@@ -105,7 +105,7 @@ export default {
     async downloadPDF() {
       //descarga manual de usuario
       axios({
-        url: "http://172.18.232.193:3000/download",
+        url: "http://172.18.232.193:9080/download",
         method: "GET",
         responseType: "blob",
       }).then((response) => {
