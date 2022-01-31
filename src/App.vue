@@ -26,13 +26,15 @@
               <b-icon icon="download" aria-hidden="true"></b-icon>
               Descargar Manual
             </b-dropdown-item-button>
-            <b-dropdown-divider></b-dropdown-divider>
+            <!-- 
+              <b-dropdown-divider></b-dropdown-divider>
             <router-link to="salir">
               <b-dropdown-item-button @click="salir()">
                 <b-icon icon="x-circle" aria-hidden="true"></b-icon>
                 Salir
               </b-dropdown-item-button>
             </router-link>
+            -->
           </b-dropdown>
         </b-col>
       </b-row>
