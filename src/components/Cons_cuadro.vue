@@ -569,7 +569,7 @@ export default {
         pdf.text(
           7,
           200,
-          'Observación: Si necesita el dictamen pericial balístico del presente reporte, puede hacer su consulta al oficinaconsultasdac@mp.gob.gt con el objeto de tramitar una copia certificada indicando que ya realizó previa consulta, considerando que los indicios balísticos se encuentan en estado "Confirmado"',
+          'Observación: Si necesita el dictamen pericial balístico del presente reporte, puede hacer su solicitud al correo oficinaconsultasdac@mp.gob.gt con el objeto de tramitar una copia certificada indicando que ya realizó previa consulta, considerando que los indicios balísticos se encuentan en estado "Confirmado"',
           {
             maxWidth: 310,
             align: "justify",

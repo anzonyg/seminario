@@ -68,7 +68,9 @@ import Consultas from "./components/Consultas_IBIS.vue";
 import Bloqueo from "./components/Bloqueo.vue";
 //import Salir from "./components/Cerrar_Session.vue";
 import axios from "axios";
-
+const cf = require("./DIR");
+const url = cf.url + "/acceso";
+const descarga = cf.url2 + "/download";
 export default {
   name: "App",
   components: {
@@ -94,20 +96,13 @@ export default {
         datos.userData.nombres + " " + datos.userData.apellidos;
       this.nombre = nombrecompleto;
     },
-    verificartoken(text) {
-      if (text) {
-        this.mostrar = true;
-      } else {
-        this.mostrar = false;
-      }
-    },
     eliminarcache() {
       localStorage.removeItem("datos");
     },
     async downloadPDF() {
       //descarga manual de usuario
       axios({
-        url: "http://172.18.230.122:9080/download",
+        url: descarga,
         method: "GET",
         responseType: "blob",
       }).then((response) => {
@@ -117,7 +112,6 @@ export default {
         fileLink.href = fileURL;
         fileLink.setAttribute("download", "Manual_Usuario.pdf");
         document.body.appendChild(fileLink);
-
         fileLink.click();
       });
     },
@@ -140,12 +134,69 @@ export default {
             };
             //console.log(auxDataUser); // ver info
             this.datos(auxDataUser);
-            this.verificartoken(res.valid);
+            this.validarAcceso(auxDataUser.userData);
           } else {
             this.verificartoken(false);
             console.log(false);
           }
         });
+    },
+    bitacora(user) {
+      const userlist = user;
+      let bitacora = {
+        horafecha: new Date(),
+        level: 0,
+        message: "Inicio de sesion en base de datos.",
+        codproceso: "",
+        busqueda: "",
+        fiscalia_solicitante: "",
+        equipo_solicitante: "",
+        nombres: userlist.nombres,
+        apellidos: userlist.apellidos,
+        id: userlist.id,
+        rol: userlist.rol,
+        grupo: userlist.grupo,
+        idGrupo: userlist.idGrupo,
+        nipId: userlist.nipId,
+        dependencia: userlist.dependencia,
+      };
+      //console.log(bitacora);
+      return bitacora;
+    },
+    async validarAcceso(user) {
+      const userlist = user
+      const list = {
+        uid: userlist.id +"",
+        rol: userlist.rol,
+        grupo: userlist.grupo,
+        dependencia: userlist.dependencia,
+        bitacora: this.bitacora(userlist),
+      };
+      /*const list = {
+        uid: "422s",
+        rol: "Coordinadors",
+        grupo: "DAEFC",
+        dependencia: "DAC",
+      };*/
+      console.log(user);
+      await axios.post(url, list).then((data) => {
+        const result1 = data.data;
+        console.log(result1);
+        if (result1) {
+          this.verificartoken(true);
+        } else {
+          this.verificartoken(false);
+        }
+      });
+    },
+    verificartoken(text) {
+      if (text) {
+        console.log(text);
+
+        this.mostrar = true;
+      } else {
+        this.mostrar = false;
+      }
     },
     salir() {
       localStorage.removeItem("datos");
