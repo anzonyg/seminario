@@ -5,13 +5,13 @@
         <b-form-input
           type="text"
           v-model="form.id_arma"
-          v-on:keyup.enter="buscararma()"
+          v-on:keyup.enter="justificar()"
           placeholder="Ingrese registro de arma"
           required
         ></b-form-input>
       </b-col>
       <b-col md="2">
-        <b-button pill v-on:click="buscararma()">
+        <b-button pill v-on:click="justificar()">
           <span
             class="spinner-border spinner-border-sm"
             role="status"
@@ -33,6 +33,54 @@
         </b-alert>
       </b-col>
     </b-row>
+    <b-modal
+      ref="my-modal2"
+      id="modal-2"
+      header-bg-variant="info"
+      title="Ingresar Justificacion de Busqueda"
+      hide-footer
+    >
+      <div class="form-group col-12">
+        <b-form-group
+          label="Justificación:"
+          label-for="name-input"
+          invalid-feedback="Name is required"
+        >
+          <b-form-textarea
+            id="name-input"
+            rows="3"
+            v-model="justificacion"
+            required
+          ></b-form-textarea>
+        </b-form-group>
+        <br />
+      </div>
+      <br />
+      <b-alert
+        :show="dismissCountDown3"
+        variant="danger"
+        @dismissed="dismissCountDown3 = 0"
+        @dismiss-count-down="countDownChanged3"
+      >
+        <p>Datos Incorrectos!!</p>
+      </b-alert>
+      <div class="text-center">
+        <b-button
+          center
+          size="sm"
+          variant="outline-info"
+          v-on:click="validarcuadro3()"
+          ><span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+            v-show="mostrar6"
+          ></span>
+          <b-icon icon="search" aria-hidden="true" v-show="mostrar7"></b-icon>
+          Buscar
+        </b-button>
+      </div>
+    </b-modal>
     <br />
     <br />
     <b-table id="my-table" :fields="fields" :items="tabla" small></b-table>
@@ -121,10 +169,16 @@ export default {
       dismissSecs: 4,
       dismissCountDown: 0,
       showDismissibleAlert: false,
-      mostrar: false,
-      mostrar2: true,
+      dismissSecs3: 4,
+      dismissCountDown3: 0,
+      showDismissibleAlert3: false,
+      mostrar: false, //spinner de buscar
+      mostrar2: true,  //icon de buscar
+      mostrar6: false, //spinner de buscar modal
+      mostrar7: true, // icon buscar modal
       consultas: [],
       tabla: [],
+      justificacion: "",
       form: {
         id_arma: "",
         bitacora: [],
@@ -143,6 +197,12 @@ export default {
     },
     showAlert() {
       this.dismissCountDown = this.dismissSecs;
+    },
+    countDownChanged3(dismissCountDown3) {
+      this.dismissCountDown3 = dismissCountDown3;
+    },
+    showAlert3() {
+      this.dismissCountDown3 = this.dismissSecs3;
     },
     async buscararma() {
       const storage = JSON.parse(localStorage.getItem("datos"));
@@ -252,6 +312,26 @@ export default {
         this.mostrar2 = true;
       }
     },
+    validarcuadro3() {
+      this.mostrar6 = true;
+      this.mostrar7 = false;
+      if (this.justificacion.length > 5) {
+        this.buscararma();
+        this.$refs["my-modal2"].hide();
+        this.mostrar = false;
+        this.mostrar2 = true;
+      } else {
+        
+        this.showAlert3();
+      }
+      this.mostrar6 = false;
+      this.mostrar7 = true;
+    },
+    justificar() {
+      this.$refs["my-modal2"].show();
+      this.mostrar = true;
+      this.mostrar2 = false;
+    },
     alerta1() {
       this.showAlert();
       this.mostrar = false;
@@ -276,8 +356,8 @@ export default {
       const storage = JSON.parse(localStorage.getItem("datos"));
       let bitacora = {
         horafecha: new Date(),
-        level: 2,
-        message: "Consulta de arma en base de datos",
+        level: 4,
+        message: "Consulta de arma en base de datos. Justificacíon:  " + this.justificacion,
         codproceso: this.form.id,
         busqueda: this.form.id_arma,
         fiscalia_solicitante: "",

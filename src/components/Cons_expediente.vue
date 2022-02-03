@@ -5,13 +5,13 @@
         <b-form-input
           type="text"
           v-model="form.id_expediente"
-          v-on:keyup.enter="buscarexpediente()"
+          v-on:keyup.enter="justificar()"
           placeholder="Ingrese número de expediente: MP001-2021-123"
           required
         ></b-form-input>
       </b-col>
       <b-col md="2">
-        <b-button pill v-on:click="buscarexpediente()">
+        <b-button pill v-on:click="justificar()">
           <span
             class="spinner-border spinner-border-sm"
             role="status"
@@ -33,7 +33,54 @@
         </b-alert>
       </b-col>
     </b-row>
-
+<b-modal
+      ref="my-modal2"
+      id="modal-2"
+      header-bg-variant="info"
+      title="Ingresar Justificacion de Busqueda"
+      hide-footer
+    >
+      <div class="form-group col-12">
+        <b-form-group
+          label="Justificación:"
+          label-for="name-input"
+          invalid-feedback="Name is required"
+        >
+          <b-form-textarea
+            id="name-input"
+            rows="3"
+            v-model="justificacion"
+            required
+          ></b-form-textarea>
+        </b-form-group>
+        <br />
+      </div>
+      <br />
+      <b-alert
+        :show="dismissCountDown3"
+        variant="danger"
+        @dismissed="dismissCountDown3 = 0"
+        @dismiss-count-down="countDownChanged3"
+      >
+        <p>Datos Incorrectos!!</p>
+      </b-alert>
+      <div class="text-center">
+        <b-button
+          center
+          size="sm"
+          variant="outline-info"
+          v-on:click="validarcuadro3()"
+          ><span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+            v-show="mostrar6"
+          ></span>
+          <b-icon icon="search" aria-hidden="true" v-show="mostrar7"></b-icon>
+          Buscar
+        </b-button>
+      </div>
+    </b-modal>
     <br />
     <br />
     <table class="table" id="tabla2">
@@ -75,13 +122,19 @@ export default {
       dismissSecs: 4,
       dismissCountDown: 0,
       showDismissibleAlert: false,
-      mostrar: false,
-      mostrar2: true,
+      dismissSecs3: 4,
+      dismissCountDown3: 0,
+      showDismissibleAlert3: false,
+      mostrar: false, //spinner de buscar
+      mostrar2: true,  //icon de buscar
+      mostrar6: false, //spinner de buscar modal
+      mostrar7: true, // icon buscar modal
       consultas: [],
       tabla: [],
       form: {
         id_expediente: "",
       },
+      justificacion: "",
       form1: {
         mp: "",
         anio: "",
@@ -101,6 +154,12 @@ export default {
     },
     showAlert() {
       this.dismissCountDown = this.dismissSecs;
+    },
+    countDownChanged3(dismissCountDown3) {
+      this.dismissCountDown3 = dismissCountDown3;
+    },
+    showAlert3() {
+      this.dismissCountDown3 = this.dismissSecs3;
     },
     async buscarexpediente() {
       const storage = JSON.parse(localStorage.getItem("datos"));
@@ -168,12 +227,32 @@ export default {
         this.mostrar5 = true;
       }
     },
+     validarcuadro3() {
+      this.mostrar6 = true;
+      this.mostrar7 = false;
+      if (this.justificacion.length > 5) {
+        this.buscarexpediente();
+        this.$refs["my-modal2"].hide();
+        this.mostrar = false;
+        this.mostrar2 = true;
+      } else {
+        
+        this.showAlert3();
+      }
+      this.mostrar6 = false;
+      this.mostrar7 = true;
+    },
+    justificar() {
+      this.$refs["my-modal2"].show();
+      this.mostrar = true;
+      this.mostrar2 = false;
+    },
     bitacora() {
       const storage = JSON.parse(localStorage.getItem("datos"));
         let bitacora = {
           horafecha: new Date(),
-          level: 2,
-          message: "Consulta de expediente en base de datos",
+          level: 3,
+          message: "Consulta de expediente en base de datos. Justificacíon:  " + this.justificacion,
           codproceso: this.form1.id,
           busqueda: this.form.id_expediente,
           fiscalia_solicitante: "",

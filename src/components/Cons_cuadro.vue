@@ -5,13 +5,13 @@
         <b-input
           type="number"
           v-model="form.id_cuadro"
-          v-on:keyup.enter="buscarcuadro()"
+          v-on:keyup.enter="justificacion()"
           placeholder="Ingrese número de cuadro"
           required
         ></b-input>
       </b-col>
       <b-col md="2">
-        <b-button pill v-on:click="buscarcuadro()"
+        <b-button pill v-on:click="justificacion()"
           ><span
             class="spinner-border spinner-border-sm"
             role="status"
@@ -40,7 +40,7 @@
           @dismissed="dismissCountDown = 0"
           @dismiss-count-down="countDownChanged"
         >
-          <p>{{alerta}}</p>
+          <p>{{ alerta }}</p>
         </b-alert>
       </b-col>
     </b-row>
@@ -127,6 +127,55 @@
         </b-button>
       </div>
     </b-modal>
+    <b-modal
+      ref="my-modal2"
+      id="modal-2"
+      header-bg-variant="info"
+      title="Ingresar Justificacion de Busqueda"
+      hide-footer
+    >
+      <div class="form-group col-12">
+        <b-form-group
+          label="Justificación:"
+          label-for="name-input"
+          invalid-feedback="Name is required"
+        >
+          <b-form-textarea
+            id="name-input"
+            rows="3"
+            v-model="fiscalia.justificacion"
+            
+            required
+          ></b-form-textarea>
+        </b-form-group>
+        <br />
+      </div>
+      <br />
+      <b-alert
+        :show="dismissCountDown3"
+        variant="danger"
+        @dismissed="dismissCountDown3 = 0"
+        @dismiss-count-down="countDownChanged3"
+      >
+        <p>Datos Incorrectos!!</p>
+      </b-alert>
+      <div class="text-center">
+        <b-button
+          center
+          size="sm"
+          variant="outline-info"
+          v-on:click="validarcuadro3()"
+          ><span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+            v-show="mostrar6"
+          ></span>
+          <b-icon icon="search" aria-hidden="true" v-show="mostrar7"></b-icon>
+          Buscar
+        </b-button>
+      </div>
+    </b-modal>
 
     <br />
     <br />
@@ -191,33 +240,35 @@
 import axios from "axios";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-const cf = require('../DIR')
+const cf = require("../DIR");
 
-
-const url = cf.url+"/cuadro";
-const url2 = cf.url+"/bitacora";
-
-
-
+const url = cf.url + "/cuadro";
+const url2 = cf.url + "/bitacora";
 
 export default {
   data() {
     return {
-      alerta:"",
+      alerta: "",
       dismissSecs: 4,
       dismissCountDown: 0,
       showDismissibleAlert: false,
       dismissSecs2: 4,
       dismissCountDown2: 0,
       showDismissibleAlert2: false,
+      dismissSecs3: 4,
+      dismissCountDown3: 0,
+      showDismissibleAlert3: false,
       mostrar: false,
       mostrar2: false, //spinner de descarga pdf
       mostrar3: true, // icon descarga pdf
-      mostrar4: false, //spinner de bucar tabla
-      mostrar5: true, // icon bucar tabla
+      mostrar4: false, //spinner de buscar tabla
+      mostrar5: true, // icon buscar tabla
+      mostrar6: false, //spinner de buscar modal
+      mostrar7: true, // icon buscar modal
       fiscalia: {
         fiscalia: "",
         unidad: "",
+        justificacion: "",
       },
       consultas: [],
       tabla: [],
@@ -232,7 +283,7 @@ export default {
         //bitacora de descarga
         bitacora: [],
       },
-      headers:{
+      headers: {
         Authorization: "",
         idaction: "",
       },
@@ -251,6 +302,12 @@ export default {
     showAlert2() {
       this.dismissCountDown2 = this.dismissSecs2;
     },
+    countDownChanged3(dismissCountDown3) {
+      this.dismissCountDown3 = dismissCountDown3;
+    },
+    showAlert3() {
+      this.dismissCountDown3 = this.dismissSecs3;
+    },
     async buscarcuadro() {
       const storage = JSON.parse(localStorage.getItem("datos"));
       this.mostrar4 = true;
@@ -258,43 +315,46 @@ export default {
       this.headers.Authorization = storage.token;
       this.form.token = storage.token;
       this.bitacora(1);
-      await axios.post(url, this.form, {
-            headers: {
-              authorization: storage.token,
-              idaction: "616da60877ce5e828b018de1",
-            },
-          }).then((data) => {
-        this.encabezado = []; //limpia el encabezado para nueva consulta
-        this.tabla = []; //limpia la tabla para nueva consulta
-        this.consultas = data.data;
-        this.tabla = this.consultas.tabla;
-        this.encabezado = this.consultas.dato_arma;
-        console.log(this.consultas);
-        
-      });
+      await axios
+        .post(url, this.form, {
+          headers: {
+            authorization: storage.token,
+            idaction: "616da60877ce5e828b018de1",
+          },
+        })
+        .then((data) => {
+          this.encabezado = []; //limpia el encabezado para nueva consulta
+          this.tabla = []; //limpia la tabla para nueva consulta
+          this.consultas = data.data;
+          this.tabla = this.consultas.tabla;
+          this.encabezado = this.consultas.dato_arma;
+          console.log(this.consultas);
+        });
       this.validarcuadro();
     },
     async cuadropdf() {
       const storage = JSON.parse(localStorage.getItem("datos"));
       const lista_bitacora = this.bitacora(2);
       this.form2.bitacora = lista_bitacora;
-      await axios.post(url2, this.form2, {
-            headers: {
-              authorization: storage.token,
-              idaction: "616da60877ce5e828b018de1",
-            },
-          }).then((data) => {
-        this.consultas = data.data;
-      });
+      await axios
+        .post(url2, this.form2, {
+          headers: {
+            authorization: storage.token,
+            idaction: "616da60877ce5e828b018de1",
+          },
+        })
+        .then((data) => {
+          this.consultas = data.data;
+        });
     },
     validarcuadro() {
-       if(this.consultas.valid == false){
+      if (this.consultas.valid == false) {
         this.alerta = "El usuario ha expirado.";
         this.showAlert();
         this.mostrar = false;
         this.mostrar4 = false;
         this.mostrar5 = true;
-      }else if (this.consultas.tabla.length <= 0) {
+      } else if (this.consultas.tabla.length <= 0) {
         this.alerta = "El cuadro no existe en la base de datos";
         this.showAlert();
         this.mostrar = false;
@@ -322,13 +382,35 @@ export default {
       this.mostrar2 = false;
       this.mostrar3 = true;
     },
+    validarcuadro3() {
+      this.mostrar6 = true;
+      this.mostrar7 = false;
+      if (this.fiscalia.justificacion.length > 5) {
+        this.buscarcuadro();
+        this.$refs["my-modal2"].hide();
+        this.mostrar4 = false;
+        this.mostrar5 = true;
+        
+      } else {
+        this.showAlert3();
+      }
+      this.mostrar6 = false;
+      this.mostrar7 = true;
+    },
+    justificacion() {
+      this.$refs["my-modal2"].show();
+      this.mostrar4 = true;
+      this.mostrar5 = false;
+    },
     bitacora(num) {
       const storage = JSON.parse(localStorage.getItem("datos"));
       if (num == 1) {
         let bitacora = {
           horafecha: new Date(),
-          level: 2,
-          message: "Consulta de cuadro en base de datos",
+          level: 1,
+          message:
+            "Consulta de cuadro en base de datos. Justificacíon:  " +
+            this.fiscalia.justificacion,
           codproceso: this.form.id,
           busqueda: this.form.id_cuadro,
           fiscalia_solicitante: this.fiscalia.fiscalia,
@@ -376,7 +458,6 @@ export default {
       return fecha;
     },
     generarPDF() {
-      
       this.$refs["my-modal"].hide();
       const fecha1 = new Date();
       var dia = fecha1.getDate();

@@ -5,13 +5,13 @@
         <b-form-input
           type="text"
           v-model="form.id_correlativo"
-          v-on:keyup.enter="buscarcorrelativo()"
+          v-on:keyup.enter="justificar()"
           placeholder="Ingrese número de correlativo: BAL-00-0000"
           required
         ></b-form-input>
       </b-col>
       <b-col md="2">
-        <b-button pill v-on:click="buscarcorrelativo()">
+        <b-button pill v-on:click="justificar()">
           <span
             class="spinner-border spinner-border-sm"
             role="status"
@@ -33,7 +33,54 @@
         </b-alert>
       </b-col>
     </b-row>
-
+    <b-modal
+      ref="my-modal2"
+      id="modal-2"
+      header-bg-variant="info"
+      title="Ingresar Justificacion de Busqueda"
+      hide-footer
+    >
+      <div class="form-group col-12">
+        <b-form-group
+          label="Justificación:"
+          label-for="name-input"
+          invalid-feedback="Name is required"
+        >
+          <b-form-textarea
+            id="name-input"
+            rows="3"
+            v-model="justificacion"
+            required
+          ></b-form-textarea>
+        </b-form-group>
+        <br />
+      </div>
+      <br />
+      <b-alert
+        :show="dismissCountDown3"
+        variant="danger"
+        @dismissed="dismissCountDown3 = 0"
+        @dismiss-count-down="countDownChanged3"
+      >
+        <p>Datos Incorrectos!!</p>
+      </b-alert>
+      <div class="text-center">
+        <b-button
+          center
+          size="sm"
+          variant="outline-info"
+          v-on:click="validarcuadro3()"
+          ><span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+            v-show="mostrar6"
+          ></span>
+          <b-icon icon="search" aria-hidden="true" v-show="mostrar7"></b-icon>
+          Buscar
+        </b-button>
+      </div>
+    </b-modal>
     <br />
     <br />
     <div id="tabla1">
@@ -78,10 +125,9 @@
 
 <script>
 import axios from "axios";
-const cf = require('../DIR')
+const cf = require("../DIR");
 
-
-const url = cf.url+"/correlativo";
+const url = cf.url + "/correlativo";
 export default {
   data() {
     return {
@@ -122,15 +168,21 @@ export default {
       currentPage: 1,
       contador: [],
       tabla: [],
-      mostrar: false,
-      mostrar2: true,
+      mostrar: false, //spinner de buscar
+      mostrar2: true,  //icon de buscar
+      mostrar6: false, //spinner de buscar modal
+      mostrar7: true, // icon buscar modal
       dismissSecs: 4,
       dismissCountDown: 0,
       showDismissibleAlert: false,
+      dismissSecs3: 4,
+      dismissCountDown3: 0,
+      showDismissibleAlert3: false,
       consultas: [],
       arreporte: [],
       rmax: null,
       num_correlativo: null,
+      justificacion: "",
       form: {
         id_correlativo: "",
         bitacora: [],
@@ -149,6 +201,12 @@ export default {
     },
     showAlert() {
       this.dismissCountDown = this.dismissSecs;
+    },
+    countDownChanged3(dismissCountDown3) {
+      this.dismissCountDown3 = dismissCountDown3;
+    },
+    showAlert3() {
+      this.dismissCountDown3 = this.dismissSecs3;
     },
     async buscarcorrelativo() {
       const storage = JSON.parse(localStorage.getItem("datos"));
@@ -280,12 +338,33 @@ export default {
         this.mostrar5 = false;
       }
     },
+    validarcuadro3() {
+      this.mostrar6 = true;
+      this.mostrar7 = false;
+      if (this.justificacion.length > 5) {
+        this.buscarcorrelativo();
+        this.$refs["my-modal2"].hide();
+        this.mostrar = false;
+        this.mostrar2 = true;
+      } else {
+        
+        this.showAlert3();
+      }
+      this.mostrar6 = false;
+      this.mostrar7 = true;
+    },
+    justificar() {
+      this.$refs["my-modal2"].show();
+      this.mostrar = true;
+      this.mostrar2 = false;
+    },
     bitacora() {
       var lista = JSON.parse(localStorage.getItem("datos"));
       let bitacora = {
         horafecha: new Date(),
         level: 2,
-        message: "Consulta de correlativo en base de datos",
+        message:
+          "Consulta de correlativo en base de datos. Justificacíon:  " + this.justificacion,
         codproceso: this.form.id,
         busqueda: this.form.id_correlativo,
         fiscalia_solicitante: "",
