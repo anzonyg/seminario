@@ -214,6 +214,7 @@
             <th scope="col">Correlativo</th>
             <th scope="col">Indicio</th>
             <th scope="col">Fiscalía</th>
+            <th scope="col">Fiscalía MP</th>
             <th scope="col">Referencia MP</th>
             <th scope="col">Fecha Suceso</th>
             <th scope="col">Dirección de Recolección</th>
@@ -226,6 +227,7 @@
             <td v-text="tabla1.correlativo"></td>
             <td v-text="tabla1.indicio"></td>
             <td v-text="tabla1.fiscalia"></td>
+            <td v-text="tabla1.fiscaliaMP"></td>
             <td v-text="tabla1.referencia"></td>
             <td v-text="testFecha(tabla1.fecha)"></td>
             <td v-text="tabla1.direccion"></td>
@@ -429,7 +431,7 @@ export default {
       } else {
         let bitacora = {
           horafecha: new Date(),
-          level: 2,
+          level: 5,
           message: "Descarga de cuadro en base de datos",
           codproceso: this.form.id,
           busqueda: this.form.id_cuadro,
