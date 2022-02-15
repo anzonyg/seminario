@@ -11,7 +11,7 @@ export default new Router({
             path: '/auth/consultasIBIS/token/:token',
             name: 'home',
         },
-        {
+        /*{
             path: '/consulta',
             name: 'consulta',
             component: () => import('./components/Consultas_IBIS.vue')
@@ -21,7 +21,7 @@ export default new Router({
             name: 'alert',
             component: () => import('./components/Report_alerta.vue')
 
-        },
+        },*/
         {
             path: '/bloqueo',
             name: 'bloqueo',

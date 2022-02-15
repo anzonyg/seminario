@@ -124,8 +124,6 @@ export default {
         })
         .then((r) => r.data)
         .then((res) => {
-          //console.log(res);
-          //console.log(res.valid);
           if (res.valid) {
             const auxDataUser = {
               token: this.$route.params.token,
@@ -178,7 +176,6 @@ export default {
         grupo: "DAEFC",
         dependencia: "DAC",
       };*/
-      console.log(user);
       await axios.post(url, list).then((data) => {
         const result1 = data.data;
         console.log(result1);
@@ -191,8 +188,6 @@ export default {
     },
     verificartoken(text) {
       if (text) {
-        console.log(text);
-
         this.mostrar = true;
       } else {
         this.mostrar = false;

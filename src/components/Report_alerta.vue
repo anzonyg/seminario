@@ -179,6 +179,8 @@ export default {
       this.mostrar = true;
       this.mostrar2 = false;
       this.form.fiscalia = [[],[]];
+      this.reportSeccion();
+          this.reportEquipo();
       if (this.llenarform()) {
         await axios.post(url, this.form).then((data) => {
           const c_crecer = data.data[0];

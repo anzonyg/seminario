@@ -175,7 +175,6 @@ export default {
               idaction: "616da60877ce5e828b018de1",
             },
           }).then((data) => {
-          //console.log(data.data);
           this.consultas = data.data;
           this.tabla = [];
           this.validarcuadro();
@@ -267,9 +266,7 @@ export default {
           dependencia: storage.userData.dependencia,
           token: storage.token,
         };
-        //console.log(bitacora);
         this.form1.bitacora = bitacora;
-      
     },
   },
 };

@@ -328,7 +328,7 @@ export default {
           this.consultas = data.data;
           this.tabla = this.consultas.tabla;
           this.encabezado = this.consultas.dato_arma;
-          console.log(this.consultas);
+          console.log(data);
         });
       this.validarcuadro();
     },
@@ -425,7 +425,6 @@ export default {
           dependencia: storage.userData.dependencia,
           token: storage.token,
         };
-        //console.log(bitacora);
         this.form.bitacora = bitacora;
       } else {
         let bitacora = {
