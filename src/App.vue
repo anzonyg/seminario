@@ -170,12 +170,6 @@ export default {
         dependencia: userlist.dependencia,
         bitacora: this.bitacora(userlist),
       };
-      /*const list = {
-        uid: "422s",
-        rol: "Coordinadors",
-        grupo: "DAEFC",
-        dependencia: "DAC",
-      };*/
       await axios.post(url, list).then((data) => {
         const result1 = data.data;
         console.log(result1);
