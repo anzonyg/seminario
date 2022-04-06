@@ -184,9 +184,7 @@
         <div class="text-center">
           <h3
             v-text="
-              'REPORTE DEL SISTEMA INTEGRADO DE IDENTIFICACIÓN BALÍSTICA-IBIS NO. ' +
-              encabezado.nobase +
-              ' QUE AMPARA COINCIDENCIAS HASTA EL ' +
+              'REPORTE DEL SISTEMA INTEGRADO DE IDENTIFICACIÓN BALÍSTICA-IBIS QUE AMPARA COINCIDENCIAS HASTA EL ' +
               encabezado.fecha +
               ' REGISTROS PARA USO EXCLUSIVO REFERENCIAL'
             "
@@ -229,7 +227,7 @@
             <td v-text="tabla1.fiscalia"></td>
             <td v-text="tabla1.fiscaliaMP"></td>
             <td v-text="tabla1.referencia"></td>
-            <td v-text="testFecha(tabla1.fecha)"></td>
+            <td v-text="tabla1.fecha"></td>
             <td v-text="tabla1.direccion"></td>
           </tr>
         </tbody>
@@ -525,8 +523,7 @@ export default {
         pdf.text(
           168,
           15,
-          "REPORTE DEL SISTEMA INTEGRADO DE IDENTIFICACIÓN BALÍSTICA-IBIS NO. " +
-            this.encabezado[0].nobase,
+          "REPORTE DEL SISTEMA INTEGRADO DE IDENTIFICACIÓN BALÍSTICA-IBIS ",
           "center"
         );
         pdf.text(
