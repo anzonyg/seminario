@@ -1,7 +1,7 @@
 /*module.exports = {
     url: 'http://172.18.230.122:9080/tasks',
     url2: 'http://172.18.230.122:9080'
-
+asdfas
     prueba
 }*/
 module.exports = {
