@@ -15,7 +15,6 @@
         </b-col>
         <b-col md="9" align="right">
           <h5 class="text-primary">{{ nombre }}</h5>
-          <!--<token @nombrecompleto = "nombre = $event"></token>-->
         </b-col>
         <b-col md="1" align="left">
           <b-dropdown size="sm" variant="info">
@@ -26,29 +25,25 @@
               <b-icon icon="download" aria-hidden="true"></b-icon>
               Descargar Manual
             </b-dropdown-item-button>
-            <!-- 
-              <b-dropdown-divider></b-dropdown-divider>
-            <router-link to="salir">
-              <b-dropdown-item-button @click="salir()">
-                <b-icon icon="x-circle" aria-hidden="true"></b-icon>
-                Salir
+
+            <b-dropdown-divider></b-dropdown-divider>
+
+            <router-link to="/report" style="text-decoration: none">
+              <b-dropdown-item-button @click="alert()">
+                <b-icon icon="file-earmark-bar-graph" aria-hidden="true"></b-icon>
+                Reporteria
               </b-dropdown-item-button>
             </router-link>
-            -->
           </b-dropdown>
         </b-col>
       </b-row>
     </b-container>
     <router-view />
-    <div class="text-center">
-      <br />
-      <br />
-      <h1>Módulo de Consultas IBIS</h1>
-    </div>
+
     <div v-if="mostrar">
       <Consultas />
     </div>
-    <div v-else>
+    <div v-if="mostrar2">
       <Bloqueo />
     </div>
     <div v-if="sesion" class="text-center">
@@ -66,7 +61,7 @@
 import Encabezado from "./components/Encabezado.vue";
 import Consultas from "./components/Consultas_IBIS.vue";
 import Bloqueo from "./components/Bloqueo.vue";
-//import Salir from "./components/Cerrar_Session.vue";
+
 import axios from "axios";
 const cf = require("./DIR");
 const url = cf.url + "/acceso";
@@ -77,11 +72,11 @@ export default {
     Encabezado,
     Bloqueo,
     Consultas,
-    //Salir,
   },
   data() {
     return {
       mostrar: false,
+      mostrar2: true,
       sesion: false,
       nombre: "",
       id: "",
@@ -135,7 +130,7 @@ export default {
             this.validarAcceso(auxDataUser.userData);
           } else {
             this.verificartoken(false);
-            console.log(false);
+            //console.log(false);
           }
         });
     },
@@ -158,21 +153,20 @@ export default {
         nipId: userlist.nipId,
         dependencia: userlist.dependencia,
       };
-      //console.log(bitacora);
       return bitacora;
     },
     async validarAcceso(user) {
-      const userlist = user
+      const userlist = user;
       const list = {
-        uid: userlist.id +"",
-        rol: userlist.rol,
-        grupo: userlist.grupo,
+        uid: userlist.id + "",
+        rol: userlist.rol.toUpperCase(),
+        grupo: userlist.grupo.toUpperCase(),
         dependencia: userlist.dependencia,
         bitacora: this.bitacora(userlist),
       };
       await axios.post(url, list).then((data) => {
         const result1 = data.data;
-        console.log(result1);
+        //console.log(result1);
         if (result1) {
           this.verificartoken(true);
         } else {
@@ -183,14 +177,22 @@ export default {
     verificartoken(text) {
       if (text) {
         this.mostrar = true;
+        this.mostrar2 = false;
       } else {
         this.mostrar = false;
+        this.mostrar2 = true;
       }
     },
     salir() {
       localStorage.removeItem("datos");
       this.mostrar = false;
+      this.mostrar2 = true;
       this.sesion = true;
+    },
+    alert() {
+      this.mostrar = false;
+      this.mostrar2 = false;
+      this.sesion = false;
     },
   },
   beforeCreated: function () {

@@ -227,7 +227,7 @@ export default {
           .then((data) => {
             this.consultas = data.data;
             this.tabla = [];
-            console.log(this.consultas);
+            ////console.log(this.consultas);
             this.validarcuadro();
           });
       } else {
@@ -255,7 +255,7 @@ export default {
             this.consultas = data.data;
             this.tabla = [];
             this.validarcuadro();
-            console.log(this.consultas);
+            //console.log(this.consultas);
           });
       } else {
         this.alerta = "Caracteres Incorrectos!!";

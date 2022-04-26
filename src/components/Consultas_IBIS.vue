@@ -1,6 +1,11 @@
 <template>
   <div class="consulta">
     <b-container>
+      <div class="text-center">
+      <br />
+      <br />
+      <h1>Módulo de Consultas IBIS</h1>
+    </div>
       <br>
       <br>
       <b-form-group

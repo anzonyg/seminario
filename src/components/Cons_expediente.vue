@@ -178,7 +178,7 @@ export default {
           this.consultas = data.data;
           this.tabla = [];
           this.validarcuadro();
-          console.log(this.consultas);
+          //console.log(this.consultas);
         });
       } else {
         this.alerta = "El formato del expediente es incorrecito: MP001-2021-123";

@@ -5,8 +5,9 @@
       <br />
       <p>
         Seleccione las fiscalias o equipos para la verificacion de crecimiento ó
-        nuevos cuadros IBIS y generar un reporte PDF.
+        nuevos cuadros IBIS y generar un reporte Word.
       </p>
+
       <b-row>
         <b-form-checkbox
           id="checkbox-1"
@@ -17,49 +18,145 @@
         </b-form-checkbox>
         <br />
         <br />
-        <b-col md="6">
-          <b-form-group>
+      </b-row>
+      <div class="text-center">
+        <b-button v-b-toggle.collapse-1 variant="outline-primary" pill>
+          <b-icon icon="graph-up" aria-hidden="true"></b-icon>
+          TIAE</b-button
+        >
+
+        <b-button v-b-toggle.collapse-2 variant="outline-secondary" pill>
+          <img width="30" height="30" src="@/assets/ico_arma.png" />
+          UEV</b-button
+        >
+
+        <b-button v-b-toggle.collapse-3 variant="outline-success" pill>
+          <img width="30" height="30" src="@/assets/ico_mujer.png" />
+          FEMICIDIO</b-button
+        >
+      </div>
+      <div class="accordion">
+        <b-collapse id="collapse-1" class="mt-2" accordion="my-accordion">
+          <b-card>
             <b-form-checkbox
-              v-model="selectudi"
-              :indeterminate="indeterminate"
+              v-model="selectTIAE"
+              :indeterminate="indeterminate0"
+              aria-describedby="options[0]"
+              aria-controls="options[0]"
+              @change="toggleAll0"
+              >TRATAMIENTO DE LA INFORMACION DE ANALISIS ESTRATEGICO
+            </b-form-checkbox>
+            <br />
+            <b-row>
+              <b-col md="6">
+                <b-form-group v-slot="{ ariaDescribedby }">
+                  <b-form-checkbox-group
+                    v-model="selected0"
+                    :options="options[0]"
+                    :aria-describedby="ariaDescribedby"
+                  ></b-form-checkbox-group>
+                </b-form-group>
+              </b-col>
+              <b-col md="6">
+                <b-form-group v-slot="{ ariaDescribedby }">
+                  <b-form-checkbox-group
+                    v-model="selected3"
+                    :options="options[1]"
+                    :aria-describedby="ariaDescribedby"
+                  ></b-form-checkbox-group>
+                </b-form-group>
+              </b-col>
+            </b-row>
+          </b-card>
+        </b-collapse>
+
+        <b-collapse id="collapse-2" class="mt-2" accordion="my-accordion">
+          <b-card>
+            <b-form-checkbox
+              id="checkbox-3"
+              v-model="selectUEV"
+              :indeterminate="indeterminate1"
               aria-describedby="options[0]"
               aria-controls="options[0]"
               @change="toggleAll1"
-              >Unidad de Direccion de Investigacion
+              >Fiscalia Delitos Contra la Vida
             </b-form-checkbox>
             <br />
             <b-form-group v-slot="{ ariaDescribedby }">
               <b-form-checkbox-group
-                v-model="selected"
-                :options="options[0]"
+                v-model="selected1"
+                :options="options[2]"
                 :aria-describedby="ariaDescribedby"
               ></b-form-checkbox-group>
             </b-form-group>
-          </b-form-group>
-        </b-col>
-        <b-col md="6">
-          <b-form-checkbox
-            id="checkbox-2"
-            v-model="selectfem"
-            :indeterminate="indeterminate2"
-            aria-describedby="options[0]"
-            aria-controls="options[0]"
-            @change="toggleAll2"
-            >Fiscalia Contra el Delito de Femicidio
-          </b-form-checkbox>
-          <br />
-          <b-form-group v-slot="{ ariaDescribedby }">
-            <b-form-checkbox-group
-              v-model="selected2"
-              :options="options[1]"
-              :aria-describedby="ariaDescribedby"
-            ></b-form-checkbox-group>
-          </b-form-group>
-        </b-col>
-      </b-row>
-      <br />
-      Selected1: <strong>{{ selected }}</strong> Selected2:
+          </b-card>
+        </b-collapse>
+
+        <b-collapse id="collapse-3" class="mt-2" accordion="my-accordion">
+          <b-card>
+            <b-form-checkbox
+              id="checkbox-2"
+              v-model="selectfem"
+              :indeterminate="indeterminate2"
+              aria-describedby="options[0]"
+              aria-controls="options[0]"
+              @change="toggleAll2"
+              >Fiscalia Contra el Delito de Femicidio
+            </b-form-checkbox>
+            <br />
+            <b-form-group v-slot="{ ariaDescribedby }">
+              <b-form-checkbox-group
+                v-model="selected2"
+                :options="options[3]"
+                :aria-describedby="ariaDescribedby"
+              ></b-form-checkbox-group>
+            </b-form-group>
+          </b-card>
+        </b-collapse>
+      </div>
+      <!--<br />
+      Selected0: <strong>{{ selected0 }}</strong> Selected1:
+      <strong>{{ selected1 }}</strong> Selected2:
       <strong>{{ selected2 }}</strong>
+      Selected3:
+      <strong>{{ selected3 }}</strong>-->
+      <br />
+      <br />
+      <br />
+      <div>
+        <b-form>
+          <b-row>
+            <b-col md="6">
+              <label for="example-datepicker">Escoger fecha de inicio</label>
+              <b-form-datepicker
+                id="example-datepicker"
+                v-model="form.fecha1"
+                class="mb-2"
+                :max="form.fecha2"
+                placeholder="Escoge fecha"
+                aria-required="true"
+              ></b-form-datepicker>
+              <!--<p>Value: '{{ form.fecha1 }}'</p>-->
+            </b-col>
+            <b-col md="6">
+              <label for="example-datepicker2">Escoger fecha final</label>
+              <b-form-datepicker
+                id="example-datepicker2"
+                v-model="form.fecha2"
+                class="mb-2"
+                :min="form.fecha1"
+                :max="max"
+                placeholder="Escoge fecha"
+                aria-required="true"
+              ></b-form-datepicker>
+              <!--<p>Value: '{{ form.fecha2 }}'</p>
+            <p>Value max: '{{ max }}'</p>-->
+            </b-col>
+          </b-row>
+        </b-form>
+      </div>
+      <br />
+      <br />
       <b-col align="center">
         <b-button pill variant="outline-info" @click="descargarPDF">
           <span
@@ -68,11 +165,14 @@
             aria-hidden="true"
             v-show="mostrar"
           ></span>
-          <b-icon icon="download" v-show="mostrar2" aria-hidden="true"></b-icon>
-          Descargar</b-button
+          <b-icon icon="search" v-show="mostrar2" aria-hidden="true"></b-icon>
+          Buscar</b-button
         >
       </b-col>
     </b-container>
+    <br />
+
+    <!--FORM: <strong>{{ form }}</strong>-->
   </div>
 </template>
 
@@ -80,7 +180,8 @@
 import axios from "axios";
 import { PdfMakeWrapper, Table, Columns, Txt } from "pdfmake-wrapper";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
-const url = "http://172.18.232.193:3000/tasks/";
+const cf = require("../DIR");
+const url = cf.url + "/alerta";
 
 export default {
   name: "Consultas_ibis",
@@ -94,12 +195,228 @@ export default {
       },
       form: {
         id: "5",
-        fiscalia: [[], []],
+        fecha1: "",
+        fecha2: new Date(),
+        fiscalia: [[], [], [], []],
       },
+      max: new Date(),
       consultas: [],
-      selected: [],
+      selected0: [],
+      selected1: [],
       selected2: [],
+      selected3: [],
       options: [
+        [
+          { text: "FISCALIA CONTRA EXTORSIONES", value: "EXTORSIONES" },
+          {
+            text: "FISCALIA DE ADOLESCENTES EN CONFLICTO CON LA LEY, PENAL, GUATEMALA",
+            value: "ADOLES_GT",
+          },
+          {
+            text: "FISCALIA DE DISTRITO DE BAJA VERAPAZ",
+            value: "DISTRITO_B_VERAPAZ",
+          },
+          {
+            text: "FISCALIA DE LA NIÑEZ Y ADOLESCENCIA, GUATEMALA",
+            value: "NIÑEZ_ADOLES_GT",
+          },
+          {
+            text: "FISCALIA DE SECCION CONTRA EL CRIMEN ORGANIZADO",
+            value: "CRIMEN_ORGANIZADO",
+          },
+          {
+            text: "FISCALIA DE SECCION CONTRA LA CORRUPCIÓN",
+            value: "CORRUPCION",
+          },
+          {
+            text: "FISCALÍA DE SECCION DE DELITOS DE NARCOACTIVIDAD, GUATEMALA",
+            value: "NARCO_GT",
+          },
+          {
+            text: "FISCALÍA DE SECCIÓN DE DELITOS DE NARCOACTIVIDAD, QUETZALTENANGO",
+            value: "NARCO_QUETZALTENANGO",
+          },
+          { text: "FISCALIA DISTRITAL ALTA VERAPAZ", value: "A_VERAPAZ" },
+          { text: "FISCALIA DISTRITAL DE CHIMALTENANGO", value: "CHIMALTE" },
+          { text: "FISCALIA DISTRITAL DE CHIQUIMULA", value: "CHIQUIM" },
+          { text: "FISCALIA DISTRITAL DE ESCUINTLA", value: "ESCUINT" },
+          { text: "FISCALIA DISTRITAL DE HUEHUETENANGO", value: "HUEHUE" },
+          { text: "FISCALIA DISTRITAL DE JALAPA", value: "JALAPA" },
+          { text: "FISCALIA DISTRITAL DE JUTIAPA", value: "JUTIAPA" },
+          {
+            text: "FISCALIA DISTRITAL DE QUETZALTENANGO",
+            value: "QUETZALTENANGO",
+          },
+          { text: "FISCALIA DISTRITAL DE QUICHE", value: "QUICHE" },
+          { text: "FISCALIA DISTRITAL DE RETALHULEU", value: "REU" },
+          { text: "FISCALIA DISTRITAL DE SACATEPEQUEZ", value: "SACATEPE" },
+          {
+            text: "FISCALIA DISTRITAL DE SAN BENITO, PETEN",
+            value: "BENITO_PETEN",
+          },
+          { text: "FISCALIA DISTRITAL DE SAN MARCOS", value: "S_MARCOS" },
+          { text: "FISCALIA DISTRITAL DE SOLOLA", value: "SOLOLA" },
+          { text: "FISCALIA DISTRITAL DE SUCHITEPEQUEZ", value: "SUCHI" },
+          { text: "FISCALIA DISTRITAL DE TOTONICAPAN", value: "TOTO" },
+          { text: "FISCALIA DISTRITAL DE ZACAPA", value: "ZACAPA1" },
+          { text: "FISCALIA DISTRITAL DE ZACAPA", value: "ZACAPA2" },
+          { text: "FISCALIA DISTRITAL EL PROGRESO", value: "PROGRESO" },
+          { text: "FISCALIA DISTRITAL IZABAL", value: "IZABAL" },
+          { text: "FISCALIA DISTRITAL JUTIAPA", value: "JUTIAPA" },
+          {
+            text: "FISCALIA DISTRITAL MALACATÁN, SAN MARCOS",
+            value: "MALACATAN_S_MARCOS",
+          },
+          { text: "FISCALIA DISTRITAL METROPOLITANA", value: "METRO" },
+          { text: "FISCALIA DISTRITAL SANTA ROSA", value: "S_ROSA" },
+        ],
+        [
+          {
+            text: "FISCALIA MUNICIAPL DE SANTA ELULAIA, HUEHUETENANGO",
+            value: "M_S_ELULAIA_HUEHUE",
+          },
+          {
+            text: "FISCALIA MUNICIAPL DE SANTIAGO ATITLÁN, SOLOLA",
+            value: "M_SANTIAGO_SOLOLA",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE AGUA BLANCA, JUTIAPA",
+            value: "M_AGUA_BLANCA_JUTIAPA",
+          },
+          { text: "FISCALIA MUNICIPAL DE AMATITLAN", value: "M_AMATITLAN1" },
+          { text: "FISCALIA MUNICIPAL DE AMATITLAN", value: "M_AMATITLAN2" },
+          {
+            text: "FISCALIA MUNICIPAL DE ATESCATEMPA, JUTIAPA",
+            value: "M_ATESCATEMPA_JUTIAPA",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE CASILLAS, SANTA ROSA",
+            value: "M_CASILLAS_S_ROSA",
+          },
+          { text: "FISCALIA MUNICIPAL DE CHINAUTLA", value: "M_CHINAUTLA" },
+          {
+            text: "FISCALIA MUNICIPAL DE COATEPEQUE, QUETZALTENANGO",
+            value: "M_COATEPEQUE_XELA",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE ESQUIPULAS, CHIQUIMULA",
+            value: "M_ESQUIPULAS_CHIQUIM",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE GUALAN, ZACAPA",
+            value: "M_GUALAN_ZACAPA",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE JACALTENANGO, HUEHUETENANGO",
+            value: "M_JACALTENAGO_HUEHUE",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE JOCOTAN, CHIQUIMULA",
+            value: "M_JOCOTAN_CHIQUIM",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE LA BLANCA, SAN MARCOS",
+            value: "M_BLANCA_S_MARCOS",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE LA DEMOCRACIA, HUEHUETENANGO",
+            value: "M_DEMO_HUEHUE",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE LA GOMERA, ESCUINTLA",
+            value: "M_GOMERA_ESCUINTLA",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE LA LIBERTAD, PETEN",
+            value: "M_LIBERTAD_PETEN",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE LIVINGSTON, IZABAL",
+            value: "M_IZABAL",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE MELCHOR DE MENCOS, PETEN",
+            value: "M_MELCHOR_PETEN",
+          },
+          { text: "FISCALIA MUNICIPAL DE MIXCO", value: "M_MIXCO" },
+          {
+            text: "FISCALIA MUNICIPAL DE MORALES, IZABAL",
+            value: "M_MORALES_IZABAL",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE MOYUTA, JUTIAPA",
+            value: "M_MOYUTA_JUTIAPA",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE NEBAJ, QUICHE",
+            value: "M_NEBAJ_QUICHE",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE NUEVA CONCEPCION, ESCUINTLA",
+            value: "M_N_CONCEPCION_ESCUINTLA",
+          },
+          { text: "FISCALIA MUNICIPAL DE PALENCIA", value: "M_PALENCIA" },
+          {
+            text: "FISCALIA MUNICIPAL DE PATULUL, SUCHITEPEQUEZ",
+            value: "M_PATULUL_SUCHI",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE POPTUN, PETEN",
+            value: "M_POPTUN_PETEN",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE PUERTO SAN JOSE, ESCUINTLA",
+            value: "M_S_JOSE_ESCUINTLA",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE RABINAL, BAJA VERAPAZ",
+            value: "M_RABINAL_B_VERAPAZ",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE SAN JUAN BAUTISTA, SUCHITEPEQUEZ",
+            value: "M_S_JUAN_BAUTISTA_SUCHI",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE SAN JUAN SACATEPEQUEZ",
+            value: "M_S-JUAN_SACATEPEQUEZ",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE SANTA CATALINA LA TINTA, ALTA VERAPAZ",
+            value: "M_S_CATALINA_A_VERAPAZ",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE SANTA CATARIANA PINULA",
+            value: "M_S_CATALINA_PINULA",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE SANTA LUCIA COTZULMALGUAPA, ESCUINTLA",
+            value: "M_S_LUCIA_COTZ_ESCUINTLA",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE SAYAXCHE, PETEN",
+            value: "M_SAYAXCHE_PETEN",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE TACANA, SAN MARCOS",
+            value: "M_TACANA_S_MARCOS",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE TAXISCO, SANTA ROSA",
+            value: "M_TAXISCO_S_ROSA",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE TECUN UMAN, SAN MARCOS",
+            value: "M_TECUN_S_MARCOS",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE VILLA CANALES, GUATEMALA",
+            value: "M_V_CANALES_GT",
+          },
+          {
+            text: "FISCALIA MUNICIPAL DE VILLA NUEVA, GUATEMALA",
+            value: "M_V_NUEVA_GT",
+          },
+        ],
         [
           { text: "Fiscal de Seccion", value: "FS1" },
           { text: "Fiscal de Seccion Adjunta 1", value: "FSA1" },
@@ -113,11 +430,11 @@ export default {
           { text: "E6 EPP-GIC", value: "11" },
           { text: "E7 EPP-GIC", value: "12" },
           { text: "E1 DESC-SCC", value: "13" },
-          { text: "E1 EPP-SCC", value: "13" },
-          { text: "E2 EPP-SCC", value: "13" },
-          { text: "E3 EPP-SCC", value: "13" },
-          { text: "E4 EPP-SCC", value: "13" },
-          { text: "PAL", value: "13" },
+          { text: "E1 EPP-SCC", value: "14" },
+          { text: "E2 EPP-SCC", value: "15" },
+          { text: "E3 EPP-SCC", value: "16" },
+          { text: "E4 EPP-SCC", value: "17" },
+          { text: "PAL", value: "18" },
           { text: "UDI Escuintla", value: "UDIESC" },
           { text: "UICE 1", value: "UICE1" },
           { text: "UICE 2", value: "UICE2" },
@@ -132,24 +449,41 @@ export default {
         ],
       ],
       allSelected: false,
-      selectudi: false,
+      selectTIAE: false,
+      selectUEV: false,
       selectfem: false,
-      indeterminate: false,
+      indeterminate0: false,
+      indeterminate1: false,
       indeterminate2: false,
     };
   },
   methods: {
     created() {},
     toggleAll(checked) {
-      const arreglo1 = this.options[0].slice();
-      const valores1 = [];
-      arreglo1.forEach((dato) => {
-        valores1.push(dato.value);
+      const arreglo0 = this.options[0].slice();
+      const valores0 = [];
+      arreglo0.forEach((dato) => {
+        valores0.push(dato.value);
       });
-      this.selected = checked ? valores1 : [];
+      this.selected0 = checked ? valores0 : [];
       //console.log(this.selected);
 
-      const arreglo2 = this.options[1].slice();
+      const arreglo3 = this.options[1].slice();
+      const valores3 = [];
+      arreglo3.forEach((dato3) => {
+        valores3.push(dato3.value);
+      });
+      this.selected3 = checked ? valores3 : [];
+
+      const arreglo1 = this.options[2].slice();
+      const valores1 = [];
+      arreglo1.forEach((dato1) => {
+        valores1.push(dato1.value);
+      });
+      this.selected1 = checked ? valores1 : [];
+      //console.log(this.selected2);
+
+      const arreglo2 = this.options[3].slice();
       const valores2 = [];
       arreglo2.forEach((dato2) => {
         valores2.push(dato2.value);
@@ -157,17 +491,33 @@ export default {
       this.selected2 = checked ? valores2 : [];
       //console.log(this.selected2);
     },
-    toggleAll1(checked) {
+    toggleAll0(checked) {
       const arreglo = this.options[0].slice();
       const valores = [];
       arreglo.forEach((dato) => {
         valores.push(dato.value);
       });
-      this.selected = checked ? valores : [];
+      this.selected0 = checked ? valores : [];
+      //console.log(this.selected);
+
+      const arreglo3 = this.options[1].slice();
+      const valores3 = [];
+      arreglo3.forEach((dato3) => {
+        valores3.push(dato3.value);
+      });
+      this.selected3 = checked ? valores3 : [];
+    },
+    toggleAll1(checked) {
+      const arreglo = this.options[2].slice();
+      const valores = [];
+      arreglo.forEach((dato) => {
+        valores.push(dato.value);
+      });
+      this.selected1 = checked ? valores : [];
       //console.log(this.selected);
     },
     toggleAll2(checked) {
-      const arreglo = this.options[1].slice();
+      const arreglo = this.options[3].slice();
       const valores = [];
       arreglo.forEach((dato) => {
         valores.push(dato.value);
@@ -178,33 +528,45 @@ export default {
     async descargarPDF() {
       this.mostrar = true;
       this.mostrar2 = false;
-      this.form.fiscalia = [[],[]];
-      this.reportSeccion();
-          this.reportEquipo();
+
+      //this.reportSeccion();
+      //this.reportEquipo();
       if (this.llenarform()) {
         await axios.post(url, this.form).then((data) => {
-          const c_crecer = data.data[0];
-          const c_nuevo = data.data[1];
+          this.form.fiscalia = [[], [], [], []];
+          console.log(data);
+          //const c_crecer = data.data[0];
 
-          console.log(c_crecer);
-          console.log(c_nuevo);
+          //const c_nuevo = data.data[1];
+
+          //console.log(c_crecer);
+          //console.log(c_nuevo);
           this.mostrar = false;
           this.mostrar2 = true;
-          this.reportSeccion();
-          this.reportEquipo();
+          //this.reportSeccion();
+          //this.reportEquipo();
         });
       } else {
-        alert("Seleccionar campos!!!");
+        alert("Ingresar todos los campos!!!");
         this.mostrar = false;
         this.mostrar2 = true;
       }
     },
     llenarform() {
-      if (this.selected.length <= 0 & this.selected2.length <= 0) {
+      if (
+        (this.selected0.length <= 0) &
+          (this.selected1.length <= 0) &
+          (this.selected2.length <= 0) &
+          (this.selected3.length <= 0) ||
+        this.form.fecha1.length <= 0 ||
+        this.form.fecha2.length <= 0
+      ) {
         return false;
       } else {
-        this.form.fiscalia[0].push(this.selected);
-        this.form.fiscalia[1].push(this.selected2);
+        this.form.fiscalia[0].push(this.selected0);
+        this.form.fiscalia[1].push(this.selected3);
+        this.form.fiscalia[2].push(this.selected1);
+        this.form.fiscalia[3].push(this.selected2);
         return true;
       }
     },
@@ -850,22 +1212,43 @@ export default {
     },
   },
   watch: {
-    selected(dato) {
+    selected0(dato) {
       //console.log(dato);
       //console.log(this.selected);
       if (dato.length === 0) {
         //console.log(dato + "valor 0");
         this.allSelected = false;
-        this.selectudi = false;
+        this.selectTIAE = false;
+
         this.indeterminate = false;
       } else if (dato.length === this.options[0].length) {
-        this.selectudi = true;
+        this.selectTIAE = true;
+
         this.indeterminate = false;
-        console.log(dato + "valor 15");
+        //console.log(dato + "valor 15");
       } else {
         this.indeterminate = true;
         this.allSelected = false;
-        this.selectudi = false;
+        this.selectTIAE = false;
+        //console.log(dato + "valor ");
+      }
+    },
+    selected1(dato) {
+      //console.log(dato);
+      //console.log(this.selected);
+      if (dato.length === 0) {
+        //console.log(dato + "valor 0");
+        this.allSelected = false;
+        this.selectUEV = false;
+        this.indeterminate1 = false;
+      } else if (dato.length === this.options[2].length) {
+        this.selectUEV = true;
+        this.indeterminate1 = false;
+        //console.log(dato + "valor 15");
+      } else {
+        this.indeterminate1 = true;
+        this.allSelected = false;
+        this.selectUEV = false;
         //console.log(dato + "valor ");
       }
     },
@@ -874,13 +1257,34 @@ export default {
         this.selectfem = false;
         this.allSelected = false;
         this.indeterminate2 = false;
-      } else if (dato.length === this.options[1].length) {
+      } else if (dato.length === this.options[3].length) {
         this.selectfem = true;
         this.indeterminate2 = false;
       } else {
         this.indeterminate2 = true;
         this.selectfem = false;
         this.allSelected = false;
+      }
+    },
+    selected3(dato) {
+      //console.log(dato);
+      //console.log(this.selected);
+      if (dato.length === 0) {
+        //console.log(dato + "valor 0");
+        this.allSelected = false;
+        this.selectTIAE = false;
+
+        this.indeterminate = false;
+      } else if (dato.length === this.options[1].length) {
+        this.selectTIAE = true;
+
+        this.indeterminate = false;
+        //console.log(dato + "valor 15");
+      } else {
+        this.indeterminate = true;
+        this.allSelected = false;
+        this.selectTIAE = false;
+        //console.log(dato + "valor ");
       }
     },
   },

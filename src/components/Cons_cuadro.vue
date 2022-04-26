@@ -323,12 +323,13 @@ export default {
           },
         })
         .then((data) => {
+          console.log(data.data);
           this.encabezado = []; //limpia el encabezado para nueva consulta
           this.tabla = []; //limpia la tabla para nueva consulta
           this.consultas = data.data;
           this.tabla = this.consultas.tabla;
           this.encabezado = this.consultas.dato_arma;
-          console.log(data);
+          //console.log(data);
         });
       this.validarcuadro();
     },
@@ -539,6 +540,7 @@ export default {
           "center"
         );
 
+
         pdf.setFontSize(20);
         pdf.setFillColor("#F2F2F2");
         pdf.setLineWidth(2);
@@ -559,7 +561,7 @@ export default {
         pdf.setFontSize(10);
         pdf.text(53, 70, this.encabezado[0].observacion, {
           maxWidth: 330,
-          align: "justify",
+          //align: "justify",
         });
         pdf.setFont("Helvetica", "normal");
         pdf.setFontSize(8);

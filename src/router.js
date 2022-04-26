@@ -57,6 +57,11 @@ const routes = [
         component: () => import('@/components/Cerrar_Sesion.vue')
     },
     {
+        path: '/report',
+        name: 'report',
+        component: () => import('@/components/Report_alerta.vue')
+    },
+    {
         path: '/bloqueo',
         name: 'bloqueo',
         component: () => import('@/components/Bloqueo.vue')

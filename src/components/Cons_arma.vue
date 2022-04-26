@@ -224,7 +224,7 @@ export default {
             this.consultas = data.data;
             this.tabla = [];
             this.validarconsulta();
-            console.log(this.consultas);
+            //console.log(this.consultas);
           });
       } else {
         this.alerta = "Caracteres Incorrectos!!";
@@ -245,7 +245,7 @@ export default {
             },
           }).then((data) => {
           this.consultas = data.data;
-          console.log(this.consultas);
+          //console.log(this.consultas);
           this.tabla = [];
           this.validarconsulta();
         });
@@ -372,7 +372,7 @@ export default {
         dependencia: storage.userData.dependencia,
         token: storage.token,
       };
-      //console.log(bitacora);
+      ////console.log(bitacora);
       this.form.bitacora = bitacora;
     },
     antespage(page) {
