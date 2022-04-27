@@ -57,7 +57,7 @@ const routes = [
         component: () => import('@/components/Cerrar_Sesion.vue')
     },
     {
-        path: '/report',
+        path: '/report/token/:token',
         name: 'report',
         component: () => import('@/components/Report_alerta.vue')
     },
@@ -65,6 +65,11 @@ const routes = [
         path: '/bloqueo',
         name: 'bloqueo',
         component: () => import('@/components/Bloqueo.vue')
+    },
+    {
+        path: '/consulta/token/:token',
+        name: 'consulta',
+        component: () => import('./components/Consultas_IBIS.vue')
     },
 ]
 

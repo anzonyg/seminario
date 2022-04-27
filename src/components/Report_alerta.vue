@@ -194,7 +194,6 @@ export default {
         name: "San Luis Potosi",
       },
       form: {
-        id: "5",
         fecha1: "",
         fecha2: new Date(),
         fiscalia: [[], [], [], []],

@@ -3,97 +3,91 @@
     <b-container>
       <Encabezado />
       <br />
+      <br />
       <b-row>
-        <b-col md="2">
-          <!--
-          <router-link to="/consulta">Consultas IBIS</router-link>
+        <b-col md="11" align="right">
           <br />
-          <router-link to="/alert">Alertas IBIS</router-link>
-          <br />
-          <br />
-          -->
-        </b-col>
-        <b-col md="9" align="right">
           <h5 class="text-primary">{{ nombre }}</h5>
         </b-col>
         <b-col md="1" align="left">
-          <b-dropdown size="sm" variant="info">
+          <b-dropdown size="sm" variant="link" no-caret>
             <template #button-content>
-              <b-icon icon="person-fill" aria-hidden="true"></b-icon>
+              <b-img
+                blank-color="#777"
+                thumbnail
+                width="70"
+                height="70"
+                :src="foto"
+              />
             </template>
             <b-dropdown-item-button @click="downloadPDF()">
               <b-icon icon="download" aria-hidden="true"></b-icon>
               Descargar Manual
             </b-dropdown-item-button>
 
-            <b-dropdown-divider></b-dropdown-divider>
+            <div v-if="mostrar">
+              <b-dropdown-divider></b-dropdown-divider>
 
-            <router-link to="/report" style="text-decoration: none">
-              <b-dropdown-item-button @click="alert()">
-                <b-icon icon="file-earmark-bar-graph" aria-hidden="true"></b-icon>
-                Reporteria
-              </b-dropdown-item-button>
-            </router-link>
+              <router-link
+                :to="{
+                  name: 'report',
+                  params: { token: this.$route.params.token },
+                }"
+                style="text-decoration: none"
+              >
+                <b-dropdown-item-button>
+                  <b-icon
+                    icon="file-earmark-bar-graph"
+                    aria-hidden="true"
+                  ></b-icon>
+                  Reporteria
+                </b-dropdown-item-button>
+              </router-link>
+              <router-link
+                :to="{
+                  name: 'consulta',
+                  params: { token: this.$route.params.token },
+                }"
+                style="text-decoration: none"
+              >
+                <b-dropdown-item-button>
+                  <b-icon icon="diagram3" aria-hidden="true"></b-icon>
+                  Consultas
+                </b-dropdown-item-button>
+              </router-link>
+            </div>
           </b-dropdown>
         </b-col>
       </b-row>
     </b-container>
     <router-view />
-
-    <div v-if="mostrar">
-      <Consultas />
-    </div>
-    <div v-if="mostrar2">
-      <Bloqueo />
-    </div>
-    <div v-if="sesion" class="text-center">
-      <br />
-      <br />
-      <p>Iniciar sesión en Dacs</p>
-      <b-button variant="outline-primary" href="https://www.google.com"
-        >Ir a Inicio</b-button
-      >
-    </div>
   </div>
 </template>
 
 <script>
 import Encabezado from "./components/Encabezado.vue";
-import Consultas from "./components/Consultas_IBIS.vue";
-import Bloqueo from "./components/Bloqueo.vue";
 
 import axios from "axios";
 const cf = require("./DIR");
 const url = cf.url + "/acceso";
+const url2 = cf.url + "/accessreport";
 const descarga = cf.url2 + "/download";
 export default {
   name: "App",
   components: {
     Encabezado,
-    Bloqueo,
-    Consultas,
   },
   data() {
     return {
       mostrar: false,
-      mostrar2: true,
-      sesion: false,
       nombre: "",
       id: "",
       dependencia: "",
       grupo: "",
+      foto: "",
     };
   },
   methods: {
-    datos(datos) {
-      localStorage.setItem("datos", JSON.stringify(datos));
-      var nombrecompleto =
-        datos.userData.nombres + " " + datos.userData.apellidos;
-      this.nombre = nombrecompleto;
-    },
-    eliminarcache() {
-      localStorage.removeItem("datos");
-    },
     async downloadPDF() {
       //descarga manual de usuario
       axios({
@@ -112,6 +106,8 @@ export default {
     },
     async verToken() {
       //verifica token
+      let verificar = false;
+
       await axios
         .get("http://172.18.230.112:9001/sigeemp/revisarToken/", {
           //donde realiza la consulta
@@ -126,20 +122,70 @@ export default {
               userData: res.token.user,
             };
             //console.log(auxDataUser); // ver info
+            this.foto = res.token.user.dirFoto;
             this.datos(auxDataUser);
             this.validarAcceso(auxDataUser.userData);
-          } else {
-            this.verificartoken(false);
-            //console.log(false);
+            verificar = true;
           }
         });
+      if (verificar == false) {
+        this.$router.replace("/bloqueo");
+      }
     },
-    bitacora(user) {
+    datos(datos) {
+      localStorage.setItem("datos", JSON.stringify(datos));
+      var nombrecompleto =
+        datos.userData.nombres + " " + datos.userData.apellidos;
+      this.nombre = nombrecompleto;
+    },
+    async validarAcceso(user) {
+      const userlist = user;
+      const list = {
+        uid: userlist.id + "",
+        rol: userlist.rol.toUpperCase(),
+        grupo: userlist.grupo.toUpperCase(),
+        dependencia: userlist.dependencia,
+        bitacora: this.bitacora(userlist, "Inicio de sesion en base de datos."),
+      };
+      await axios.post(url, list).then((data) => {
+        const result1 = data.data;
+        //console.log(result1);
+        if (result1) {
+          this.validarAccesorReporte(userlist);
+        } else {
+          this.$router.replace("/bloqueo");
+        }
+      });
+    },
+    async validarAccesorReporte(user) {
+      const userlist = user;
+      const list = {
+        uid: userlist.id + "",
+        bitacora: this.bitacora(userlist, "Acceso a Reporteria"),
+      };
+      await axios.post(url2, list).then((data) => {
+        const result1 = data.data;
+        //console.log(result1);
+        if (result1) {
+          this.mostrar = true;
+          console.log(this.mostrar);
+          console.log("SI TIENE ACCESO");
+        } else {
+          console.log(this.mostrar);
+          console.log("NO TIENE ACCESO");
+          this.$router.push({
+            name: "consulta",
+            params: { token: this.$route.params.token },
+          });
+        }
+      });
+    },
+    bitacora(user, text) {
       const userlist = user;
       let bitacora = {
         horafecha: new Date(),
         level: 0,
-        message: "Inicio de sesion en base de datos.",
+        message: text,
         codproceso: "",
         busqueda: "",
         fiscalia_solicitante: "",
@@ -155,53 +201,16 @@ export default {
       };
       return bitacora;
     },
-    async validarAcceso(user) {
-      const userlist = user;
-      const list = {
-        uid: userlist.id + "",
-        rol: userlist.rol.toUpperCase(),
-        grupo: userlist.grupo.toUpperCase(),
-        dependencia: userlist.dependencia,
-        bitacora: this.bitacora(userlist),
-      };
-      await axios.post(url, list).then((data) => {
-        const result1 = data.data;
-        //console.log(result1);
-        if (result1) {
-          this.verificartoken(true);
-        } else {
-          this.verificartoken(false);
-        }
-      });
-    },
-    verificartoken(text) {
-      if (text) {
-        this.mostrar = true;
-        this.mostrar2 = false;
-      } else {
-        this.mostrar = false;
-        this.mostrar2 = true;
-      }
-    },
-    salir() {
-      localStorage.removeItem("datos");
-      this.mostrar = false;
-      this.mostrar2 = true;
-      this.sesion = true;
-    },
-    alert() {
-      this.mostrar = false;
-      this.mostrar2 = false;
-      this.sesion = false;
-    },
   },
   beforeCreated: function () {
-    localStorage.removeItem("datos");
+    //localStorage.removeItem("datos");
   },
-  created: function () {
+  created() {},
+  mounted() {
     this.verToken();
   },
   updated() {
+    this.verToken();
     console.log("Componente actualizado");
   },
 };
