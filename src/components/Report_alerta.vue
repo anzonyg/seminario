@@ -184,7 +184,7 @@ const cf = require("../DIR");
 const url = cf.url + "/alerta";
 
 export default {
-  name: "Consultas_ibis",
+  name: "Reporteria_ibis",
   components: {},
   data() {
     return {

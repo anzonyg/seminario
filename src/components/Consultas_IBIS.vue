@@ -33,6 +33,7 @@ import ConsCuadro from "@/components/Cons_cuadro.vue";
 import ConsCorrelativo from "@/components/Cons_correlativo.vue";
 import ConsExpediente from "@/components/Cons_expediente.vue";
 import ConsArma from "@/components/Cons_arma.vue";
+//import Report from "@/components/Report_alerta.vue";
 
 export default {
   name: "Consultas_ibis",
@@ -41,6 +42,7 @@ export default {
     ConsCorrelativo,
     ConsExpediente,
     ConsArma,
+    //Report
   },
   data() {
     return {
@@ -51,6 +53,7 @@ export default {
         { text: "Consultas por Correlativo", value: "ConsCorrelativo" },
         { text: "Consultas por Expediente", value: "ConsExpediente" },
         { text: "Consultas por Arma", value: "ConsArma" },
+        //{ text: "Reporteria", value: "Report" },
       ],
     };
   },

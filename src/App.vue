@@ -1,85 +1,98 @@
 <template>
   <div id="app">
+    <!--ENCABEZADO-->
     <b-container>
       <Encabezado />
       <br />
       <br />
-      <b-row>
-        <b-col md="11" align="right">
-          <br />
-          <h5 class="text-primary">{{ nombre }}</h5>
-        </b-col>
-        <b-col md="1" align="left">
-          <b-dropdown size="sm" variant="link" no-caret>
-            <template #button-content>
-              <b-img
-                blank-color="#777"
-                thumbnail
-                width="70"
-                height="70"
-                :src="foto"
-              />
-            </template>
-            <b-dropdown-item-button @click="downloadPDF()">
-              <b-icon icon="download" aria-hidden="true"></b-icon>
-              Descargar Manual
-            </b-dropdown-item-button>
+      <div>
+        <b-row>
+          <b-col md="11" align="right">
+            <br />
+            <h5 class="text-primary">{{ nombre }}</h5>
+          </b-col>
+          <b-col md="1" align="left">
+            <b-dropdown size="sm" variant="link" no-caret>
+              <template #button-content>
+                <div v-if="imgmostrar">
+                  <b-img
+                    blank-color="black"
+                    thumbnail
+                    width="70"
+                    height="70"
+                    :src="foto"
+                  />
+                </div>
+                <div v-else>
+                  <b-icon icon="person" style="width: 70; height: 70"> </b-icon>
+                </div>
+              </template>
+              <b-dropdown-item-button @click="downloadPDF()">
+                <b-icon icon="download" aria-hidden="true"></b-icon>
+                Descargar Manual
+              </b-dropdown-item-button>
 
-            <div v-if="mostrar">
-              <b-dropdown-divider></b-dropdown-divider>
-
-              <router-link
-                :to="{
-                  name: 'report',
-                  params: { token: this.$route.params.token },
-                }"
-                style="text-decoration: none"
-              >
-                <b-dropdown-item-button>
+              <div v-if="mostrar">
+                <b-dropdown-divider></b-dropdown-divider>
+                <b-dropdown-item-button @click="link('report')">
                   <b-icon
                     icon="file-earmark-bar-graph"
                     aria-hidden="true"
                   ></b-icon>
                   Reporteria
                 </b-dropdown-item-button>
-              </router-link>
-              <router-link
-                :to="{
-                  name: 'consulta',
-                  params: { token: this.$route.params.token },
-                }"
-                style="text-decoration: none"
-              >
-                <b-dropdown-item-button>
+                <b-dropdown-item-button @click="link('consulta')">
                   <b-icon icon="diagram3" aria-hidden="true"></b-icon>
                   Consultas
                 </b-dropdown-item-button>
-              </router-link>
-            </div>
-          </b-dropdown>
-        </b-col>
-      </b-row>
+              </div>
+            </b-dropdown>
+          </b-col>
+        </b-row>
+      </div>
     </b-container>
-    <router-view />
+
+    <!--CONTENIDO-->
+    <b-container>
+      <div v-if="mostrar_Consulta">
+        <Consultas />
+      </div>
+      <div v-else-if="mostrar_Alertas">
+        <Alertas />
+      </div>
+      <div v-else-if="mostrar_Bloqueo">
+        <Bloqueo />
+      </div>
+    </b-container>
   </div>
 </template>
 
 <script>
-import Encabezado from "./components/Encabezado.vue";
+var cont = 0;
+import Encabezado from "@/components/Encabezado.vue";
+import Consultas from "@/components/Consultas_IBIS.vue";
+import Alertas from "@/components/Report_alerta.vue";
+import Bloqueo from "@/components/Bloqueo.vue";
 
 import axios from "axios";
 const cf = require("./DIR");
 const url = cf.url + "/acceso";
-const url2 = cf.url + "/accessreport";
 const descarga = cf.url2 + "/download";
 export default {
   name: "App",
   components: {
     Encabezado,
+    Consultas,
+    Alertas,
+    Bloqueo,
   },
   data() {
     return {
       mostrar: false,
+      mostrar_Consulta: false,
+      mostrar_Alertas: false,
+      mostrar_Bloqueo: true,
+      imgmostrar: false,
       nombre: "",
       id: "",
       dependencia: "",
@@ -107,7 +120,7 @@ export default {
     async verToken() {
       //verifica token
       let verificar = false;
-
+      console.log(this.$route.params.token);
       await axios
         .get("http://172.18.230.112:9001/sigeemp/revisarToken/", {
           //donde realiza la consulta
@@ -123,20 +136,23 @@ export default {
             };
             //console.log(auxDataUser); // ver info
             this.foto = res.token.user.dirFoto;
-            this.datos(auxDataUser);
+            this.imgmostrar = true;
+            localStorage.setItem("datos", JSON.stringify(auxDataUser));
+            var nombrecompleto =
+              auxDataUser.userData.nombres +
+              " " +
+              auxDataUser.userData.apellidos;
+            this.nombre = nombrecompleto;
             this.validarAcceso(auxDataUser.userData);
             verificar = true;
           }
         });
+      //.catch(error => console.log(error))
+
       if (verificar == false) {
-        this.$router.replace("/bloqueo");
+        console.log(verificar);
+        this.mostrar_Bloqueo = true;
       }
-    },
-    datos(datos) {
-      localStorage.setItem("datos", JSON.stringify(datos));
-      var nombrecompleto =
-        datos.userData.nombres + " " + datos.userData.apellidos;
-      this.nombre = nombrecompleto;
     },
     async validarAcceso(user) {
       const userlist = user;
@@ -149,34 +165,26 @@ export default {
       };
       await axios.post(url, list).then((data) => {
         const result1 = data.data;
-        //console.log(result1);
-        if (result1) {
-          this.validarAccesorReporte(userlist);
-        } else {
-          this.$router.replace("/bloqueo");
-        }
-      });
-    },
-    async validarAccesorReporte(user) {
-      const userlist = user;
-      const list = {
-        uid: userlist.id + "",
-        bitacora: this.bitacora(userlist, "Acceso a Reporteria"),
-      };
-      await axios.post(url2, list).then((data) => {
-        const result1 = data.data;
-        //console.log(result1);
-        if (result1) {
+        if (result1 == "report") {
+          console.log("acceso a reporte consedido!");
           this.mostrar = true;
-          console.log(this.mostrar);
-          console.log("SI TIENE ACCESO");
+          this.mostrar_Consulta = true;
+          this.mostrar_Bloqueo = false;
+          this.mostrar_Alertas = false;
+        } else if (result1 == "consult") {
+          console.log("acceso a consulta consedido!");
+          this.mostrar_Consulta = true;
+          this.mostrar_Bloqueo = false;
+          this.mostrar_Alertas = false;
+        } else if (result1 == "negativo") {
+          console.log("acceso a negativo!");
+          this.mostrar_Bloqueo = true;
+          this.mostrar_Consulta = false;
+          this.mostrar_Alertas = false;
         } else {
-          console.log(this.mostrar);
-          console.log("NO TIENE ACCESO");
-          this.$router.push({
-            name: "consulta",
-            params: { token: this.$route.params.token },
-          });
+          this.mostrar_Bloqueo = true;
+          this.mostrar_Consulta = false;
+          this.mostrar_Alertas = false;
         }
       });
     },
@@ -201,17 +209,45 @@ export default {
       };
       return bitacora;
     },
+
+    link(dato) {
+      var option = dato;
+      console.log(option);
+      if (option == "report") {
+        this.mostrar_Consulta = false;
+        this.mostrar_Bloqueo = false;
+        this.mostrar_Alertas = true;
+      } else if (option == "consulta") {
+        this.mostrar_Consulta = true;
+        this.mostrar_Bloqueo = false;
+        this.mostrar_Alertas = false;
+      } else {
+        this.mostrar_Consulta = false;
+        this.mostrar_Bloqueo = true;
+        this.mostrar_Alertas = false;
+      }
+    },
   },
-  beforeCreated: function () {
-    //localStorage.removeItem("datos");
+  created() {
+    console.log("eliminacion de registro!!!");
+    localStorage.removeItem("datos");
+    /*console.log(this.$route.params.token);
+    console.log("inicio montaje!!!");
+    console.log(window.location);
+    this.verToken();
+    console.log(this.$route.params.token + "  " + cont++);*/
   },
-  created() {},
   mounted() {
+    console.log(this.$route.params.token + "  " + cont++);
+    console.log("inicio montaje!!!");
+    console.log(window.location);
     this.verToken();
   },
   updated() {
+    /*console.log("inicio actualizacion!!!");
     this.verToken();
-    console.log("Componente actualizado");
+    console.log("actualizado!!!");
+    console.log(this.$route.params.token + "  " + cont++);*/
   },
 };
 </script>
