@@ -212,7 +212,7 @@ export default {
         this.mostrar4 = false;
         this.mostrar5 = true;
       }else if (this.consultas.tabla.length <= 0) {
-        this.alerta = "El cuadro no existe en la base de datos";
+        this.alerta = "El expediente no existe en la base de datos";
         this.showAlert();
         this.mostrar = false;
         this.mostrar2 = true;

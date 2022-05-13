@@ -30,7 +30,7 @@
           name="descarga"
           v-show="mostrar"
           ><b-icon icon="download" aria-hidden="true"></b-icon>
-          Exportar</b-button
+          Exportar PDF</b-button
         >
       </b-col>
       <b-col md="8">
@@ -47,60 +47,66 @@
     <b-modal
       ref="my-modal"
       id="modal-1"
+      size="xl"
       header-bg-variant="info"
       title="Ingresar Datos"
       hide-footer
     >
-      <div class="form-group col-12">
-        <p>Ingrese el nombre de la fiscalía y equipo solicitante</p>
-        <b-form-group
-          label="Fiscalía"
-          label-for="name-input"
-          invalid-feedback="Name is required"
-        >
-          <b-form-input
-            id="name-input"
-            v-model="fiscalia.fiscalia"
-            required
-          ></b-form-input>
-        </b-form-group>
-        <br />
-        <b-form-group
-          id="input-group-3"
-          label-cols-sm="7"
-          label="Equipo:"
-          label-for="input-3"
-        >
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            v-model="fiscalia.unidad"
+      <b-row>
+        <p>Ingrese el nombre de la fiscalía y agencia o equipo solicitante</p>
+        <b-col md="12">
+          <!------ Fiscalia ------->
+
+          <b-form-group
+            label=""
+            label-for="filter-input"
+            label-cols-sm="3"
+            label-align-sm="right"
+            label-size="sm"
+            class="mb-0"
           >
-            <option value="" selected>Selecciona equipo de trabajo</option>
-            <option value="(E1) (DES-GIC)">(E1) EQUIPO UNO (DES-GIC)</option>
-            <option value="(E2) (EPP-GIC)">(E2) EQUIPO DOS (EPP-GIC)</option>
-            <option value="(E3) (EPP-GIC)">(E3) EQUIPO TRES (EPP-GIC)</option>
-            <option value="(E4) (EPP-GIC)">(E4) EQUIPO CUATRO (EPP-GIC)</option>
-            <option value="(E1) (DESC-SCC)">(E1) EQUIPO UNO (DESC-SCC))</option>
-            <option value="(E1) (EPP-SCC)">(E1) EQUIPO UNO (EPP-SCC)</option>
-            <option value="(E2) (EPP-SCC)">(E2) EQUIPO DOS (EPP-SCC)</option>
-            <option value="(E3) (EPP-SCC)">(E3) EQUIPO TRES (EPP-SCC))</option>
-            <option value="(E4) (EPP-SCC) LIQUIDACIÓN">
-              (E4) EQUIPO CUATRO (EPP-SCC) LIQUIDACIÓN
-            </option>
-            <option value="(E5) (EPP-GIC) CASOS ESPECIALES">
-              (E5) EQUIPO CINCO (EPP-GIC) CASOS ESPECIALES
-            </option>
-            <option value="(E6) (EPP-GIC) CASOS DE PILOTOS (EXTORSIONES)">
-              (E6) EQUIPO SEIS (EPP-GIC) CASOS DE PILOTOS (EXTORSIONES)
-            </option>
-            <option value="(E7) (EPP-GIC) MANIFESTACIONES">
-              (E7) EQUIPO SIETE (EPP-GIC) MANIFESTACIONES
-            </option>
-            <option value="(PAL)">(PAL) PERSONAL DE APOYO A LITIGIO</option>
-          </select>
-        </b-form-group>
-      </div>
+            <br />
+            <b-input-group size="sm">
+              <b-form-input
+                id="filter-input"
+                v-model="filter"
+                type="search"
+                placeholder="Buscador"
+              ></b-form-input>
+
+              <b-input-group-append>
+                <b-button :disabled="!filter" @click="filter = ''"
+                  >Limpiar</b-button
+                >
+              </b-input-group-append>
+            </b-input-group>
+          </b-form-group>
+
+          <b-table
+            striped
+            sticky-header
+            hover
+            :filter="filter"
+            :select-mode="selectMode"
+            selectable
+            :items="items"
+            @row-selected="onRowSelected"
+          ></b-table>
+          <br />
+        </b-col>
+        <b-col md="12">
+          <!-------- Equipo --------->
+          <b-form-group
+            id="input-group-3"
+            label-cols-sm="7"
+            label="Agencia o Equipo:"
+            label-for="input-3"
+          >
+            <b-form-input v-model="fiscalia.unidad"></b-form-input>
+          </b-form-group>
+        </b-col>
+      </b-row>
+
       <br />
       <b-alert
         :show="dismissCountDown2"
@@ -110,6 +116,18 @@
       >
         <p>Datos Incorrectos!!</p>
       </b-alert>
+      <br />
+      <br />
+      <!--
+      <p>
+        Selected Rows:<br />
+        {{ selected }}
+        <br/>
+        {{ fiscalia.fiscalia }}
+      </p>
+      <br />
+      <br />
+          -->
       <div class="text-center">
         <b-button
           center
@@ -144,7 +162,6 @@
             id="name-input"
             rows="3"
             v-model="fiscalia.justificacion"
-            
             required
           ></b-form-textarea>
         </b-form-group>
@@ -265,6 +282,444 @@ export default {
       mostrar5: true, // icon buscar tabla
       mostrar6: false, //spinner de buscar modal
       mostrar7: true, // icon buscar modal
+      selected1: null,
+      filter: null,
+      filterOn: [],
+      selectMode: "single",
+      selected: [],
+      items: [
+        {
+          fiscalia:
+            "FISCALÍA CONTRA DELITOS DE DEFRAUDACIÓN Y CONTRABANDO ADUANEROS, AGENCIA LIQUIDADORA DE CONTRABANDO",
+        },
+        { fiscalia: "FISCALIA CONTRA DELITOS DE USURPACION" },
+        { fiscalia: "FISCALÍA CONTRA DELITOS TRANSNACIONALES" },
+        { fiscalia: "FISCALÍA CONTRA EL TRÁFICO ILÍCITO DE MIGRANTES" },
+        { fiscalia: "FISCALIA CONTRA EXTORSIONES	, 	CHIMALTENANGO" },
+        { fiscalia: "FISCALIA CONTRA EXTORSIONES	, 	HUEHUETENANGO" },
+        { fiscalia: "FISCALIA CONTRA EXTORSIONES	, 	JUTIAPA" },
+        { fiscalia: "FISCALIA CONTRA EXTORSIONES	, 	QUETZALTENANGO" },
+        { fiscalia: "FISCALIA CONTRA EXTORSIONES	, 	SAN MARCOS" },
+        { fiscalia: "FISCALIA CONTRA EXTORSIONES	, 	SUCHITEPEQUEZ" },
+        { fiscalia: "FISCALIA CONTRA FEMICIDIO" },
+        { fiscalia: "FISCALIA DE ACTIVISTAS DERECHOS HUMANOS" },
+        {
+          fiscalia:
+            "FISCALÍA DE ADOLESCENTES EN CONFLICTO CON LA LEY PENAL, GUATEMALA",
+        },
+        { fiscalia: "FISCALIA DE CASOS ESPECIALES DERECHOS HUMANOS" },
+        { fiscalia: "FISCALIA DE DELITOS CONTRA EL PATRIMONIO CULTURAL" },
+        { fiscalia: "FISCALIA DE DELITOS CONTRA LOS DERECHOS HUMANOS" },
+        {
+          fiscalia:
+            "FISCALIA DE DELITOS CONTRA OPERADORES DE JUSTICIA Y SINDICALISTAS",
+        },
+        { fiscalia: "FISCALIA DE DELITOS CONTRA PERIODISTAS" },
+        { fiscalia: "FISCALIA DE DELITOS DE NARCOACTIVIDAD, CHIQUIMULA" },
+        { fiscalia: "FISCALIA DE DELITOS DE NARCOACTIVIDAD, SAN BENITO PETEN" },
+        { fiscalia: "FISCALIA DE DELITOS ELECTORALES" },
+        { fiscalia: "FISCALIA DE DERECHOS HUMANOS" },
+        { fiscalia: "FISCALIA DE EJECUCION ADOLESCENTES" },
+        { fiscalia: "FISCALIA DE EJECUCION ADOLESCENTES QUETZALTENANGO" },
+        { fiscalia: "FISCALIA DE EXTINSION DE DOMINIO" },
+        { fiscalia: "FISCALÍA DE LA NIÑEZ Y ADOLESCENCIA, GUATEMALA" },
+        { fiscalia: "FISCALIA DE LA VIDA ESCUINTLA" },
+        { fiscalia: "FISCALIA DE MENORES O DE LA NIÑEZ, SAN BENITO PETEN" },
+        { fiscalia: "FISCALIA DE MENORES O DE LA NIÑEZ, SAN MARCOS" },
+        { fiscalia: "FISCALIA DE MENORES O NIÑEZ HUEHUETENANGO" },
+        { fiscalia: "FISCALIA DE MENORES O NIÑEZ QUICHE" },
+        { fiscalia: "FISCALIA DE MENORES O NIÑEZ, ALTA VERAPAZ" },
+        { fiscalia: "FISCALIA DE MENORES O NIÑEZ, CHIMALTENANGO" },
+        { fiscalia: "FISCALIA DE MENORES O NIÑEZ, COATEPEQUE" },
+        { fiscalia: "FISCALIA DE MENORES O NIÑEZ, ESCUINTLA" },
+        { fiscalia: "FISCALIA DE MENORES O NIÑEZ, JUTIAPA" },
+        { fiscalia: "FISCALIA DE MENORES O NIÑEZ, QUETZALTENANGO" },
+        { fiscalia: "FISCALIA DE MENORES O NIÑEZ, SUCHITEPEQUEZ" },
+        { fiscalia: "FISCALIA DE MENORES O NIÑEZ, ZACAPA" },
+        { fiscalia: "FISCALIA DE OPERADORES DE JUSTICIA" },
+        { fiscalia: "FISCALIA DE PERIODISTAS" },
+        { fiscalia: "FISCALIA DE SECCION ASUNTOS INTERNOS" },
+        { fiscalia: "FISCALIA DE SECCION CONTRA EL CRIMEN ORGANIZADO" },
+        {
+          fiscalia:
+            "FISCALIA DE SECCION CONTRA EL CRIMEN ORGANIZADO, GUATEMALA",
+        },
+        { fiscalia: "FISCALIA DE SECCION CONTRA EL CRIMEN ORGANIZADO, JALAPA" },
+        {
+          fiscalia:
+            "FISCALIA DE SECCION CONTRA EL CRIMEN ORGANIZADO, QUETZALTENANGO",
+        },
+        {
+          fiscalia:
+            "FISCALIA DE SECCION CONTRA EL CRIMEN ORGANIZADO, SAN MARCOS",
+        },
+        {
+          fiscalia:
+            "FISCALIA DE SECCION CONTRA EL LAVADO DE DINERO U OTROS ACTIVOS",
+        },
+        { fiscalia: "FISCALIA DE SECCION CONTRA LA CORRUPCION" },
+        { fiscalia: "FISCALIA DE SECCION CONTRA SECUESTROS" },
+        { fiscalia: "FISCALIA DE SECCION CONTRA TRATA DE PERSONAS" },
+        {
+          fiscalia:
+            "FISCALIA DE SECCION DE ASUNTOS CONSTITUCIONALES, AMPAROS Y EXHIBICIÓN PERSONAL",
+        },
+        { fiscalia: "FISCALIA DE SECCION DE ASUNTOS INTERNACIONALES" },
+        { fiscalia: "FISCALIA DE SECCION DE DELITOS ADMINISTRATIVOS" },
+        {
+          fiscalia: "FISCALIA DE SECCION DE DELITOS CONTRA EL AMBIENTE IZABAL",
+        },
+        {
+          fiscalia: "FISCALÍA DE SECCION DE DELITOS CONTRA EL AMBIENTE, ZACAPA",
+        },
+        {
+          fiscalia:
+            "FISCALIA DE SECCION DE DELITOS CONTRA EL PATRIMONIO CULTURAL, PETEN",
+        },
+        { fiscalia: "FISCALIA DE SECCION DE DELITOS CONTRA LA VIDA" },
+        {
+          fiscalia:
+            "FISCALIA DE SECCION DE DELITOS CONTRA TURISTAS EXTRANJEROS",
+        },
+        {
+          fiscalia:
+            "FISCALIA DE SECCION DE DELITOS DE NARCOACTIVIDAD, QUETZALTENANGO",
+        },
+        {
+          fiscalia:
+            "FISCALIA DE SECCION DE DERECHOS HUMANOS	, 	FISCALIA DE ACTIVISTAS",
+        },
+        {
+          fiscalia:
+            "FISCALIA DE SECCION DE DERECHOS HUMANOS	, 	FISCALIA DE CONFLITO ARMADO",
+        },
+        {
+          fiscalia:
+            "FISCALIA DE SECCION DE DERECHOS HUMANOS	, 	FISCALIA DE DERECHOS HUMANOS",
+        },
+        {
+          fiscalia:
+            "FISCALIA DE SECCION DE DERECHOS HUMANOS	, 	FISCALIA DE DISCRIMINACION",
+        },
+        {
+          fiscalia:
+            "FISCALIA DE SECCION DE DERECHOS HUMANOS	, 	FISCALIA DE OPERADORES DE JUSTICIA",
+        },
+        {
+          fiscalia:
+            "FISCALIA DE SECCION DE DERECHOS HUMANOS	, 	FISCALIA DE PERIODISTAS",
+        },
+        {
+          fiscalia:
+            "FISCALIA DE SECCION DE DERECHOS HUMANOS	, 	FISCALIA DE SINDICALISTAS",
+        },
+        { fiscalia: "FISCALIA DE SECCION DE EJECUCION" },
+        { fiscalia: "FISCALIA DE SECCION DE LA MUJER" },
+        { fiscalia: "FISCALIA DE SECCION DE NARCOACTIVIDAD, GUATEMALA" },
+        { fiscalia: "FISCALIA DE SECCION DE SINDICALISTAS, DERECHOS HUM" },
+        { fiscalia: "FISCALIA DE SECCION DELITOS CONTRA EL AMBIENTE COBAN" },
+        {
+          fiscalia: "FISCALIA DE SECCION DELITOS CONTRA EL AMBIENTE ESCUINTLA",
+        },
+        {
+          fiscalia: "FISCALIA DE SECCION DELITOS CONTRA EL AMBIENTE GUATEMALA",
+        },
+        { fiscalia: "FISCALIA DE SECCION DELITOS CONTRA EL AMBIENTE PETEN" },
+        {
+          fiscalia:
+            "FISCALIA DE SECCION DELITOS CONTRA EL AMBIENTE PETEN (ANTERIOR)",
+        },
+        { fiscalia: "FISCALIA DE SECCION DELITOS DE NARCOACTIVIDAD (IZABAL)" },
+        { fiscalia: "FISCALIA DE SECCION DELITOS ECONOMICOS" },
+        { fiscalia: "FISCALIA DE SECCION PROPIEDAD INTELECTUAL" },
+        { fiscalia: "FISCALIA DE SINDICALISTAS" },
+        { fiscalia: "FISCALIA DE TURNO ANTIGUA" },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE ALTA VERAPAZ	, 	AGENCIA LIQUIDADORA COBAN",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE ALTA VERAPAZ	, 	FISCALIA DE LA MUJER COBAN",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE ALTA VERAPAZ	, 	FISCALIA DE MENORES COBAN",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE BAJA VERAPAZ	, 	FISCALIA DE LA MENORES BAJA VERAPAZ",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE BAJA VERAPAZ	, 	FISCALIA DE LA MUJER BAJA VERAPAZ",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE CHIMALTENANGO	, 	FISCALIA DE LA MUJER CHIMALTENANGO",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE CHIMALTENANGO	, 	FISCALIA DE MENORES CHIMALTENANGO",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE CHIMALTENANGO	, 	FISCALIA LIQUIDADORA CHIMALTENANGO",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE CHIQUIMULA	, 	FISCALIA DE ADOLESCENTES, CHIQUIMULA",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE CHIQUIMULA	, 	FISCALIA DE LA MUJER CHIQUIMULA",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE CHIQUIMULA	, 	UNIDAD LIQUIDADORA DE CHIQUIMULA",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE COATEPEQUE	, 	FISCALIA DE LA MUJER COATEPEQUE",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE COATEPEQUE	, 	FISCALIA DE MENORES COATEPEQUE",
+        },
+        { fiscalia: "FISCALIA DISTRITAL DE EL PROGRESO" },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE ESCUINTLA	, 	AGENCIA LIQUIDADORA ESCUINTLA",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE ESCUINTLA	, 	AGENCIA LIQUIDADORA INL ESCUINTLA",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE ESCUINTLA	, 	FISCALIA DE LA MUJER ESCUINTLA",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE ESCUINTLA	, 	FISCALIA DE MENORES ESCUINTLA",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE HUEHUETENANGO	, 	FISCALIA DE LA MUJER HUEHUETENANGO",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE HUEHUETENANGO	, 	FISCALIA DE MENORES HUEHUETENANGO",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE HUEHUETENANGO	, 	UNIDAD LIQUIDADORA DE HUEHUETENANGO",
+        },
+        {
+          fiscalia: "FISCALIA DISTRITAL DE IZABAL	, 	FISCALIA DE LA MUJER IZABAL",
+        },
+        {
+          fiscalia: "FISCALIA DISTRITAL DE IZABAL	, 	FISCALIA DE MENORES IZABAL",
+        },
+        {
+          fiscalia: "FISCALIA DISTRITAL DE JALAPA	, 	FISCALIA DE LA MUJER JALAPA",
+        },
+        {
+          fiscalia: "FISCALIA DISTRITAL DE JALAPA	, 	FISCALIA DE MENORES JALAPA",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE JUTIAPA	, 	FISCALIA DE LA MUJER JUTIAPA",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE JUTIAPA	, 	FISCALIA DE MENORES JUTIAPA",
+        },
+        { fiscalia: "FISCALIA DISTRITAL DE PETEN	, 	FISCALIA DE AMBIENTE PETEN" },
+        { fiscalia: "FISCALIA DISTRITAL DE PETEN	, 	FISCALIA DE LA MUJER PETEN" },
+        { fiscalia: "FISCALIA DISTRITAL DE PETEN	, 	FISCALIA DE MENORES PETEN" },
+        {
+          fiscalia: "FISCALIA DISTRITAL DE PETEN	, 	FISCALIA DE PATRIMONIO PETEN",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE QUETZALTENANGO	, 	AGENCIA LIQUIDADORA INL QUETZALTENANGO",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE QUETZALTENANGO	, 	AGENCIA LIQUIDADORA QUETZALTENANGO",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE QUETZALTENANGO	, 	FISCALIA DE LA MUJER QUETZALTENANGO",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE QUETZALTENANGO	, 	FISCALIA DE MENORES QUETZALTENANGO",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE RETALHULEU	, 	FISCALIA DE LA MUJER RETALHULEU",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE SACATEPEQUEZ	, 	FISCALIA DE MENORES SACATEPEQUEZ",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE SACATEPEQUEZ	, 	FISCALIA DE MUJER SACATEPEQUEZ",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE SAN MARCOS	, 	FISCALIA DE LA MUJER SAN MARCOS",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE SAN MARCOS	, 	FISCALIA DE MENORES SAN MARCOS",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE SANTA CRUZ EL QUICHE	, 	FISCALIA DE LA MUJER QUICHE",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE SANTA CRUZ EL QUICHE	, 	FISCALIA DE MENORES QUICHE",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE SANTA CRUZ EL QUICHE	, 	UNIDAD LIQUIDADORA DE QUICHE",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE SANTA ROSA	, 	FISCALIA DE LA MUJER SANTA ROSA",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE SANTA ROSA	, 	FISCALIA DE MENORES SANTA ROSA",
+        },
+        {
+          fiscalia: "FISCALIA DISTRITAL DE SOLOLA	, 	FISCALIA DE LA MUJER SOLOLA",
+        },
+        {
+          fiscalia: "FISCALIA DISTRITAL DE SOLOLA	, 	FISCALIA DE MENORES SOLOLA",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE SUCHITEPEQUEZ	, 	AGENCIA LIQUIDADORA DE SUCHITEPEQUEZ",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE SUCHITEPEQUEZ	, 	FISCALIA DE LA MUJER SUCHITEPEQUEZ",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE SUCHITEPEQUEZ	, 	FISCALIA DE MENORES SUCHITEPEQUEZ",
+        },
+        {
+          fiscalia:
+            "FISCALIA DISTRITAL DE TOTONICAPAN	, 	AGENCIA DE LA MUJER TOTONICAPAN",
+        },
+        {
+          fiscalia: "FISCALIA DISTRITAL DE ZACAPA	, 	FISCALIA DE LA MUJER ZACAPA",
+        },
+        {
+          fiscalia: "FISCALIA DISTRITAL DE ZACAPA	, 	FISCALIA DE MENORES ZACAPA",
+        },
+        { fiscalia: "FISCALIA DISTRITAL METROPOLITANA" },
+        { fiscalia: "FISCALIA ESPECIAL" },
+        { fiscalia: "FISCALIA ESPECIAL CICIG" },
+        { fiscalia: "FISCALIA ESPECIAL CONTRA LA IMPUNIDAD" },
+        { fiscalia: "FISCALIA ESPECIAL CONTRA LA IMPUNIDAD QUETZALTENANGO" },
+        { fiscalia: "FISCALIA ESPECIAL DE CASO GERARDI" },
+        { fiscalia: "FISCALIA ESPECIAL DE LA SECRETARIA GENERAL" },
+        { fiscalia: "FISCALIA ESPECIAL DE TURNO GERONA" },
+        { fiscalia: "FISCALIA ESPECIAL TURNO MIXCO" },
+        { fiscalia: "FISCALIA ESPECIAL TURNO VILLA NUEVA" },
+        { fiscalia: "FISCALIA ESPECIAL TURNO, ESCUINTLA" },
+        { fiscalia: "FISCALIA ESPECIAL TURNO, GUATEMALA" },
+        { fiscalia: "FISCALIA GENERAL" },
+        { fiscalia: "FISCALIA LIQUIDADORA DE MIXCO" },
+        { fiscalia: "FISCALIA LIQUIDADORA DE SANTA CATARINA PINULA" },
+        { fiscalia: "FISCALIA LIQUIDADORA DE VILLA NUEVA" },
+        {
+          fiscalia:
+            "FISCALIA LIQUIDADORA METROPOLITANA	, 	AGENCIA LIQUIDADORA INL METROPOLITANA",
+        },
+        { fiscalia: "FISCALIA MUNICIPAL DE AMATITLAN, GUATEMALA" },
+        { fiscalia: "FISCALIA MUNICIPAL DE ASUNCION MITA" },
+        { fiscalia: "FISCALIA MUNICIPAL DE ATESCATEMPA" },
+        { fiscalia: "FISCALIA MUNICIPAL DE CASILLAS, SANTA ROSA" },
+        { fiscalia: "FISCALIA MUNICIPAL DE CHINAUTLA, GUATEMALA" },
+        { fiscalia: "FISCALIA MUNICIPAL DE CHIQUIMULILLA" },
+        { fiscalia: "FISCALIA MUNICIPAL DE CHISEC, ALTA VERAPAZ" },
+        { fiscalia: "FISCALIA MUNICIPAL DE CUILCO" },
+        { fiscalia: "FISCALIA MUNICIPAL DE DOLORES" },
+        { fiscalia: "FISCALIA MUNICIPAL DE ESQUIPULAS, CHIQUIMULA" },
+        { fiscalia: "FISCALIA MUNICIPAL DE GUALAN, ZACAPA" },
+        { fiscalia: "FISCALIA MUNICIPAL DE IXCHIGUAN SAN MARCOS" },
+        { fiscalia: "FISCALIA MUNICIPAL DE JACALTENANGO" },
+        { fiscalia: "FISCALIA MUNICIPAL DE JALPATAGUA, JUTIAPA" },
+        { fiscalia: "FISCALIA MUNICIPAL DE JOCOTAN" },
+        { fiscalia: "FISCALIA MUNICIPAL DE JOYABAJ" },
+        { fiscalia: "FISCALIA MUNICIPAL DE LA DEMOCRACIA, HUEHUETENANGO" },
+        { fiscalia: "FISCALIA MUNICIPAL DE LA LIBERTAD PETEN" },
+        { fiscalia: "FISCALIA MUNICIPAL DE LIVINGSTON, IZABAL" },
+        { fiscalia: "FISCALIA MUNICIPAL DE MALACATAN" },
+        { fiscalia: "FISCALIA MUNICIPAL DE MELCHOR DE MENCOS" },
+        { fiscalia: "FISCALIA MUNICIPAL DE MIXCO	, 	FISCALIA DE LA MUJER MIXCO" },
+        { fiscalia: "FISCALIA MUNICIPAL DE MORALES" },
+        {
+          fiscalia:
+            "FISCALIA MUNICIPAL DE NEBAJ QUICHE	, 	FISCALIA DE MUJER NEBAJ",
+        },
+        { fiscalia: "FISCALIA MUNICIPAL DE PALENCIA, GUATEMALA" },
+        { fiscalia: "FISCALIA MUNICIPAL DE PLAYA GRANDE, IXCAN, QUICHE" },
+        { fiscalia: "FISCALIA MUNICIPAL DE POPTUN PETEN" },
+        {
+          fiscalia:
+            "FISCALIA MUNICIPAL DE PUERTO DE SAN JOSE	, 	AGENCIA LIQUIDADORA DE PUERTO SAN JOSE",
+        },
+        { fiscalia: "FISCALIA MUNICIPAL DE RABINAL" },
+        { fiscalia: "FISCALIA MUNICIPAL DE SAN JUAN BAUTISTA" },
+        { fiscalia: "FISCALIA MUNICIPAL DE SAN JUAN SACATEPEQUEZ" },
+        { fiscalia: "FISCALIA MUNICIPAL DE SAN MATEO IXTATAN, HUEHUETENANGO" },
+        { fiscalia: "FISCALIA MUNICIPAL DE SAN PEDRO CARCHA" },
+        {
+          fiscalia:
+            "FISCALIA MUNICIPAL DE SANTA CATALINA LA TINTA, ALTA VERAPAZ",
+        },
+        {
+          fiscalia:
+            "FISCALIA MUNICIPAL DE SANTA CATARINA PINULA	, 	FISCALIA DE LA MUJER SANTA CATARINA",
+        },
+        {
+          fiscalia: "FISCALIA MUNICIPAL DE SANTA CRUZ BARILLAS, HUEHUETENANGO",
+        },
+        { fiscalia: "FISCALIA MUNICIPAL DE SANTA EULALIA HUEHUETENANGO" },
+        {
+          fiscalia:
+            "FISCALIA MUNICIPAL DE SANTA LUCIA COTZUMALGUAPA	, 	UNIDAD LIQUIDADORA SANTA LUCIA COTZUMALGUAPA",
+        },
+        { fiscalia: "FISCALIA MUNICIPAL DE SANTIAGO ATITLAN" },
+        { fiscalia: "FISCALIA MUNICIPAL DE SAYAXCHE" },
+        { fiscalia: "FISCALIA MUNICIPAL DE TACANA" },
+        { fiscalia: "FISCALIA MUNICIPAL DE TECUN UMAN" },
+        { fiscalia: "FISCALIA MUNICIPAL DE TIQUISATE" },
+        { fiscalia: "FISCALIA MUNICIPAL DE VILLA CANALES, GUATEMALA" },
+        {
+          fiscalia:
+            "FISCALIA MUNICIPAL DE VILLA NUEVA	, 	FISCALIA DE LA MUJER VILLA NUEVA",
+        },
+        { fiscalia: "UNIDAD DE EXTINCION DE DOMINIO" },
+        { fiscalia: "UNIDAD DE INVESTIGACIÓN CRIMINAL TRANSNACIONAL" },
+        { fiscalia: "UNIDAD DE REACCION INMEDIATA" },
+        { fiscalia: "UNIDAD ESPECIAL ANTIPANDILLAS TRANSNACIONALES" },
+        {
+          fiscalia:
+            "UNIDAD ESPECIAL CONTRA DELITOS EN AEROPUERTOS Y AERÓDROMOS",
+        },
+        { fiscalia: "UNIDAD ESPECIALIZADA CONTRA ORGANIZACIONES CRIMINALES" },
+      ],
       fiscalia: {
         fiscalia: "",
         unidad: "",
@@ -290,6 +745,9 @@ export default {
     };
   },
   methods: {
+    onRowSelected(items) {
+      this.selected = items;
+    },
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;
     },
@@ -323,7 +781,6 @@ export default {
           },
         })
         .then((data) => {
-          console.log(data.data);
           this.encabezado = []; //limpia el encabezado para nueva consulta
           this.tabla = []; //limpia la tabla para nueva consulta
           this.consultas = data.data;
@@ -370,10 +827,16 @@ export default {
     validarcuadro2() {
       this.mostrar2 = true;
       this.mostrar3 = false;
-      if (this.fiscalia.fiscalia.length > 0) {
-        if (this.fiscalia.unidad.length > 0) {
-          this.cuadropdf();
-          this.generarPDF();
+      if (this.selected.length > 0) {
+        this.fiscalia.fiscalia = this.selected[0].fiscalia;
+        console.log(this.fiscalia);
+        if (this.fiscalia.fiscalia.length > 0) {
+          if (this.fiscalia.unidad.length > 0) {
+            this.cuadropdf();
+            this.generarPDF();
+          } else {
+            this.showAlert2();
+          }
         } else {
           this.showAlert2();
         }
@@ -391,7 +854,6 @@ export default {
         this.$refs["my-modal2"].hide();
         this.mostrar4 = false;
         this.mostrar5 = true;
-        
       } else {
         this.showAlert3();
       }
@@ -539,7 +1001,6 @@ export default {
           " REGISTROS PARA USO EXCLUSIVO REFERENCIAL",
           "center"
         );
-
 
         pdf.setFontSize(20);
         pdf.setFillColor("#F2F2F2");

@@ -111,11 +111,11 @@
           v-on:click="despuespage(despues)"
           >{{ despues }}</b-button
         >
-        <b-button variant="outline-primary" align="center"
+        <b-button variant="outline-primary" align="center" v-on:click="ultimopage()"
           ><b-icon
             icon="arrow-bar-right"
             aria-hidden="true"
-            v-on:click="ultimopage()"
+            
           ></b-icon
         ></b-button>
       </div>
@@ -323,7 +323,7 @@ export default {
         this.mostrar4 = false;
         this.mostrar5 = true;
       } else if (this.consultas.tabla.length <= 0) {
-        this.alerta = "El cuadro no existe en la base de datos";
+        this.alerta = "El correlativo no existe en la base de datos";
         this.showAlert();
         this.mostrar = false;
         this.mostrar2 = true;

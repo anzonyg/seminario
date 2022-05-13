@@ -34,16 +34,16 @@
 
               <div v-if="mostrar">
                 <b-dropdown-divider></b-dropdown-divider>
+                <b-dropdown-item-button @click="link('consulta')">
+                  <b-icon icon="diagram3" aria-hidden="true"></b-icon>
+                  Consultas
+                </b-dropdown-item-button>
                 <b-dropdown-item-button @click="link('report')">
                   <b-icon
                     icon="file-earmark-bar-graph"
                     aria-hidden="true"
                   ></b-icon>
                   Reporteria
-                </b-dropdown-item-button>
-                <b-dropdown-item-button @click="link('consulta')">
-                  <b-icon icon="diagram3" aria-hidden="true"></b-icon>
-                  Consultas
                 </b-dropdown-item-button>
               </div>
             </b-dropdown>
@@ -68,7 +68,6 @@
 </template>
 
 <script>
-var cont = 0;
 import Encabezado from "@/components/Encabezado.vue";
 import Consultas from "@/components/Consultas_IBIS.vue";
 import Alertas from "@/components/Report_alerta.vue";
@@ -120,7 +119,7 @@ export default {
     async verToken() {
       //verifica token
       let verificar = false;
-      console.log(this.$route.params.token);
+      //console.log(this.$route.params.token);
       await axios
         .get("http://172.18.230.112:9001/sigeemp/revisarToken/", {
           //donde realiza la consulta
@@ -156,15 +155,20 @@ export default {
     },
     async validarAcceso(user) {
       const userlist = user;
+      var dato = userlist.grupo;
+      if(dato == null){
+        dato = userlist.dependencia;
+      }
       const list = {
         uid: userlist.id + "",
         rol: userlist.rol.toUpperCase(),
-        grupo: userlist.grupo.toUpperCase(),
+        grupo: dato.toUpperCase(),
         dependencia: userlist.dependencia,
         bitacora: this.bitacora(userlist, "Inicio de sesion en base de datos."),
       };
       await axios.post(url, list).then((data) => {
         const result1 = data.data;
+        console.log(result1);
         if (result1 == "report") {
           console.log("acceso a reporte consedido!");
           this.mostrar = true;
@@ -212,7 +216,7 @@ export default {
 
     link(dato) {
       var option = dato;
-      console.log(option);
+      //console.log(option);
       if (option == "report") {
         this.mostrar_Consulta = false;
         this.mostrar_Bloqueo = false;
@@ -229,7 +233,7 @@ export default {
     },
   },
   created() {
-    console.log("eliminacion de registro!!!");
+    //console.log("eliminacion de registro!!!");
     localStorage.removeItem("datos");
     /*console.log(this.$route.params.token);
     console.log("inicio montaje!!!");
@@ -238,9 +242,11 @@ export default {
     console.log(this.$route.params.token + "  " + cont++);*/
   },
   mounted() {
-    console.log(this.$route.params.token + "  " + cont++);
-    console.log("inicio montaje!!!");
-    console.log(window.location);
+    //console.log(this.$route.params.token + "  " + cont++);
+    //console.log("inicio montaje!!!");
+    //console.log(window.location);
+    
+    
     this.verToken();
   },
   updated() {

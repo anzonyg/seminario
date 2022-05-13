@@ -158,7 +158,8 @@
       <br />
       <br />
       <b-col align="center">
-        <b-button pill variant="outline-info" @click="descargarPDF">
+        <b-button pill variant="outline-info" @click="descargarPDF()">
+          <!--<b-button pill variant="outline-info" v-b-modal.modalPopover>-->
           <span
             class="spinner-border spinner-border-sm"
             role="status"
@@ -172,7 +173,118 @@
     </b-container>
     <br />
 
-    <!--FORM: <strong>{{ form }}</strong>-->
+    <strong>{{ form }}</strong>
+    <br/>
+    <strong>{{ fiscalia }}</strong>
+    <!--
+    <div>
+      <b-modal
+        id="modalPopover"
+        title="Creacion de Reporte de Alertas IBIS"
+        ok-only
+        scrollable
+      >
+        <div>
+          <p v-for="item in selected0" :key="item">
+            <b-row>
+              <b-col md="10">
+                {{ item }}
+              </b-col>
+              <b-col md="2" align="right">
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                  v-show="mostrar4"
+                  variant="primary"
+                ></span>
+                <b-icon
+                  icon="search"
+                  v-show="mostrar5"
+                  aria-hidden="true"
+                ></b-icon>
+              </b-col>
+            </b-row>
+          </p>
+          <p v-for="item in selected3" :key="item">
+            <b-row>
+              <b-col md="10">
+                {{ item }}
+              </b-col>
+              <b-col md="2" align="right">
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                  v-show="mostrar4"
+                  variant="primary"
+                ></span>
+                <b-icon
+                  icon="search"
+                  v-show="mostrar5"
+                  aria-hidden="true"
+                ></b-icon>
+              </b-col>
+            </b-row>
+          </p>
+          <p v-for="item in selected1" :key="item">
+            <b-row>
+              <b-col md="10">
+                {{ item }}
+              </b-col>
+              <b-col md="2" align="right">
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                  v-show="mostrar4"
+                  variant="primary"
+                ></span>
+                <b-icon
+                  icon="search"
+                  v-show="mostrar5"
+                  aria-hidden="true"
+                ></b-icon>
+              </b-col>
+            </b-row>
+          </p>
+          <p v-for="item in selected2" :key="item">
+            <b-row>
+              <b-col md="10">
+                {{ item }}
+              </b-col>
+              <b-col md="2" align="right">
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                  v-show="mostrar4"
+                  variant="primary"
+                ></span>
+                <b-icon
+                  icon="search"
+                  v-show="mostrar5"
+                  aria-hidden="true"
+                ></b-icon>
+              </b-col>
+            </b-row>
+          </p>
+        </div>
+        <template #modal-footer>
+          <div class="w-100" align="right">
+            <b-button
+              variant="primary"
+              size="sm"
+              class="float-right"
+              @click="show = false"
+            >
+              OK
+            </b-button>
+          </div>
+        </template>
+      </b-modal>
+    </div>
+    -->
   </div>
 </template>
 
@@ -180,6 +292,7 @@
 import axios from "axios";
 import { PdfMakeWrapper, Table, Columns, Txt } from "pdfmake-wrapper";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
+
 const cf = require("../DIR");
 const url = cf.url + "/alerta";
 
@@ -190,14 +303,17 @@ export default {
     return {
       mostrar: false,
       mostrar2: true,
+      mostrar4: true,
+      mostrar5: false,
       state: {
         name: "San Luis Potosi",
       },
       form: {
         fecha1: "",
         fecha2: new Date(),
-        fiscalia: [[], [], [], []],
+        fiscalia: "",
       },
+      fiscalia: [[], [], [], []],
       max: new Date(),
       consultas: [],
       selected0: [],
@@ -427,16 +543,12 @@ export default {
           { text: "E4 EPP-GIC", value: "9" },
           { text: "E5 EPP-GIC", value: "10" },
           { text: "E6 EPP-GIC", value: "11" },
-          { text: "E7 EPP-GIC", value: "12" },
           { text: "E1 DESC-SCC", value: "13" },
           { text: "E1 EPP-SCC", value: "14" },
           { text: "E2 EPP-SCC", value: "15" },
           { text: "E3 EPP-SCC", value: "16" },
           { text: "E4 EPP-SCC", value: "17" },
-          { text: "PAL", value: "18" },
-          { text: "UDI Escuintla", value: "UDIESC" },
-          { text: "UICE 1", value: "UICE1" },
-          { text: "UICE 2", value: "UICE2" },
+          { text: "Escuintla", value: "UDIESC" },
         ],
         [
           { text: "Fiscal de Seccion", value: "FS2" },
@@ -524,27 +636,45 @@ export default {
       this.selected2 = checked ? valores : [];
       //console.log(this.selected2);
     },
+
+    download(data) {
+      if (!data) {
+        return;
+      }
+      let url = window.URL.createObjectURL(new Blob([data]));
+      let link = document.createElement("a");
+      link.style.display = "none";
+      link.href = url;
+      link.setAttribute("download", "input.docx");
+
+      document.body.appendChild(link);
+      link.click();
+    },
+
     async descargarPDF() {
       this.mostrar = true;
       this.mostrar2 = false;
 
-      //this.reportSeccion();
-      //this.reportEquipo();
+      //await axios.post(url, this.form).then((response) => {
       if (this.llenarform()) {
-        await axios.post(url, this.form).then((data) => {
-          this.form.fiscalia = [[], [], [], []];
-          console.log(data);
-          //const c_crecer = data.data[0];
-
-          //const c_nuevo = data.data[1];
-
-          //console.log(c_crecer);
-          //console.log(c_nuevo);
-          this.mostrar = false;
-          this.mostrar2 = true;
-          //this.reportSeccion();
-          //this.reportEquipo();
-        });
+        for (let i in this.fiscalia) {
+          for (let k in this.fiscalia[i][0]) {
+            
+            this.form.fiscalia = this.fiscalia[i][0][k];
+          await axios({
+            url: url,
+            method: "POST",
+            data: this.form,
+            responseType: "blob",
+          }).then((response) => {
+            console.log(response);
+            this.mostrar = false;
+            this.mostrar2 = true;
+            this.download(response.data);
+          });
+          }
+        }
+        this.fiscalia = [[],[],[],[]]
       } else {
         alert("Ingresar todos los campos!!!");
         this.mostrar = false;
@@ -562,10 +692,10 @@ export default {
       ) {
         return false;
       } else {
-        this.form.fiscalia[0].push(this.selected0);
-        this.form.fiscalia[1].push(this.selected3);
-        this.form.fiscalia[2].push(this.selected1);
-        this.form.fiscalia[3].push(this.selected2);
+        this.fiscalia[0].push(this.selected0);
+        this.fiscalia[1].push(this.selected3);
+        this.fiscalia[2].push(this.selected1);
+        this.fiscalia[3].push(this.selected2);
         return true;
       }
     },
