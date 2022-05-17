@@ -6,7 +6,7 @@ const routes = [
     {
         path: '/auth/consultasIBIS/token/:token',
         name: 'home',
-        
+
     },
     {
         path: '/salir',
@@ -31,8 +31,8 @@ const routes = [
 ]
 
 const router = new VueRouter({
-    mode: 'history',
+
     base: '/consultasIbis/',
     routes
-  })
+})
 export default router
