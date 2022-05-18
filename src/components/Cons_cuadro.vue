@@ -965,7 +965,10 @@ export default {
         margin: { top: 75, left: 7, bottom: 30 },
         styles: { fontSize: "12" },
         theme: "plain",
-        headStyles: { fillColor: "#2C87BF", textColor: "#FFFFFF" },
+        //headStyles: { fillColor: "#2C87BF", textColor: "#FFFFFF" },
+        headStyles: { fillColor: "#1b2668", textColor: "#FFFFFF" },
+        //bodyStyles: { fillColor: "#deefff" },
+        //bodyStyles: { fillColor: "#deefff", textColor: "#FFFFFF" },
       });
 
       var img1 = this.imgpdf();
@@ -1059,14 +1062,15 @@ export default {
         );
         pdf.text("página: " + pageCurrent + "/" + pageCount, 310, 210);
         pdf.setFontSize(10);
-        pdf.setTextColor("#ECF3F4");
+        //pdf.setTextColor("#ECF3F4");
+        pdf.setTextColor("#bdbbb9");
         pdf.setFont;
         pdf.text(
           50,
           135,
-          "Fiscalía:  " +
+          "" +
             this.fiscalia.fiscalia +
-            ", Equipo:  " +
+            ", " +
             this.fiscalia.unidad,
           35,
           "center"
@@ -1074,9 +1078,9 @@ export default {
         pdf.text(
           177,
           135,
-          "Fiscalía:  " +
+          " " +
             this.fiscalia.fiscalia +
-            ", Equipo:  " +
+            ", " +
             this.fiscalia.unidad,
           35,
           "center"
@@ -1084,9 +1088,9 @@ export default {
         pdf.text(
           304,
           135,
-          "Fiscalía:  " +
+          " " +
             this.fiscalia.fiscalia +
-            ", Equipo:  " +
+            ", " +
             this.fiscalia.unidad,
           35,
           "center"
@@ -1094,9 +1098,9 @@ export default {
         pdf.text(
           50,
           180,
-          "Fiscalía:  " +
+          " " +
             this.fiscalia.fiscalia +
-            ", Equipo:  " +
+            ", " +
             this.fiscalia.unidad,
           35,
           "center"
@@ -1104,9 +1108,9 @@ export default {
         pdf.text(
           177,
           180,
-          "Fiscalía:  " +
+          " " +
             this.fiscalia.fiscalia +
-            ", Equipo:  " +
+            ", " +
             this.fiscalia.unidad,
           35,
           "center"
@@ -1114,9 +1118,9 @@ export default {
         pdf.text(
           304,
           180,
-          "Fiscalía:  " +
+          " " +
             this.fiscalia.fiscalia +
-            ", Equipo:  " +
+            ", " +
             this.fiscalia.unidad,
           35,
           "center"
