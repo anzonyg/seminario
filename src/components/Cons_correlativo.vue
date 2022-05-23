@@ -360,6 +360,7 @@ export default {
     },
     bitacora() {
       var lista = JSON.parse(localStorage.getItem("datos"));
+      
       let bitacora = {
         horafecha: new Date(),
         level: 2,
@@ -369,15 +370,16 @@ export default {
         busqueda: this.form.id_correlativo,
         fiscalia_solicitante: "",
         equipo_solicitante: "",
-        nombres: lista.nombres,
-        apellidos: lista.apellidos,
-        id: lista.id,
-        rol: lista.rol,
-        grupo: lista.grupo,
-        idGrupo: lista.idGrupo,
-        nipId: lista.nipId,
-        dependencia: lista.dependencia,
-        token: lista.token,
+        nombres: lista.userData.nombres,
+        apellidos: lista.userData.apellidos,
+        id: lista.userData.id,
+        rol: lista.userData.rol,
+        grupo: lista.userData.grupo,
+        idGrupo: lista.userData.idGrupo,
+        nipId: lista.userData.nipId,
+        dependencia: lista.userData.dependencia,
+        token: lista.userData.token,
+        infoDB: ""
       };
       //console.log(bitacora);
       this.form.bitacora = bitacora;

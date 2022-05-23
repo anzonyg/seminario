@@ -887,6 +887,7 @@ export default {
           nipId: storage.userData.nipId,
           dependencia: storage.userData.dependencia,
           token: storage.token,
+          infoDB: "",
         };
         this.form.bitacora = bitacora;
       } else {
@@ -907,6 +908,7 @@ export default {
           nipId: storage.userData.nipId,
           dependencia: storage.userData.dependencia,
           token: storage.token,
+          infoDB: JSON.stringify(this.consultas)
         };
         return bitacora;
       }

@@ -265,6 +265,7 @@ export default {
           nipId: storage.userData.nipId,
           dependencia: storage.userData.dependencia,
           token: storage.token,
+          infoDB: ""
         };
         this.form1.bitacora = bitacora;
     },

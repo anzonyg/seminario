@@ -644,7 +644,7 @@ export default {
       //await axios.post(url, this.form).then((response) => {
       if (this.llenarform()) {
         this.tablaFiscalia = [];
-        console.log(this.fiscalia);
+        //console.log(this.fiscalia);
         for (let i in this.fiscalia) {
           for (let k in this.fiscalia[i][0]) {
             this.form.fiscalia = this.fiscalia[i][0][k];
@@ -656,8 +656,9 @@ export default {
             }).then((response) => {
               this.mostrar = false;
               this.mostrar2 = true;
-              this.tablaFiscalia.push(response.data);
-              console.log(this.tablaFiscalia);
+              //this.tablaFiscalia.push(response.data);
+              //console.log(this.tablaFiscalia);
+              console.log(response.data);
             });
           }
         }
