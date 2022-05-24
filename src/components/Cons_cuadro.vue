@@ -229,7 +229,7 @@
             <th scope="col">Correlativo</th>
             <th scope="col">Indicio</th>
             <th scope="col">Fiscalía</th>
-            <th scope="col">Fiscalía MP</th>
+            <th scope="col">Agencia / Equipo</th>
             <th scope="col">Referencia MP</th>
             <th scope="col">Fecha Suceso</th>
             <th scope="col">Dirección de Recolección</th>
@@ -241,8 +241,8 @@
             <td v-text="tabla1.dato"></td>
             <td v-text="tabla1.correlativo"></td>
             <td v-text="tabla1.indicio"></td>
-            <td v-text="tabla1.fiscalia"></td>
             <td v-text="tabla1.fiscaliaMP"></td>
+            <td v-text="tabla1.nombreAgencia"></td>
             <td v-text="tabla1.referencia"></td>
             <td v-text="tabla1.fecha"></td>
             <td v-text="tabla1.direccion"></td>
@@ -785,6 +785,7 @@ export default {
           this.tabla = []; //limpia la tabla para nueva consulta
           this.consultas = data.data;
           this.tabla = this.consultas.tabla;
+          console.log(this.tabla)
           this.encabezado = this.consultas.dato_arma;
           //console.log(data);
         });
@@ -965,7 +966,7 @@ export default {
       autoTable(pdf, {
         html: "#tabla1",
         margin: { top: 75, left: 7, bottom: 30 },
-        styles: { fontSize: "12" },
+        styles: { fontSize: "11" },
         theme: "plain",
         //headStyles: { fillColor: "#2C87BF", textColor: "#FFFFFF" },
         headStyles: { fillColor: "#1b2668", textColor: "#FFFFFF" },

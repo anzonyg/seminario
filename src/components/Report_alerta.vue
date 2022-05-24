@@ -645,9 +645,8 @@ export default {
       if (this.llenarform()) {
         this.tablaFiscalia = [];
         //console.log(this.fiscalia);
-        for (let i in this.fiscalia) {
-          for (let k in this.fiscalia[i][0]) {
-            this.form.fiscalia = this.fiscalia[i][0][k];
+        
+            this.form.fiscalia = this.fiscalia;
             console.log(this.form.fiscalia);
             await axios({
               url: url,
@@ -660,8 +659,7 @@ export default {
               //console.log(this.tablaFiscalia);
               console.log(response.data);
             });
-          }
-        }
+          
         this.fiscalia = [[], [], [], []];
         this.modalShow = !this.modalShow;
       } else {
