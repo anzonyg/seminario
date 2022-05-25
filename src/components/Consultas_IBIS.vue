@@ -1,15 +1,11 @@
 <template>
   <div class="consulta">
     <b-container>
-      <div class="text-center">
-        <br />
-        <br />
-        <h1>Módulo de Consultas IBIS</h1>
-      </div>
-      <br />
+      
+      <h3>Seleccionar tipo de consulta</h3>
       <br />
       <b-form-group
-        label="Seleccionar tipo de consulta"
+        
         v-slot="{ ariaDescribedby }"
       >
         <b-form-radio-group
