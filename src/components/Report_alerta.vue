@@ -62,7 +62,7 @@
       <br />
       <b-col align="center">
         <!--<b-button pill variant="outline-info" @click="descargarPDF()">-->
-        <b-button pill variant="outline-info" @click="buscarAlerta()">
+        <b-button pill variant="outline-info" @click="justificacion()">
           <span
             class="spinner-border spinner-border-sm"
             role="status"
@@ -76,10 +76,61 @@
     </b-container>
     <br />
 
-    <strong>{{ form }}</strong>
-    <br />
-    <strong>{{ fiscalia }}</strong>
+    
 
+    <!--MODAL JUSTIFICACION-->
+    <div>
+      <b-modal
+        ref="my-modal2"
+        id="modal-2"
+        header-bg-variant="info"
+        title="Ingresar Justificacion de Busqueda"
+        hide-footer
+      >
+        <div class="form-group col-12">
+          <b-form-group
+            label="Justificación:"
+            label-for="name-input"
+            invalid-feedback="Name is required"
+          >
+            <b-form-textarea
+              id="name-input"
+              rows="3"
+              v-model="justificacion1"
+              required
+            ></b-form-textarea>
+          </b-form-group>
+          <br />
+        </div>
+        <br />
+        <b-alert
+          :show="dismissCountDown3"
+          variant="danger"
+          @dismissed="dismissCountDown3 = 0"
+          @dismiss-count-down="countDownChanged3"
+        >
+          <p>Datos Incorrectos!!</p>
+        </b-alert>
+        <div class="text-center">
+          <b-button
+            center
+            size="sm"
+            variant="outline-info"
+            v-on:click="validarcuadro3()"
+            ><span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+              v-show="mostrar6"
+            ></span>
+            <b-icon icon="search" aria-hidden="true" v-show="mostrar7"></b-icon>
+            Buscar
+          </b-button>
+        </div>
+      </b-modal>
+    </div>
+
+    <!--MODAL TABLA FISCALIAS-->
     <div>
       <b-modal
         id="modalPopover"
@@ -127,11 +178,7 @@
 
           <!--Descargar Archivo-->
           <template #cell(Descarga)="row2">
-            <b-button
-              pill
-              variant="outline-info"
-              @click="info(row2.item)"
-            >
+            <b-button pill variant="outline-info" @click="info(row2.item)">
               <span
                 class="spinner-border spinner-border-sm"
                 role="status"
@@ -147,7 +194,7 @@
             >
           </template>
         </b-table>
-        <!--MODALo-->
+        <!--MODAL TABLA RESULTADO-->
         <template #modal-footer>
           <div class="w-100" align="right">
             <b-button
@@ -180,7 +227,6 @@
 <script>
 import axios from "axios";
 
-
 const cf = require("../DIR");
 const url = cf.url + "/alerta";
 const url2 = cf.url + "/archivo";
@@ -190,6 +236,11 @@ export default {
   components: {},
   data() {
     return {
+      dismissSecs3: 4,
+      dismissCountDown3: 0,
+      showDismissibleAlert3: false,
+      mostrar6: false, //spinner de buscar modal
+      mostrar7: true, // icon buscar modal
       mostrar: false,
       mostrar2: true,
       modalShow: false,
@@ -216,16 +267,42 @@ export default {
         { text: "UNIDAD DE ENLACE VIDA", value: "UEV" },
         { text: "UNIDAD DE ENLACE FEMICIDIO", value: "FEM" },
       ],
+      nomFiscal: "",
+      nomCreador: "",
+      justificacion1: "",
     };
   },
   methods: {
+    countDownChanged3(dismissCountDown3) {
+      this.dismissCountDown3 = dismissCountDown3;
+    },
+    showAlert3() {
+      this.dismissCountDown3 = this.dismissSecs3;
+    },
     info(item) {
-      
       var content = JSON.stringify(item, null, 2);
       var dato = JSON.parse(content);
       this.descargarPDF(dato);
     },
+    validarcuadro3() {
+      this.mostrar6 = true;
+      this.mostrar7 = false;
+      if (this.justificacion1.length > 5) {
+        this.buscarAlerta();
+        this.$refs["my-modal2"].hide();
+      } else {
+        this.showAlert3();
+      }
+      this.mostrar6 = false;
+      this.mostrar7 = true;
+    },
+    justificacion() {
+      this.$refs["my-modal2"].show();
+      this.mostrar = true;
+      this.mostrar2 = false;
+    },
     async buscarAlerta() {
+      const storage = JSON.parse(localStorage.getItem("datos"));
       this.mostrar = true;
       this.mostrar2 = false;
 
@@ -234,20 +311,23 @@ export default {
         this.tablaFiscalia = [];
         //console.log(this.fiscalia);
         this.bitacora();
-        await axios({
-          url: url,
-          method: "POST",
-          data: this.form,
-        }).then((response) => {
-          this.mostrar = false;
-          this.mostrar2 = true;
+        await axios
+          .post(url, this.form, {
+            headers: {
+              authorization: storage.token,
+              idaction: "616da60877ce5e828b018de1",
+            },
+          })
+          .then((response) => {
+            this.mostrar = false;
+            this.mostrar2 = true;
 
-          var listData = JSON.stringify(response.data);
-          var listData2 = JSON.parse(listData);
-          this.tablaFiscalia = listData2;
-          
-          console.log(response.data);
-        });
+            var listData = JSON.stringify(response.data);
+            var listData2 = JSON.parse(listData);
+            this.tablaFiscalia = listData2;
+
+            console.log(response.data);
+          });
 
         this.fiscalia = [[], [], [], []];
         this.modalShow = !this.modalShow;
@@ -258,7 +338,12 @@ export default {
       }
     },
     async descargarPDF(datos) {
-      const content2 = datos;
+      var content2 = {
+        lista: datos,
+        bitacora: this.bitacora2(),
+      };
+      this.nomFiscal = datos.fiscalia;
+      this.nomCreador = datos.creador;
       await axios({
         url: url2,
         method: "POST",
@@ -278,7 +363,10 @@ export default {
       let link = document.createElement("a");
       link.style.display = "none";
       link.href = url;
-      link.setAttribute("download", "input.docx");
+      link.setAttribute(
+        "download",
+        this.nomFiscal + "_" + this.nomCreador + ".docx"
+      );
 
       document.body.appendChild(link);
       link.click();
@@ -297,13 +385,18 @@ export default {
     },
     bitacora() {
       var lista = JSON.parse(localStorage.getItem("datos"));
-      
+
       let bitacora = {
         horafecha: new Date(),
         level: 7,
         message:
-          "Generar reporte de alertas. Justificacíon:  " /*+ this.justificacion*/,
-        busqueda: this.form.fiscalia,
+          "Generar reporte de alertas. Justificacíon:  " + this.justificacion1,
+        busqueda:
+          this.form.fiscalia +
+          "  desde:  " +
+          this.form.fecha1 +
+          ",  hasta:" +
+          this.form.fecha2,
         nombres: lista.userData.nombres,
         apellidos: lista.userData.apellidos,
         id: lista.userData.id,
@@ -313,10 +406,36 @@ export default {
         nipId: lista.userData.nipId,
         dependencia: lista.userData.dependencia,
         token: lista.userData.token,
-        infoDB: ""
+        infoDB: "",
       };
       //console.log(bitacora);
       this.form.bitacora = bitacora;
+    },
+    bitacora2() {
+      var lista = JSON.parse(localStorage.getItem("datos"));
+
+      let bitacora = {
+        horafecha: new Date(),
+        level: 8,
+        message: "Descargar reporte de alertas. Justificacíon:  " + this.justificacion1,
+        busqueda:
+          this.form.fiscalia +
+          "  desde:  " +
+          this.form.fecha1 +
+          ",  hasta:" +
+          this.form.fecha2,
+        nombres: lista.userData.nombres,
+        apellidos: lista.userData.apellidos,
+        id: lista.userData.id,
+        rol: lista.userData.rol,
+        grupo: lista.userData.grupo,
+        idGrupo: lista.userData.idGrupo,
+        nipId: lista.userData.nipId,
+        dependencia: lista.userData.dependencia,
+        token: lista.userData.token,
+        infoDB: "",
+      };
+      return bitacora;
     },
 
     testmes(num) {

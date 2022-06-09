@@ -118,16 +118,7 @@
       </b-alert>
       <br />
       <br />
-      <!--
-      <p>
-        Selected Rows:<br />
-        {{ selected }}
-        <br/>
-        {{ fiscalia.fiscalia }}
-      </p>
-      <br />
-      <br />
-          -->
+
       <div class="text-center">
         <b-button
           center
@@ -145,6 +136,7 @@
         </b-button>
       </div>
     </b-modal>
+    
     <b-modal
       ref="my-modal2"
       id="modal-2"
