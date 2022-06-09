@@ -153,10 +153,6 @@ export default {
           key: "indicio",
           label: "Indicio",
         },
-        {
-          key: "dictamen",
-          label: "Dictamen",
-        },
       ],
       limitpage: 1,
       hasPrevPage: true,

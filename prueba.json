@@ -1,0 +1,770 @@
+0: {descrFiscalia: 'FISCALIA MUNICIPAL DE JALPATAGUA', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E2) Equipo Dos (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+1: {descrFiscalia: 'FISCALÍA MUNICIPAL DE MOYUTA, JUTIAPA', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+2: {descrFiscalia: 'FISCALÍA MUNICIPAL', nombreAgencia: '(AUX) Auxiliares (ED-SCC),(E1) Equipo Uno (ED-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+3: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA CANALES, GUATEMALA', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos (EPP-SCC-GRAVES),(EPP) Equipo de Persecución Penal (SCC)'}
+4: {descrFiscalia: 'FISCALÍA DISTRITAL DE SANTA ROSA', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+5: {descrFiscalia: 'FISCALIA MUNICIPAL, MELCHOR DE MENCOS, PETEN', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+6: {descrFiscalia: 'FISCALÍA MUNICIPAL DE PUERTO DE SAN JOSE', nombreAgencia: '(AUX) Auxiliares (DES-SCC),(E1) Equipo Uno (DES-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+7: {descrFiscalia: 'FISCALÍA MUNICIPAL DE PUERTO DE SAN JOSE', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno (DES-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+8: {descrFiscalia: 'FISCALÍA DISTRITAL DE ZACAPA', nombreAgencia: '(AUX) Auxiliares,(EP1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+9: {descrFiscalia: 'FISCALÍA MUNICIPAL DE POPTUN PETEN', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (DES-GIC),(ED)Equipo de Desjiudicialización (SCC)'}
+10: {descrFiscalia: 'FISCALÍA DISTRITAL DE JALAPA', nombreAgencia: '(AUX) Auxiliares,(EP1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+11: {descrFiscalia: 'FISCALÍA DISTRITAL DE EL PROGRESO', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos,(UDI) Unidad de Dirección de la Investigación'}
+12: {descrFiscalia: 'FISCALÍA DE SECCIÓN DE DELITOS CONTRA LA VIDA', nombreAgencia: null}
+13: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: 'DESESTIMACION 310,EXEMPLEADOS'}
+14: {descrFiscalia: 'FISCALÍA DISTRITAL DE SUCHITEPEQUEZ', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (VIDA),(UDI) Unidad de Dirección de la Investigación'}
+15: {descrFiscalia: 'FISCALÍA DISTRITAL DE SUCHITEPEQUEZ', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-SCC) VIDA,(EPP) Equipo de Persecución Penal (SCC)'}
+16: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(E2) Equipo Dos (EPP-SCC) ,(EPP) Equipo de Persecución Penal (SCC)'}
+17: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E4) Equipo Cuatro (EPP…quidación,(EPP) Equipo de Persecución Penal (SCC)'}
+18: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares,(E4) Equipo Cuatro,(ED) Equipo de Desjudicialización'}
+19: {descrFiscalia: 'FISCALÍA MUNICIPAL DE MIXCO', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-SCC-VIDA),(EPP) Equipo Persecución Penal (SCC)'}
+20: {descrFiscalia: 'FISCALÍA MUNICIPAL DE AMATITLAN, GUATEMALA', nombreAgencia: 'JUZGADO DE PAZ O INSTANCIA'}
+21: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: 'ARCHIVO'}
+22: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+23: {descrFiscalia: 'FISCALÍA DISTRITAL', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+24: {descrFiscalia: 'FISCALÍA DISTRITAL DE COATEPEQUE', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+25: {descrFiscalia: 'FISCALÍA DISTRITAL DE COATEPEQUE', nombreAgencia: '(AUX) Auxiliares (VIDA),(AG1) Agencia Uno (VIDA),(UDI) Unidad de Dirección de la Investigación'}
+26: {descrFiscalia: 'FISCALÍA DISTRITAL DE COATEPEQUE', nombreAgencia: null}
+27: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA NUEVA', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos (EPP - VIDA II),(EPP) Equipo de Persecución Penal (SCC)'}
+28: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA CANALES, GUATEMALA', nombreAgencia: '(EPP) Equipo de Persecución Penal (SCC)'}
+29: {descrFiscalia: 'FISCALÍA MUNICIPAL, DOLORES, PETEN', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+30: {descrFiscalia: 'FISCALÍA MUNICIPAL DE CHINAUTLA, GUATEMALA', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+31: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (DES-SCC),(E1) Equipo Uno (DES-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+32: {descrFiscalia: 'FISCALÍA MUNICIPAL DE SANTA LUCIA COTZUMALGUAPA', nombreAgencia: '(AUX) Auxiliares,(AG3) Agencia Tres (VIDA),(UDI) Unidad de Direccion de Investigacion'}
+33: {descrFiscalia: 'FISCALÍA MUNICIPAL DE SANTA LUCIA COTZUMALGUAPA', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+34: {descrFiscalia: 'FISCALIA MUNICIPAL DE JOCOTÁN, CHIQUIMULA', nombreAgencia: '(AUX) Auxiliares,(EP1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+35: {descrFiscalia: 'FISCALIA MUNICIPAL DE JOCOTÁN, CHIQUIMULA', nombreAgencia: '(AUX) Auxiliares,(EP1) Equipo Uno,(ED) Equipo de Desjudicializacion'}
+36: {descrFiscalia: 'FISCALÍA CONTRA FEMICIDIO', nombreAgencia: null}
+37: {descrFiscalia: 'FISCALÍA DISTRITAL DE SANTA ROSA', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno,(EPP) Equipo de Persecución Penal (Casos Nuevos)'}
+38: {descrFiscalia: 'FISCALÍA MUNICIPAL DE SANTA CATALINA LA TINTA, ALTA VERAPAZ', nombreAgencia: '(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+39: {descrFiscalia: 'FISCALÍA MUNICIPAL DE AMATITLAN, GUATEMALA', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-SCC)'}
+40: {descrFiscalia: 'FISCALÍA DISTRITAL METROPOLITANA', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno-GIC,(ED) Equipo de Desjudicialización-GIC'}
+41: {descrFiscalia: 'FISCALÍA DISTRITAL DE ESCUINTLA', nombreAgencia: '(AUX) Auxiliares (DES-SCC),(E1) Equipo Uno (DES-SCC),(ED) Equipo de Desjudicialización (GIC)'}
+42: {descrFiscalia: 'FISCALÍA DISTRITAL DE ESCUINTLA', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E2) Equipo Dos (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+43: {descrFiscalia: 'FISCALÍA DISTRITAL DE SUCHITEPEQUEZ', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (ED-EPP),(EPP) Equipo Persecución Penal (SCC)'}
+44: {descrFiscalia: 'FISCALÍA DISTRITAL DE EL PROGRESO', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+45: {descrFiscalia: 'FISCALÍA DISTRITAL DE EL PROGRESO', nombreAgencia: '(AUX) Auxiliares (DES-SCC),(E1) Equipo Uno (DES-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+46: {descrFiscalia: 'FISCALÍA DISTRITAL DE SOLOLA', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+47: {descrFiscalia: 'FISCALÍA DISTRITAL DE SOLOLA', nombreAgencia: '(E1) Equipo Uno,(PAL) Personal de Apoyo a Litigio'}
+48: {descrFiscalia: 'AGENCIA FISCAL DE TACTIC, ALTA VERAPAZ', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UDT) Unidad de Decisión Temprana'}
+49: {descrFiscalia: 'FISCALÍA MUNICIPAL DE MORALES', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UDT) Unidad de Decisión Temprana'}
+50: {descrFiscalia: 'FISCALÍA MUNICIPAL DE AMATITLAN, GUATEMALA', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E4) Equipo Cuatro (EPP…quidación,(EPP) Equipo de Persecución Penal (SCC)'}
+51: {descrFiscalia: 'FISCALÍA MUNICIPAL DE CASILLAS, SANTA ROSA', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E2) Equipo Dos (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+52: {descrFiscalia: 'FISCALÍA DISTRITAL DE SANTA ROSA', nombreAgencia: '(EPP) Equipo de Persecución Penal (Casos Nuevos)'}
+53: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (PAZ),(UDT) Unidad de Decision Temprana'}
+54: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,M3255 - FISCALIA DE SECCION DELITOS CONTRA EL AMBIENTE COBAN'}
+55: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+56: {descrFiscalia: 'FISCALÍA MUNICIPAL DE ESQUIPULAS, CHIQUIMULA', nombreAgencia: '(AUX) Auxiliares,(EP1) Equipo Uno,(ED) Equipo de Desjudicializacion'}
+57: {descrFiscalia: 'FISCALÍA MUNICIPAL DE SANTA LUCIA COTZUMALGUAPA', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UL) Unidad de Litigio'}
+58: {descrFiscalia: 'FISCALÍA MUNICIPAL DE RABINAL', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (ED-SCC),(ED) Equipo de Desjudicialización (SCC)'}
+59: {descrFiscalia: 'FISCALÍA MUNICIPAL DE RABINAL', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-SCC),(EPP) Equipo Persecución Penal (SCC)'}
+60: {descrFiscalia: 'FISCALÍA MUNICIPAL DE MORALES', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+61: {descrFiscalia: 'FISCALÍA DISTRITAL DE IZABAL', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (ED),(ED)Equipo de Desjiudicialización (SCC)'}
+62: {descrFiscalia: 'FISCALÍA MUNICIPAL', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+63: {descrFiscalia: 'FISCALÍA MUNICIPAL DE SANTA CATARINA PINULA', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+64: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA NUEVA', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP - SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+65: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA NUEVA', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (VIDA - GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+66: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E6) Equipo Seis (EPP-S…TORSIONES,(EPP) Equipo de Persecución Penal (SCC)'}
+67: {descrFiscalia: 'FISCALÍA DISTRITAL DE JUTIAPA', nombreAgencia: '(AUX) AUXILIARES,(E1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+68: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (ED-SCC),(E1) Equipo Uno (ED-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+69: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: null}
+70: {descrFiscalia: 'FISCALÍA DISTRITAL DE ZACAPA', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E5) Equipo Cinco (EPP-…speciales,(EPP) Equipo de Persecución Penal (SCC)'}
+71: {descrFiscalia: 'FISCALÍA MUNICIPAL DE SANTA LUCIA COTZUMALGUAPA', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (COMUNES),(UDI) Unidad de Direccion de Investigacion'}
+72: {descrFiscalia: 'FISCALÍA MUNICIPAL DE PUERTO DE SAN JOSE', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (VIDA - COMUNES),(UDI) Unidad de Dirección de la Investigación'}
+73: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos,(EPP) Equipo de Persecución Penal'}
+74: {descrFiscalia: 'FISCALÍA MUNICIPAL DE ASUNCION MITA, JUTIAPA', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-SCC),(EPP) Equipo Persecución Penal (SCC)'}
+75: {descrFiscalia: 'FISCALÍA DISTRITAL DE CHIQUIMULA', nombreAgencia: '(AUX) Auxiliares,(EP1) Equipo Uno,(ED) Equipo de Desjudicializacion'}
+76: {descrFiscalia: 'FISCALÍA MUNICIPAL DE PUERTO DE SAN JOSE', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UDT) Unidad de Decisión Temprana'}
+77: {descrFiscalia: 'FISCALÍA MUNICIPAL DE AMATITLAN, GUATEMALA', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (ED-SCC)'}
+78: {descrFiscalia: 'FISCALÍA DISTRITAL DE ESCUINTLA', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+79: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E5) Equipo Cinco (EPP-…speciales,(EPP) Equipo de Persecución Penal (SCC)'}
+80: {descrFiscalia: 'FISCALÍA DISTRITAL DE IZABAL', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E6) Equipo Seis (EPP-S…TORSIONES,(EPP) Equipo de Persecución Penal (SCC)'}
+81: {descrFiscalia: 'FISCALÍA DISTRITAL DE IZABAL', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+82: {descrFiscalia: 'FISCALÍA DISTRITAL DE CHIMALTENANGO', nombreAgencia: '(EP1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+83: {descrFiscalia: 'FISCALÍA DISTRITAL DE SACATEPEQUEZ', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos (VIDA),(EPP) Equipo de Persecución Penal'}
+84: {descrFiscalia: 'FISCALÍA DISTRITAL DE CHIMALTENANGO', nombreAgencia: '(AUX) Auxiliares,(EP1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+85: {descrFiscalia: 'FISCALÍA DISTRITAL DE JALAPA', nombreAgencia: '(EP1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+86: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos,(DSA) Unidad Desestimación Sede Fiscal y Archivo'}
+87: {descrFiscalia: 'FISCALIA MUNICIPAL DE JALPATAGUA', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+88: {descrFiscalia: 'FISCALÍA MUNICIPAL DE MOYUTA, JUTIAPA', nombreAgencia: '(AUX) Auxiliares,(E3) Equipo Tres,(EPP) Equipo de Persecución Penal'}
+89: {descrFiscalia: 'FISCALÍA MUNICIPAL', nombreAgencia: '(ED)Equipo de Desjiudicialización (SCC)'}
+90: {descrFiscalia: 'FISCALÍA MUNICIPAL DE LA LIBERTAD PETEN', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+91: {descrFiscalia: 'FISCALÍA MUNICIPAL DE ESQUIPULAS, CHIQUIMULA', nombreAgencia: 'MP420 - FISCALIA MUNICIPAL DE ESQUIPULAS, CHIQUIMULA'}
+92: {descrFiscalia: 'FISCALÍA MUNICIPAL DE ESQUIPULAS, CHIQUIMULA', nombreAgencia: '(AUX) Auxiliares,(EP1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+93: {descrFiscalia: 'FISCALIA MUNICIPAL DE JOCOTÁN, CHIQUIMULA', nombreAgencia: '(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+94: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno-GIC,(ED) Equipo de Desjudicialización-GIC'}
+95: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E2) Equipo Dos (EPP-SCC) ,(EPP) Equipo de Persecución Penal (SCC)'}
+96: {descrFiscalia: '', nombreAgencia: null}
+97: {descrFiscalia: 'FISCALÍA MUNICIPAL', nombreAgencia: '(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+98: {descrFiscalia: 'FISCALÍA DISTRITAL DE SOLOLA', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos (Mujer),(EPP) Equipo de Persecución Penal'}
+99: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(E3) Equipo Tres,(EPP) Equipo de Persecución Penal'}
+100: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E3) Equipo Tres (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+101: {descrFiscalia: 'FISCALÍA MUNICIPAL DE MORALES', nombreAgencia: null}
+102: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares,(EP1) Equipo Uno,(ED) Equipo de Desjudicializacion'}
+103: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA NUEVA', nombreAgencia: '(E1) Equipo Uno (VIDA - GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+104: {descrFiscalia: 'FISCALÍA MUNICIPAL DE GUALAN, ZACAPA', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (ED-SCC),(ED) Equipo de Desjudicialización (SCC)'}
+105: {descrFiscalia: 'FISCALÍA MUNICIPAL DE GUALAN, ZACAPA', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-SCC),(EPP) Equipo Persecución Penal (SCC)'}
+106: {descrFiscalia: 'FISCALÍA TECÚN UMÁN', nombreAgencia: '(AUX) Auxiliares (DES-SCC),(E1) Equipo Uno (DES-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+107: {descrFiscalia: 'FISCALÍA TECÚN UMÁN', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+108: {descrFiscalia: 'AGENCIA FISCAL DE TECULUTAN', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UDI) Unidad de Dirección de la Investigación'}
+109: {descrFiscalia: 'AGENCIA FISCAL DE TECULUTAN', nombreAgencia: null}
+110: {descrFiscalia: 'FISCALÍA MUNICIPAL DE AMATITLAN, GUATEMALA', nombreAgencia: null}
+111: {descrFiscalia: 'FISCALÍA MUNICIPAL DE TECUN UMAN', nombreAgencia: '(AUX) Auxiliares (DES-SCC),(E1) Equipo Uno (DES-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+112: {descrFiscalia: 'FISCALÍA MUNICIPAL DE GUALAN, ZACAPA', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E5) Equipo Cinco (EPP-…speciales,(EPP) Equipo de Persecución Penal (SCC)'}
+113: {descrFiscalia: 'FISCALÍA DISTRITAL DE QUETZALTENANGO', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-SCC-VIDA),(EPP) Equipo Persecución Penal (SCC)'}
+114: {descrFiscalia: 'UNIDAD DE DIRECCION DE INVESTIGACIÓN', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E3) Equipo Tres (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+115: {descrFiscalia: 'FISCALÍA DISTRITAL DE MALACATAN', nombreAgencia: null}
+116: {descrFiscalia: 'AGENCIA FISCAL', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (ED-EPP),(EPP) Equipo Persecución Penal (SCC)'}
+117: {descrFiscalia: 'FISCALÍA DISTRITAL DE RETALHULEU', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (ED-EPP),(EPP) Equipo Persecución Penal (SCC)'}
+118: {descrFiscalia: 'FISCALÍA MUNICIPAL DE CHINAUTLA, GUATEMALA', nombreAgencia: '(AUX) Auxiliares (DES-SCC),(E1) Equipo Uno (DES-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+119: {descrFiscalia: 'FISCALÍA MUNICIPAL DE MORALES', nombreAgencia: '(AUX) Auxiliares (DES-SCC),(E1) Equipo Uno (DES-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+120: {descrFiscalia: 'FISCALÍA MUNICIPAL DE CHISEC, ALTA VERAPAZ', nombreAgencia: '(AUX) Auxiliares (DES-SCC),(E1) Equipo Uno (DES-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+121: {descrFiscalia: 'FISCALÍA MUNICIPAL, SAYAXCHE, PETEN', nombreAgencia: 'MP279 - FISCALIA MUNICIPAL DE SAYAXCHE'}
+122: {descrFiscalia: 'FISCALÍA MUNICIPAL DE MIXCO', nombreAgencia: '(E1) Equipo Uno (EPP-SCC-VIDA),(EPP) Equipo Persecución Penal (SCC)'}
+123: {descrFiscalia: 'FISCALÍA DISTRITAL DE SACATEPEQUEZ', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EXTORSIONES),(EPP) Equipo de Persecución Penal'}
+124: {descrFiscalia: 'FISCALÍA DISTRITAL DE ZACAPA', nombreAgencia: '(AUX) Auxiliares,(EP1) Equipo Uno,(ED) Equipo de Desjudicializacion'}
+125: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA CANALES, GUATEMALA', nombreAgencia: '(AUX) Auxiliares,(E3) Equipo Tres (EPP-SCC-COMUNES…GRANCIAS),(EPP) Equipo de Persecución Penal (SCC)'}
+126: {descrFiscalia: 'FISCALÍA MUNICIPAL DE MIXCO', nombreAgencia: '(AUX) Auxiliares'}
+127: {descrFiscalia: 'FISCALÍA MUNICIPAL DE CHISEC, ALTA VERAPAZ', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (Delitos Sexual…P701 - FISCALIA MUNICIPAL DE CHISEC, ALTA VERAPAZ'}
+128: {descrFiscalia: 'FISCALÍA MUNICIPAL DE CHISEC, ALTA VERAPAZ', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+129: {descrFiscalia: 'AGENCIA FISCAL MUNICIPAL DE COMAPA, JUTIAPA', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E2) Equipo Dos (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+130: {descrFiscalia: 'FISCALÍA DISTRITAL DE IZABAL', nombreAgencia: null}
+131: {descrFiscalia: '', nombreAgencia: '(AG5) Agencia Cinco (MENORES),(UDI) Unidad de Dirección de la Investigación'}
+132: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos (VIDA),(EPP) Equipo de Persecución Penal'}
+133: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG5) Agencia Cinco (VIDA),(UDI) Unidad de Dirección de la Investigación'}
+134: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E3) Equipo Tres (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+135: {descrFiscalia: '', nombreAgencia: '(E5) Equipo Cinco (EPP-SCC) Casos Especiales,(EPP) Equipo de Persecución Penal (SCC)'}
+136: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP - SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+137: {descrFiscalia: '', nombreAgencia: '(PAL) Personal de Apoyo a Litigio'}
+138: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(EP1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+139: {descrFiscalia: '', nombreAgencia: 'JUZGADO DE PAZ'}
+140: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(DAJ) Unidad Desestimación con Autorización Judicial'}
+141: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(DSA) Unidad Desestimación Sede Fiscal y Archivo'}
+142: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E6) Equipo Seis,(GIC) Gestion Integral de Casos'}
+143: {descrFiscalia: '', nombreAgencia: '(Aux) Auxiliares,(E2) Equipo Dos,(GIC) Gestion Integral de Casos'}
+144: {descrFiscalia: '', nombreAgencia: '(E9) Equipo Nueve,(GIC) Gestion Integral de Casos'}
+145: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG9) Agencia Nueve,(UDI) Unidad de Dirección de la Investigación'}
+146: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E5) Equipo Cinco,(EPP) Equipo de Persecución Penal'}
+147: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (DESESTIMACIÓN EN SEDE FISCAL),(AUX) Auxiliares'}
+148: {descrFiscalia: '', nombreAgencia: '(E2) Equipo Dos (EPP - VIDA II),(EPP) Equipo de Persecución Penal (SCC)'}
+149: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno,(UL) Unidad de Litigio'}
+150: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E4) Equipo Cuatro (EPP…quidación,(EPP) Equipo de Persecución Penal (SCC)'}
+151: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (DESESTIMACION SEDE JUDICIAL),(LIQ) Unidad Liquidadora'}
+152: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E10) Equipo Diez,(GIC) Gestion Integral de Casos'}
+153: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+154: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+155: {descrFiscalia: '', nombreAgencia: '(EPP) Equipo de Persecusión Penal,(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+156: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno,(ED) Equipo de Desjudicialización'}
+157: {descrFiscalia: '', nombreAgencia: '(AUX) AUXILIARES,(E1) EQUIPO UNO ,(ED) Equipo de Desjudicialización '}
+158: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (DES-SCC),(E1) Equipo Uno (DES-SCC),(ED) Equipo de Desjudicialización (GIC)'}
+159: {descrFiscalia: '', nombreAgencia: '(E3) Equipo Tres (EPP-GIC) ESTRUCTURA CRIMINAL,(EPP) Equipo de Persecución Penal (GIC)'}
+160: {descrFiscalia: 'FISCALÍA DISTRITAL METROPOLITANA', nombreAgencia: '(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+161: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(EP1) Equipo Uno,(ED) Equipo de Desjudicializacion'}
+162: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+163: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos (EPP - VIDA II),(EPP) Equipo de Persecución Penal (SCC)'}
+164: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno-GIC,(ED) Equipo de Desjudicialización-GIC'}
+165: {descrFiscalia: 'FISCALÍA DISTRITAL', nombreAgencia: null}
+166: {descrFiscalia: 'FISCALÍA TECÚN UMÁN', nombreAgencia: null}
+167: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (ED-EPP),(EPP) Equipo Persecución Penal (SCC)'}
+168: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (VIDA, COMUNES),(UDI) Unidad de Investigacion'}
+169: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E6) Equipo Seis (EPP-S…TORSIONES,(EPP) Equipo de Persecución Penal (SCC)'}
+170: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E5) Equipo Cinco (EPP-…speciales,(EPP) Equipo de Persecución Penal (SCC)'}
+171: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-SCC)'}
+172: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos (EPP-SCC-GRAVES),(EPP) Equipo de Persecución Penal (SCC)'}
+173: {descrFiscalia: '', nombreAgencia: '(AUX) AUXILIARES,(E1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+174: {descrFiscalia: 'FISCALIA MUNICIPAL DE JALPATAGUA', nombreAgencia: null}
+175: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E3) Equipo Tres (EPP-SCC-COMUNES…GRANCIAS),(EPP) Equipo de Persecución Penal (SCC)'}
+176: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-SCC) VIDA,(EPP) Equipo de Persecución Penal (SCC)'}
+177: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno (DES-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+178: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (ED-SCC)'}
+179: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E2) Equipo Dos (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+180: {descrFiscalia: 'AGENCIA FISCAL DE LA MUJER', nombreAgencia: null}
+181: {descrFiscalia: 'FISCALÍA DISTRITAL DE RETALHULEU', nombreAgencia: null}
+182: {descrFiscalia: '', nombreAgencia: '(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+183: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG3) Agencia Tres (MUJER),(UDI) Unidad de Dirección de la Investigación'}
+184: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+185: {descrFiscalia: 'FISCALÍA DISTRITAL METROPOLITANA', nombreAgencia: '(E1) Equipo Uno-GIC,(EPP) Equipo de Persecución Penal-GIC'}
+186: {descrFiscalia: 'FISCALÍA DISTRITAL METROPOLITANA', nombreAgencia: null}
+187: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos,(UDI) Unidad de Dirección de la Investigación'}
+188: {descrFiscalia: 'FISCALÍA DISTRITAL DE EL PROGRESO', nombreAgencia: '(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+189: {descrFiscalia: '', nombreAgencia: 'DESESTIMACION 310 CPP'}
+190: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E2) Equipo Dos (EPP-SCC) ,(EPP) Equipo de Persecución Penal (SCC)'}
+191: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-SCC-VIDA),(EPP) Equipo Persecución Penal (SCC)'}
+192: {descrFiscalia: '', nombreAgencia: '(ED) Equipo Desjudicialización (SCC)'}
+193: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno-GIC,(EPP) Equipo de Persecución Penal-GIC'}
+194: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA CANALES, GUATEMALA', nombreAgencia: null}
+195: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno,(EPP) Equipo de Persecución Penal (Casos Nuevos)'}
+196: {descrFiscalia: '', nombreAgencia: '(E2) Equipo Dos (EPP-SCC) ,(EPP) Equipo de Persecución Penal (SCC)'}
+197: {descrFiscalia: '', nombreAgencia: '(E2) Equipo Dos (EPP-SCC) VIDA,(EPP) Equipo de Persecución Penal (SCC)'}
+198: {descrFiscalia: 'FISCALÍA DISTRITAL DE BAJA VERAPAZ', nombreAgencia: null}
+199: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA NUEVA', nombreAgencia: null}
+200: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E3) Equipo Tres (PATRIMONIALES),(EPP) Equipo de Persecución Penal'}
+201: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-SCC),(EPP) Equipo Persecución Penal (SCC)'}
+202: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+203: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos,(EPP) Equipo de Persecución Penal'}
+204: {descrFiscalia: 'FISCALÍA MUNICIPAL', nombreAgencia: null}
+205: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E3) Equipo Tres,(EPP) Equipo de Persecución Penal'}
+206: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares'}
+207: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (ED-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+208: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (COMUNES),(UDI) Unidad de Dirección de la Investigación'}
+209: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E2) Equipo Dos (EPP-SCC) VIDA,(EPP) Equipo de Persecución Penal (SCC)'}
+210: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG3) Agencia Tres (VIDA),(UDI) Unidad de Direccion de Investigacion'}
+211: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (DES-SCC),(E1) Equipo Uno (DES-GIC),(ED) Equipo de Desjudicialización (GIC)'}
+212: {descrFiscalia: '', nombreAgencia: '(AUX) Auxilares,(E1) Equipo Uno,(EPP) Equipo de Persecusión Penal'}
+213: {descrFiscalia: '', nombreAgencia: '(UL) Unidad de Litigio'}
+214: {descrFiscalia: '', nombreAgencia: '(GIC) Gestión Integral de Casos,MP010 - FISCALIA MUNICIPAL DE SAN JUAN SACATEPEQUEZ'}
+215: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (VIDA),(AG1) Agencia Uno (VIDA),(UDI) Unidad de Dirección de la Investigación'}
+216: {descrFiscalia: '', nombreAgencia: 'Auxiliares Mixco,Agencia Mixco,Equipos Municipales'}
+217: {descrFiscalia: 'FISCALÍA MUNICIPAL DE SAN JUAN SACATEPEQUEZ', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+218: {descrFiscalia: '', nombreAgencia: '(E3) Equipo Tres,(EPP) Equipo de Persecución Penal'}
+219: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (VIDA - COMUNES),(UDI) Unidad de Dirección de la Investigación'}
+220: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (VIDA - COMUNES),(UDI) Unidad de Dirección de la Investigación'}
+221: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno'}
+222: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UDT) Unidad de Decision Temprana'}
+223: {descrFiscalia: '', nombreAgencia: '(REC) Recepción'}
+224: {descrFiscalia: '', nombreAgencia: '(AG2) Agencia Dos,(UDI) Unidad de Investigación'}
+225: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,MP700 - FISCALIA DE SECCION DE DELITOS CONTRA EL AMBIENTE IZABAL'}
+226: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (DESESTIMACION EN SEDE FISCAL),(LIQ) Unidad Liquidadora'}
+227: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (ED-SCC),(ED) Equipo de Desjudicialización (SCC)'}
+228: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-GIC),(E3) Equipo Tres (EPP-G… CRIMINAL,(EPP) Equipo de Persecución Penal (GIC)'}
+229: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+230: {descrFiscalia: '', nombreAgencia: '(E2) Equipo Dos,(EPP) Equipo de Persecución Penal'}
+231: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (COMUNES),(AG3) Agencia Tres (COM…ES),(UDI) Unidad de Dirección de la Investigación'}
+232: {descrFiscalia: '', nombreAgencia: 'Auxiliares Quetzaltenango,Agencia Quetzaltenango,Equipos Distritales'}
+233: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E4) Equipo Cuatro,(EPP) Equipo de Persecución Penal'}
+234: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (VIDA),(UDI) Unidad de Dirección de la Investigación'}
+235: {descrFiscalia: '', nombreAgencia: '(EPP) Equipo de Persecución Penal'}
+236: {descrFiscalia: '', nombreAgencia: '(UL) Unidad de Litigio,M0006 - FISCALIA DE SECCION DE NARCOACTIVIDAD, GUATEMALA'}
+237: {descrFiscalia: '', nombreAgencia: '(SCC) Seguimiento y Conclusión de Casos (Casos Activos),MP316 - FISCALIA MUNICIPAL DE ASUNCION MITA'}
+238: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (DESESTIMACION EN SEDE JUDICIAL,(LIQ) Unidad Liquidadora'}
+239: {descrFiscalia: 'FISCALÍA DISTRITAL DE JALAPA', nombreAgencia: null}
+240: {descrFiscalia: '', nombreAgencia: 'ARCHIVO OAP'}
+241: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno,(ED) Equipo de Desjudicialización '}
+242: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UDT) Unidad de Decisión Temprana'}
+243: {descrFiscalia: 'FISCALÍA MUNICIPAL DE PUERTO DE SAN JOSE', nombreAgencia: null}
+244: {descrFiscalia: '', nombreAgencia: '(ANA) Analisis'}
+245: {descrFiscalia: '', nombreAgencia: '(E5) Equipo Cinco  (VEHICULOS 3-EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+246: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E5) Equipo Cinco  (VEHICULOS 3-EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+247: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno,(ED) Equipo de Desjudicialización'}
+248: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos (EPP-GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+249: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (VIDA),(UDI) Unidad de Dirección de la Investigación'}
+250: {descrFiscalia: 'FISCALÍA DISTRITAL DE ZACAPA', nombreAgencia: '(EPP) Equipo de Persecución Penal'}
+251: {descrFiscalia: '', nombreAgencia: 'MP410 - FISCALIA MUNICIPAL DE GUALAN, ZACAPA'}
+252: {descrFiscalia: '', nombreAgencia: '(EPP) Equipo de Persecución Penal (SCC),(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+253: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno,(EPP) Equipo de Persecuciòn Penal'}
+254: {descrFiscalia: '', nombreAgencia: '(E4) Equipo Cuatro (EPP-GIC- PATRIMONIALES Y COMUNES),(EPP) Equipo Persecución Penal (GIC)'}
+255: {descrFiscalia: '', nombreAgencia: 'MP274 - FISCALIA MUNICIPAL DE LA LIBERTAD PETEN'}
+256: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno (DES-SCC) ,(ED)Equipo de Desjiudicialización (SCC)'}
+257: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UDI) Unidad de Dirección de la Investigación'}
+258: {descrFiscalia: '', nombreAgencia: '(E3) Equipo Tres (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+259: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (DESESTIMACIÓN JUDICIAL),(LIQ) Unidad Liquidadora'}
+260: {descrFiscalia: '', nombreAgencia: 'DESESTIMACION 310,EXEMPLEADOS'}
+261: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (DES-GIC),(E1) Equipo Uno (DES-GIC),(ED) Equipo de Desjudicialización (GIC)'}
+262: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (DESESTIMACION EN SEDE JUDICIAL),(AUX) Auxiliares'}
+263: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (Mujer),(UDI) Unidad de Dirección de la Investigación'}
+264: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+265: {descrFiscalia: '', nombreAgencia: '(SCC) Seguimiento y Conclusión de Casos (Casos Act…010 - FISCALIA MUNICIPAL DE SAN JUAN SACATEPEQUEZ'}
+266: {descrFiscalia: '', nombreAgencia: '(UL) Unidad de Litigio,MP282 - FISCALIA DISTRITAL DE IZABAL'}
+267: {descrFiscalia: '', nombreAgencia: 'ARCHIVO'}
+268: {descrFiscalia: '', nombreAgencia: '(UDT) Unidad de Decision Temprana'}
+269: {descrFiscalia: '', nombreAgencia: '(E2) Equipo Dos,(PAL) Personal de Apoyo a Litigio'}
+270: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno,(ED) Equipo de Desjudicializaciòn'}
+271: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UDI) Uniddad de Direccion de la Investigacion'}
+272: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UL) Unidad de Litigio'}
+273: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (VIDA - GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+274: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E7) Equipo Siete (RECUPERACION DE CASOS),(EPP) Equipo de Persecución Penal (SCC)'}
+275: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E3) Equipo Tres (EPP-SCC- PATRIM…S Y COMUNES),(EPP) Equipo Persecución Penal (SCC)'}
+276: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (DESESTIMACION CON AUTORIZACION JUDICIAL),(AUX) Auxiliares'}
+277: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (DES - GIC),(ED) Equipo de Desjudicialización (GIC)'}
+278: {descrFiscalia: '', nombreAgencia: '(E8) Euipo Ocho,(GIC) Gestion Integral de Casos'}
+279: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (PAL),(PAL) Personal de Apoyo a Litigio,FISCALIA DE SECCION'}
+280: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (ED-SCC),(E1) Equipo Uno (ED-SCC)'}
+281: {descrFiscalia: '', nombreAgencia: '(E9) Equipo Nueve (EPP-GIC )  JALAPA,(EPP) Equipo de Persecución Penal (GIC)'}
+282: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG3) Agencia Tres,(UDI) Unidad de Dirección de la Investigación'}
+283: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos,(UDT) Unidad de Decision Temprana'}
+284: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(PAL) Personal de Apoyo a Litigio,MP410 - FISCALIA MUNICIPAL DE GUALAN, ZACAPA'}
+285: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E9) Equipo Nueve,(GIC) Gestion Integral de Casos'}
+286: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (PAL),(PAL) Personal de Apoyo a L…P016 - FISCALIA MUNICIPAL DE CHINAUTLA, GUATEMALA'}
+287: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (DES-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+288: {descrFiscalia: '', nombreAgencia: '(AG2) Agencia Dos (Adolescentes),(UDI) Unidad de Dirección de la Investigación'}
+289: {descrFiscalia: '', nombreAgencia: '(UL) Unidad de Litigio,MP450 - FISCALIA MUNICIPAL DE PUERTO DE SAN JOSE'}
+290: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (ED-SCC),(E1) Equipo Uno (DES-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+291: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-GIC) COATEPEQUE,(E3) Equipo …OATEPEQUE,(EPP) Equipo de Persecución Penal (GIC)'}
+292: {descrFiscalia: 'FISCALÍA DISTRITAL DE ESCUINTLA', nombreAgencia: '(AUX) Auxiliares (EPP-GIC),(E3) Equipo Tres (EPP-G… CRIMINAL,(EPP) Equipo de Persecución Penal (GIC)'}
+293: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (ED),(ED)Equipo de Desjiudicialización (SCC)'}
+294: {descrFiscalia: '', nombreAgencia: '(E4) Equipo Cuatro (EPP-SCC) Liquidación,(EPP) Equipo de Persecución Penal (SCC)'}
+295: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (DESESTIMACION EN SEDE FISCAL),(AUX) Auxiliares'}
+296: {descrFiscalia: '', nombreAgencia: '(EP1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+297: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E7) Equipo Siete,(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+298: {descrFiscalia: '', nombreAgencia: 'CONSTANCIAS'}
+299: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E6) Equipo Seis,(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+300: {descrFiscalia: '', nombreAgencia: '(E6) Equipo Seis (FENOMENOS CRIMINALES),(EPP) Equipo de Persecución Penal (SCC)'}
+301: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (CASOS ACTIVOS),(E1) Equipo Uno (…ED) Equipo de Desjudicialización  (CASOS ACTIVOS)'}
+302: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno,(LIQ) Liquidadora Mixco'}
+303: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (INVESTIGACIÓN Y LITIGIO),(AUX) Auxiliares'}
+304: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (DESESTIMACION SEDE FISCAL),(LIQ) Unidad Liquidadora'}
+305: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E8) Euipo Ocho,(GIC) Gestion Integral de Casos'}
+306: {descrFiscalia: '', nombreAgencia: '(AG3) Agencia Tres (UNIDAD DE INVESTIGACIÓN Y LITIGIO),(AUX) Auxiliares'}
+307: {descrFiscalia: '', nombreAgencia: '(E10) Equipo Diez,(GIC) Gestion Integral de Casos'}
+308: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno,(ED) Equipo de Desjudicialización (CASOS ACTIVOS)'}
+309: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos,(EPP) Equipo de Persecusión Penal (CASOS ACTIVOS)'}
+310: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (COMUNES),(AG4) Agencia Cuatro (C…ES),(UDI) Unidad de Dirección de la Investigación'}
+311: {descrFiscalia: '', nombreAgencia: '(ED)Equipo de Desjiudicialización (SCC)'}
+312: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno,(EPP) Equipo de Persecuciòn Penal'}
+313: {descrFiscalia: '', nombreAgencia: 'M0019 - FISCALIA CONTRA EXTORSIONES'}
+314: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno,MP062 - FISCALIA MUNICIPAL DE TIQUISATE'}
+315: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E3) Equipo Tres (EPP-SCC) COMUNES I,(EPP) Equipo de Persecución Penal (SCC)'}
+316: {descrFiscalia: '', nombreAgencia: 'MP238 - FISCALIA MUNICIPAL DE NEBAJ QUICHE'}
+317: {descrFiscalia: '', nombreAgencia: '(EPP) Equipo de Persecución Penal (SCC)'}
+318: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno,(EPP) Equipo de Persecusión Penal (CASOS ACTIVOS)'}
+319: {descrFiscalia: '', nombreAgencia: 'MP132 - FISCALIA DISTRITAL DE COATEPEQUE'}
+320: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG3) Agencia Tres (COMUNES),(UDI) Uniddad de Direccion de la Investigacion'}
+321: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos (EPP-SCC- PATRIMO…S Y COMUNES),(EPP) Equipo Persecución Penal (SCC)'}
+322: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG3) Agencia Tres (VIDA),(UDI) Unidad de Dirección de la Investigación'}
+323: {descrFiscalia: '', nombreAgencia: '(E7) Equipo Siete,(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+324: {descrFiscalia: '', nombreAgencia: 'MP313 - AGENCIA FISCAL EN EL MUNICIPIO DE MONJAS, JALAPA'}
+325: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (PAL),(PAL) Personal de Apoyo a Litigio,MP181 - FISCALIA MUNICIPAL DE TECUN UMAN'}
+326: {descrFiscalia: '', nombreAgencia: '(GIC) Gestión Integral de Casos'}
+327: {descrFiscalia: '', nombreAgencia: '(E2) Equipo Dos (EPP-GIC- PATRIMONIALES Y COMUNES),(EPP) Equipo Persecución Penal (GIC)'}
+328: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E4) Equipo Cuatro (DELITOS  COMUNES II),(EPP) Equipo de Persecución Penal (SCC)'}
+329: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG3) Agencia Tres (UNIDAD DE INVESTIGACIÓN Y LITIGIO),(AUX) Auxiliares'}
+330: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG) Agencia Extorsiones,(AG1) Agencia Uno (VIDA)'}
+331: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG3) Agencia Tres (COMUNES),(UDI) Unidad de Dirección de la Investigación'}
+332: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E4) Equipo Cuatro,(GIC) Gestion Integral de Casos'}
+333: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos,(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+334: {descrFiscalia: '', nombreAgencia: '(E3) Equipo Tres (EPP-GIC ) COATEPEQUE,(EPP) Equipo de Persecución Penal (GIC)'}
+335: {descrFiscalia: '', nombreAgencia: '(GIC) Gestión Integral de Casos,MP248 - FISCALIA MUNICIPAL DE RABINAL'}
+336: {descrFiscalia: '', nombreAgencia: 'MP008 - FISCALIA MUNICIPAL DE MIXCO'}
+337: {descrFiscalia: '', nombreAgencia: '(E4) Equipo Cuatro,(GIC) Gestion Integral de Casos'}
+338: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UDI) Unidad de Investigacion'}
+339: {descrFiscalia: '', nombreAgencia: 'Temporal'}
+340: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (ED-GIC),(ED) Equipo Desjudicialización (GIC)'}
+341: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno ,(UDT) Unidad de Decisión Temprana'}
+342: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno (GRAVES),(UDI) Unidad de Dirección de la Investigación'}
+343: {descrFiscalia: '', nombreAgencia: 'ARCHIVO 310'}
+344: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG3) Agencia Tres (UNIDAD DE INVESTIGACION Y LITIGIO),(AUX) Auxiliares'}
+345: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(PAL) Personal de Apoyo a Litigio,MP157 - FISCALIA DISTRITAL DE RETALHULEU'}
+346: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares ,(E1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+347: {descrFiscalia: '', nombreAgencia: 'DESESTIMACION 310'}
+348: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG3) Agencia Uno (VIDA),(UDI) Unidad de Dirección de la Investigación'}
+349: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (ED-GIC)'}
+350: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG4) Agencia Cuatro (VIDA),(UDI) Unidad de Dirección de la Investigación'}
+351: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (DES-GIC),(E2) Equipo Dos (DES-GIC),(ED) Equipo de Desjudicialización (GIC)'}
+352: {descrFiscalia: '', nombreAgencia: '(ED) Equipo de Desjudicialización'}
+353: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG3) Agencia Tres (DESESTIMACIÓN CON AUTORIZACIÓN JUDICIAL),(AUX) Auxiliares'}
+354: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno ,(UDI) Unidad de Dirección de la Investigación'}
+355: {descrFiscalia: '', nombreAgencia: '(AG2) Agencia Dos (DESESTIMACION CON AUTORIZACION JUDICIAL),(AUX) Auxiliares'}
+356: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno  BANCOS (EPP-GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+357: {descrFiscalia: '', nombreAgencia: '(E5) Equipo Cinco  (EPP-SCC) COMUNES III,(EPP) Equipo de Persecución Penal (SCC)'}
+358: {descrFiscalia: '', nombreAgencia: '(E3) Equipo Tres (EPP-SCC-COMUNES Y  FLAGRANCIAS),(EPP) Equipo de Persecución Penal (SCC)'}
+359: {descrFiscalia: '', nombreAgencia: '(REC) Receptores'}
+360: {descrFiscalia: '', nombreAgencia: 'MP181 - FISCALIA MUNICIPAL DE TECUN UMAN'}
+361: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(EP1) Equipo Uno,(PAL) Personal de Apoyo a Litigio'}
+362: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-GIC),(E1) Equipo Uno (EPP-GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+363: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (FLAGRANCIA),(UDI) Unidad de Direccion de la Investigacion'}
+364: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno (EPP-GIC-VIDA),(EPP) Equipo Persecución Penal (GIC)'}
+365: {descrFiscalia: '', nombreAgencia: '(AG18) Agencia Dieciocho,(UL) Unidad de Litigio'}
+366: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos,(ED) Equipo Desjudicialización '}
+367: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-GIC) SACATEPEQUEZ,(E2) Equip…(EPP) Equipo de Persecución Penal (GIC) GUATEMALA'}
+368: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares ,(AG1) Agencia Uno (DESESTIMACION EN SEDE FISCAL,(LIQ) Unidad Liquidadora'}
+369: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG3) Agencia Tres (UNIDAD DE INVESTIGACION Y LITIGIO),(LIQ) Unidad Liquidadora'}
+370: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (DES-GIC),(ED)Equipo de Desjiudicialización (SCC)'}
+371: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos,(UIL) Unidad de Investigación y Litigio'}
+372: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno,(PAL) Personal de Apoyo a Litigio'}
+373: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (MUJER),(UDI) Unidad de Dirección de la Investigación'}
+374: {descrFiscalia: '', nombreAgencia: '(LIQ) Unidad Liquidadora'}
+375: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (CASOS ACTIVOS),(E1) Equipo Uno (…(EPP) Equipo de Persecución Penal (CASOS ACTIVOS)'}
+376: {descrFiscalia: '', nombreAgencia: '(AG3) Agencia Tres,(UDI) Unidad de Dirección de la Investigación'}
+377: {descrFiscalia: '', nombreAgencia: '(EP1) Equipo Uno,(ED) Equipo de Desjudicializacion'}
+378: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (DESESTIMACION EN SEDE FISCAL Y ARCHIVO),(AUX) Auxiliares'}
+379: {descrFiscalia: '', nombreAgencia: '(AG2) Agencia Dos (ADOLESCENTES),(UDI) Unidad de Dirección de la Investigación'}
+380: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG3) Agencia Tres (Investigacion y Litigio),(LIQ) Unidad Liquidadora'}
+381: {descrFiscalia: '', nombreAgencia: '(AG10) Agencia Diez,(UL) Unidad de Litigio'}
+382: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno ( DESESTIMACION EN SEDE FISCAL,(LIQ) Unidad Liquidadora'}
+383: {descrFiscalia: '', nombreAgencia: 'M0004 - FISCALÍA DE ADOLESCENTES EN CONFLICTO CON LA LEY PENAL, GUATEMALA'}
+384: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (DES-SCC),(E2) Equipo Dos (DES-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+385: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (PAL),(PAL) Personal de Apoyo a Litigio,MP321 - FISCALIA MUNICIPAL DE ATESCATEMPA'}
+386: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (DESESTIMACION EN SEDE FISCAL),(LIQ) Unidad Liquidadora'}
+387: {descrFiscalia: '', nombreAgencia: '(MUJER)(GIC) Gestión Integral de Casos'}
+388: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UDI) Unidad de Investigación'}
+389: {descrFiscalia: '', nombreAgencia: '(SCC) Seguimiento y Conclusión de Casos (Casos Act…s),MP104 - FISCALIA MUNICIPAL DE SANTIAGO ATITLAN'}
+390: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E5) Equipo Cinco  (EPP-SCC) COMUNES III,(EPP) Equipo de Persecución Penal (SCC)'}
+391: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno,(PAL) Personal de Apoyo a Litigio'}
+392: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(EPP) Equipo de Persecución Penal,(GIC) Gestion Integral de Casos'}
+393: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(EPP) Equipo de Persecución Penal…Seguimiento y Conclusión de Casos (Casos Activos)'}
+394: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(ED) Equipo de Desjudicialización…Seguimiento y Conclusión de Casos (Casos Activos)'}
+395: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-SCC-MUJER),(EPP) Equipo de Persecución Penal (SCC)'}
+396: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno (COMUNES Y PATRIMONIALES),(UDI) Unidad de Investigacion'}
+397: {descrFiscalia: '', nombreAgencia: '(OFI) Oficiales'}
+398: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos (Mujer),(EPP) Equipo de Persecución Penal'}
+399: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E3) Equipo Tres (VEHICULOS-EPP-GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+400: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno (EPP - SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+401: {descrFiscalia: '', nombreAgencia: '(SCC) Seguimiento y Conclusión de Casos (Casos Act…P014 - FISCALIA MUNICIPAL DE AMATITLAN, GUATEMALA'}
+402: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-GIC) ZACAPA,(E8) Equipo Ocho…)  ZACAPA,(EPP) Equipo de Persecución Penal (GIC)'}
+403: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-GIC-VIDA),(EPP) Equipo Persecución Penal (GIC)'}
+404: {descrFiscalia: '', nombreAgencia: '(UOJ) Unidad de Operadores de Justicia'}
+405: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-GIC),(E2) Equipo Dos (EPP-GI…R MENORES,(EPP) Equipo de Persecución Penal (GIC)'}
+406: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG3) Agencia Tres (INVESTIGACION Y LITIGIO),(AUX) Auxiliares'}
+407: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E6) Equipo Seis (FENOMENOS CRIMINALES),(EPP) Equipo de Persecución Penal (SCC)'}
+408: {descrFiscalia: '', nombreAgencia: '(E3) Equipo Tres (EPP-SCC- PATRIMONIALES Y COMUNES),(EPP) Equipo Persecución Penal (SCC)'}
+409: {descrFiscalia: '', nombreAgencia: 'MP019 - FISCALIA DISTRITAL DE EL PROGRESO'}
+410: {descrFiscalia: '', nombreAgencia: '(EPP) Equipo Persecución Penal (SCC),(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+411: {descrFiscalia: '', nombreAgencia: '(REC) Recepcion'}
+412: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (DES-SCC),(E1) Equipo Uno (DES-SCC) ,(ED)Equipo de Desjiudicialización (SCC)'}
+413: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(UDI) Unidad de Investigación,MP157 - FISCALIA DISTRITAL DE RETALHULEU'}
+414: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (DESESTIMACIÓN EN SEDE FISCAL),(LIQ) Unidad Liquidadora'}
+415: {descrFiscalia: '', nombreAgencia: '(UL) Unidad de Litigio,MP157 - FISCALIA DISTRITAL DE RETALHULEU'}
+416: {descrFiscalia: '', nombreAgencia: '(UDI) Unidad de Dirección de la Investigación'}
+417: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (TRANSITORIOS),(PAL) Personal de Apoyo a Litigio'}
+418: {descrFiscalia: '', nombreAgencia: '(E9) Equipo Nueve,(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+419: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(PAL) Personal de Apoyo a Litigio'}
+420: {descrFiscalia: '', nombreAgencia: '(E8) Equipo Ocho (CASOS JUDICIALIZADOS-EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+421: {descrFiscalia: '', nombreAgencia: 'M0017 - FISCALIA DE SECCION DE DELITOS CONTRA LA VIDA'}
+422: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (GRAVES),(UDI) Unidad de Dirección de la Investigación'}
+423: {descrFiscalia: '', nombreAgencia: '(GIC) Gestión Integral de Casos,MP014 - FISCALIA MUNICIPAL DE AMATITLAN, GUATEMALA'}
+424: {descrFiscalia: '', nombreAgencia: '(ED) Equipo de Desjudicialización '}
+425: {descrFiscalia: '', nombreAgencia: '(ARCH) Archivo'}
+426: {descrFiscalia: '', nombreAgencia: 'AUXILIARES AGENCIA SIETE,AGENCIA No. SIETE (DELITOS CONTRA LA VIDA),ESTRUCTURA ANTIGUA'}
+427: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (CASOS ACTIVOS),(E1) Equipo Uno (…CTIVOS),(LC) Liquidación de Casos (CASOS ACTIVOS)'}
+428: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos,M1131 - FISCALI…CION DE DELITOS DE NARCOACTIVIDAD, QUETZALTENANGO'}
+429: {descrFiscalia: '', nombreAgencia: '(UCT) Unidad de Casos Transitorios,(UDI) Unidad de Investigación'}
+430: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG6) Agencia Seis,(UDI) Unidad de Dirección de la Investigación'}
+431: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (COMUNES),(UDI) Unidad de Dirección de la Investigación'}
+432: {descrFiscalia: '', nombreAgencia: '(E4) Equipo Cuatro,(EPP) Equipo de Persecución Penal'}
+433: {descrFiscalia: '', nombreAgencia: 'M0021 - FISCALIA DE LA VIDA ESCUINTLA'}
+434: {descrFiscalia: '', nombreAgencia: 'MP420 - FISCALIA MUNICIPAL DE ESQUIPULAS, CHIQUIMULA'}
+435: {descrFiscalia: '', nombreAgencia: '(E14) Equipo Catorce (EPP-GIC) CHIMALTENANGO,(EPP) Equipo de Persecución Penal (GIC)'}
+436: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno,(PAL) Personal de Apoyo a Litigio'}
+437: {descrFiscalia: '', nombreAgencia: '(LIQ) Unidad Liquidadora,MP332 - FISCALIA DISTRITAL DE SANTA ROSA'}
+438: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (CASOS ACTIVOS),(E1) Equipo Uno (…stro de la Propiedad-Caso Topacio (CASOS ACTIVOS)'}
+439: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (CASOS ACTIVOS),(E1) Equipo Uno (… Equipo de Estructuras Criminales (CASOS ACTIVOS)'}
+440: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UD) Unidad de Depuracion (VEHICULOS)'}
+441: {descrFiscalia: '', nombreAgencia: 'Archivo 310'}
+442: {descrFiscalia: '', nombreAgencia: '(E5) Equipo Cinco,(GIC) Gestion Integral de Casos'}
+443: {descrFiscalia: '', nombreAgencia: '(UDI) Unidad de Dirección de la Investigación,MP016 - FISCALIA MUNICIPAL DE CHINAUTLA, GUATEMALA'}
+444: {descrFiscalia: '', nombreAgencia: '(AG2) Agencia Dos (AUDIENCIAS DE JUICIO),(UL) Unidad de Litigio'}
+445: {descrFiscalia: '', nombreAgencia: '(UDT) Unidad de Decisión Temprana'}
+446: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(G1) Grupo Uno,(AG5) Agencia Cinco (PROYECTO INL)'}
+447: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno ,(EPP) Equipo de Persecución Penal (MUJER)'}
+448: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (ED-GIC),(ED) Equipo de Desjudicialización (GIC)'}
+449: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E9) Equipo Nueve,(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+450: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno (ED-SCC),(ED) Equipo de Desjudicialización (SCC)'}
+451: {descrFiscalia: '', nombreAgencia: '(E2) Equipo Dos (CASOS ACTIVOS),(EPP) Equipo de Persecución Penal (CASOS ACTIVOS)'}
+452: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno (EPP-SCC-VIDA),(EPP) Equipo Persecución Penal (SCC)'}
+453: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (PAL),(PAL) Personal de Apoyo a L…o,MP275 - FISCALIA MUNICIPAL DE MELCHOR DE MENCOS'}
+454: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (DESESTIMACION EN SEDE JUDICIAL),(LIQ) Unidad Liquidadora'}
+455: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno ,(UDT) Unidad de Decision Temprana (MUJER)'}
+456: {descrFiscalia: '', nombreAgencia: '(E2) Equipo Dos (EPP-SCC- PATRIMONIALES Y COMUNES),(EPP) Equipo Persecución Penal (SCC)'}
+457: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno  (EPP-SCC) D.H.. Y TORTURA,(EPP) Equipo de Persecución Penal (SCC)'}
+458: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,Agencia Puerto Barrios,Equipos Distritales'}
+459: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E3) Equipo Tres,(EPP) Equipo de Persecución Penal (SCC)'}
+460: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E2) Equipo Dos (EPP-SCC) COMUNES,(EPP) Equipo de Persecución Penal (SCC)'}
+461: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos (EPP-SCC)'}
+462: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno ,(ED) Equipo de Desjudicialización'}
+463: {descrFiscalia: '', nombreAgencia: '(AG11) Agencia Once,(UL) Unidad de Litigio'}
+464: {descrFiscalia: '', nombreAgencia: '(AG2) Agencia Dos,(UL) Unidad de Litigio'}
+465: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno (UL),(UL) Unidad de Litigio'}
+466: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+467: {descrFiscalia: '', nombreAgencia: 'MP201 - FISCALIA MUNICIPAL DE JACALTENANGO'}
+468: {descrFiscalia: '', nombreAgencia: '(AG14) Agencia Catorce,(UL) Unidad de Litigio'}
+469: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno (CASOS ACTIVOS),(EPP) Equipo de Persecución Penal (CASOS ACTIVOS)'}
+470: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos (ARMAS-EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+471: {descrFiscalia: '', nombreAgencia: '(AG6) Agencia Seis,(UL) Unidad de Litigio'}
+472: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA NUEVA', nombreAgencia: '(E1) Equipo Uno (EPP - SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+473: {descrFiscalia: 'FISCALÍA DE SECCIÓN CONTRA EL CRIMEN ORGANIZADO, GUATEMALA', nombreAgencia: null}
+474: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares,(E8) Euipo Ocho,(GIC) Gestion Integral de Casos'}
+475: {descrFiscalia: '', nombreAgencia: '(AG15) Agencia Quince,(UL) Unidad de Litigio'}
+476: {descrFiscalia: 'FISCALÍA DE SECCIÓN DE NARCOACTIVIDAD, GUATEMALA', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E4) Equipo Cuatro (EPP-GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+477: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos-GIC,(EPP) Equipo de Persecución Penal-GIC'}
+478: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG5) Agencia Cinco (MENORES),(UDI) Unidad de Dirección de la Investigación'}
+479: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos (ARMAS-EPP-GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+480: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E7) Equipo Siete (UBICACIÓN Y RE…-EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+481: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno,(UL) Unidad de Litigios (MUJER)'}
+482: {descrFiscalia: '', nombreAgencia: '(E2) Equipo Dos (ARMAS-EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+483: {descrFiscalia: '', nombreAgencia: '(AG16) Agenda Dieciseis,(UL) Unidad de Litigio'}
+484: {descrFiscalia: '', nombreAgencia: '(SCC) Seguimiento y Conclusión de Casos (CASOS ACTIVOS)'}
+485: {descrFiscalia: '', nombreAgencia: '(E3) Equipo Tres (EPP-SCC) COMUNES I,(EPP) Equipo de Persecución Penal (SCC)'}
+486: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno (DES-GIC),(ED)Equipo de Desjiudicialización (SCC)'}
+487: {descrFiscalia: 'FISCALÍA CONTRA EXTORSIONES', nombreAgencia: 'Auxiliares Mixco,Agencia Mixco,Equipos Municipales'}
+488: {descrFiscalia: 'FISCALÍA MUNICIPAL DE PALENCIA, GUATEMALA', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+489: {descrFiscalia: 'FISCALÍA MUNICIPAL DE PALENCIA, GUATEMALA', nombreAgencia: null}
+490: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA NUEVA', nombreAgencia: '(AUX) Auxiliares,(E6) Equipo Seis (FENOMENOS CRIMINALES),(EPP) Equipo de Persecución Penal (SCC)'}
+491: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UL) Unidad de Ligitios'}
+492: {descrFiscalia: '', nombreAgencia: '(AG17) Agencia Diecisiete,(UL) Unidad de Litigio'}
+493: {descrFiscalia: '', nombreAgencia: '(AG13) Agencia Trece,(UL) Unidad de Litigio'}
+494: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia uno (COMUNES)'}
+495: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-GIC) IZABAL,(E12) Equipo Doc…C) IZABAL,(EPP) Equipo de Persecución Penal (GIC)'}
+496: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-GIC),(E5) Equipo Cinco (EPP-… CRIMINAL,(EPP) Equipo de Persecución Penal (GIC)'}
+497: {descrFiscalia: '', nombreAgencia: 'Auxiliares Chimaltenango,Agencia Chimaltenango,Equipos Distritales'}
+498: {descrFiscalia: '', nombreAgencia: '(UDI) Unidad de Dirección de la Investigación,MP701 - FISCALIA MUNICIPAL DE CHISEC, ALTA VERAPAZ'}
+499: {descrFiscalia: '', nombreAgencia: '(AG19) Agencia Diecinueve,(UL) Unidad de Litigio'}
+500: {descrFiscalia: '', nombreAgencia: '(E2) Equipo Dos,(EPP) Equipo de Persecuciòn Penal'}
+501: {descrFiscalia: '', nombreAgencia: 'MP279 - FISCALIA MUNICIPAL DE SAYAXCHE'}
+502: {descrFiscalia: 'FISCALÍA DISTRITAL METROPOLITANA', nombreAgencia: '(AG1) Agencia Uno,(UL) Unidad de Litigio'}
+503: {descrFiscalia: 'FISCALÍA MUNICIPAL DE CHINAUTLA, GUATEMALA', nombreAgencia: '(AUX) Auxiliares,(E8) Euipo Ocho,(GIC) Gestion Integral de Casos'}
+504: {descrFiscalia: 'FISCALÍA DISTRITAL DE ZACAPA', nombreAgencia: '(E1) Equipo Uno (GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+505: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(E3) Equipo Tres (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+506: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(E3) Equipo Tres (EPP-GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+507: {descrFiscalia: 'FISCALÍA MUNICIPAL DE SANTA LUCIA COTZUMALGUAPA', nombreAgencia: '(ANA) Analisis'}
+508: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA NUEVA', nombreAgencia: '(PAL) Personal de Apoyo a Litigio'}
+509: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG11) Agencia Once,(UL) Unidad de Litigio'}
+510: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E7) Equipo Siete ,(GIC) Gestion Integral de Casos'}
+511: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno (CASOS ACTIVOS),(EEC) Equipo de Estructuras Criminales (CASOS ACTIVOS)'}
+512: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG7) Agencia Siete,(UDI) Unidad de Direccion de la Investigacion'}
+513: {descrFiscalia: '', nombreAgencia: 'AUXILIARES 5'}
+514: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E5) Equipo Cinco,(GIC) Gestion Integral de Casos'}
+515: {descrFiscalia: '', nombreAgencia: 'MP431 - FISCALIA MUNICIPAL DE CASILLAS, SANTA ROSA'}
+516: {descrFiscalia: '', nombreAgencia: 'Unidad RAC'}
+517: {descrFiscalia: '', nombreAgencia: '(AUX) Auxliares,(AG2) Agencia Dos,(UDI) Unidad de Investigación'}
+518: {descrFiscalia: '', nombreAgencia: '(E7) Equipo Siete (EPP-GIC) SUCHITEPEQUEZ,(EPP) Equipo de Persecución Penal (GIC)'}
+519: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno (PAZ),(UDT) Unidad de Decision Temprana'}
+520: {descrFiscalia: '', nombreAgencia: '(AG6) Agencia Seis (MENORES),(UDI) Unidad de Dirección de la Investigación'}
+521: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG12) Agencia Doce,(UL) Unidad de Litigio'}
+522: {descrFiscalia: '', nombreAgencia: '(E4) Equipo Cuatro (CASOS JUDICIALIZADOS FLAGRANCI…-EPP-GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+523: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UDT) Unidad de la Decisión Temprana'}
+524: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(AGE) AGENCIA CENTRO DE APOYO NIÑEZ'}
+525: {descrFiscalia: '', nombreAgencia: '(E6) Equipo Seis (EPP-SCC) C.T.P.EXTORSIONES,(EPP) Equipo de Persecución Penal (SCC)'}
+526: {descrFiscalia: '', nombreAgencia: '(E2) Equipo Dos (EPP-GIC) QUETZALTENANGO,(EPP) Equipo de Persecución Penal (GIC)'}
+527: {descrFiscalia: '', nombreAgencia: 'Auxiliares Huehuetenango,Agencia de Huehuetenango,Equipos Distritales'}
+528: {descrFiscalia: 'FISCALÍA MUNICIPAL DE SAN JUAN BAUTISTA', nombreAgencia: '(PAL) Personal de Apoyo a Litigio'}
+529: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E8) Equipo Ocho (CASOS JUDICIALI…-EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+530: {descrFiscalia: '', nombreAgencia: 'Agencia San Marcos,Equipos Distritales'}
+531: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E3) Equipo Tres (EPP-SCC-COMUNES Y FENOMENOS),(EPP) Equipo Persecución Penal (SCC)'}
+532: {descrFiscalia: '', nombreAgencia: '(E6) Equipo Seis (EPP-GIC ) SANTA ROSA,(EPP) Equipo de Persecución Penal (GIC)'}
+533: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(UDI) Unidad de Dirección de la I…P701 - FISCALIA MUNICIPAL DE CHISEC, ALTA VERAPAZ'}
+534: {descrFiscalia: '', nombreAgencia: '(E10) Equpo Diez  (EPP-GIC)  ESCUINTLA,(EPP) Equipo de Persecución Penal (GIC)'}
+535: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG6) Agencia Seis (MENORES),(UDI) Unidad de Dirección de la Investigación'}
+536: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E4) Equipo Cuatro,(ED) Equipo de Desjudicialización'}
+537: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno,(UL) Unidad de Litigio,MP157 - FISCALIA DISTRITAL DE RETALHULEU'}
+538: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (CASOS ACTIVOS),(E2) Equipo Dos (…(EPP) Equipo de Persecución Penal (CASOS ACTIVOS)'}
+539: {descrFiscalia: '', nombreAgencia: '(E3) Equipo Tres (EPP-SCC) DISCRIMINACION,(EPP) Equipo de Persecución Penal (SCC)'}
+540: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (PAL),(PAL) Personal de Apoyo a L…- FISCALIA MUNICIPAL DE SANTA LUCIA COTZUMALGUAPA'}
+541: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG12) Agencia Doce,(UDI) Unidad de Dirección de la Investigación'}
+542: {descrFiscalia: '', nombreAgencia: 'MP239 - FISCALIA MUNICIPAL DE JOYABAJ'}
+543: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno,MP700 - FISCALIA DE SECCION DE DELITOS CONTRA EL AMBIENTE IZABAL'}
+544: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (TRANSITORIOS),(TRANS) Unidad Transitorios'}
+545: {descrFiscalia: '', nombreAgencia: '(AG3) Agencia Tres (FLAGRANCIA),(UDI) Unidad de Direccion de la Investigacion'}
+546: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E4) Equipo Cuatro (EPP-GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+547: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG10) Agencia Diez,(UDI) Unidad de Dirección de la Investigación'}
+548: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG5) Agencia Cinco,(UL) Unidad de Litigio'}
+549: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG5) Agencia Cinco,(UDI) Unidad de Direccion de la Investigacion'}
+550: {descrFiscalia: 'FISCALÍA DISTRITAL DE ESCUINTLA', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UDT) Unidad de Decision Temprana'}
+551: {descrFiscalia: 'FISCALÍA MUNICIPAL', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (COMUNES),(UDI) Unidad de Dirección de la Investigación'}
+552: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA NUEVA', nombreAgencia: '(E3) Equipo Tres,(EPP) Equipo de Persecución Penal'}
+553: {descrFiscalia: 'FISCALÍA DISTRITAL DE JUTIAPA', nombreAgencia: '(EPP) Equipo de Persecución Penal'}
+554: {descrFiscalia: 'FISCALÍA CONTRA EXTORSIONES', nombreAgencia: 'Auxiliares Jutiapa,Agencia Jutiapa,Equipos Distritales'}
+555: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E6) Equipo Seis (EPP-GIC ) JALAPA,(EPP) Equipo de Persecución Penal (GIC)'}
+556: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno (ED-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+557: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(LIQ) Liquidadora Mixco'}
+558: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno-GIC,(EPP) Equipo de Persecución Penal-GIC'}
+559: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,M1297 - FISCALIA DE DELITOS DE NARCOACTIVIDAD, CHIQUIMULA'}
+560: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (FLAGRANCIA),(UDI) Unidad de Direccion de la Investigacion'}
+561: {descrFiscalia: '', nombreAgencia: '(E2) Equipo Dos-GIC,(EPP) Equipo de Persecución Penal-GIC'}
+562: {descrFiscalia: '', nombreAgencia: '(E3) Equipo Tres (EPP-GIC-COMUNES Y  FLAGRANCIAS),(EPP) Equipo de Persecución Penal (GIC)'}
+563: {descrFiscalia: 'FISCALÍA DISTRITAL DE ESCUINTLA', nombreAgencia: '(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+564: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-GIC) QUETZALTENANGO,(E2) Equ…ALTENANGO,(EPP) Equipo de Persecución Penal (GIC)'}
+565: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-S…Y COMUNES,(EPP) Equipo de Persecución Penal (SCC)'}
+566: {descrFiscalia: '', nombreAgencia: 'Auxiliares Jutiapa,Agencia Jutiapa,Equipos Distritales'}
+567: {descrFiscalia: '', nombreAgencia: 'MP440 - FISCALIA MUNICIPAL DE VILLA CANALES, GUATEMALA'}
+568: {descrFiscalia: 'FISCALÍA DISTRITAL DE JALAPA', nombreAgencia: '(AUX) Auxiliares,(EP1) Equipo Uno,(ED) Equipo de Desjudicializacion'}
+569: {descrFiscalia: 'FISCALÍA DISTRITAL DE JALAPA', nombreAgencia: '(EPP) Equipo de Persecución Penal (SCC)'}
+570: {descrFiscalia: '', nombreAgencia: '(EP7) Equipo Siete,(EPP) Equipo de Persecución Penal'}
+571: {descrFiscalia: '', nombreAgencia: '(ARCH) ARCHIVO'}
+572: {descrFiscalia: 'FISCALÍA MUNICIPAL DE MIXCO', nombreAgencia: 'Auxiliares Mixco,Agencia Mixco,Equipos Municipales'}
+573: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno,(UDI) Unidad de Dirección de la Investigación'}
+574: {descrFiscalia: 'FISCALÍA DISTRITAL DE RETALHULEU', nombreAgencia: '(EPP) Equipo Persecución Penal (SCC),(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+575: {descrFiscalia: 'FISCALÍA CONTRA EXTORSIONES', nombreAgencia: '(AUX) Auxiliares,(E5) Equipo Cinco,(GIC) Gestion Integral de Casos'}
+576: {descrFiscalia: 'FISCALÍA MUNICIPAL DE PUERTO DE SAN JOSE', nombreAgencia: '(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+577: {descrFiscalia: 'FISCALÍA DISTRITAL DE SACATEPEQUEZ', nombreAgencia: '(AG5) Agencia Cinco (MENORES),(UDI) Unidad de Dirección de la Investigación'}
+578: {descrFiscalia: 'FISCALÍA MUNICIPAL DE SANTA CATARINA PINULA', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+579: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA NUEVA', nombreAgencia: '(AUX) Auxiliares (DES-SCC),(E1) Equipo Uno (DES-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+580: {descrFiscalia: 'FISCALÍA MUNICIPAL DE MIXCO', nombreAgencia: '(E2) Equipo Dos (EPP-GIC-COMUNES),(EPP) Equipo Persecución Penal (GIC)'}
+581: {descrFiscalia: 'FISCALÍA MUNICIPAL DE SANTA CATARINA PINULA', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UDT) Unidad de Decisión Temprana'}
+582: {descrFiscalia: '', nombreAgencia: '(E12) Equipo Doce (EPP-GIC) IZABAL,(EPP) Equipo de Persecución Penal (GIC)'}
+583: {descrFiscalia: 'FISCALÍA DISTRITAL DE IZABAL', nombreAgencia: '(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+584: {descrFiscalia: '', nombreAgencia: '(E3)  Equipo Tres,(GIC) Gestion Integral de Casos'}
+585: {descrFiscalia: 'FISCALÍA MUNICIPAL DE MIXCO', nombreAgencia: '(UL) Unidad de Litigio'}
+586: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno (CASOS ACTIVOS),(ED) Equipo de Desjudicialización  (CASOS ACTIVOS)'}
+587: {descrFiscalia: '', nombreAgencia: 'MP270 - FISCALIA DISTRITAL DE PETEN'}
+588: {descrFiscalia: '', nombreAgencia: 'MP275 - FISCALIA MUNICIPAL DE MELCHOR DE MENCOS'}
+589: {descrFiscalia: 'FISCALÍA MUNICIPAL DE ASUNCION MITA, JUTIAPA', nombreAgencia: '(SCC) Seguimiento y Conclusión de Casos (Casos Activos),MP316 - FISCALIA MUNICIPAL DE ASUNCION MITA'}
+590: {descrFiscalia: 'FISCALÍA DISTRITAL DE EL PROGRESO', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UDI) Unidad de Dirección de la Investigación'}
+591: {descrFiscalia: 'FISCALÍA DISTRITAL DE EL PROGRESO', nombreAgencia: '(AG1) Agencia Uno,(UL) Unidad de Litigio'}
+592: {descrFiscalia: 'FISCALÍA DISTRITAL DE SACATEPEQUEZ', nombreAgencia: '(EPP) Equipo de Persecución Penal'}
+593: {descrFiscalia: '', nombreAgencia: '(E4) Equipo Cuatro (VEHICULOS 2-EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+594: {descrFiscalia: 'FISCALÍA DISTRITAL', nombreAgencia: '(E1) Equipo Uno (ED-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+595: {descrFiscalia: '', nombreAgencia: '(E3) Equipo Tres,(EPP) Equipo de Persecución Penal (SCC)'}
+596: {descrFiscalia: '', nombreAgencia: '(UDI) Unidad de Direccion de la Investigacion (MUJER)'}
+597: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA NUEVA', nombreAgencia: '(E5) Equipo Cinco  (EPP-SCC) COMUNES III,(EPP) Equipo de Persecución Penal (SCC)'}
+598: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno  (EPP-SCC) PATRIMONIALES Y COMUNES,(EPP) Equipo de Persecución Penal (SCC)'}
+599: {descrFiscalia: '', nombreAgencia: '(E5) Equipo Cinco (EPP-GIC) D. NUEVAS FENOMENO CRIMINAL,(EPP) Equipo de Persecución Penal (GIC)'}
+600: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG6) Agencia Seis,(UDI) Unidad de Direccion de la Investigacion'}
+601: {descrFiscalia: 'FISCALÍA DISTRITAL METROPOLITANA', nombreAgencia: '(E8) Equipo Ocho (CASOS JUDICIALIZADOS-EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+602: {descrFiscalia: 'FISCALÍA DISTRITAL DE SACATEPEQUEZ', nombreAgencia: null}
+603: {descrFiscalia: 'FISCALÍA DE ADOLESCENTES EN CONFLICTO CON LA LEY PENAL, GUATEMALA', nombreAgencia: null}
+604: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno,M1297 - FISCALIA DE DELITOS DE NARCOACTIVIDAD, CHIQUIMULA'}
+605: {descrFiscalia: 'FISCALÍA DISTRITAL, SAN BENITO, PETEN', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno,(ED) Equipo de Desjudicialización'}
+606: {descrFiscalia: '', nombreAgencia: '(AG2) Agencia Dos (DESESTIMACION EN SEDE JUDICIAL),(AUX) Auxiliares'}
+607: {descrFiscalia: '', nombreAgencia: '(AG9) Agencia Nueve,(EPP) Equipo de Persecución Penal'}
+608: {descrFiscalia: '', nombreAgencia: '(E4) Equipo Cuatro (DELITOS  COMUNES II),(EPP) Equipo de Persecución Penal (SCC)'}
+609: {descrFiscalia: '', nombreAgencia: 'MP315 - FISCALIA DISTRITAL DE JUTIAPA'}
+610: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno,(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+611: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno-GIC,(ED) Equipo de Desjudicialización-GIC'}
+612: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG10) Agencia Diez,(PAL) Personal de Apoyo a Litigio'}
+613: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno (UDI),(UDT) Unidad de Decisión Temprana'}
+614: {descrFiscalia: 'FISCALÍA ESPECIAL TURNO MIXCO', nombreAgencia: null}
+615: {descrFiscalia: 'FISCALÍA DISTRITAL DE ESCUINTLA', nombreAgencia: null}
+616: {descrFiscalia: 'FISCALIA MUNICIPAL DE FRAIJANES', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+617: {descrFiscalia: 'FISCALÍA DE ADOLESCENTES EN CONFLICTO CON LA LEY PENAL, GUATEMALA', nombreAgencia: '(AUX) Auxiliares,(PAL) Personal de Apoyo a Litigio…ESCENTES EN CONFLICTO CON LA LEY PENAL, GUATEMALA'}
+618: {descrFiscalia: '', nombreAgencia: 'MP281 - FISCALIA MUNICIPAL DE POPTUN PETEN'}
+619: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno,MP181 - FISCALIA MUNICIPAL DE TECUN UMAN'}
+620: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA CANALES, GUATEMALA', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos (EPP-GIC-GRAVES)'}
+621: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (CASOS ACTIVOS),(E1) Equipo Uno (…) Equipo Contra Robo de Celulares (CASOS ACTIVOS)'}
+622: {descrFiscalia: 'FISCALÍA DE TURNO OJ', nombreAgencia: '(E1) Equipo Uno-GIC,(EPP) Equipo de Persecución Penal-GIC'}
+623: {descrFiscalia: '', nombreAgencia: 'Basurero'}
+624: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos,(EPP) Equipo de Persecuciòn Penal'}
+625: {descrFiscalia: '', nombreAgencia: '(UDI) Uniddad de Direccion de la Investigacion'}
+626: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA NUEVA', nombreAgencia: '(AG1) Agencia Uno,(UL) Unidad de Litigio'}
+627: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno (MUJER),(UL) Unidad de Litigio (MUJER)'}
+628: {descrFiscalia: 'FISCALÍA DISTRITAL DE SANTA ROSA', nombreAgencia: '(ED) Equipo de Desjudicialización'}
+629: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno (DES-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+630: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (PAL),(PAL) Personal de Apoyo a L… FISCALIA DE SECCION DE NARCOACTIVIDAD, GUATEMALA'}
+631: {descrFiscalia: 'FISCALÍA MUNICIPAL DE MIXCO', nombreAgencia: null}
+632: {descrFiscalia: '', nombreAgencia: '(E6) Equipo Seis (EPP-GIC ) JALAPA,(EPP) Equipo de Persecución Penal (GIC)'}
+633: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E3) Equipo Tres (VEHICULOS 1-EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+634: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E8) Equipo Ocho (EPP-GIC) QUETZALTENANGO,(EPP) Equipo de Persecución Penal (GIC)'}
+635: {descrFiscalia: '', nombreAgencia: 'MP018 - FISCALIA MUNICIPAL DE PALENCIA, GUATEMALA'}
+636: {descrFiscalia: '', nombreAgencia: '(AG2) Agencia Dos,M1131 - FISCALIA DE SECCION DE DELITOS DE NARCOACTIVIDAD, QUETZALTENANGO'}
+637: {descrFiscalia: '', nombreAgencia: '(E6) Equipo Seis,(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+638: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-S…Y TORTURA,(EPP) Equipo de Persecución Penal (SCC)'}
+639: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-GIC),(E3) Equipo Tres (EPP-GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+640: {descrFiscalia: 'FISCALÍA DISTRITAL DE QUETZALTENANGO', nombreAgencia: '(AUX) Auxiliares,(E3) Equipo Tres,(EPP) Equipo de Persecución Penal'}
+641: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno  (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+642: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (MENORES),(MEN) Unidad De Menores,MP255 - FISCALIA DISTRITAL DE ALTA VERAPAZ'}
+643: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (Delitos Sexual…P701 - FISCALIA MUNICIPAL DE CHISEC, ALTA VERAPAZ'}
+644: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno,(EEC) Equipo de Estructuras Criminales-GIC'}
+645: {descrFiscalia: 'FISCALÍA DE SECCIÓN DE NARCOACTIVIDAD, GUATEMALA', nombreAgencia: '(PAL) Personal de Apoyo a Litigio'}
+646: {descrFiscalia: 'FISCALÍA DISTRITAL DE CHIQUIMULA', nombreAgencia: '(EPP) Equipo de Persecución Penal'}
+647: {descrFiscalia: '', nombreAgencia: '(E2) Equipo Dos (ED-GIC),(ED) Equipo de Desjudicialización (GIC)'}
+648: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-GIC) PETEN,(E4) Equipo Cuatr…C ) PETEN,(EPP) Equipo de Persecución Penal (GIC)'}
+649: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-GIC)'}
+650: {descrFiscalia: '', nombreAgencia: '(E3) Equipo Tres (VEHICULOS 1-EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+651: {descrFiscalia: '', nombreAgencia: '(EPP) Equipo de Persecución Penal (GIC)'}
+652: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (COMUNES),(UDI) Unidad de Investigación'}
+653: {descrFiscalia: 'AGENCIA FISCAL PALÍN, ESCUINTLA', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E2) Equipo Dos (EPP-SCC),(EPP) Equipo de Persecución Penal (SCC)'}
+654: {descrFiscalia: '', nombreAgencia: '(E7) Equipo Siete (RECUPERACION DE CASOS),(EPP) Equipo de Persecución Penal (SCC)'}
+655: {descrFiscalia: 'FISCALÍA DE ADOLESCENTES EN CONFLICTO CON LA LEY PENAL, GUATEMALA', nombreAgencia: '(AG1) Agencia Uno,(UL) Unidad de Litigio'}
+656: {descrFiscalia: 'FISCALÍA DISTRITAL DE ZACAPA', nombreAgencia: null}
+657: {descrFiscalia: 'FISCALÍA DISTRITAL DE CHIQUIMULA', nombreAgencia: '(AUX) Auxiliares,(EP1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+658: {descrFiscalia: '', nombreAgencia: '(E2) Equipo Dos,(EPP) Equipo de Persecución Penal (SCC)'}
+659: {descrFiscalia: '', nombreAgencia: '(E7) Equipo Siete (EPP-GIC) SAN MARCOS,(EPP) Equipo de Persecución Penal (GIC)'}
+660: {descrFiscalia: '', nombreAgencia: 'FISCALIA ESPECIAL'}
+661: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,MP245 - FISCALIA MUNICIPAL DE PLAYA GRANDE, IXCAN, QUICHE'}
+662: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(EP2) Equipo Dos,(EPP) Equipo de Persecución Penal'}
+663: {descrFiscalia: '', nombreAgencia: '(AG10) Agencia Diez (CELULARES),(UDI) Unidad de Direccion de la Investigacion'}
+664: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos,(UDT) Unidad Desicion Temprana'}
+665: {descrFiscalia: '', nombreAgencia: '(GIC) Gestion Integral de Casos'}
+666: {descrFiscalia: '', nombreAgencia: 'DESESTIMACIÓN 310 C.P.P'}
+667: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos,(DAJ) Unidad Desestimación con Autorización Judicial'}
+668: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(PAL) Personal de Apoyo a Litigio…P226 - FISCALIA DISTRITAL DE SANTA CRUZ EL QUICHE'}
+669: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (PATRIMONIALES),(UDI) Unidad de Dirección de la Investigación'}
+670: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (PAL),(PAL) Personal de Apoyo a Litigio,MP059 - FISCALIA DISTRITAL DE ESCUINTLA'}
+671: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG9) Agencia Nueve,(UL) Unidad de Litigio'}
+672: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E5) Equipo Cinco (Violencia psic…a, liquidación),(EPP) Equipo de Persecución Penal'}
+673: {descrFiscalia: '', nombreAgencia: 'Unidad Contra Secuestros AGENCIA 2'}
+674: {descrFiscalia: 'FISCALÍA MUNICIPAL DE LA LIBERTAD PETEN', nombreAgencia: 'MP274 - FISCALIA MUNICIPAL DE LA LIBERTAD PETEN'}
+675: {descrFiscalia: 'FISCALÍA DISTRITAL, SAN BENITO, PETEN', nombreAgencia: '(EPP) Equipo de Persecución Penal'}
+676: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG3) Agencia Tres (FLAGRANCIA),(UDI) Unidad de Direccion de la Investigacion'}
+677: {descrFiscalia: 'FISCALÍA DISTRITAL DE SACATEPEQUEZ', nombreAgencia: '(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+678: {descrFiscalia: 'FISCALÍA DE MENORES O DE LA NIÑEZ, GUATEMALA', nombreAgencia: '(AUX) Auxiliares,(PAL) Personal de Apoyo a Litigio…ESCENTES EN CONFLICTO CON LA LEY PENAL, GUATEMALA'}
+679: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG2) Agencia Dos (DELITOS SEXUALES),(UDI) Unidad de Investigacion (MUJER)'}
+680: {descrFiscalia: '', nombreAgencia: '(E4) Equipo Cuatro (EPP-GIC ) PETEN,(EPP) Equipo de Persecución Penal (GIC)'}
+681: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-GIC) SANTA CRUZ EL QUICHE,(E…C) QUICHE,(EPP) Equipo de Persecución Penal (GIC)'}
+682: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (COMUNES),(UDI) Unidad de Direccion de Investigacion'}
+683: {descrFiscalia: 'FISCALÍA DISTRITAL DE SOLOLA', nombreAgencia: null}
+684: {descrFiscalia: '', nombreAgencia: '(E8) Equipo Ocho (EPP-GIC)  ZACAPA,(EPP) Equipo de Persecución Penal (GIC)'}
+685: {descrFiscalia: 'FISCALÍA DISTRITAL DE SANTA ROSA', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos,(EPP) Equipo de Persecución Penal'}
+686: {descrFiscalia: 'FISCALÍA DISTRITAL DE SANTA ROSA', nombreAgencia: null}
+687: {descrFiscalia: 'FISCALÍA DISTRITAL METROPOLITANA', nombreAgencia: '(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+688: {descrFiscalia: 'FISCALÍA DE LA MUJER Y NIÑEZ VICTIMA', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos,(EPP) Equipo de Persecución Penal'}
+689: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UDT) Unidad de Decision Temprana'}
+690: {descrFiscalia: '', nombreAgencia: '(E11) EquipoOnce ( EPP-GIC) QUICHE,(EPP) Equipo de Persecución Penal (GIC)'}
+691: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-GIC) CHIMALTENANGO,(E14) Equ…ALTENANGO,(EPP) Equipo de Persecución Penal (GIC)'}
+692: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares,(E3) Equipo Tres,(EPP) Equipo de Persecución Penal'}
+693: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares (EPP-GIC),(E1) Equipo Uno (EPP-GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+694: {descrFiscalia: '', nombreAgencia: 'Auxiliares San Marcos,Agencia San Marcos,Equipos Distritales'}
+695: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos ,(EPP) Equipo de Persecución Penal'}
+696: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E3)  Equipo Tres,(GIC) Gestion Integral de Casos'}
+697: {descrFiscalia: '', nombreAgencia: '(E5) Equipo Cinco ( EPP-GIC ) JUTIAPA'}
+698: {descrFiscalia: '', nombreAgencia: 'MP269 - AGENCIA FISCAL EN EL MUNICIPIO DE FRAY BARTOLOMÉ DE LAS CASAS, ALTA VERAPAZ'}
+699: {descrFiscalia: '', nombreAgencia: 'FISCALIA MUNICIPAL DE COATEPEQUE'}
+700: {descrFiscalia: 'FISCALÍA DISTRITAL DE SUCHITEPEQUEZ', nombreAgencia: '(EPP) Equipo de Persecución Penal (GIC)'}
+701: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares,(E4) Equipo Cuatro,(EPP) Equipo de Persecución Penal'}
+702: {descrFiscalia: 'FISCALÍA MUNICIPAL DE SAN JUAN SACATEPEQUEZ', nombreAgencia: null}
+703: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA NUEVA', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-SCC)'}
+704: {descrFiscalia: 'FISCALÍA DISTRITAL DE ALTA VERAPAZ', nombreAgencia: '(E1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+705: {descrFiscalia: 'FISCALÍA DISTRITAL DE ALTA VERAPAZ', nombreAgencia: '(E2) Equipo Dos,(PAL) Personal de Apoyo a Litigio'}
+706: {descrFiscalia: 'FISCALÍA DISTRITAL METROPOLITANA', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UDT) Unidad de Decision Temprana'}
+707: {descrFiscalia: 'FISCALÍA DISTRITAL DE JUTIAPA', nombreAgencia: '(AUX) AUXILIARES,(E1) EQUIPO UNO ,(ED) Equipo de Desjudicialización '}
+708: {descrFiscalia: '', nombreAgencia: 'M2297 - FISCALIA DE SECCION CONTRA EL CRIMEN ORGANIZADO, JALAPA'}
+709: {descrFiscalia: '', nombreAgencia: 'MP137 - FISCALIA DISTRITAL DE SUCHITEPEQUEZ'}
+710: {descrFiscalia: '', nombreAgencia: 'Agencia 1,(UL) Unidad de Litigio,MP450 - FISCALIA MUNICIPAL DE PUERTO DE SAN JOSE'}
+711: {descrFiscalia: 'FISCALÍA MUNICIPAL DE AMATITLAN, GUATEMALA', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (EPP-GIC),(EPP) Equipo Persecución Penal (GIC)'}
+712: {descrFiscalia: '', nombreAgencia: '(UDI) Unidad de Dirección de la Investigación,MP255 - FISCALIA DISTRITAL DE ALTA VERAPAZ'}
+713: {descrFiscalia: '', nombreAgencia: '(AG3) Agencia Tres - Mujer -,(UDI) Unidad de Dirección de la Investigación'}
+714: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E2) Equipo Dos (EPP-SC…IOLENCIAS,(EPP) Equipo de Persecución Penal (SCC)'}
+715: {descrFiscalia: '', nombreAgencia: 'MP059 - FISCALIA DISTRITAL DE ESCUINTLA'}
+716: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG4) Agencia Cuatro (MALTRATO INFANTIL),(EPP) Equipo de Persecución Penal'}
+717: {descrFiscalia: 'FISCALÍA MUNICIPAL DE POPTUN PETEN', nombreAgencia: null}
+718: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares,(E5) Equipo Cinco,(EPP) Equipo de Persecución Penal'}
+719: {descrFiscalia: 'FISCALÍA DISTRITAL DE JUTIAPA', nombreAgencia: null}
+720: {descrFiscalia: 'FISCALÍA DISTRITAL DE SACATEPEQUEZ', nombreAgencia: '(AUX) Auxiliares,(E3) Equipo Tres (PATRIMONIALES),(EPP) Equipo de Persecución Penal'}
+721: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG5) Agencia Cinco (MUJER),MP315 - FISCALIA DISTRITAL DE JUTIAPA'}
+722: {descrFiscalia: 'FISCALÍA DISTRITAL DE CHIMALTENANGO', nombreAgencia: null}
+723: {descrFiscalia: 'FISCALÍA MUNICIPAL DE AMATITLAN, GUATEMALA', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos (EPP - VIDA II),(EPP) Equipo de Persecución Penal (SCC)'}
+724: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-SCC),(E1) Equipo Uno  (EPP-SCC)'}
+725: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E7) Equipo Siete (EPP-GIC) SAN MARCOS,(EPP) Equipo de Persecución Penal (GIC)'}
+726: {descrFiscalia: 'FISCALÍA MUNICIPAL DE SANTA CATARINA PINULA', nombreAgencia: null}
+727: {descrFiscalia: 'FISCALÍA DISTRITAL DE ESCUINTLA', nombreAgencia: '(E3) Equipo Tres (EPP-GIC) ESTRUCTURA CRIMINAL,(EPP) Equipo de Persecución Penal (GIC)'}
+728: {descrFiscalia: 'FISCALÍA MUNICIPAL DE CASILLAS, SANTA ROSA', nombreAgencia: null}
+729: {descrFiscalia: 'FISCALÍA DISTRITAL DE JUTIAPA', nombreAgencia: '(EPP) Equipo de Persecusión Penal,(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+730: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares (EPP-GIC),(E3) Equipo Tres (EPP-GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+731: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(E4) Equipo Cuatro (EPP-GIC),(EPP) Equipo de Persecución Penal (GIC)'}
+732: {descrFiscalia: 'FISCALÍA DISTRITAL DE SAN MARCOS', nombreAgencia: null}
+733: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno,(EEC) Equipo de Estructuras Criminales-GIC'}
+734: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares (EPP-GIC) SUCHITEPEQUEZ,(E7) Equi…ITEPEQUEZ,(EPP) Equipo de Persecución Penal (GIC)'}
+735: {descrFiscalia: '', nombreAgencia: 'MP450 - FISCALIA MUNICIPAL DE PUERTO DE SAN JOSE'}
+736: {descrFiscalia: 'AGENCIA FISCAL MUNICIPAL, SANTIAGO SACATEPEQUEZ', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno,(UDT) Unidad de Decisión Temprana'}
+737: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E2) Equipo Dos,(EPP) Equipo de Persecución Penal (SCC)'}
+738: {descrFiscalia: 'FISCALÍA MUNICIPAL DE CHINAUTLA, GUATEMALA', nombreAgencia: null}
+739: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(MEN) Agencia Fiscal de Adolescentes,MP297 - FISCALIA DISTRITAL DE CHIQUIMULA'}
+740: {descrFiscalia: '', nombreAgencia: '(E3) Equipo Tres (EPP-SCC) ,(EPP) Equipo de Persecución Penal (SCC)'}
+741: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA NUEVA', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno (ED),(ED)Equipo de Desjiudicialización (SCC)'}
+742: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA NUEVA', nombreAgencia: '(AUX) Auxiliares,(E3) Equipo Tres (EPP-SCC) COMUNES I,(EPP) Equipo de Persecución Penal (SCC)'}
+743: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA NUEVA', nombreAgencia: '(AUX) Auxiliares,(AG3) Agencia Tres,(UDI) Unidad de Dirección de la Investigación'}
+744: {descrFiscalia: '', nombreAgencia: '(EPP) Equipo de Persecución Penal (Casos Nuevos)'}
+745: {descrFiscalia: 'FISCALÍA MUNICIPAL DE MIXCO', nombreAgencia: '(AG1) Agencia Uno,(UL) Unidad de Litigio'}
+746: {descrFiscalia: 'FISCALÍA DISTRITAL DE CHIQUIMULA', nombreAgencia: '(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+747: {descrFiscalia: 'FISCALÍA DE DELITOS CONTRA LA VIDA E INTEGRIDAD DE LAS PERSONAS', nombreAgencia: '(AUX) Auxiliares (PAL),(PAL) Personal de Apoyo a Litigio,FISCALIA DE SECCION'}
+748: {descrFiscalia: 'FISCALÍA MUNICIPAL DE MIXCO', nombreAgencia: '(AUX) Auxiliares,(E3) Equipo Tres (EPP-SCC-COMUNES Y FENOMENOS),(EPP) Equipo Persecución Penal (SCC)'}
+749: {descrFiscalia: 'FISCALÍA DISTRITAL, SAN BENITO, PETEN', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno,(EPP) Equipo de Persecución Penal'}
+750: {descrFiscalia: '', nombreAgencia: '(E1) Equipo Uno (ED),(ED)Equipo de Desjiudicialización (SCC)'}
+751: {descrFiscalia: 'FISCALÍA MUNICIPAL DE AMATITLAN, GUATEMALA', nombreAgencia: '(AUX) Auxiliares (DES-SCC),(E1) Equipo Uno (DES-SCC),(ED)Equipo de Desjiudicialización (SCC)'}
+752: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(AG1) Agencia Uno (PAZ),(UDT) Unidad de Decision Temprana'}
+753: {descrFiscalia: '', nombreAgencia: '(AG1) Agencia Uno,M1131 - FISCALIA DE SECCION DE DELITOS DE NARCOACTIVIDAD, QUETZALTENANGO'}
+754: {descrFiscalia: 'FISCALÍA DISTRITAL METROPOLITANA', nombreAgencia: '(AUX) Auxiliares (CASOS ACTIVOS),(E1) Equipo Uno (…(EPP) Equipo de Persecución Penal (CASOS ACTIVOS)'}
+755: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno-GIC,(EPP) Equipo de Persecución Penal-GIC'}
+756: {descrFiscalia: '', nombreAgencia: '(AUX) Auxiliares,(PAL) Personal de Apoyo a Litigio…ESCENTES EN CONFLICTO CON LA LEY PENAL, GUATEMALA'}
+757: {descrFiscalia: 'FISCALÍA DISTRITAL DE JALAPA', nombreAgencia: '(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+758: {descrFiscalia: 'FISCALÍA DISTRITAL DE ESCUINTLA', nombreAgencia: '(AUX) Auxiliares (PAL),(PAL) Personal de Apoyo a Litigio,MP059 - FISCALIA DISTRITAL DE ESCUINTLA'}
+759: {descrFiscalia: 'FISCALÍA DISTRITAL DE SACATEPEQUEZ', nombreAgencia: '(AUX) Auxiliares,(E4) Equipo Cuatro (COMUNES),(EPP) Equipo de Persecución Penal'}
+760: {descrFiscalia: 'FISCALÍA MUNICIPAL DE NEBAJ QUICHE', nombreAgencia: '(SCC) Seguimiento y Conclusión de Casos (Casos Activos)'}
+761: {descrFiscalia: 'FISCALÍA DISTRITAL METROPOLITANA', nombreAgencia: '(E2) Equipo Dos-GIC,(EPP) Equipo de Persecución Penal-GIC'}
+762: {descrFiscalia: 'FISCALÍA MUNICIPAL DE SANTA CATARINA PINULA', nombreAgencia: '(AG3) Agencia Tres (MUJER),(UDI) Unidad de Dirección de la Investigación'}
+763: {descrFiscalia: 'FISCALÍA MUNICIPAL DE ASUNCION MITA, JUTIAPA', nombreAgencia: '(AG1) Agencia Uno,(UDT) Unidad de Decisión Temprana'}
+764: {descrFiscalia: 'FISCALÍA DISTRITAL METROPOLITANA', nombreAgencia: '(EPP) Equipo de Persecución Penal (GIC),(GIC) Gestión Integral de Casos'}
+765: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA CANALES, GUATEMALA', nombreAgencia: '(AUX) Auxiliares,(E3) Equipo Tres (EPP-GIC-COMUNES…GRANCIAS),(EPP) Equipo de Persecución Penal (GIC)'}
+766: {descrFiscalia: 'FISCALÍA MUNICIPAL', nombreAgencia: '(E10) Equpo Diez  (EPP-GIC)  ESCUINTLA,(EPP) Equipo de Persecución Penal (GIC)'}
+767: {descrFiscalia: 'FISCALÍA MUNICIPAL DE MIXCO', nombreAgencia: '(E3) Equipo Tres (EPP-SCC-COMUNES Y FENOMENOS),(EPP) Equipo Persecución Penal (SCC)'}
+768: {descrFiscalia: 'FISCALÍA MUNICIPAL DE VILLA NUEVA', nombreAgencia: '(E2) Equipo Dos (EPP - VIDA II),(EPP) Equipo de Persecución Penal (SCC)'}
+769: {descrFiscalia: 'FISCALÍA DISTRITAL METROPOLITANA', nombreAgencia: '(AUX) Auxiliares,(E1) Equipo Uno-GIC,(EPP) Equipo de Persecución Penal-GIC'}

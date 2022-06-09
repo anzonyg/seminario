@@ -91,7 +91,6 @@
           <th scope="col">Referencia MP</th>
           <th scope="col">Correlativo</th>
           <th scope="col">Indicio</th>
-          <th scope="col">Dictamen</th>
         </tr>
       </thead>
       <tbody>
@@ -101,7 +100,6 @@
           <td v-text="tabla.referencia"></td>
           <td v-text="tabla.correlativo"></td>
           <td v-text="tabla.indicio"></td>
-          <td v-text="tabla.dictamen"></td>
         </tr>
       </tbody>
     </table>
