@@ -471,7 +471,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _nod
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("/*module.exports = {\r\n    url: 'http://dacservices2:9080/tasks',\r\n    url2: 'http://dacservices2:9080'\r\n}*/\nmodule.exports = {\n  url: 'http://localhost:9080/tasks',\n  url2: 'http://localhost:9080'\n};\n\n//# sourceURL=webpack:///./src/DIR.js?");
+eval("module.exports = {\n  url: 'http://dacservices2:9080/tasks',\n  url2: 'http://dacservices2:9080'\n};\n/*module.exports = {\r\n    url: 'http://localhost:9080/tasks',\r\n    url2: 'http://localhost:9080'\r\n}*/\n\n//# sourceURL=webpack:///./src/DIR.js?");
 
 /***/ }),
 
