@@ -293,6 +293,12 @@ export default {
         { fiscalia: "FISCALIA CONTRA EXTORSIONES	, 	QUETZALTENANGO" },
         { fiscalia: "FISCALIA CONTRA EXTORSIONES	, 	SAN MARCOS" },
         { fiscalia: "FISCALIA CONTRA EXTORSIONES	, 	SUCHITEPEQUEZ" },
+        { fiscalia: "FISCALIA CONTRA EXTORSIONES	, 	COATEPEQUE" },
+        { fiscalia: "FISCALIA CONTRA EXTORSIONES	, 	ESCUINTLA" },
+        { fiscalia: "FISCALIA CONTRA EXTORSIONES	, 	IZABAL" },
+        { fiscalia: "FISCALIA CONTRA EXTORSIONES	, 	VILLA NUEVA" },
+        { fiscalia: "FISCALIA CONTRA EXTORSIONES	, 	MIXCO" },
+        { fiscalia: "FISCALIA CONTRA EXTORSIONES	, 	SEDE CENTRAL" },
         { fiscalia: "FISCALIA CONTRA FEMICIDIO" },
         { fiscalia: "FISCALIA DE ACTIVISTAS DERECHOS HUMANOS" },
         {

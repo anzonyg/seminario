@@ -4,8 +4,8 @@
       <h3>Generar Alertas IBIS</h3>
       <br />
       <p>
-        Seleccione las fiscalias o equipos para la verificacion de crecimiento ó
-        nuevos cuadros IBIS y generar un reporte Word.
+        Seleccione el grupo de fiscalias y rango de fechas para la verificacion
+        de crecimiento ó nuevos cuadros IBIS y generar un reporte Word.
       </p>
       <br />
       <br />
@@ -75,8 +75,6 @@
       </b-col>
     </b-container>
     <br />
-
-    
 
     <!--MODAL JUSTIFICACION-->
     <div>
@@ -200,7 +198,7 @@
             <b-button
               size="sm"
               class="float-right"
-              @click="show = false"
+              @click="descargarTotalPDF()"
               pill
               variant="outline-primary"
             >
@@ -226,6 +224,7 @@
 
 <script>
 import axios from "axios";
+import swal from "sweetalert";
 
 const cf = require("../DIR");
 const url = cf.url + "/alerta";
@@ -273,6 +272,13 @@ export default {
     };
   },
   methods: {
+    makeToast() {
+      swal("No existen alertas!!", {
+        buttons: false,
+        timer: 3000,
+        background: "#FAAFFF",
+      });
+    },
     countDownChanged3(dismissCountDown3) {
       this.dismissCountDown3 = dismissCountDown3;
     },
@@ -325,12 +331,10 @@ export default {
             var listData = JSON.stringify(response.data);
             var listData2 = JSON.parse(listData);
             this.tablaFiscalia = listData2;
-
-            console.log(response.data);
+            this.validacionDatos();
           });
 
         this.fiscalia = [[], [], [], []];
-        this.modalShow = !this.modalShow;
       } else {
         alert("Ingresar todos los campos!!!");
         this.mostrar = false;
@@ -371,7 +375,27 @@ export default {
       document.body.appendChild(link);
       link.click();
     },
-
+    async descargarTotalPDF() {
+      var datos = this.tablaFiscalia;
+      for (let k in datos) {
+        var content2 = {
+          lista: datos[k],
+          bitacora: this.bitacora2(),
+        };
+        this.nomFiscal = datos[k].fiscalia;
+        this.nomCreador = datos[k].creador;
+        await axios({
+          url: url2,
+          method: "POST",
+          data: content2,
+          responseType: "blob",
+        }).then((response) => {
+          this.mostrar = false;
+          this.mostrar2 = true;
+          this.download(response.data);
+        });
+      }
+    },
     llenarform() {
       if (
         this.form.fiscalia.length <= 0 ||
@@ -417,7 +441,9 @@ export default {
       let bitacora = {
         horafecha: new Date(),
         level: 8,
-        message: "Descargar reporte de alertas. Justificacíon:  " + this.justificacion1,
+        message:
+          "Descargar reporte de alertas. Justificacíon:  " +
+          this.justificacion1,
         busqueda:
           this.form.fiscalia +
           "  desde:  " +
@@ -438,6 +464,13 @@ export default {
       return bitacora;
     },
 
+    validacionDatos() {
+      if (this.tablaFiscalia.length >= 1) {
+        this.modalShow = !this.modalShow;
+      } else {
+        this.makeToast();
+      }
+    },
     testmes(num) {
       if (num == "1") {
         return "enero";
