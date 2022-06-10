@@ -269,11 +269,12 @@ export default {
       nomFiscal: "",
       nomCreador: "",
       justificacion1: "",
+      alerta: "",
     };
   },
   methods: {
     makeToast() {
-      swal("No existen alertas!!", {
+      swal(this.alerta, {
         buttons: false,
         timer: 3000,
         background: "#FAAFFF",
@@ -303,9 +304,16 @@ export default {
       this.mostrar7 = true;
     },
     justificacion() {
-      this.$refs["my-modal2"].show();
-      this.mostrar = true;
-      this.mostrar2 = false;
+      if (this.llenarform()) {
+        this.$refs["my-modal2"].show();
+        this.mostrar = true;
+        this.mostrar2 = false;
+      } else {
+        this.alerta = "Ingresar todos los campos!!!";
+        this.makeToast();
+        this.mostrar = false;
+        this.mostrar2 = true;
+      }
     },
     async buscarAlerta() {
       const storage = JSON.parse(localStorage.getItem("datos"));
@@ -330,13 +338,14 @@ export default {
 
             var listData = JSON.stringify(response.data);
             var listData2 = JSON.parse(listData);
-            this.tablaFiscalia = listData2;
-            this.validacionDatos();
+            this.tablaFiscalia = listData2.datos;
+            this.validacionDatos(listData2.valid);
           });
 
         this.fiscalia = [[], [], [], []];
       } else {
-        alert("Ingresar todos los campos!!!");
+        this.alerta = "Ingresar todos los campos!!!";
+        this.makeToast();
         this.mostrar = false;
         this.mostrar2 = true;
       }
@@ -464,10 +473,16 @@ export default {
       return bitacora;
     },
 
-    validacionDatos() {
-      if (this.tablaFiscalia.length >= 1) {
-        this.modalShow = !this.modalShow;
+    validacionDatos(validar) {
+      if (validar == true) {
+        if (this.tablaFiscalia.length >= 1) {
+          this.modalShow = !this.modalShow;
+        } else {
+          this.alerta = "No hay alertas!!";
+          this.makeToast();
+        }
       } else {
+        this.alerta = "Su usuario ha expirado!!";
         this.makeToast();
       }
     },
