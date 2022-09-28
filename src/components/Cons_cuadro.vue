@@ -783,7 +783,7 @@ export default {
           this.tabla = []; //limpia la tabla para nueva consulta
           this.consultas = data.data;
           this.tabla = this.consultas.tabla;
-          console.log(this.tabla)
+          //console.log(this.tabla)
           this.encabezado = this.consultas.dato_arma;
           //console.log(data);
         });
@@ -828,7 +828,7 @@ export default {
       this.mostrar3 = false;
       if (this.selected.length > 0) {
         this.fiscalia.fiscalia = this.selected[0].fiscalia;
-        console.log(this.fiscalia);
+        //console.log(this.fiscalia);
         if (this.fiscalia.fiscalia.length > 0) {
           if (this.fiscalia.unidad.length > 0) {
             this.cuadropdf();

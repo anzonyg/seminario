@@ -121,7 +121,8 @@ export default {
       let verificar = false;
       //console.log(this.$route.params.token);
       await axios
-        .get("http://172.18.230.112:9001/sigeemp/revisarToken/", {
+        //.get("http://172.18.230.112:9001/sigeemp/revisarToken/", {
+          .get("https://apidac.mp.gob.gt/sigeemp//sigeemp/revisarToken/", {
           //donde realiza la consulta
           headers: { Authorization: this.$route.params.token }, // el token
         })
