@@ -254,7 +254,7 @@ export default {
       tablaFiscalia: [],
       form: {
         fecha1: "",
-        fecha2: new Date(),
+        fecha2: "",
         fiscalia: "",
         bitacora: [],
       },
@@ -335,7 +335,7 @@ export default {
           .then((response) => {
             this.mostrar = false;
             this.mostrar2 = true;
-
+            //console.log(response.data)
             var listData = JSON.stringify(response.data);
             var listData2 = JSON.parse(listData);
             this.tablaFiscalia = listData2.datos;

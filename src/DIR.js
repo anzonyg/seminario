@@ -1,12 +1,16 @@
-module.exports = {
+/*module.exports = {
     url: 'https://apidac.mp.gob.gt/consultasibis/tasks',
     url2: 'https://apidac.mp.gob.gt/consultasibis/'
-}
+}*/
+
+
 /*module.exports = {
     url: 'http://dacservices2:9080/tasks',
     url2: 'http://dacservices2:9080'
 }*/
-/*module.exports = {
+
+
+module.exports = {
     url: 'http://localhost:9080/tasks',
     url2: 'http://localhost:9080'
-}*/
+}
