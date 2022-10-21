@@ -1,7 +1,8 @@
 <template>
   <div>
     <b-row>
-      <b-col md="8">
+      <b-col md="8" cols="12" align="center">
+        <br />
         <b-input
           type="number"
           v-model="form.id_cuadro"
@@ -10,7 +11,9 @@
           required
         ></b-input>
       </b-col>
-      <b-col md="2">
+
+      <b-col md="2" cols="6" align="center">
+        <br />
         <b-button pill v-on:click="justificacion()"
           ><span
             class="spinner-border spinner-border-sm"
@@ -22,15 +25,16 @@
           Buscar</b-button
         >
       </b-col>
-      <b-col md="2">
+      <b-col md="2" cols="6" align="center">
+        <br />
         <b-button
           v-b-modal.modal-1
           pill
           variant="outline-info"
           name="descarga"
           v-show="mostrar"
-          ><b-icon icon="download" aria-hidden="true"></b-icon>
-          Exportar PDF</b-button
+          ><b-icon icon="download" aria-hidden="true"></b-icon> Exportar
+          PDF</b-button
         >
       </b-col>
       <b-col md="8">
@@ -136,7 +140,7 @@
         </b-button>
       </div>
     </b-modal>
-    
+
     <b-modal
       ref="my-modal2"
       id="modal-2"
@@ -188,7 +192,7 @@
 
     <br />
     <br />
-    <div id="cuadro1">
+    <div id="cuadro1" md="12">
       <div v-for="(encabezado, index2) in encabezado" :key="index2">
         <div class="text-center">
           <h3
@@ -212,35 +216,36 @@
         <h4 v-text="'Observaciones:   ' + encabezado.observacion"></h4>
       </div>
       <br />
-
-      <table class="table" id="tabla1">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Dato</th>
-            <th scope="col">Correlativo</th>
-            <th scope="col">Indicio</th>
-            <th scope="col">Fiscalía</th>
-            <th scope="col">Agencia / Equipo</th>
-            <th scope="col">Referencia MP</th>
-            <th scope="col">Fecha Suceso</th>
-            <th scope="col">Dirección de Recolección</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(tabla1, index) in tabla" :key="index">
-            <th scope="row" v-text="index + 1"></th>
-            <td v-text="tabla1.dato"></td>
-            <td v-text="tabla1.correlativo"></td>
-            <td v-text="tabla1.indicio"></td>
-            <td v-text="tabla1.fiscaliaMP"></td>
-            <td v-text="tabla1.nombreAgencia"></td>
-            <td v-text="tabla1.referencia"></td>
-            <td v-text="tabla1.fecha"></td>
-            <td v-text="tabla1.direccion"></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table" id="tabla1">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Dato</th>
+              <th scope="col">Correlativo</th>
+              <th scope="col">Indicio</th>
+              <th scope="col">Fiscalía</th>
+              <th scope="col">Agencia / Equipo</th>
+              <th scope="col">Referencia MP</th>
+              <th scope="col">Fecha Suceso</th>
+              <th scope="col">Dirección de Recolección</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(tabla1, index) in tabla" :key="index">
+              <th scope="row" v-text="index + 1"></th>
+              <td v-text="tabla1.dato"></td>
+              <td v-text="tabla1.correlativo"></td>
+              <td v-text="tabla1.indicio"></td>
+              <td v-text="tabla1.fiscaliaMP"></td>
+              <td v-text="tabla1.nombreAgencia"></td>
+              <td v-text="tabla1.referencia"></td>
+              <td v-text="tabla1.fecha"></td>
+              <td v-text="tabla1.direccion"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -907,7 +912,7 @@ export default {
           nipId: storage.userData.nipId,
           dependencia: storage.userData.dependencia,
           token: storage.token,
-          infoDB: JSON.stringify(this.consultas)
+          infoDB: JSON.stringify(this.consultas),
         };
         return bitacora;
       }
@@ -1069,60 +1074,42 @@ export default {
         pdf.text(
           50,
           135,
-          "" +
-            this.fiscalia.fiscalia +
-            ", " +
-            this.fiscalia.unidad,
+          "" + this.fiscalia.fiscalia + ", " + this.fiscalia.unidad,
           35,
           "center"
         );
         pdf.text(
           177,
           135,
-          " " +
-            this.fiscalia.fiscalia +
-            ", " +
-            this.fiscalia.unidad,
+          " " + this.fiscalia.fiscalia + ", " + this.fiscalia.unidad,
           35,
           "center"
         );
         pdf.text(
           304,
           135,
-          " " +
-            this.fiscalia.fiscalia +
-            ", " +
-            this.fiscalia.unidad,
+          " " + this.fiscalia.fiscalia + ", " + this.fiscalia.unidad,
           35,
           "center"
         );
         pdf.text(
           50,
           180,
-          " " +
-            this.fiscalia.fiscalia +
-            ", " +
-            this.fiscalia.unidad,
+          " " + this.fiscalia.fiscalia + ", " + this.fiscalia.unidad,
           35,
           "center"
         );
         pdf.text(
           177,
           180,
-          " " +
-            this.fiscalia.fiscalia +
-            ", " +
-            this.fiscalia.unidad,
+          " " + this.fiscalia.fiscalia + ", " + this.fiscalia.unidad,
           35,
           "center"
         );
         pdf.text(
           304,
           180,
-          " " +
-            this.fiscalia.fiscalia +
-            ", " +
-            this.fiscalia.unidad,
+          " " + this.fiscalia.fiscalia + ", " + this.fiscalia.unidad,
           35,
           "center"
         );

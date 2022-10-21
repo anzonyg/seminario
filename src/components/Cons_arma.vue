@@ -1,7 +1,8 @@
 <template>
   <div>
     <b-row>
-      <b-col md="10">
+      <b-col md="8" cols="12" align="center">
+        <br />
         <b-form-input
           type="text"
           v-model="form.id_arma"
@@ -10,7 +11,8 @@
           required
         ></b-form-input>
       </b-col>
-      <b-col md="2">
+      <b-col md="4" cols="12" align="center">
+        <br />
         <b-button pill v-on:click="justificar()">
           <span
             class="spinner-border spinner-border-sm"
@@ -23,6 +25,7 @@
         >
       </b-col>
       <b-col md="10">
+        <br/>
         <b-alert
           :show="dismissCountDown"
           variant="danger"
@@ -83,7 +86,7 @@
     </b-modal>
     <br />
     <br />
-    <b-table id="my-table" :fields="fields" :items="tabla" small></b-table>
+    <b-table id="my-table" responsive :fields="fields" :items="tabla" small></b-table>
     <br />
     <div class="overflow-auto" align="center">
       <b-button

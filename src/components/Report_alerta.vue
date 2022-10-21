@@ -38,6 +38,7 @@
                 :max="form.fecha2"
                 placeholder="Escoge fecha"
                 aria-required="true"
+                no-flip
               ></b-form-datepicker>
               <!--<p>Value: '{{ form.fecha1 }}'</p>-->
             </b-col>
@@ -51,6 +52,7 @@
                 :max="max"
                 placeholder="Escoge fecha"
                 aria-required="true"
+                no-flip
               ></b-form-datepicker>
               <!--<p>Value: '{{ form.fecha2 }}'</p>
             <p>Value max: '{{ max }}'</p>-->

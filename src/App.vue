@@ -7,12 +7,12 @@
       <br />
       <div>
         <b-row>
-          <b-col md="11" align="right">
+          <b-col cols="12" md="10" lg="11" align="right" order="2" order-md="1">
             <br />
             <h5 class="text-primary">{{ nombre }}</h5>
           </b-col>
-          <b-col md="1" align="left">
-            <b-dropdown size="sm" variant="link" no-caret>
+          <b-col cols="12" md="2" lg="1" align="right" order="1" order-md="2">
+            <b-dropdown size="sm" variant="link" class="m-2"  right text="Right align" no-caret>
               <template #button-content>
                 <div v-if="imgmostrar">
                   <b-img
@@ -51,7 +51,7 @@
         </b-row>
       </div>
     </b-container>
-
+    <br/>
     <!--CONTENIDO-->
     <b-container>
       <div v-if="mostrar_Consulta">

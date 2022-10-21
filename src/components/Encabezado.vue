@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-row>
-      <b-col md="3" align="right">
+      <b-col cols="6" md="3" order-sm="1">
         <br />
         <img
           align="left"
@@ -12,12 +12,8 @@
           src="@/assets/MP_logo.png"
         />
       </b-col>
-      <b-col md="6" align="center">
-        <br />
-        <br />
-        <h1>Módulo de Consultas IBIS</h1>
-      </b-col>
-      <b-col md="3" align="left">
+      
+      <b-col cols="6" md="3" order-sm="2" order-md="3">
         <br />
         <img
           align="right"
@@ -27,6 +23,10 @@
           alt="DAC-IBIS logo"
           src="@/assets/DAC.jpeg"
         />
+      </b-col>
+      <b-col align="center" md="6" order-sm="3" order-md="2">
+        <br />
+        <h1>Módulo de Consultas IBIS</h1>
       </b-col>
     </b-row>
   </div>
