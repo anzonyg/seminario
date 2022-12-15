@@ -28,6 +28,11 @@ const routes = [
         name: 'consulta',
         component: () => import('./components/Consultas_IBIS.vue')
     },
+    {
+        path: '/dashboard/token/:token',
+        name: 'dashboard',
+        component: () => import('./components/Dashboard.vue')
+    },
 ]
 
 const router = new VueRouter({

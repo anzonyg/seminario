@@ -14,3 +14,8 @@ module.exports = {
     url: 'http://localhost:9080/tasks',
     url2: 'http://localhost:9080'
 }*/
+
+/*module.exports = {
+    url: 'http://172.18.232.193:9080/tasks',
+    url2: 'http://172.18.232.193:9080'
+}*/

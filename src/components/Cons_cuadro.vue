@@ -1,20 +1,20 @@
 <template>
   <div>
+    <!--FORMULARIO DE BUSQUEDA DE CUADRO-->
     <b-row>
       <b-col md="8" cols="12" align="center">
         <br />
         <b-input
           type="number"
           v-model="form.id_cuadro"
-          v-on:keyup.enter="justificacion()"
+          v-on:keyup.enter="validarInput()"
           placeholder="Ingrese número de cuadro"
           required
         ></b-input>
       </b-col>
-
       <b-col md="2" cols="6" align="center">
         <br />
-        <b-button pill v-on:click="justificacion()"
+        <b-button pill v-on:click="validarInput()"
           ><span
             class="spinner-border spinner-border-sm"
             role="status"
@@ -37,17 +37,9 @@
           PDF</b-button
         >
       </b-col>
-      <b-col md="8">
-        <b-alert
-          :show="dismissCountDown"
-          variant="danger"
-          @dismissed="dismissCountDown = 0"
-          @dismiss-count-down="countDownChanged"
-        >
-          <p>{{ alerta }}</p>
-        </b-alert>
-      </b-col>
     </b-row>
+
+    <!--Modal de Justificacion para descarga de PDF-->
     <b-modal
       ref="my-modal"
       id="modal-1"
@@ -57,7 +49,7 @@
       hide-footer
     >
       <b-row>
-        <p>Ingrese el nombre de la fiscalía y agencia o equipo solicitante</p>
+        <p>Seleccione el nombre de la fiscalía e ingrese la agencia o equipo solicitante</p>
         <b-col md="12">
           <!------ Fiscalia ------->
 
@@ -75,7 +67,7 @@
                 id="filter-input"
                 v-model="filter"
                 type="search"
-                placeholder="Buscador"
+                placeholder="Buscador de Fiscalia"
               ></b-form-input>
 
               <b-input-group-append>
@@ -110,25 +102,13 @@
           </b-form-group>
         </b-col>
       </b-row>
-
       <br />
-      <b-alert
-        :show="dismissCountDown2"
-        variant="danger"
-        @dismissed="dismissCountDown2 = 0"
-        @dismiss-count-down="countDownChanged2"
-      >
-        <p>Datos Incorrectos!!</p>
-      </b-alert>
-      <br />
-      <br />
-
       <div class="text-center">
         <b-button
           center
           size="sm"
           variant="outline-info"
-          v-on:click="validarcuadro2()"
+          v-on:click="validarDescarga()"
           ><span
             class="spinner-border spinner-border-sm"
             role="status"
@@ -141,6 +121,7 @@
       </div>
     </b-modal>
 
+    <!--Modal de Justificacion para la busqueda-->
     <b-modal
       ref="my-modal2"
       id="modal-2"
@@ -164,20 +145,12 @@
         <br />
       </div>
       <br />
-      <b-alert
-        :show="dismissCountDown3"
-        variant="danger"
-        @dismissed="dismissCountDown3 = 0"
-        @dismiss-count-down="countDownChanged3"
-      >
-        <p>Datos Incorrectos!!</p>
-      </b-alert>
       <div class="text-center">
         <b-button
           center
           size="sm"
           variant="outline-info"
-          v-on:click="validarcuadro3()"
+          v-on:click="validarJustificacion()"
           ><span
             class="spinner-border spinner-border-sm"
             role="status"
@@ -192,6 +165,8 @@
 
     <br />
     <br />
+
+    <!--RESPUESTA DE BUSQUEDA DE CUADRO-->
     <div id="cuadro1" md="12">
       <div v-for="(encabezado, index2) in encabezado" :key="index2">
         <div class="text-center">
@@ -224,11 +199,13 @@
               <th scope="col">Dato</th>
               <th scope="col">Correlativo</th>
               <th scope="col">Indicio</th>
+              <th scope="col">Fecha Incorporación</th>
               <th scope="col">Fiscalía</th>
               <th scope="col">Agencia / Equipo</th>
               <th scope="col">Referencia MP</th>
               <th scope="col">Fecha Suceso</th>
               <th scope="col">Dirección de Recolección</th>
+              <th scope="col">Vinculación con otro(s) Cuadro(s)</th>
             </tr>
           </thead>
           <tbody>
@@ -237,11 +214,13 @@
               <td v-text="tabla1.dato"></td>
               <td v-text="tabla1.correlativo"></td>
               <td v-text="tabla1.indicio"></td>
+              <td v-text="tabla1.fechaIncor"></td>
               <td v-text="tabla1.fiscaliaMP"></td>
               <td v-text="tabla1.nombreAgencia"></td>
               <td v-text="tabla1.referencia"></td>
               <td v-text="tabla1.fecha"></td>
               <td v-text="tabla1.direccion"></td>
+              <td v-text="tabla1.cuadroRelacion"></td>
             </tr>
           </tbody>
         </table>
@@ -254,6 +233,8 @@
 import axios from "axios";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import swal from "sweetalert";
+
 const cf = require("../DIR");
 
 const url = cf.url + "/cuadro";
@@ -263,15 +244,7 @@ export default {
   data() {
     return {
       alerta: "",
-      dismissSecs: 4,
-      dismissCountDown: 0,
-      showDismissibleAlert: false,
-      dismissSecs2: 4,
-      dismissCountDown2: 0,
-      showDismissibleAlert2: false,
-      dismissSecs3: 4,
-      dismissCountDown3: 0,
-      showDismissibleAlert3: false,
+      
       mostrar: false,
       mostrar2: false, //spinner de descarga pdf
       mostrar3: true, // icon descarga pdf
@@ -748,27 +721,17 @@ export default {
     };
   },
   methods: {
+    makeToast() {
+      swal(this.alerta, {
+        buttons: false,
+        timer: 3000,
+        background: "#FAAFFF",
+      });
+    },
     onRowSelected(items) {
       this.selected = items;
     },
-    countDownChanged(dismissCountDown) {
-      this.dismissCountDown = dismissCountDown;
-    },
-    showAlert() {
-      this.dismissCountDown = this.dismissSecs;
-    },
-    countDownChanged2(dismissCountDown2) {
-      this.dismissCountDown2 = dismissCountDown2;
-    },
-    showAlert2() {
-      this.dismissCountDown2 = this.dismissSecs2;
-    },
-    countDownChanged3(dismissCountDown3) {
-      this.dismissCountDown3 = dismissCountDown3;
-    },
-    showAlert3() {
-      this.dismissCountDown3 = this.dismissSecs3;
-    },
+    
     async buscarcuadro() {
       const storage = JSON.parse(localStorage.getItem("datos"));
       this.mostrar4 = true;
@@ -792,7 +755,7 @@ export default {
           this.encabezado = this.consultas.dato_arma;
           //console.log(data);
         });
-      this.validarcuadro();
+      this.validarRest();
     },
     async cuadropdf() {
       const storage = JSON.parse(localStorage.getItem("datos"));
@@ -809,16 +772,41 @@ export default {
           this.consultas = data.data;
         });
     },
-    validarcuadro() {
+
+
+    validarInput(){
+      if(this.form.id_cuadro.length <=0){
+        this.alerta = "Ingresar número de cuadro.";
+        this.makeToast();
+      }else{
+        this.Mostrarjustificacion();
+      }
+    },
+    validarJustificacion() {
+      this.mostrar6 = true;
+      this.mostrar7 = false;
+      if (this.fiscalia.justificacion.length > 5) {
+        this.buscarcuadro();
+        this.$refs["my-modal2"].hide();
+        this.mostrar4 = false;
+        this.mostrar5 = true;
+      } else {
+        this.alerta = "Ingresar la justificación de la búsqueda.";
+        this.makeToast();
+      }
+      this.mostrar6 = false;
+      this.mostrar7 = true;
+    },
+    validarRest() {
       if (this.consultas.valid == false) {
         this.alerta = "El usuario ha expirado.";
-        this.showAlert();
+        this.makeToast();
         this.mostrar = false;
         this.mostrar4 = false;
         this.mostrar5 = true;
       } else if (this.consultas.tabla.length <= 0) {
         this.alerta = "El cuadro no existe en la base de datos";
-        this.showAlert();
+        this.makeToast();
         this.mostrar = false;
         this.mostrar4 = false;
         this.mostrar5 = true;
@@ -828,7 +816,7 @@ export default {
         this.mostrar5 = true;
       }
     },
-    validarcuadro2() {
+    validarDescarga() {
       this.mostrar2 = true;
       this.mostrar3 = false;
       if (this.selected.length > 0) {
@@ -839,36 +827,28 @@ export default {
             this.cuadropdf();
             this.generarPDF();
           } else {
-            this.showAlert2();
+            this.alerta = "Ingresar nombre de la agencia o equipo de trabajo.";
+            this.makeToast();
           }
         } else {
-          this.showAlert2();
+          this.alerta = "Seleccionar la fiscalia, de no existir solicitar el registro a DTSI.";
+          this.makeToast();
         }
       } else {
-        this.showAlert2();
+        this.alerta = "Seleccionar la fiscalia, de no existir solicitar el registro a DTSI.";
+        this.makeToast();
       }
       this.mostrar2 = false;
       this.mostrar3 = true;
     },
-    validarcuadro3() {
-      this.mostrar6 = true;
-      this.mostrar7 = false;
-      if (this.fiscalia.justificacion.length > 5) {
-        this.buscarcuadro();
-        this.$refs["my-modal2"].hide();
-        this.mostrar4 = false;
-        this.mostrar5 = true;
-      } else {
-        this.showAlert3();
-      }
-      this.mostrar6 = false;
-      this.mostrar7 = true;
-    },
-    justificacion() {
+    
+    Mostrarjustificacion() {
       this.$refs["my-modal2"].show();
       this.mostrar4 = true;
       this.mostrar5 = false;
     },
+
+
     bitacora(num) {
       const storage = JSON.parse(localStorage.getItem("datos"));
       if (num == 1) {
@@ -925,6 +905,8 @@ export default {
       const fecha = dia + "/" + mes + "/" + anio;
       return fecha;
     },
+
+
     generarPDF() {
       this.$refs["my-modal"].hide();
       const fecha1 = new Date();
@@ -1038,8 +1020,17 @@ export default {
         pdf.setTextColor("black");
         pdf.text(
           7,
+          192,
+          'Observación: Si necesita el dictamen pericial balístico del presente reporte, puede hacer su solicitud al correo oficinaconsultasdac@mp.gob.gt con el objeto de tramitar una copia certificada indicando que ya realizó previa consulta, considerando que los indicios balísticos se encuentan en estado "Confirmado".',
+          {
+            maxWidth: 310,
+            align: "justify",
+          }
+        );
+        pdf.text(
+          7,
           200,
-          'Observación: Si necesita el dictamen pericial balístico del presente reporte, puede hacer su solicitud al correo oficinaconsultasdac@mp.gob.gt con el objeto de tramitar una copia certificada indicando que ya realizó previa consulta, considerando que los indicios balísticos se encuentan en estado "Confirmado"',
+          'Confidencialidad: Reserva de la información de acuerdo a: a) Ley Orgánica del Ministerio Público, Decreto 40-94 Articulo 62, Literal C., Literal M. b) Ley de Acceso a la Información Pública, Decreto 57-2008 Articulo 23, Inciso 4. c) Código Procesal Penal, Decreto 17-73 Articulo 422 y Decreto 51-92 Articulo 314. Compartir esta información a personas ajenas a los casos, tiene consecuencias administrativas y penales.',
           {
             maxWidth: 310,
             align: "justify",

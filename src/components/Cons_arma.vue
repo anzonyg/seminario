@@ -1,19 +1,20 @@
 <template>
   <div>
+    <!--FORMULARIO DE BUSQUEDA DE CUADRO-->
     <b-row>
       <b-col md="8" cols="12" align="center">
         <br />
         <b-form-input
           type="text"
           v-model="form.id_arma"
-          v-on:keyup.enter="justificar()"
+          v-on:keyup.enter="validarInput()"
           placeholder="Ingrese registro de arma"
           required
         ></b-form-input>
       </b-col>
       <b-col md="4" cols="12" align="center">
         <br />
-        <b-button pill v-on:click="justificar()">
+        <b-button pill v-on:click="validarInput()">
           <span
             class="spinner-border spinner-border-sm"
             role="status"
@@ -24,18 +25,9 @@
           Buscar</b-button
         >
       </b-col>
-      <b-col md="10">
-        <br/>
-        <b-alert
-          :show="dismissCountDown"
-          variant="danger"
-          @dismissed="dismissCountDown = 0"
-          @dismiss-count-down="countDownChanged"
-        >
-          <p>{{ alerta }}</p>
-        </b-alert>
-      </b-col>
     </b-row>
+
+    <!--Modal de Justificacion para descarga de PDF-->
     <b-modal
       ref="my-modal2"
       id="modal-2"
@@ -59,20 +51,12 @@
         <br />
       </div>
       <br />
-      <b-alert
-        :show="dismissCountDown3"
-        variant="danger"
-        @dismissed="dismissCountDown3 = 0"
-        @dismiss-count-down="countDownChanged3"
-      >
-        <p>Datos Incorrectos!!</p>
-      </b-alert>
       <div class="text-center">
         <b-button
           center
           size="sm"
           variant="outline-info"
-          v-on:click="validarcuadro3()"
+          v-on:click="validarJustificacion()"
           ><span
             class="spinner-border spinner-border-sm"
             role="status"
@@ -84,9 +68,17 @@
         </b-button>
       </div>
     </b-modal>
+
     <br />
     <br />
-    <b-table id="my-table" responsive :fields="fields" :items="tabla" small></b-table>
+    <!--RESPUESTA DE BUSQUEDA DE CUADRO-->
+    <b-table
+      id="my-table"
+      responsive
+      :fields="fields"
+      :items="tabla"
+      small
+    ></b-table>
     <br />
     <div class="overflow-auto" align="center">
       <b-button
@@ -123,10 +115,11 @@
 
 <script>
 import axios from "axios";
-const cf = require('../DIR')
+import swal from "sweetalert";
 
+const cf = require("../DIR");
 
-const url = cf.url+"/arma";
+const url = cf.url + "/arma";
 
 export default {
   data() {
@@ -165,14 +158,8 @@ export default {
       actual: 1,
       despues: ">",
       perPage: 25,
-      dismissSecs: 4,
-      dismissCountDown: 0,
-      showDismissibleAlert: false,
-      dismissSecs3: 4,
-      dismissCountDown3: 0,
-      showDismissibleAlert3: false,
       mostrar: false, //spinner de buscar
-      mostrar2: true,  //icon de buscar
+      mostrar2: true, //icon de buscar
       mostrar6: false, //spinner de buscar modal
       mostrar7: true, // icon buscar modal
       consultas: [],
@@ -191,90 +178,143 @@ export default {
     };
   },
   methods: {
-    countDownChanged(dismissCountDown) {
-      this.dismissCountDown = dismissCountDown;
+    makeToast() {
+      swal(this.alerta, {
+        buttons: false,
+        timer: 3000,
+        background: "#FAAFFF",
+      });
     },
-    showAlert() {
-      this.dismissCountDown = this.dismissSecs;
-    },
-    countDownChanged3(dismissCountDown3) {
-      this.dismissCountDown3 = dismissCountDown3;
-    },
-    showAlert3() {
-      this.dismissCountDown3 = this.dismissSecs3;
-    },
+
     async buscararma() {
       const storage = JSON.parse(localStorage.getItem("datos"));
       this.mostrar = true;
       this.mostrar2 = false;
-      if (this.validarString()) {
-        this.headers.authorization = storage.token;
-        this.form.token = storage.token;
-        this.form.page = 1;
-        this.bitacora();
-        await axios
-          .post(url, this.form, {
-            headers: {
-              authorization: storage.token,
-              idaction: "616da60877ce5e828b018de1",
-            },
-          })
-          .then((data) => {
-            this.consultas = data.data;
-            this.tabla = [];
-            this.validarconsulta();
-            //console.log(this.consultas);
-          });
-      } else {
-        this.alerta = "Caracteres Incorrectos!!";
-        this.alerta1();
-      }
+
+      this.headers.authorization = storage.token;
+      this.form.token = storage.token;
+      this.form.page = 1;
+      this.bitacora();
+      await axios
+        .post(url, this.form, {
+          headers: {
+            authorization: storage.token,
+            idaction: "616da60877ce5e828b018de1",
+          },
+        })
+        .then((data) => {
+          this.consultas = data.data;
+          this.tabla = [];
+          this.validarRest();
+          //console.log(this.consultas);
+        });
     },
     async buscararma2() {
       const storage = JSON.parse(localStorage.getItem("datos"));
       this.mostrar = true;
       this.mostrar2 = false;
-      if (this.validarString()) {
-        this.form.token = storage.token;
-        this.bitacora();
-        await axios.post(url, this.form, {
-            headers: {
-              authorization: storage.token,
-              idaction: "616da60877ce5e828b018de1",
-            },
-          }).then((data) => {
+
+      this.form.token = storage.token;
+      this.bitacora();
+      await axios
+        .post(url, this.form, {
+          headers: {
+            authorization: storage.token,
+            idaction: "616da60877ce5e828b018de1",
+          },
+        })
+        .then((data) => {
           this.consultas = data.data;
           //console.log(this.consultas);
           this.tabla = [];
-          this.validarconsulta();
+          this.validarRest();
         });
-      } else { 
-        this.alerta = "Caracteres Incorrectos!!";
-        this.alerta1();
+    },
+
+    validarInput() {
+      var serie = "";
+      serie = this.form.id_arma + "";
+      var regExp = /^[0-9A-Z-]*$/;
+      if (serie.length >= 3) {
+        if (regExp.test(serie)) {
+          this.Mostrarjustificacion();
+        } else {
+          this.alerta = "Ingresar número correcto de registro del arma.";
+          this.makeToast();
+        }
+      } else {
+        this.alerta = "Ingresar número de registro del arma.";
+        this.makeToast();
       }
     },
-    validarconsulta(){
-      if(this.consultas.valid == false){
+
+    validarJustificacion() {
+      this.mostrar6 = true;
+      this.mostrar7 = false;
+      if (this.justificacion.length > 5) {
+        this.buscararma();
+        this.$refs["my-modal2"].hide();
+        this.mostrar = false;
+        this.mostrar2 = true;
+      } else {
+        this.alerta = "Ingresar la justificación de la búsqueda.";
+        this.makeToast();
+      }
+      this.mostrar6 = false;
+      this.mostrar7 = true;
+    },
+    validarRest() {
+      if (this.consultas.valid == false) {
         this.alerta = "El usuario ha expirado.";
-        this.alerta1();
-      }else if (this.consultas.tabla.length <= 0) {
+        this.makeToast();
+        this.mostrar = false;
+        this.mostrar2 = true;
+        this.tabla = [];
+      } else if (this.consultas.tabla.length <= 0) {
         this.alerta = "El registro del arma no existe en la base de datos.";
-        this.alerta1();
-      } else{
+        this.makeToast();
+        this.mostrar = false;
+        this.mostrar2 = true;
+        this.tabla = [];
+      } else {
         this.tabla = this.consultas.tabla;
         this.paginacion();
         this.mostrar = false;
         this.mostrar2 = true;
       }
     },
-    validartoken(text) {
-      var valor = text;
-      if (valor) {
-        this.tabla = this.consultas.tabla;
-      } else {
-        this.alerta1();
-      }
+
+    Mostrarjustificacion() {
+      this.$refs["my-modal2"].show();
+      this.mostrar = true;
+      this.mostrar2 = false;
     },
+    bitacora() {
+      const storage = JSON.parse(localStorage.getItem("datos"));
+      let bitacora = {
+        horafecha: new Date(),
+        level: 4,
+        message:
+          "Consulta de arma en base de datos. Justificacíon:  " +
+          this.justificacion,
+        codproceso: this.form.id,
+        busqueda: this.form.id_arma,
+        fiscalia_solicitante: "",
+        equipo_solicitante: "",
+        nombres: storage.userData.nombres,
+        apellidos: storage.userData.apellidos,
+        id: storage.userData.id,
+        rol: storage.userData.rol,
+        grupo: storage.userData.grupo,
+        idGrupo: storage.userData.idGrupo,
+        nipId: storage.userData.nipId,
+        dependencia: storage.userData.dependencia,
+        token: storage.token,
+      };
+      ////console.log(bitacora);
+      this.form.bitacora = bitacora;
+    },
+
     paginacion() {
       this.limitpage = this.consultas.pagination.totalPages;
       this.actual = this.consultas.pagination.page;
@@ -301,78 +341,6 @@ export default {
       } else {
         this.hasNextPage = false;
       }
-    },
-    validarcuadro() {
-      if (this.consultas.tabla.length <= 0) {
-        this.alerta = "El registro del arma no existe en la base de datos.";
-        this.alerta1();
-      } else {
-        this.mostrar = false;
-        this.mostrar2 = true;
-      }
-    },
-    validarcuadro3() {
-      this.mostrar6 = true;
-      this.mostrar7 = false;
-      if (this.justificacion.length > 5) {
-        this.buscararma();
-        this.$refs["my-modal2"].hide();
-        this.mostrar = false;
-        this.mostrar2 = true;
-      } else {
-        
-        this.showAlert3();
-      }
-      this.mostrar6 = false;
-      this.mostrar7 = true;
-    },
-    justificar() {
-      this.$refs["my-modal2"].show();
-      this.mostrar = true;
-      this.mostrar2 = false;
-    },
-    alerta1() {
-      this.showAlert();
-      this.mostrar = false;
-      this.mostrar2 = true;
-      this.tabla = [];
-    },
-    validarString() {
-      var serie = "";
-      serie = this.form.id_arma + "";
-      var regExp = /^[0-9A-Z-]*$/;
-      if (serie.length >= 3) {
-        if (regExp.test(serie)) {
-          return true;
-        } else {
-          return false;
-        }
-      } else {
-        return false;
-      }
-    },
-    bitacora() {
-      const storage = JSON.parse(localStorage.getItem("datos"));
-      let bitacora = {
-        horafecha: new Date(),
-        level: 4,
-        message: "Consulta de arma en base de datos. Justificacíon:  " + this.justificacion,
-        codproceso: this.form.id,
-        busqueda: this.form.id_arma,
-        fiscalia_solicitante: "",
-        equipo_solicitante: "",
-        nombres: storage.userData.nombres,
-        apellidos: storage.userData.apellidos,
-        id: storage.userData.id,
-        rol: storage.userData.rol,
-        grupo: storage.userData.grupo,
-        idGrupo: storage.userData.idGrupo,
-        nipId: storage.userData.nipId,
-        dependencia: storage.userData.dependencia,
-        token: storage.token,
-      };
-      ////console.log(bitacora);
-      this.form.bitacora = bitacora;
     },
     antespage(page) {
       this.form.page = page;

@@ -7,19 +7,19 @@
       <br />
       <div>
         <b-row>
-          <b-col cols="12" md="10" lg="11" align="right" order="2" order-md="1">
+          <b-col md="10" xl="11" align="right" align-self="end" order="2" order-md="1">
             <br />
-            <h5 class="text-primary">{{ nombre }}</h5>
+            <h4 class="text-primary ">{{ nombre }}</h4>
           </b-col>
-          <b-col cols="12" md="2" lg="1" align="right" order="1" order-md="2">
-            <b-dropdown size="sm" variant="link" class="m-2"  right text="Right align" no-caret>
+          <b-col md="2" xl="1" class="p-0"  align="right" order="1" order-md="2">
+            <b-dropdown size="md" variant="link" right text="Right align" no-caret>
               <template #button-content>
                 <div v-if="imgmostrar">
                   <b-img
                     blank-color="black"
                     thumbnail
-                    width="70"
-                    height="70"
+                    width="75%"
+                    height= "auto"
                     :src="foto"
                   />
                 </div>
@@ -40,11 +40,18 @@
                 </b-dropdown-item-button>
                 <b-dropdown-item-button @click="link('report')">
                   <b-icon
-                    icon="file-earmark-bar-graph"
+                    icon="file-earmark-word"
                     aria-hidden="true"
                   ></b-icon>
                   Reporteria
                 </b-dropdown-item-button>
+                <!--<b-dropdown-item-button @click="link('dashboard')">
+                  <b-icon
+                    icon="file-earmark-bar-graph"
+                    aria-hidden="true"
+                  ></b-icon>
+                  Dashboard
+                </b-dropdown-item-button>-->
               </div>
             </b-dropdown>
           </b-col>
@@ -60,6 +67,9 @@
       <div v-else-if="mostrar_Alertas">
         <Alertas />
       </div>
+      <div v-else-if="mostrar_Dashboard">
+        <Dashboard />
+      </div>
       <div v-else-if="mostrar_Bloqueo">
         <Bloqueo />
       </div>
@@ -68,10 +78,12 @@
 </template>
 
 <script>
+
 import Encabezado from "@/components/Encabezado.vue";
 import Consultas from "@/components/Consultas_IBIS.vue";
 import Alertas from "@/components/Report_alerta.vue";
 import Bloqueo from "@/components/Bloqueo.vue";
+import Dashboard from "@/components/Dashboard.vue"
 
 import axios from "axios";
 const cf = require("./DIR");
@@ -84,6 +96,7 @@ export default {
     Consultas,
     Alertas,
     Bloqueo,
+    Dashboard,
   },
   data() {
     return {
@@ -91,6 +104,7 @@ export default {
       mostrar_Consulta: false,
       mostrar_Alertas: false,
       mostrar_Bloqueo: true,
+      mostrar_Dashboard : false,
       imgmostrar: false,
       nombre: "",
       id: "",
@@ -222,14 +236,22 @@ export default {
         this.mostrar_Consulta = false;
         this.mostrar_Bloqueo = false;
         this.mostrar_Alertas = true;
+        this.mostrar_Dashboard = false;
       } else if (option == "consulta") {
         this.mostrar_Consulta = true;
         this.mostrar_Bloqueo = false;
         this.mostrar_Alertas = false;
-      } else {
+        this.mostrar_Dashboard = false;
+      } else if (option == "dashboard") {
+        this.mostrar_Consulta = false;
+        this.mostrar_Bloqueo = false;
+        this.mostrar_Alertas = false;
+        this.mostrar_Dashboard = true;
+      }else {
         this.mostrar_Consulta = false;
         this.mostrar_Bloqueo = true;
         this.mostrar_Alertas = false;
+        this.mostrar_Dashboard = false;
       }
     },
   },

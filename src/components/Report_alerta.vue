@@ -18,6 +18,7 @@
             :options="options"
             :aria-describedby="ariaDescribedby"
             name="radio-options-slots"
+            class="mb-5"
             plain
           >
           </b-form-radio-group>
@@ -64,7 +65,7 @@
       <br />
       <b-col align="center">
         <!--<b-button pill variant="outline-info" @click="descargarPDF()">-->
-        <b-button pill variant="outline-info" @click="justificacion()">
+        <b-button pill  @click="justificacion()">
           <span
             class="spinner-border spinner-border-sm"
             role="status"
