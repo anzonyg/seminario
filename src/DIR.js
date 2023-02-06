@@ -1,7 +1,7 @@
-module.exports = {
+/*module.exports = {
     url: 'https://apidac.mp.gob.gt/consultasibis/tasks',
     url2: 'https://apidac.mp.gob.gt/consultasibis/'
-}
+}*/
 
 
 /*module.exports = {
@@ -10,10 +10,10 @@ module.exports = {
 }*/
 
 
-/*module.exports = {
+module.exports = {
     url: 'http://localhost:9080/tasks',
     url2: 'http://localhost:9080'
-}*/
+}
 
 /*module.exports = {
     url: 'http://172.18.232.193:9080/tasks',

@@ -45,13 +45,13 @@
                   ></b-icon>
                   Reporteria
                 </b-dropdown-item-button>
-                <!--<b-dropdown-item-button @click="link('dashboard')">
+                <b-dropdown-item-button @click="link('dashboard')">
                   <b-icon
                     icon="file-earmark-bar-graph"
                     aria-hidden="true"
                   ></b-icon>
                   Dashboard
-                </b-dropdown-item-button>-->
+                </b-dropdown-item-button>
               </div>
             </b-dropdown>
           </b-col>
