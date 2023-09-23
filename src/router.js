@@ -8,7 +8,7 @@ const routes = [
         name: 'home',
 
     },
-    {
+    /*{
         path: '/salir',
         name: 'salir',
         component: () => import('@/components/Cerrar_Sesion.vue')
@@ -32,7 +32,7 @@ const routes = [
         path: '/dashboard/token/:token',
         name: 'dashboard',
         component: () => import('./components/Dashboard.vue')
-    },
+    },*/
 ]
 
 const router = new VueRouter({

@@ -66,9 +66,7 @@
 
   import Encabezado from "@/components/Encabezado.vue";
   import Consultas from "@/components/Consultas_IBIS.vue";
-  import Alertas from "@/components/Report_alerta.vue";
-  import Bloqueo from "@/components/Bloqueo.vue";
-  import Dashboard from "@/components/Dashboard.vue"
+  
   
   import axios from "axios";
   const cf = require("./DIR");
@@ -79,9 +77,7 @@
     components: {
       Encabezado,
       Consultas,
-      Alertas,
-      Bloqueo,
-      Dashboard,
+      
     },
     data() {
       return {
