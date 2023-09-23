@@ -1,27 +1,15 @@
 <template>
-  <div class="consulta">
-    <b-container>
-      
+  <v-container>
+    <div class="consulta">
       <h3>Seleccionar tipo de consulta</h3>
       <br />
-      <b-form-group
-        
-        v-slot="{ ariaDescribedby }"
-      >
-        <b-form-radio-group
-          id="radio-slots"
-          v-model="selected"
-          :options="options"
-          :aria-describedby="ariaDescribedby"
-          name="radio-options-slots"
-          plain
-        >
-        </b-form-radio-group>
-      </b-form-group>
+      <v-radio-group row v-model="selected" name="radio-options-slots">
+        <v-radio v-for="(option, index) in options" :key="index" :label="option.text" :value="option.value"></v-radio>
+      </v-radio-group>
       <br />
       <component :is="selected" />
-    </b-container>
-  </div>
+    </div>
+  </v-container>
 </template>
 
 <script>

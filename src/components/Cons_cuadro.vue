@@ -1,233 +1,220 @@
 <template>
-  <div>
-    <!--FORMULARIO DE BUSQUEDA DE CUADRO-->
-    <b-row>
-      <b-col md="8" cols="12" align="center">
+  <v-container>
+    <!-- FORMULARIO DE BUSQUEDA DE CUADRO -->
+    <v-row>
+      <v-col md="8" cols="12" align="center">
         <br />
-        <b-input
+        <v-text-field
           type="number"
           v-model="form.id_cuadro"
-          v-on:keyup.enter="validarInput()"
+          @keyup.enter="validarInput"
           placeholder="Ingrese número de cuadro"
           required
-        ></b-input>
-      </b-col>
-      <b-col md="2" cols="6" align="center">
+        ></v-text-field>
+      </v-col>
+      <v-col md="2" cols="6" align="center">
         <br />
-        <b-button pill v-on:click="validarInput()"
-          ><span
+        <v-btn pill @click="validarInput">
+          <span
             class="spinner-border spinner-border-sm"
             role="status"
             aria-hidden="true"
             v-show="mostrar4"
           ></span>
-          <b-icon icon="search" v-show="mostrar5" aria-hidden="true"></b-icon>
-          Buscar</b-button
-        >
-      </b-col>
-      <b-col md="2" cols="6" align="center">
+          <v-icon v-show="mostrar5">mdi-magnify</v-icon>
+          Buscar
+        </v-btn>
+      </v-col>
+      <v-col md="2" cols="6" align="center">
         <br />
-        <b-button
-          v-b-modal.modal-1
+
+        <v-btn
+          @click="showModal = true"
           pill
-          variant="outline-info"
+          color="info"
           name="descarga"
           v-show="mostrar"
-          ><b-icon icon="download" aria-hidden="true"></b-icon> Exportar
-          PDF</b-button
         >
-      </b-col>
-    </b-row>
+          <v-icon>mdi-download</v-icon> Exportar PDF
+        </v-btn>
+      </v-col>
+    </v-row>
 
-    <!--Modal de Justificacion para descarga de PDF-->
-    <b-modal
-      ref="my-modal"
-      id="modal-1"
-      size="xl"
-      header-bg-variant="info"
-      title="Ingresar Datos"
-      hide-footer
-    >
-      <b-row>
-        <p>Seleccione el nombre de la fiscalía e ingrese la agencia o equipo solicitante</p>
-        <b-col md="12">
-          <!------ Fiscalia ------->
+    <!-- Modal de Justificacion para descarga de PDF -->
+    <v-dialog ref="showModal" id="modal-1" max-width="xl" hide-footer>
+      <v-card>
+        <v-card-text>
+          <p>
+            Seleccione el nombre de la fiscalía e ingrese la agencia o equipo
+            solicitante
+          </p>
 
-          <b-form-group
-            label=""
-            label-for="filter-input"
-            label-cols-sm="3"
-            label-align-sm="right"
-            label-size="sm"
-            class="mb-0"
-          >
-            <br />
-            <b-input-group size="sm">
-              <b-form-input
-                id="filter-input"
-                v-model="filter"
-                type="search"
-                placeholder="Buscador de Fiscalia"
-              ></b-form-input>
+          <!-- Fiscalia -->
+          <v-form>
+            <v-container>
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="filter"
+                    type="search"
+                    placeholder="Buscador de Fiscalia"
+                    clearable
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-form>
 
-              <b-input-group-append>
-                <b-button :disabled="!filter" @click="filter = ''"
-                  >Limpiar</b-button
-                >
-              </b-input-group-append>
-            </b-input-group>
-          </b-form-group>
-
-          <b-table
+          <v-data-table
             striped
-            sticky-header
-            hover
-            :filter="filter"
-            :select-mode="selectMode"
-            selectable
             :items="items"
+            :search="filter"
+            :select-mode="selectMode"
             @row-selected="onRowSelected"
-          ></b-table>
-          <br />
-        </b-col>
-        <b-col md="12">
-          <!-------- Equipo --------->
-          <b-form-group
-            id="input-group-3"
-            label-cols-sm="7"
-            label="Agencia o Equipo:"
-            label-for="input-3"
-          >
-            <b-form-input v-model="fiscalia.unidad"></b-form-input>
-          </b-form-group>
-        </b-col>
-      </b-row>
-      <br />
-      <div class="text-center">
-        <b-button
-          center
-          size="sm"
-          variant="outline-info"
-          v-on:click="validarDescarga()"
-          ><span
-            class="spinner-border spinner-border-sm"
-            role="status"
-            aria-hidden="true"
-            v-show="mostrar2"
-          ></span>
-          <b-icon icon="download" aria-hidden="true" v-show="mostrar3"></b-icon>
-          Descargar
-        </b-button>
-      </div>
-    </b-modal>
+          ></v-data-table>
+        </v-card-text>
 
-    <!--Modal de Justificacion para la busqueda-->
-    <b-modal
-      ref="my-modal2"
-      id="modal-2"
-      header-bg-variant="info"
-      title="Ingresar Justificacion de Busqueda"
-      hide-footer
-    >
-      <div class="form-group col-12">
-        <b-form-group
-          label="Justificación:"
-          label-for="name-input"
-          invalid-feedback="Name is required"
+        <!-- Equipo -->
+        <v-card-text>
+          <v-form>
+            <v-row>
+              <v-col cols="12">
+                <v-text-field
+                  v-model="fiscalia.unidad"
+                  label="Agencia o Equipo"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+          </v-form>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-btn small @click="validarDescarga">
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+              v-show="mostrar2"
+            ></span>
+            <v-icon v-show="mostrar3">mdi-download</v-icon> Descargar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <!-- Modal de Justificacion para la busqueda -->
+    <v-dialog v-model="dialogJustBusqueda" id="modal-2" hide-footer>
+      <v-card>
+        <v-card-text>
+          <v-form>
+            <v-row>
+              <v-col cols="12">
+                <v-textarea
+                  v-model="fiscalia.justificacion"
+                  label="Justificación"
+                  required
+                  rows="3"
+                ></v-textarea>
+              </v-col>
+            </v-row>
+          </v-form>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-btn small @click="validarJustificacion">
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+              v-show="mostrar6"
+            ></span>
+            <v-icon v-show="mostrar7">mdi-magnify</v-icon> Buscar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <br />
+    <br />
+
+    <!-- RESPUESTA DE BUSQUEDA DE CUADRO -->
+    <v-container id="cuadro1">
+      <v-row>
+        <v-col
+          cols="12"
+          v-for="(encabezado, index2) in encabezado"
+          :key="index2"
         >
-          <b-form-textarea
-            id="name-input"
-            rows="3"
-            v-model="fiscalia.justificacion"
-            required
-          ></b-form-textarea>
-        </b-form-group>
-        <br />
-      </div>
-      <br />
-      <div class="text-center">
-        <b-button
-          center
-          size="sm"
-          variant="outline-info"
-          v-on:click="validarJustificacion()"
-          ><span
-            class="spinner-border spinner-border-sm"
-            role="status"
-            aria-hidden="true"
-            v-show="mostrar6"
-          ></span>
-          <b-icon icon="search" aria-hidden="true" v-show="mostrar7"></b-icon>
-          Buscar
-        </b-button>
-      </div>
-    </b-modal>
+          <div class="text-center">
+            <h3>
+              {{
+                `REPORTE DEL SISTEMA INTEGRADO DE IDENTIFICACIÓN BALÍSTICA-IBIS QUE AMPARA COINCIDENCIAS HASTA EL ${encabezado.fecha} REGISTROS PARA USO EXCLUSIVO REFERENCIAL`
+              }}
+            </h3>
+          </div>
+          <br />
+          <br />
+          <h4>
+            {{
+              `Arma: ${encabezado.arma}, REGISTRO/SERIE: ${encabezado.serie}`
+            }}
+          </h4>
+          <h4 v-text="'Observaciones:   ' + encabezado.observacion"></h4>
+          <br />
+          <br />
 
-    <br />
-    <br />
-
-    <!--RESPUESTA DE BUSQUEDA DE CUADRO-->
-    <div id="cuadro1" md="12">
-      <div v-for="(encabezado, index2) in encabezado" :key="index2">
-        <div class="text-center">
-          <h3
-            v-text="
-              'REPORTE DEL SISTEMA INTEGRADO DE IDENTIFICACIÓN BALÍSTICA-IBIS QUE AMPARA COINCIDENCIAS HASTA EL ' +
-              encabezado.fecha +
-              ' REGISTROS PARA USO EXCLUSIVO REFERENCIAL'
-            "
-          ></h3>
-        </div>
-        <br />
-        <br />
-        <h4
-          v-text="
-            'Arma:   ' +
-            encabezado.arma +
-            ', REGISTRO/SERIE: ' +
-            encabezado.serie
-          "
-        ></h4>
-        <h4 v-text="'Observaciones:   ' + encabezado.observacion"></h4>
-      </div>
+          <v-col cols="12">
+            <v-btn @click="descargarReporte" color="info">
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+                v-show="mostrar8"
+              ></span>
+              <v-icon v-show="mostrar9">mdi-download</v-icon> Descargar Reporte
+            </v-btn>
+          </v-col>
+          <div class="table-responsive">
+            <v-data-table :headers="headers2" :items="tabla">
+              <template v-slot:items="props">
+                <tr>
+                  <td>{{ props.index + 1 }}</td>
+                  <td>{{ props.item.dato }}</td>
+                  <td>{{ props.item.correlativo }}</td>
+                  <td>{{ props.item.indicio }}</td>
+                  <td>{{ props.item.fechaIncor }}</td>
+                  <td>{{ props.item.fiscaliaMP }}</td>
+                  <td>{{ props.item.nombreAgencia }}</td>
+                  <td>{{ props.item.referencia }}</td>
+                  <td>{{ props.item.fecha }}</td>
+                  <td>{{ props.item.direccion }}</td>
+                  <td>{{ props.item.cuadroRelacion }}</td>
+                </tr>
+              </template>
+            </v-data-table>
+          </div>
+          F
+        </v-col>
+      </v-row>
       <br />
-      <div class="table-responsive">
-        <table class="table" id="tabla1">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Dato</th>
-              <th scope="col">Correlativo</th>
-              <th scope="col">Indicio</th>
-              <th scope="col">Fecha Incorporación</th>
-              <th scope="col">Fiscalía</th>
-              <th scope="col">Agencia / Equipo</th>
-              <th scope="col">Referencia MP</th>
-              <th scope="col">Fecha Suceso</th>
-              <th scope="col">Dirección de Recolección</th>
-              <th scope="col">Vinculación con otro(s) Cuadro(s)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(tabla1, index) in tabla" :key="index">
-              <th scope="row" v-text="index + 1"></th>
-              <td v-text="tabla1.dato"></td>
-              <td v-text="tabla1.correlativo"></td>
-              <td v-text="tabla1.indicio"></td>
-              <td v-text="tabla1.fechaIncor"></td>
-              <td v-text="tabla1.fiscaliaMP"></td>
-              <td v-text="tabla1.nombreAgencia"></td>
-              <td v-text="tabla1.referencia"></td>
-              <td v-text="tabla1.fecha"></td>
-              <td v-text="tabla1.direccion"></td>
-              <td v-text="tabla1.cuadroRelacion"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+      <br />
+    </v-container>
+
+    <!-- No se encontró coincidencia -->
+    <v-container id="cuadro2">
+      <v-row>
+        <v-col cols="12">
+          <div class="text-center">
+            <h3>
+              No se encontró coincidencia para el número de cuadro ingresado.
+            </h3>
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-container>
 </template>
+
 
 <script>
 import axios from "axios";
@@ -237,14 +224,14 @@ import swal from "sweetalert";
 
 const cf = require("../DIR");
 
-const url = cf.url + "/cuadro";
+//const url = cf.url + "/cuadro";
 const url2 = cf.url + "/bitacora";
 
 export default {
   data() {
     return {
       alerta: "",
-      
+      dialogJustBusqueda: false,
       mostrar: false,
       mostrar2: false, //spinner de descarga pdf
       mostrar3: true, // icon descarga pdf
@@ -703,6 +690,19 @@ export default {
       },
       consultas: [],
       tabla: [],
+      headers2: [
+        { text: '#', value: 'index' },
+        { text: 'Dato', value: 'dato' },
+        { text: 'Correlativo', value: 'correlativo' },
+        { text: 'Indicio', value: 'indicio' },
+        { text: 'Fecha Incorporación', value: 'fechaIncor' },
+        { text: 'Fiscalía', value: 'fiscaliaMP' },
+        { text: 'Agencia / Equipo', value: 'nombreAgencia' },
+        { text: 'Referencia MP', value: 'referencia' },
+        { text: 'Fecha Suceso', value: 'fecha' },
+        { text: 'Dirección de Recolección', value: 'direccion' },
+        { text: 'Vinculación con otro(s) Cuadro(s)', value: 'cuadroRelacion' },
+      ],
       encabezado: [],
       form: {
         //fromulario enviado al backend
@@ -718,6 +718,110 @@ export default {
         Authorization: "",
         idaction: "",
       },
+      respuesta: {
+        data: {
+          dato_arma: [
+            {
+              fecha: "22/9/2023",
+              arma: "Sub-Ametralladora, UZI, 9 x 19 Milimetros, SMG-UZI",
+              serie: "102043",
+              observacion: "No Hay",
+            },
+          ],
+          tabla: [
+            {
+              index: 5,
+              dato: "Huella Balistica - Pendiente",
+              correlativo: "BAL-10-13933-5.2",
+              indicio: "CASQUILLO",
+              nombreAgencia:
+                "(E4) Equipo Cuatro (EPP-SCC) Liquidación,(EPP) Equipo de Persecución Penal (SCC)",
+              fiscaliaMP: "FISCALIA DE SECCION DE DELITOS CONTRA LA VIDA",
+              referencia: "MP001-2010-107664",
+              fecha: "01/01/1900",
+              direccion: "23 Calle 16 av. Zona 5 Colonia 5 de Agosto",
+              victima: "NO INDICA",
+              fechaIncor: "20/02/2012",
+              cuadroRelacion: "538, 554, 327",
+            },
+            {
+              index: 1,
+              dato: "Indicio - Confirmado",
+              correlativo: "BAL-10-11593-30",
+              indicio: "CASQUILLO",
+              nombreAgencia:
+                "(AUX) Auxiliares (EPP-SCC),(E5) Equipo Cinco (EPP-SCC) Casos Especiales,(EPP) Equipo de Persecución Penal (SCC)",
+              fiscaliaMP: "FISCALIA DE SECCION DE DELITOS CONTRA LA VIDA",
+              referencia: "MP001-2010-93094",
+              fecha: "02/09/2010",
+              direccion:
+                "Km 9,5 ruta a Boca del Monte frente a puente de entrada a condominio Monte Azul, Guatemala",
+              victima: "NO INDICA",
+              fechaIncor: "18/02/2011",
+              cuadroRelacion: "326, 688, 327",
+            },
+            {
+              index: 3,
+              dato: "Indicio - Confirmado",
+              correlativo: "BAL-10-15623-15",
+              indicio: "CASQUILLO",
+              nombreAgencia:
+                "(AUX) Auxiliares (EPP-SCC),(E4) Equipo Cuatro (EPP-SCC) Liquidación,(EPP) Equipo de Persecución Penal (SCC)",
+              fiscaliaMP: "FISCALIA DE SECCION DE DELITOS CONTRA LA VIDA",
+              referencia: "MP001-2010-118821",
+              fecha: "18/11/2010",
+              direccion:
+                "13 calle y 16 Avenida frente al 16-63, Colonia Roosevelt, zona 11, Guatemala, Ciudad",
+              victima: "NO INDICA",
+              fechaIncor: "18/02/2011",
+              cuadroRelacion: "274",
+            },
+            {
+              index: 4,
+              dato: "Indicio - Confirmado",
+              correlativo: "BAL-11-4263-5",
+              indicio: "CASQUILLO",
+              nombreAgencia:
+                "(E2) Equipo Dos (EPP-SCC) ,(EPP) Equipo de Persecución Penal (SCC)",
+              fiscaliaMP: "FISCALIA DE SECCION DE DELITOS CONTRA LA VIDA",
+              referencia: "MP001-2011-27378",
+              fecha: "19/03/2011",
+              direccion:
+                "8 Avenida y Calzada San Juan frente al 8-78 Colonia Quinta Samayoa Zona 7 Guatemala, Guatemala",
+              victima: "NO INDICA",
+              fechaIncor: "20/05/2011",
+              cuadroRelacion: "1566",
+            },
+          ],
+          valid: true,
+        },
+        status: 200,
+        statusText: "OK",
+        headers: {
+          "content-length": "2124",
+          "content-type": "application/json; charset=utf-8",
+        },
+        config: {
+          url: "https://apidac.mp.gob.gt/consultasibis/tasks/cuadro",
+          method: "post",
+          data: '{"id_cuadro":"30","bitacora":{"horafecha":"2023-09-22T19:23:57.922Z","level":1,"message":"Consulta de cuadro en base de datos. Justificacíon:  prueba de concepto","busqueda":"30","fiscalia_solicitante":"","equipo_solicitante":"","nombres":"Anzony Rafael ","apellidos":"González Ríos","id":422,"rol":"ANALISTA","grupo":"ÁREA OPERATIVA","idGrupo":33,"nipId":20210498,"dependencia":"DAEFC","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDIyLCJ1c2VyIjp7Im5vbWJyZXMiOiJBbnpvbnkgUmFmYWVsICIsImFwZWxsaWRvcyI6IkdvbnrDoWxleiBSw61vcyIsImlkIjo0MjIsInJvbCI6IkFOQUxJU1RBIiwiZ3J1cG8iOiLDgVJFQSBPUEVSQVRJVkEiLCJpZEdydXBvIjozMywiZGlyRm90byI6Imh0dHBzOi8vYXBpZGFjLm1wLmdvYi5ndC9zaWdlZW1wL2ltYWdlbi9GT1RPUyBEQUMgMjAyMVxcMjAyMTA0OTguanBnIiwibmlwSWQiOjIwMjEwNDk4LCJkZXBlbmRlbmNpYSI6IkRBRUZDIiwiZGVwZW5kZW5jaWFEZXNjIjoiRGVwYXJ0YW1lbnRvIGRlIEFuw6FsaXNpcyBFc3RyYXTDqWdpY28gZGVsIEZlbsOzbWVubyBDcmltaW5hbCIsImNvcnJlbyI6ImFuem9ueWdAbGl2ZS5jb20ifSwiaWF0IjoxNjk1NDEwNTkzLCJleHAiOjE2OTU0MjEzOTN9.zuC1RZih4dtpjwzvde6VughkHMU5wSfG_mw7cglGxnk","infoDB":""},"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDIyLCJ1c2VyIjp7Im5vbWJyZXMiOiJBbnpvbnkgUmFmYWVsICIsImFwZWxsaWRvcyI6IkdvbnrDoWxleiBSw61vcyIsImlkIjo0MjIsInJvbCI6IkFOQUxJU1RBIiwiZ3J1cG8iOiLDgVJFQSBPUEVSQVRJVkEiLCJpZEdydXBvIjozMywiZGlyRm90byI6Imh0dHBzOi8vYXBpZGFjLm1wLmdvYi5ndC9zaWdlZW1wL2ltYWdlbi9GT1RPUyBEQUMgMjAyMVxcMjAyMTA0OTguanBnIiwibmlwSWQiOjIwMjEwNDk4LCJkZXBlbmRlbmNpYSI6IkRBRUZDIiwiZGVwZW5kZW5jaWFEZXNjIjoiRGVwYXJ0YW1lbnRvIGRlIEFuw6FsaXNpcyBFc3RyYXTDqWdpY28gZGVsIEZlbsOzbWVubyBDcmltaW5hbCIsImNvcnJlbyI6ImFuem9ueWdAbGl2ZS5jb20ifSwiaWF0IjoxNjk1NDEwNTkzLCJleHAiOjE2OTU0MjEzOTN9.zuC1RZih4dtpjwzvde6VughkHMU5wSfG_mw7cglGxnk"}',
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json;charset=utf-8",
+            authorization:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDIyLCJ1c2VyIjp7Im5vbWJyZXMiOiJBbnpvbnkgUmFmYWVsICIsImFwZWxsaWRvcyI6IkdvbnrDoWxleiBSw61vcyIsImlkIjo0MjIsInJvbCI6IkFOQUxJU1RBIiwiZ3J1cG8iOiLDgVJFQSBPUEVSQVRJVkEiLCJpZEdydXBvIjozMywiZGlyRm90byI6Imh0dHBzOi8vYXBpZGFjLm1wLmdvYi5ndC9zaWdlZW1wL2ltYWdlbi9GT1RPUyBEQUMgMjAyMVxcMjAyMTA0OTguanBnIiwibmlwSWQiOjIwMjEwNDk4LCJkZXBlbmRlbmNpYSI6IkRBRUZDIiwiZGVwZW5kZW5jaWFEZXNjIjoiRGVwYXJ0YW1lbnRvIGRlIEFuw6FsaXNpcyBFc3RyYXTDqWdpY28gZGVsIEZlbsOzbWVubyBDcmltaW5hbCIsImNvcnJlbyI6ImFuem9ueWdAbGl2ZS5jb20ifSwiaWF0IjoxNjk1NDEwNTkzLCJleHAiOjE2OTU0MjEzOTN9.zuC1RZih4dtpjwzvde6VughkHMU5wSfG_mw7cglGxnk",
+            idaction: "616da60877ce5e828b018de1",
+          },
+          transformRequest: [null],
+          transformResponse: [null],
+          timeout: 0,
+          xsrfCookieName: "XSRF-TOKEN",
+          xsrfHeaderName: "X-XSRF-TOKEN",
+          maxContentLength: -1,
+          maxBodyLength: -1,
+        },
+        request: {},
+      },
     };
   },
   methods: {
@@ -731,15 +835,15 @@ export default {
     onRowSelected(items) {
       this.selected = items;
     },
-    
+
     async buscarcuadro() {
-      const storage = JSON.parse(localStorage.getItem("datos"));
+      //const storage = JSON.parse(localStorage.getItem("datos"));
       this.mostrar4 = true;
       this.mostrar5 = false;
-      this.headers.Authorization = storage.token;
-      this.form.token = storage.token;
-      this.bitacora(1);
-      await axios
+      //this.headers.Authorization = storage.token;
+      //this.form.token = storage.token;
+      //this.bitacora(1);
+      /*await axios
         .post(url, this.form, {
           headers: {
             authorization: storage.token,
@@ -754,7 +858,14 @@ export default {
           //console.log(this.tabla)
           this.encabezado = this.consultas.dato_arma;
           //console.log(data);
-        });
+        });*/
+      this.encabezado = []; //limpia el encabezado para nueva consulta
+      this.tabla = []; //limpia la tabla para nueva consulta
+      this.consultas = this.respuesta.data;
+      this.tabla = this.consultas.tabla;
+      //console.log(this.tabla)
+      this.encabezado = this.consultas.dato_arma;
+      //console.log(data);
       this.validarRest();
     },
     async cuadropdf() {
@@ -773,13 +884,14 @@ export default {
         });
     },
 
-
-    validarInput(){
-      if(this.form.id_cuadro.length <=0){
+    validarInput() {
+      if (this.form.id_cuadro.length <= 0) {
         this.alerta = "Ingresar número de cuadro.";
         this.makeToast();
-      }else{
+        console.log("no validar input");
+      } else {
         this.Mostrarjustificacion();
+        console.log("validar input");
       }
     },
     validarJustificacion() {
@@ -787,7 +899,7 @@ export default {
       this.mostrar7 = false;
       if (this.fiscalia.justificacion.length > 5) {
         this.buscarcuadro();
-        this.$refs["my-modal2"].hide();
+        this.dialogJustBusqueda = false;
         this.mostrar4 = false;
         this.mostrar5 = true;
       } else {
@@ -831,23 +943,24 @@ export default {
             this.makeToast();
           }
         } else {
-          this.alerta = "Seleccionar la fiscalia, de no existir solicitar el registro a DTSI.";
+          this.alerta =
+            "Seleccionar la fiscalia, de no existir solicitar el registro a DTSI.";
           this.makeToast();
         }
       } else {
-        this.alerta = "Seleccionar la fiscalia, de no existir solicitar el registro a DTSI.";
+        this.alerta =
+          "Seleccionar la fiscalia, de no existir solicitar el registro a DTSI.";
         this.makeToast();
       }
       this.mostrar2 = false;
       this.mostrar3 = true;
     },
-    
+
     Mostrarjustificacion() {
-      this.$refs["my-modal2"].show();
+      this.dialogJustBusqueda = true;
       this.mostrar4 = true;
       this.mostrar5 = false;
     },
-
 
     bitacora(num) {
       const storage = JSON.parse(localStorage.getItem("datos"));
@@ -905,7 +1018,6 @@ export default {
       const fecha = dia + "/" + mes + "/" + anio;
       return fecha;
     },
-
 
     generarPDF() {
       this.$refs["my-modal"].hide();
@@ -1030,7 +1142,7 @@ export default {
         pdf.text(
           7,
           200,
-          'Confidencialidad: Reserva de la información de acuerdo a: a) Ley Orgánica del Ministerio Público, Decreto 40-94 Articulo 62, Literal C., Literal M. b) Ley de Acceso a la Información Pública, Decreto 57-2008 Articulo 23, Inciso 4. c) Código Procesal Penal, Decreto 17-73 Articulo 422 y Decreto 51-92 Articulo 314. Compartir esta información a personas ajenas a los casos, tiene consecuencias administrativas y penales.',
+          "Confidencialidad: Reserva de la información de acuerdo a: a) Ley Orgánica del Ministerio Público, Decreto 40-94 Articulo 62, Literal C., Literal M. b) Ley de Acceso a la Información Pública, Decreto 57-2008 Articulo 23, Inciso 4. c) Código Procesal Penal, Decreto 17-73 Articulo 422 y Decreto 51-92 Articulo 314. Compartir esta información a personas ajenas a los casos, tiene consecuencias administrativas y penales.",
           {
             maxWidth: 310,
             align: "justify",

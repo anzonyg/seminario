@@ -1,3 +1,7 @@
 module.exports = {
-    publicPath: '/consultasIbis'
+    publicPath: '/consultasIbis',
+
+    transpileDependencies: [
+      'vuetify'
+    ]
 }
