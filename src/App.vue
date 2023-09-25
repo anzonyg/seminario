@@ -1,263 +1,182 @@
 <template>
-    <v-app>
-      <!-- ENCABEZADO -->
-      <v-container>
-        <Encabezado />
-        <br />
-        <br />
-        <div>
-          <v-row>
-            <v-col md="10" xl="11" align="right" align-self="end" order="2" order-md="1">
-              <br />
-              <h4 class="text-primary">{{ nombre }}</h4>
-            </v-col>
-            <v-col md="2" xl="1" class="p-0" align="right" order="1" order-md="2">
-              <v-menu offset-y right>
-                <template v-slot:activator="{ on }">
-                  <v-btn text v-on="on">
-                    <v-icon v-if="imgmostrar">mdi-account-circle</v-icon>
-                    <v-icon v-else>mdi-account</v-icon>
-                  </v-btn>
-                </template>
-                <v-list>
-                  <v-list-item @click="downloadPDF">
-                    <v-icon>mdi-download</v-icon>
-                    Descargar Manual
-                  </v-list-item>
-                  <v-divider v-if="mostrar" />
-                  <v-list-item @click="link('consulta')">
-                    <v-icon>mdi-card-search</v-icon>
-                    Consultas
-                  </v-list-item>
-                  <v-list-item @click="link('report')">
-                    <v-icon>mdi-file-chart-outline</v-icon>
-                    Reporteria
-                  </v-list-item>
-                  <v-list-item @click="link('dashboard')">
-                    <v-icon>mdi-view-dashboard</v-icon>
-                    Dashboard
-                  </v-list-item>
-                </v-list>
-              </v-menu>
-            </v-col>
-          </v-row>
-        </div>
-      </v-container>
-      <br />
-      <!-- CONTENIDO -->
-      <v-container>
-        <div v-if="mostrar_Consulta">
-          <Consultas />
-        </div>
-        <div v-else-if="mostrar_Alertas">
-          <Alertas />
-        </div>
-        <div v-else-if="mostrar_Dashboard">
-          <Dashboard />
-        </div>
-        <div v-else-if="mostrar_Bloqueo">
-          <Bloqueo />
-        </div>
-      </v-container>
-    </v-app>
-  </template>
+  <v-app>
+    <!--Encabezado-->
+    <v-app-bar
+      absolute
+      color="#010326"
+      dark
+      shrink-on-scroll
+      prominent
+      src="@/assets/logo.png"
+      fade-img-on-scroll
+      scroll-target="#scrolling-techniques-4"
+      app
+    >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <h1 class="display-2 custom-center">Módulo de Consultas</h1>
+    </v-app-bar>
+    <!--Menu-->
+    <v-navigation-drawer v-model="drawer" absolute bottom temporary app>
+      <v-list class="primary">
+        <v-list-item class="px-2">
+          <v-list-item-avatar>
+            <v-img
+              src="https://randomuser.me/portraits/men/1.jpg"
+            ></v-img>
+          </v-list-item-avatar>
+          <v-list-item-content class="white--text">
+            <v-list-item-title class="text-h6">
+              Anzony Gonzalez
+            </v-list-item-title>
+            <v-list-item-subtitle class="white--text"
+              >agonzalez@gmail.com</v-list-item-subtitle
+            >
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+
+      <v-divider></v-divider>
+
+      <v-list>
+        <v-list-item link to="/home">
+          <v-list-item-icon>
+            <v-icon>mdi-home</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-title>Inicio</v-list-item-title>
+        </v-list-item>
+
+        <v-list-group prepend-icon="mdi-file-plus">
+          <template v-slot:activator>
+            <v-list-item-title>Registro</v-list-item-title>
+          </template>
+
+          <v-list-group :value="true" no-action sub-group>
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title>Persona</v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <v-list-item link to="/registro/docente">
+              <v-list-item-title>Docente</v-list-item-title>
+              <v-list-item-icon>
+                <v-icon>mdi-account</v-icon>
+              </v-list-item-icon>
+            </v-list-item>
+            <v-list-item link to="/registro/estudiante">
+              <v-list-item-title>Estudiante</v-list-item-title>
+              <v-list-item-icon>
+                <v-icon>mdi-account</v-icon>
+              </v-list-item-icon>
+            </v-list-item>
+          </v-list-group>
+          <v-list-group no-action sub-group>
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title>Colegio</v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <v-list-item link to="/registro/grado">
+              <v-list-item-title>Grado</v-list-item-title>
+              <v-list-item-icon>
+                <v-icon>mdi-school</v-icon>
+              </v-list-item-icon>
+            </v-list-item>
+            <v-list-item link to="/registro/curso">
+              <v-list-item-title>Curso</v-list-item-title>
+              <v-list-item-icon>
+                <v-icon>mdi-school</v-icon>
+              </v-list-item-icon>
+            </v-list-item>
+            <v-list-item link to="/registro/actividad">
+              <v-list-item-title>Actividad</v-list-item-title>
+              <v-list-item-icon>
+                <v-icon>mdi-check</v-icon>
+              </v-list-item-icon>
+            </v-list-item>
+          </v-list-group>
+        </v-list-group>
+
+        <v-list-group prepend-icon="mdi-magnify">
+          <template v-slot:activator>
+            <v-list-item-title>Buscador</v-list-item-title>
+          </template>
+          <v-list-item link to="/buscador/docente">
+            <v-list-item-icon>
+              <v-icon>mdi-magnify</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Docente</v-list-item-title>
+          </v-list-item>
+          <v-list-item link to="/buscador/estudiante">
+            <v-list-item-icon>
+              <v-icon>mdi-magnify</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Estudiante</v-list-item-title>
+          </v-list-item>
+        </v-list-group>
+
+        <v-list-group prepend-icon="mdi-file-find-outline">
+          <template v-slot:activator>
+            <v-list-item-title>Reporteria</v-list-item-title>
+          </template>
+          <v-list-item link to="/reporteria/curso">
+            <v-list-item-icon>
+              <v-icon>mdi-file-chart</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Curso</v-list-item-title>
+          </v-list-item>
+          <v-list-item link to="/reporteria/estudiante">
+            <v-list-item-icon>
+              <v-icon>mdi-file-chart</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Estudiante</v-list-item-title>
+          </v-list-item>
+        </v-list-group>
+
+        <v-list-item link to="/calificaciones">
+          <v-list-item-icon>
+            <v-icon>mdi-file-check</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-title>Calificaciones</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <!--Paginas-->
+    <v-main>
+      <router-view></router-view>
+    </v-main>
+  </v-app>
+</template>
   
   <script>
 
-  import Encabezado from "@/components/Encabezado.vue";
-  import Consultas from "@/components/Consultas_IBIS.vue";
-  
-  
-  import axios from "axios";
-  const cf = require("./DIR");
-  const url = cf.url + "/acceso";
-  const descarga = cf.url2 + "/download";
-  export default {
-    name: "App",
-    components: {
-      Encabezado,
-      Consultas,
-      
+//const cf = require("./DIR");
+export default {
+  name: "App",
+  components: {
+   
+  },
+  data: () => ({
+    drawer: false,
+    group: null,
+    
+  }),
+
+  watch: {
+    group() {
+      this.drawer = false;
     },
-    data() {
-      return {
-        mostrar: true,
-        mostrar_Consulta: true,
-        mostrar_Alertas: false,
-        mostrar_Bloqueo: false,
-        mostrar_Dashboard : false,
-        imgmostrar: false,
-        nombre: "Anzony Gonzalez",
-        id: "",
-        dependencia: "",
-        grupo: "",
-        foto: "",
-      };
-    },
-    methods: {
-      async downloadPDF() {
-        //descarga manual de usuario
-        axios({
-          url: descarga,
-          method: "GET",
-          responseType: "blob",
-        }).then((response) => {
-          var fileURL = window.URL.createObjectURL(new Blob([response.data]));
-          var fileLink = document.createElement("a");
-  
-          fileLink.href = fileURL;
-          fileLink.setAttribute("download", "Manual_Usuario.pdf");
-          document.body.appendChild(fileLink);
-          fileLink.click();
-        });
-      },
-      async verToken() {
-        //verifica token
-        let verificar = false;
-        //console.log(this.$route.params.token);
-        await axios
-          //.get("http://172.18.230.112:9001/sigeemp/revisarToken/", {
-            .get("https://apidac.mp.gob.gt/sigeemp//sigeemp/revisarToken/", {
-            //donde realiza la consulta
-            headers: { Authorization: this.$route.params.token }, // el token
-          })
-          .then((r) => r.data)
-          .then((res) => {
-            if (res.valid) {
-              const auxDataUser = {
-                token: this.$route.params.token,
-                uid: res.token.user.id,
-                userData: res.token.user,
-              };
-              //console.log(auxDataUser); // ver info
-              this.foto = res.token.user.dirFoto;
-              this.imgmostrar = true;
-              localStorage.setItem("datos", JSON.stringify(auxDataUser));
-              var nombrecompleto =
-                auxDataUser.userData.nombres +
-                " " +
-                auxDataUser.userData.apellidos;
-              this.nombre = nombrecompleto;
-              this.validarAcceso(auxDataUser.userData);
-              verificar = true;
-            }
-          });
-        //.catch(error => console.log(error))
-  
-        if (verificar == false) {
-          console.log(verificar);
-          this.mostrar_Bloqueo = true;
-        }
-      },
-      async validarAcceso(user) {
-        const userlist = user;
-        var dato = userlist.grupo;
-        if(dato == null){
-          dato = userlist.dependencia;
-        }
-        const list = {
-          uid: userlist.id + "",
-          rol: userlist.rol.toUpperCase(),
-          grupo: dato.toUpperCase(),
-          dependencia: userlist.dependencia,
-          bitacora: this.bitacora(userlist, "Inicio de sesion en base de datos."),
-        };
-        await axios.post(url, list).then((data) => {
-          const result1 = data.data;
-          console.log(result1);
-          if (result1 == "report") {
-            console.log("acceso a reporte consedido!");
-            this.mostrar = true;
-            this.mostrar_Consulta = true;
-            this.mostrar_Bloqueo = false;
-            this.mostrar_Alertas = false;
-          } else if (result1 == "consult") {
-            console.log("acceso a consulta consedido!");
-            this.mostrar_Consulta = true;
-            this.mostrar_Bloqueo = false;
-            this.mostrar_Alertas = false;
-          } else if (result1 == "negativo") {
-            console.log("acceso a negativo!");
-            this.mostrar_Bloqueo = true;
-            this.mostrar_Consulta = false;
-            this.mostrar_Alertas = false;
-          } else {
-            this.mostrar_Bloqueo = true;
-            this.mostrar_Consulta = false;
-            this.mostrar_Alertas = false;
-          }
-        });
-      },
-      bitacora(user, text) {
-        const userlist = user;
-        let bitacora = {
-          horafecha: new Date(),
-          level: 0,
-          message: text,
-          codproceso: "",
-          busqueda: "",
-          fiscalia_solicitante: "",
-          equipo_solicitante: "",
-          nombres: userlist.nombres,
-          apellidos: userlist.apellidos,
-          id: userlist.id,
-          rol: userlist.rol,
-          grupo: userlist.grupo,
-          idGrupo: userlist.idGrupo,
-          nipId: userlist.nipId,
-          dependencia: userlist.dependencia,
-        };
-        return bitacora;
-      },
-  
-      link(dato) {
-        var option = dato;
-        //console.log(option);
-        if (option == "report") {
-          this.mostrar_Consulta = false;
-          this.mostrar_Bloqueo = false;
-          this.mostrar_Alertas = true;
-          this.mostrar_Dashboard = false;
-        } else if (option == "consulta") {
-          this.mostrar_Consulta = true;
-          this.mostrar_Bloqueo = false;
-          this.mostrar_Alertas = false;
-          this.mostrar_Dashboard = false;
-        } else if (option == "dashboard") {
-          this.mostrar_Consulta = false;
-          this.mostrar_Bloqueo = false;
-          this.mostrar_Alertas = false;
-          this.mostrar_Dashboard = true;
-        }else {
-          this.mostrar_Consulta = false;
-          this.mostrar_Bloqueo = true;
-          this.mostrar_Alertas = false;
-          this.mostrar_Dashboard = false;
-        }
-      },
-    },
-    created() {
-      //console.log("eliminacion de registro!!!");
-      localStorage.removeItem("datos");
-      /*console.log(this.$route.params.token);
-      console.log("inicio montaje!!!");
-      console.log(window.location);
-      this.verToken();
-      console.log(this.$route.params.token + "  " + cont++);*/
-    },
-    mounted() {
-      //console.log(this.$route.params.token + "  " + cont++);
-      //console.log("inicio montaje!!!");
-      //console.log(window.location);
-      
-      
-      //this.verToken();
-    },
-    updated() {
-      /*console.log("inicio actualizacion!!!");
-      this.verToken();
-      console.log("actualizado!!!");
-      console.log(this.$route.params.token + "  " + cont++);*/
-    },
-  };
-  </script>
+  },
+};
+</script>
+  <style>
+.custom-center {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
