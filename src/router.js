@@ -11,50 +11,50 @@ const routes = [
 
     {
         path: '/registro/docente',
-        name: 'docente',
+        name: 'docenteReg',
         component: () => import('@/components/registro/Docente.vue')
     },
     {
         path: '/registro/estudiante',
-        name: 'estudiante',
+        name: 'estudianteReg',
         component: () => import('@/components/registro/Estudiante.vue')
     },
 
     {
         path: '/registro/grado',
-        name: 'grado',
+        name: 'gradoReg',
         component: () => import('@/components/registro/Grado.vue')
     },
     {
         path: '/registro/curso',
-        name: 'curso',
+        name: 'cursoReg',
         component: () => import('@/components/registro/Curso.vue')
     },
     {
         path: '/registro/actividad',
-        name: 'actividad',
+        name: 'actividadReg',
         component: () => import('@/components/registro/Actividad.vue')
     },
 
     {
         path: '/buscador/docente',
-        name: 'docente',
+        name: 'docenteBus',
         component: () => import('@/components/buscador/Docente.vue')
     },
     {
         path: '/buscador/estudiante',
-        name: 'estudiante',
+        name: 'estudianteBus',
         component: () => import('@/components/buscador/Estudiante.vue')
     },
 
     {
         path: '/reporteria/curso',
-        name: 'curso',
+        name: 'cursoReport',
         component: () => import('@/components/reporteria/Curso.vue')
     },
     {
         path: '/reporteria/estudiante',
-        name: 'estudiante',
+        name: 'estudianteReport',
         component: () => import('@/components/reporteria/Estudiante.vue')
     },
 
