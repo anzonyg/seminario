@@ -59,7 +59,7 @@
     </v-row>
     <br />
 
-    <!-- RESPUESTA DE BUSQUEDA ESTUDIANTE -->
+    <!-- RESPUESTA DE BUSQUEDA ACTIVIDAD -->
     <v-container id="cuadro1" v-if="respuestaBusqueda">
       <v-row>
         <v-col cols="12">
@@ -89,14 +89,7 @@
                       <v-card-text>
                         <v-container>
                           <v-row>
-                            <v-col cols="12" sm="6" md="6">
-                              <v-text-field
-                                v-model="editedItem.nombre"
-                                label="Nombre de Actividad"
-                                required
-                              ></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="6">
+                            <v-col cols="12">
                               <v-select
                                 :items="tipoActividad"
                                 label="Tipo de Actividad"
@@ -104,7 +97,7 @@
                                 required
                               ></v-select>
                             </v-col>
-                            <v-col cols="12" sm="12" md="12">
+                            <v-col cols="12">
                               <v-textarea
                                 v-model="editedItem.descripcion"
                                 label="Descripcion"
@@ -203,7 +196,6 @@ export default {
         "Recuperacion 4",
       ],
       headers: [
-        { text: "Nombre de Actividad", value: "nombre" },
         { text: "Tipo de Actividad", value: "tipo" },
         { text: "Descripcion", value: "descripcion" },
         { text: "Detalle", value: "actions", sortable: false },
@@ -232,27 +224,17 @@ export default {
 
       respuesta: {
         data: {
-          dato_arma: [
-            {
-              nombre: "Anzony Gonzalez",
-              grado: "6to. Primaria",
-              seccion: "A",
-            },
-          ],
           tabla: [
             {
-              nombre: "Actividad no. 1",
               tipo: "Nota 1",
               descripcion: "22",
             },
             {
-              nombre: "Actividad no. 2",
               tipo: "Nota 2",
               descripcion: "16",
             },
             {
-              nombre: "Actividad no. 3",
-              tipo: "Recuperacion 8",
+              tipo: "Recuperacion 2",
               descripcion: "cambia de carrera",
             },
             // ... (otras entradas de tabla)

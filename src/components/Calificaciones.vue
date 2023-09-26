@@ -30,8 +30,7 @@
         </v-btn>
       </v-col>
     </v-row>
-    <br />
-
+    
     <!-- FORMULARIO BUSQUEDA DE MATERIA -->
     <v-row v-if="respuestaBusquedaMateria">
       <v-col md="10" cols="12" align="center">
@@ -57,35 +56,52 @@
         </v-btn>
       </v-col>
     </v-row>
-    <br />
+
+    <!-- FORMULARIO BUSQUEDA DE ACTIVIDAD -->
+    <v-row v-if="respuestaBusquedaActividad">
+      <v-col md="10" cols="12" align="center">
+        <br />
+        <v-select
+          :items="itemsActividad"
+          label="Seleccionar la actividad"
+          v-model="actividad"
+          required
+          item-text="nombre"
+        ></v-select>
+      </v-col>
+      <v-col md="2" cols="12" align="center">
+        <br />
+        <v-btn pill @click="validarInputActividad" color="secondary">
+          <v-progress-circular
+            indeterminate
+            :size="25"
+            color="light"
+            v-show="progressBuscarActividad"
+          ></v-progress-circular>
+          <v-icon v-show="icoBuscarActividad">mdi-magnify</v-icon>
+          Buscar
+        </v-btn>
+      </v-col>
+      <v-col cols="12">
+        <br />
+        <h3>Descripcion: {{ descripcionSeleccionada }}</h3>
+      </v-col>
+    </v-row>
 
     <!-- RESPUESTA DE BUSQUEDA ESTUDIANTE -->
     <v-container id="cuadro1" v-if="respuestaBusqueda">
       <v-row>
         <v-col cols="12">
-          <br />
           <div class="table-responsive">
             <v-data-table :headers="headers" :items="tabla" hide-default-footer>
               <template v-slot:top>
                 <v-toolbar flat>
                   <v-spacer></v-spacer>
                   <v-dialog v-model="dialog" max-width="500px">
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-btn
-                        color="primary"
-                        dark
-                        class="mb-2"
-                        v-bind="attrs"
-                        v-on="on"
-                      >
-                        Añadir Actividad
-                      </v-btn>
-                    </template>
                     <v-card>
                       <v-card-title>
                         <span class="text-h5">{{ formTitle }}</span>
                       </v-card-title>
-
                       <v-card-text>
                         <v-container>
                           <v-row>
@@ -93,23 +109,17 @@
                               <v-text-field
                                 v-model="editedItem.nombre"
                                 label="Nombre de Actividad"
-                                required
+                                disabled
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
-                              <v-select
-                                :items="tipoActividad"
-                                label="Tipo de Actividad"
-                                v-model="editedItem.tipo"
+                              <v-text-field
+                                type="number"
+                                v-model="editedItem.nota"
+                                label="Nota"
+                                max="25"
                                 required
-                              ></v-select>
-                            </v-col>
-                            <v-col cols="12" sm="12" md="12">
-                              <v-textarea
-                                v-model="editedItem.descripcion"
-                                label="Descripcion"
-                                required
-                              ></v-textarea>
+                              ></v-text-field>
                             </v-col>
                           </v-row>
                         </v-container>
@@ -190,22 +200,18 @@ export default {
       materia: "", // valor que se selecciono en selectbox de materia
       respuestaBusquedaMateria: false,
 
+      progressBuscarActividad: false, //icono spiner para boton buscar actividad
+      icoBuscarActividad: true, //icono buscar para boton buscar actividad
+      consultasActividad: [], // ingresa datos del backend
+      itemsActividad: [], //selectbox de actividad
+      actividad: "", // valor que se selecciono en selectbox de actividad
+      respuestaBusquedaActividad: false,
+
       consultas: [], //ingresa datos del backend
       tabla: [],
-      tipoActividad: [
-        "Nota 1",
-        "Nota 2",
-        "Nota 3",
-        "Nota 4",
-        "Recuperacion 1",
-        "Recuperacion 2",
-        "Recuperacion 3",
-        "Recuperacion 4",
-      ],
       headers: [
-        { text: "Nombre de Actividad", value: "nombre" },
-        { text: "Tipo de Actividad", value: "tipo" },
-        { text: "Descripcion", value: "descripcion" },
+        { text: "Nombre del Estudiante", value: "nombre" },
+        { text: "Nota", value: "nota" },
         { text: "Detalle", value: "actions", sortable: false },
       ],
 
@@ -230,30 +236,31 @@ export default {
         token: [],
       },
 
+      tipoActividad: [
+        "Nota 1",
+        "Nota 2",
+        "Nota 3",
+        "Nota 4",
+        "Recuperacion 1",
+        "Recuperacion 2",
+        "Recuperacion 3",
+        "Recuperacion 4",
+      ],
+
       respuesta: {
         data: {
-          dato_arma: [
-            {
-              nombre: "Anzony Gonzalez",
-              grado: "6to. Primaria",
-              seccion: "A",
-            },
-          ],
           tabla: [
             {
-              nombre: "Actividad no. 1",
-              tipo: "Nota 1",
-              descripcion: "22",
+              nombre: "Anzony Gonzalez",
+              nota: "14",
             },
             {
-              nombre: "Actividad no. 2",
-              tipo: "Nota 2",
-              descripcion: "16",
+              nombre: "Rafael Gonzalez",
+              nota: " 25",
             },
             {
               nombre: "Actividad no. 3",
-              tipo: "Recuperacion 8",
-              descripcion: "cambia de carrera",
+              nota: "18",
             },
             // ... (otras entradas de tabla)
           ],
@@ -281,6 +288,19 @@ export default {
             "Lenguaje",
             "Ciencias Sociales",
             "Ciencias Naturales",
+            // ... (otras entradas de tabla)
+          ],
+          valid: true,
+        },
+        // ...
+      },
+      respuestaActividad: {
+        data: {
+          tabla: [
+            { nombre: "Nota 1", descripcion: "descripcion de la actividad 1" },
+            { nombre: "Nota 2", descripcion: "descripcion de la actividad 2" },
+            { nombre: "Nota 3", descripcion: "descripcion de la actividad 3" },
+            { nombre: "Nota 4", descripcion: "descripcion de la actividad 4" },
             // ... (otras entradas de tabla)
           ],
           valid: true,
@@ -347,6 +367,20 @@ export default {
       this.icoBuscarMateria = false;
 
       // Limpieza de datos
+      this.itemsActividad = [];
+
+      // Asignar nuevos valores
+      this.consultasActividad = this.respuestaActividad.data;
+      this.itemsActividad = this.consultasActividad.tabla;
+
+      // Validar datos
+      this.validarRestActividad();
+    },
+    async buscarEstudiante() {
+      this.progressBuscarActividad = true;
+      this.icoBuscarActividad = false;
+
+      // Limpieza de datos
       this.consultas = [];
       this.tabla = [];
 
@@ -355,7 +389,7 @@ export default {
       this.tabla = this.consultas.tabla;
 
       // Validar datos
-      this.validarRestActividad();
+      this.validarRestEstudiante();
     },
     async cuadropdf() {
       // ... (código para descargar PDF)
@@ -385,6 +419,18 @@ export default {
         console.log("validar input " + this.materia);
       }
     },
+    validarInputActividad() {
+      if (this.actividad.length <= 0) {
+        this.alerta = "Seleccionar Actividad";
+        this.makeToast();
+        console.log("no validar input " + this.actividad);
+      } else {
+        this.progressBuscarActividad = true;
+        this.icoBuscarActividad = false;
+        this.buscarEstudiante();
+        console.log("validar input " + this.actividad);
+      }
+    },
 
     validarRestGrado() {
       if (this.consultasGrado.valid == false) {
@@ -401,33 +447,44 @@ export default {
       }
     },
     validarRestMateria() {
+      this.progressBuscarMateria = false;
+      this.icoBuscarMateria = true;
       if (this.consultasMateria.valid == false) {
         this.alerta = "El usuario ha expirado.";
         this.makeToast();
-        this.progressBuscarMateria = false;
-        this.icoBuscarMateria = true;
         this.respuestaBusquedaMateria = false;
       } else if (this.consultasMateria.tabla.length <= 0) {
         this.alerta = "La materia no existe en la base de datos";
         this.makeToast();
-        this.progressBuscarMateria = false;
-        this.icoBuscarMateria = true;
         this.respuestaBusquedaMateria = false;
       } else {
-        this.progressBuscarMateria = false;
-        this.icoBuscarMateria = true;
         this.respuestaBusquedaMateria = true;
       }
     },
     validarRestActividad() {
       this.progressBuscarMateria = false;
       this.icoBuscarMateria = true;
+      if (this.consultasActividad.valid == false) {
+        this.alerta = "El usuario ha expirado.";
+        this.makeToast();
+        this.respuestaBusquedaActividad = false;
+      } else if (this.consultasActividad.tabla.length <= 0) {
+        this.alerta = "La actividad no existe en la base de datos";
+        this.makeToast();
+        this.respuestaBusquedaActividad = false;
+      } else {
+        this.respuestaBusquedaActividad = true;
+      }
+    },
+    validarRestEstudiante() {
+      this.progressBuscarActividad = false;
+      this.icoBuscarActividad = true;
       if (this.consultas.valid == false) {
         this.alerta = "El usuario ha expirado.";
         this.makeToast();
         this.respuestaBusquedaMateria = false;
       } else if (this.consultas.tabla.length <= 0) {
-        this.alerta = "La actividad no existe en la base de datos";
+        this.alerta = "Los estudiantes no existe en la base de datos";
         this.makeToast();
         this.respuestaBusqueda = false;
       } else {
@@ -482,6 +539,13 @@ export default {
   computed: {
     formTitle() {
       return this.editedIndex === -1 ? "Nueva Actividad" : "Editar Actividad";
+    },
+    descripcionSeleccionada() {
+      const actividadSeleccionada = this.itemsActividad.find(
+        (item) => item.nombre === this.actividad
+      );
+
+      return actividadSeleccionada ? actividadSeleccionada.descripcion : "";
     },
   },
 
