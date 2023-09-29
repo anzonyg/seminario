@@ -1,40 +1,8 @@
 <template>
   <v-container>
-    <!-- FORMULARIO BUSQUEDA DE GRADO Y SECCION -->
-    <v-row v-if="respuestaBusquedaGrado">
-      <v-col cols="12">
-        <br />
-        <h1>Creacion de Actividades</h1>
-        <br />
-      </v-col>
-      <v-col md="10" cols="12" align="center">
-        <br />
-        <v-select
-          :items="itemsGrado"
-          label="Seleccionar el Grado y Seccion"
-          v-model="grado"
-          required
-        ></v-select>
-      </v-col>
-      <v-col md="2" cols="12" align="center">
-        <br />
-        <v-btn pill @click="validarInputGrado" color="secondary">
-          <v-progress-circular
-            indeterminate
-            :size="25"
-            color="light"
-            v-show="progressBuscarGrado"
-          ></v-progress-circular>
-          <v-icon v-show="icoBuscarGrado">mdi-magnify</v-icon>
-          Buscar
-        </v-btn>
-      </v-col>
-    </v-row>
-    <br />
-
     <!-- FORMULARIO BUSQUEDA DE MATERIA -->
     <v-row v-if="respuestaBusquedaMateria">
-      <v-col md="10" cols="12" align="center">
+      <v-col md="3" cols="4" align="center">
         <br />
         <v-select
           :items="itemsMateria"
@@ -43,7 +11,25 @@
           required
         ></v-select>
       </v-col>
-      <v-col md="2" cols="12" align="center">
+      <v-col md="3" cols="4" align="center">
+        <br />
+        <v-select
+          :items="itemsCiclo"
+          label="Seleccionar la ciclo"
+          v-model="ciclo"
+          required
+        ></v-select>
+      </v-col>
+      <v-col md="3" cols="4" align="center">
+        <br />
+        <v-select
+          :items="itemsBloque"
+          label="Seleccionar la bloque"
+          v-model="bloque"
+          required
+        ></v-select>
+      </v-col>
+      <v-col md="3" cols="12" align="center">
         <br />
         <v-btn pill @click="validarInputMateria" color="secondary">
           <v-progress-circular
@@ -183,6 +169,12 @@ export default {
       materia: "", // valor que se selecciono en selectbox de materia
       respuestaBusquedaMateria: false,
 
+      itemsCiclo: [], //selectbox de ciclo
+      ciclo: "",
+
+      itemsBloque: ["Bloque 1", "Bloque 2", "Bloque 3", "Bloque 4"], //selectbox de bloque
+      bloque: "",
+
       consultas: [], //ingresa datos del backend
       tabla: [],
       tipoActividad: [
@@ -216,10 +208,9 @@ export default {
         descripcion: "",
       },
       encabezado: [],
-      formGrado: {
+      formMateria: {
         nombre: "",
-        bitacora: [],
-        token: [],
+        idDocente: "",
       },
 
       respuesta: {
@@ -310,17 +301,13 @@ export default {
       this.validarRestGrado();
     },
     async buscarMateria() {
-      this.progressBuscarGrado = true;
-      this.icoBuscarGrado = false;
-
       // Limpieza de datos
       this.itemsMateria = [];
 
       // Asignar nuevos valores
       this.consultasMateria = this.respuestaMateria.data;
       this.itemsMateria = this.consultasMateria.tabla;
-      this.progressBuscarGrado = false;
-      this.icoBuscarGrado = true;
+      this.itemsCiclo = this.generarArrayDeAnios();
       // Validar datos
       this.validarRestMateria();
     },
@@ -343,21 +330,9 @@ export default {
       // ... (código para descargar PDF)
     },
 
-    validarInputGrado() {
-      if (this.grado.length <= 0) {
-        this.alerta = "Seleccionar Grado y Seccion";
-        this.makeToast();
-        console.log("no validar input " + this.grado);
-      } else {
-        this.progressBuscarGrado = true;
-        this.icoBuscarGrado = false;
-        this.buscarMateria();
-        console.log("validar input " + this.grado);
-      }
-    },
     validarInputMateria() {
-      if (this.materia.length <= 0) {
-        this.alerta = "Seleccionar Materia";
+      if (this.materia.length <= 0 || this.ciclo.length <= 0 || this.bloque.length <= 0){
+        this.alerta = "Seleccionar Materia, Ciclo, Bloque";
         this.makeToast();
         console.log("no validar input " + this.materia);
       } else {
@@ -368,36 +343,16 @@ export default {
       }
     },
 
-    validarRestGrado() {
-      if (this.consultasGrado.valid == false) {
-        this.alerta = "El usuario ha expirado.";
-        this.makeToast();
-        this.respuestaBusquedaGrado = false;
-      } else if (this.consultasGrado.tabla.length <= 0) {
-        this.alerta = "El grado no existe en la base de datos";
-        this.makeToast();
-        this.respuestaBusquedaGrado = false;
-      } else {
-        this.respuestaBusquedaGrado = true;
-        //console.log('funciona respuesta en Grado')
-      }
-    },
     validarRestMateria() {
       if (this.consultasMateria.valid == false) {
         this.alerta = "El usuario ha expirado.";
         this.makeToast();
-        this.progressBuscarMateria = false;
-        this.icoBuscarMateria = true;
         this.respuestaBusquedaMateria = false;
       } else if (this.consultasMateria.tabla.length <= 0) {
         this.alerta = "La materia no existe en la base de datos";
         this.makeToast();
-        this.progressBuscarMateria = false;
-        this.icoBuscarMateria = true;
         this.respuestaBusquedaMateria = false;
       } else {
-        this.progressBuscarMateria = false;
-        this.icoBuscarMateria = true;
         this.respuestaBusquedaMateria = true;
       }
     },
@@ -407,7 +362,7 @@ export default {
       if (this.consultas.valid == false) {
         this.alerta = "El usuario ha expirado.";
         this.makeToast();
-        this.respuestaBusquedaMateria = false;
+        this.respuestaBusqueda = false;
       } else if (this.consultas.tabla.length <= 0) {
         this.alerta = "La actividad no existe en la base de datos";
         this.makeToast();
@@ -415,6 +370,17 @@ export default {
       } else {
         this.respuestaBusqueda = true;
       }
+    },
+
+    generarArrayDeAnios() {
+      const anioActual = new Date().getFullYear();
+      const arrayDeAnios = [];
+
+      for (let anio = 2023; anio <= anioActual; anio++) {
+        arrayDeAnios.push(anio);
+      }
+      console.log(arrayDeAnios + " de ");
+      return arrayDeAnios;
     },
 
     editItem(item) {
@@ -477,7 +443,7 @@ export default {
   },
 
   created() {
-    this.buscarGrado();
+    this.buscarMateria();
   },
 };
 </script>

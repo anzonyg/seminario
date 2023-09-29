@@ -7,13 +7,21 @@
         <h1>Reporteria de Estudiante</h1>
         <br />
       </v-col>
-      <v-col md="8" cols="12" align="center">
+      <v-col md="4" sm="6" cols="12" align="center">
         <br />
         <v-text-field
           type="text"
           v-model="form.nombre"
-          @keyup.enter="validarInput"
           placeholder="Ingrese nombre del estudiante"
+          required
+        ></v-text-field>
+      </v-col>
+      <v-col md="4" sm="6" cols="12" align="center">
+        <br />
+        <v-text-field
+          type="text"
+          v-model="form.apellido"
+          placeholder="Ingrese apellido del estudiante"
           required
         ></v-text-field>
       </v-col>
@@ -117,8 +125,8 @@ export default {
       encabezado: [],
       form: {
         nombre: "",
-        bitacora: [],
-        token: [],
+        apellido: "",
+        idDocente: "",
       },
       form2: {
         bitacora: [],
@@ -199,7 +207,7 @@ export default {
       // ... (código para descargar PDF)
     },
     validarInput() {
-      if (this.form.nombre.length <= 0) {
+      if (this.form.nombre.length <= 0 || this.form.apellido.length <= 0) {
         this.alerta = "Ingresar nombre del estudiante.";
         this.makeToast();
         console.log("no validar input");
