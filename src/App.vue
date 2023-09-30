@@ -5,15 +5,13 @@
       absolute
       color="#010326"
       dark
-      shrink-on-scroll
-      prominent
-      src="@/assets/logo.png"
-      fade-img-on-scroll
-      scroll-target="#scrolling-techniques-4"
       app
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <h1 class="display-2 custom-center">Módulo de Consultas</h1>
+      <h1 class="display-2 custom-center"></h1>
+      <v-spacer></v-spacer>
+      <v-btn color="white" outlined>Registrarse</v-btn>
+      <v-btn color="white" outlined>Iniciar Sesión</v-btn>
     </v-app-bar>
     <!--Menu-->
 
@@ -58,7 +56,6 @@
               <v-icon class="white--text">mdi-file-plus</v-icon>
             </v-list-item-icon>
             <v-list-item-title class="white--text">Registro</v-list-item-title>
-            
           </template>
 
           <v-list-item link to="/registro/grado" class="white--text">
@@ -123,7 +120,11 @@
               <v-icon class="white--text">mdi-file-chart</v-icon>
             </v-list-item-icon>
           </v-list-item>
-          <v-list-item link to="/reporteria/estudiante" class="white--text">
+          <v-list-item
+            link
+            to="/reporteria/estudianteCiclo"
+            class="white--text"
+          >
             <v-list-item-title>Estudiante Ciclo</v-list-item-title>
             <v-list-item-icon>
               <v-icon class="white--text">mdi-file-chart</v-icon>
@@ -152,6 +153,29 @@
     <v-main>
       <router-view></router-view>
     </v-main>
+
+    <!--Pie de Pagina-->
+    <v-footer app class="primary">
+      <v-container>
+        <v-row>
+          <v-col cols="12" md="6">
+            <h2 class="white--text">Contáctanos</h2>
+            <p class="white--text">Dirección: Calle Principal #123, Ciudad</p>
+            <p class="white--text">Email: docentes@escuelaxyz.com</p>
+            <p class="white--text">Teléfono: (123) 456-7890</p>
+          </v-col>
+          <v-col cols="12" md="6">
+            <h2 class="white--text">Enlaces Rápidos</h2>
+            <ul>
+              <li><a href="#" class="white--text">Inicio</a></li>
+              <li><a href="#" class="white--text">Recursos</a></li>
+              <li><a href="#" class="white--text">Comunidad</a></li>
+              <li><a href="#" class="white--text">Contacto</a></li>
+            </ul>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-footer>
   </v-app>
 </template>
   

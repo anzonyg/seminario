@@ -6,7 +6,7 @@ const routes = [
     {
         path: '/home',
         name: 'home',
-        
+        component: () => import('@/components/Home.vue')
     },
 
     {
@@ -54,8 +54,13 @@ const routes = [
     },
     {
         path: '/reporteria/estudiante',
-        name: 'estudianteReport',
+        name: 'estudianteReportBloque',
         component: () => import('@/components/reporteria/Estudiante.vue')
+    },
+    {
+        path: '/reporteria/estudianteCiclo',
+        name: 'estudianteReportCiclo',
+        component: () => import('@/components/reporteria/EstudianteCiclo.vue')
     },
 
     {
