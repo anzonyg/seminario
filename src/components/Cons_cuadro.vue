@@ -222,7 +222,7 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import swal from "sweetalert";
 
-const cf = require("../DIR");
+const cf = require("./DIR");
 
 //const url = cf.url + "/cuadro";
 const url2 = cf.url + "/bitacora";

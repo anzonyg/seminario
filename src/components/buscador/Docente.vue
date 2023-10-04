@@ -19,6 +19,8 @@
                 <br />
                 <v-toolbar flat>
                   <v-spacer></v-spacer>
+
+                  <!-- EDITAR DATOS -->
                   <v-dialog v-model="dialog" max-width="1100px">
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn
@@ -41,84 +43,41 @@
                           <v-row>
                             <v-col cols="12" sm="6" md="6">
                               <v-text-field
-                                v-model="editedItem.nombre"
+                                v-model="editedItem.Nombre"
                                 label="Nombre"
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
                               <v-text-field
-                                v-model="editedItem.apellido"
+                                v-model="editedItem.Apellido"
                                 label="Apellido"
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
                               <v-text-field
                                 type="number"
-                                v-model="editedItem.dpi"
+                                v-model="editedItem.DPI"
                                 label="DPI"
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
-                              <v-select
-                                :items="sexo"
-                                label="Sexo"
-                                v-model="editedItem.sexo"
-                                required
-                              ></v-select>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="6">
                               <v-text-field
-                                v-model="editedItem.direccion"
-                                label="Dirección"
+                                v-model="editedItem.CorreoElectronico"
+                                label="Correo"
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
                               <v-text-field
                                 type="number"
-                                v-model="editedItem.telefono"
+                                v-model="editedItem.Telefono"
                                 label="Telefono"
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
-                              <v-menu
-                                ref="menu"
-                                v-model="menu"
-                                :close-on-content-click="false"
-                                transition="scale-transition"
-                                offset-y
-                                min-width="auto"
-                              >
-                                <template v-slot:activator="{ on, attrs }">
-                                  <v-text-field
-                                    v-model="editedItem.fechaNacimiento"
-                                    label="Fecha de Nacimiento"
-                                    prepend-icon="mdi-calendar"
-                                    readonly
-                                    v-bind="attrs"
-                                    v-on="on"
-                                  ></v-text-field>
-                                </template>
-                                <v-date-picker
-                                  v-model="editedItem.fechaNacimiento"
-                                  :active-picker.sync="activePicker"
-                                  locale="es-US"
-                                  :max="
-                                    new Date(
-                                      Date.now() -
-                                        new Date().getTimezoneOffset() * 60000
-                                    )
-                                      .toISOString()
-                                      .substring(0, 10)
-                                  "
-                                  min="1950-01-01"
-                                  @change="save"
-                                ></v-date-picker>
-                              </v-menu>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="6">
                               <v-text-field
-                                v-model="editedItem.correo"
-                                label="Correo"
+                                type="number"
+                                v-model="editedItem.clave"
+                                label="Clave"
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
@@ -136,7 +95,7 @@
                               <v-select
                                 :items="grado"
                                 label="Grado"
-                                v-model="editedItem.grado"
+                                v-model="editedItem.GradoAcademico"
                                 required
                                 item-text="nombre"
                                 :disabled="!switchState"
@@ -168,6 +127,7 @@
                   </v-dialog>
                 </v-toolbar>
 
+                <!-- VER DATOS -->
                 <v-dialog v-model="dialog2" max-width="1100px">
                   <v-card>
                     <v-card-title>
@@ -175,7 +135,7 @@
                         ><v-avatar color="primary">
                           <img :src="editedItem.foto" alt="John" />
                         </v-avatar>
-                        {{ editedItem.nombre }} {{ editedItem.apellido }}</span
+                        {{ editedItem.Nombre }} {{ editedItem.Apellido }}</span
                       >
                     </v-card-title>
 
@@ -183,34 +143,19 @@
                       <v-container>
                         <v-row>
                           <v-col cols="12" sm="6" md="6">
-                            <h4>DPI: {{ editedItem.dpi }}</h4>
+                            <h4>DPI: {{ editedItem.DPI }}</h4>
                           </v-col>
                           <v-col cols="12" sm="6" md="6">
-                            <h4>Sexo: {{ editedItem.sexo }}</h4>
+                            <h4>Telefono: {{ editedItem.Telefono }}</h4>
                           </v-col>
                           <v-col cols="12" sm="6" md="6">
-                            <h4>Dirección: {{ editedItem.direccion }}</h4>
-                          </v-col>
-                          <v-col cols="12" sm="6" md="6">
-                            <h4>Telefono: {{ editedItem.telefono }}</h4>
-                          </v-col>
-                          <v-col cols="12" sm="6" md="6">
-                            <h4>
-                              Fecha de Nacimiento :
-                              {{ editedItem.fechaNacimiento }}
-                            </h4>
-                          </v-col>
-                          <v-col cols="12" sm="6" md="6">
-                            <h4>Correo: {{ editedItem.correo }}</h4>
+                            <h4>Correo: {{ editedItem.CorreoElectronico }}</h4>
                           </v-col>
                           <v-col cols="12" sm="6" md="6">
                             <h4>Ciclo Escolar: {{ editedItem.ciclo }}</h4>
                           </v-col>
                           <v-col cols="12" sm="6" md="6">
-                            <h4>Grado: {{ editedItem.grado }}</h4>
-                          </v-col>
-                          <v-col cols="12" sm="6" md="6">
-                            <h4>Seccion: {{ editedItem.seccion }}</h4>
+                            <h4>Grado: {{ editedItem.GradoSeccion }}</h4>
                           </v-col>
                         </v-row>
                       </v-container>
@@ -249,6 +194,12 @@
 <script>
 import swal from "sweetalert";
 
+import axios from "axios";
+const cf = require("../DIR");
+const url = cf.url + "/listarDocente";
+const AddDocente = cf.url + "/AggDocente";
+const uDocente = cf.url + "/ModtDocente";
+
 export default {
   data() {
     return {
@@ -267,32 +218,44 @@ export default {
       desserts: [],
       editedIndex: -1,
       editedItem: {
-        nombre: "",
-        apellido: "",
-        dpi: "",
-        sexo: "",
-        grado: "",
-        seccion: "",
-        direccion: "",
-        telefono: "",
-        fechaNacimiento: "",
-        correo: "",
+        ID: "",
+        Nombre: "",
+        Apellido: "",
+        DPI: "",
+        idTipo: "",
+        GradoAcademico: "",
+        Seccion: "",
+        CorreoElectronico: "",
+        Telefono: "",
         foto: "",
-        ciclo: "",
+        clave: "",
+        Sexo: "",
       },
       defaultItem: {
-        nombre: "",
-        apellido: "",
-        dpi: "",
-        sexo: "",
-        grado: "",
-        seccion: "",
-        direccion: "",
-        telefono: "",
-        fechaNacimiento: "",
-        correo: "",
+        ID: "",
+        Nombre: "",
+        Apellido: "",
+        DPI: "",
+        idTipo: "",
+        GradoAcademico: "",
+        Seccion: "",
+        CorreoElectronico: "",
+        Telefono: "",
         foto: "",
-        ciclo: "",
+        clave: "",
+        Sexo: "",
+      },
+      formEditar: {
+        ID: "",
+        DPI: "",
+        Nombre: "",
+        apellido: "",
+        foto: "",
+        idtipo: "",
+        email: "",
+        tel: "",
+        GradoAca: "",
+        clave: "",
       },
 
       sexo: ["M", "F"],
@@ -311,10 +274,10 @@ export default {
       consultas: [],
       tabla: [],
       headers: [
-        { text: "Nombre", value: "nombre" },
-        { text: "Apellido", value: "apellido" },
-        { text: "Grado", value: "grado" },
-        { text: "Seccion", value: "seccion" },
+        { text: "Nombre", value: "Nombre" },
+        { text: "Apellido", value: "Apellido" },
+        { text: "Grado", value: "GradoAcademico" },
+        { text: "Correo", value: "CorreoElectronico" },
         { text: "Detalle", value: "actions", sortable: false },
       ],
       encabezado: [],
@@ -389,21 +352,49 @@ export default {
       this.selected = items;
     },
     async buscarDocente() {
-      // Limpieza de datos
-      this.encabezado = [];
-      this.tabla = [];
+      await axios.post(url, this.formEditar).then((data) => {
+        // Limpieza de datos
+        this.encabezado = [];
+        this.tabla = [];
 
-      // Asignar nuevos valores
-      this.consultas = this.respuesta.data;
-      this.tabla = this.consultas.tabla;
-      this.encabezado = this.consultas.dato_arma;
-
+        // Asignar nuevos valores
+        this.consultas = data.data;
+        //this.consultas = this.respuesta.data;
+        this.tabla = this.consultas.tabla;
+        this.encabezado = this.consultas.dato_arma;
+      });
       // Validar datos
       this.validarRest();
     },
 
+    async actualizarDocente() {
+      await axios.post(uDocente, this.formEditar).then((data) => {
+        // Limpieza de datos
+        this.encabezado = [];
+        this.tabla = [];
+        // Asignar nuevos valores
+        this.consultas = data.data;
+        console.log(this.consultas);
+      });
+      // Validar datos
+      this.validarRestEditar();
+    },
+
+    async crearDocente() {
+      await axios.post(AddDocente, this.formEditar).then((data) => {
+        // Limpieza de datos
+        this.encabezado = [];
+        this.tabla = [];
+        // Asignar nuevos valores
+        this.consultas = data.data;
+        console.log(this.consultas);
+      });
+      // Validar datos
+      this.validarRestCrear();
+    },
+
     validarRest() {
-      if (this.consultas.valid == false) {
+      if (this.consultas.validar == false) {
         this.alerta = "El usuario ha expirado.";
         this.makeToast();
         this.icoBuscar = true;
@@ -416,6 +407,24 @@ export default {
       } else {
         this.icoBuscar = true;
         this.respuestaBusqueda = true;
+      }
+    },
+    validarRestCrear() {
+      if (this.consultas.validar == false) {
+        this.alerta = "El docente no se ha registrado.";
+        this.makeToast();
+      } else {
+        this.alerta = "El docente se ha registrado";
+        this.makeToast();
+      }
+    },
+    validarRestEditar() {
+      if (this.consultas.validar == false) {
+        this.alerta = "El docente no se ha editado.";
+        this.makeToast();
+      } else {
+        this.alerta = "El docente se ha editado";
+        this.makeToast();
       }
     },
 
@@ -476,10 +485,39 @@ export default {
     saveDocente() {
       if (this.editedIndex > -1) {
         Object.assign(this.tabla[this.editedIndex], this.editedItem);
+        //Object.assign(this.formEditar, this.editedItem);
+        
+        this.formEditar.ID = this.editedItem.ID +"";
+        this.formEditar.DPI = this.editedItem.DPI+"";
+        this.formEditar.Nombre = this.editedItem.Nombre+"";
+        this.formEditar.apellido = this.editedItem.Apellido+"";
+        this.formEditar.foto = this.editedItem.foto+"";
+        this.formEditar.idtipo = this.editedItem.idTipo+"";
+        this.formEditar.email = this.editedItem.CorreoElectronico+"";
+        this.formEditar.tel = this.editedItem.Telefono+"";
+        this.formEditar.GradoAca = this.editedItem.GradoAcademico+"";
+        this.formEditar.clave = this.editedItem.clave+"";
+        console.log(this.formEditar);
+        this.actualizarDocente();
       } else {
+         
+        this.formEditar.ID = this.editedItem.ID +" ";
+        this.formEditar.DPI = this.editedItem.DPI+"";
+        this.formEditar.Nombre = this.editedItem.Nombre+"";
+        this.formEditar.apellido = this.editedItem.Apellido+"";
+        this.formEditar.foto = this.editedItem.foto+" ";
+        this.formEditar.idtipo = 2;
+        this.formEditar.email = this.editedItem.CorreoElectronico+"";
+        this.formEditar.tel = this.editedItem.Telefono+"";
+        this.formEditar.GradoAca = this.editedItem.GradoAcademico+" ";
+        this.formEditar.clave = this.editedItem.clave+"";
+        console.log(this.formEditar);
+        this.crearDocente();
+        console.log('agregar')
         this.tabla.push(this.editedItem);
       }
       console.log(this.tabla);
+      
       this.close();
     },
   },

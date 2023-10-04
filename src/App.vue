@@ -1,17 +1,47 @@
 <template>
   <v-app>
     <!--Encabezado-->
-    <v-app-bar
-      absolute
-      color="#010326"
-      dark
-      app
-    >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-app-bar absolute color="#010326" dark app>
+      <v-app-bar-nav-icon
+        v-if="menu"
+        @click.stop="drawer = !drawer"
+      ></v-app-bar-nav-icon>
       <h1 class="display-2 custom-center"></h1>
       <v-spacer></v-spacer>
-      <v-btn color="white" outlined>Registrarse</v-btn>
-      <v-btn color="white" outlined>Iniciar Sesión</v-btn>
+      <v-btn
+        color="white"
+        v-if="botonLogin"
+        outlined
+        @click="loginDialog = !loginDialog"
+        >Iniciar Sesión</v-btn
+      >
+      <v-dialog v-model="loginDialog" max-width="400">
+        <v-card>
+          <v-card-title class="text-h6">Iniciar Sesión</v-card-title>
+          <v-card-text>
+            <v-form>
+              <v-text-field
+                label="Correo Electrónico"
+                v-model="form.correo"
+                required
+              ></v-text-field>
+              <v-text-field
+                label="Contraseña"
+                v-model="form.clave"
+                type="password"
+                required
+              ></v-text-field>
+              <v-card-actions class="justify-end">
+                <!-- Añade la clase justify-end aquí -->
+                <v-btn text @click="loginDialog = false">Cancelar</v-btn>
+                <v-btn color="primary" type="submit" @click="validarLogin"
+                  >IniciarSesion</v-btn
+                >
+              </v-card-actions>
+            </v-form>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
     </v-app-bar>
     <!--Menu-->
 
@@ -27,14 +57,14 @@
       <v-list>
         <v-list-item class="px-2">
           <v-list-item-avatar>
-            <v-img src="https://randomuser.me/portraits/men/1.jpg"></v-img>
+            <v-img :src="foto"></v-img>
           </v-list-item-avatar>
           <v-list-item-content class="white--text">
             <v-list-item-title class="text-h6">
-              Anzony Gonzalez
+              {{ nombre }} {{ apellidos }}
             </v-list-item-title>
             <v-list-item-subtitle class="white--text">
-              agonzalez@gmail.com
+              {{ correo }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -43,7 +73,7 @@
       <v-divider></v-divider>
 
       <v-list>
-        <v-list-item link to="/home" class="white--text">
+        <v-list-item link to="/" class="white--text">
           <v-list-item-icon>
             <v-icon class="white--text">mdi-home</v-icon>
           </v-list-item-icon>
@@ -141,9 +171,9 @@
       </v-list>
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn block>
+          <v-btn block @click="cerrarSesion" color="white" outlined>
             Cerrar Sesion
-            <v-icon class="primary--text">mdi-account-cancel</v-icon>
+            <v-icon class="white--text">mdi-account-cancel</v-icon>
           </v-btn>
         </div>
       </template>
@@ -179,16 +209,88 @@
   </v-app>
 </template>
   
-  <script>
-//const cf = require("./DIR");
+<script>
+import swal from "sweetalert";
+import axios from "axios";
+const cf = require("./components/DIR");
+const url = cf.url + "/DocenteLogin";
+
 export default {
   name: "App",
   components: {},
   data: () => ({
     drawer: false,
+    alerta: "",
+    menu: true,
+    botonLogin: true,
     group: null,
+    loginDialog: false, // Inicialmente, el diálogo de inicio de sesión está oculto
+    form: {
+      correo: "",
+      clave: "",
+    },
+    foto: "https://randomuser.me/portraits/men/1.jpg",
+    nombre: "Anzony",
+    apellidos: "Gonzalez",
+    correo: "gmail.com",
   }),
+  methods: {
+    makeToast() {
+      swal(this.alerta, {
+        buttons: false,
+        timer: 3000,
+        background: "#FAAFFF",
+      });
+    },
+    onRowSelected(items) {
+      this.selected = items;
+    },
+    async validarLogin() {
+      await axios.post(url, this.form).then((data) => {
+        // Limpieza de datos
+        console.log(data.data);
+        console.log(data.data.validar);
+        if (data.data.validar) {
+          const auxDataUser = data.data.tabla[0];
+          localStorage.setItem("datos", JSON.stringify(auxDataUser));
+          this.tabla = [];
+          this.consultas = data.data;
+          this.validarRest();
+        } else {
+          this.consultas = data.data;
+          this.validarRest();
+        }
+      });
+      // Asignar nuevos valores
 
+      // Validar datos
+      this.validarRest();
+    },
+    validarRest() {
+      console.log(this.consultas);
+      if (this.consultas.validar == false) {
+        this.alerta = "Error de login verificar datos.";
+        this.makeToast();
+        this.botonLogin = true;
+        this.menu = false;
+      } else {
+        this.botonLogin = false;
+        this.loginDialog = false;
+        this.menu = true;
+        this.alerta = "Login exitoso.";
+        this.makeToast();
+        this.nombre = this.consultas.tabla[0].Nombre;
+        this.apellidos = this.consultas.tabla[0].Apellidos;
+        this.correo = this.consultas.tabla[0].CorreoElectronico;
+      }
+    },
+    cerrarSesion() {
+      localStorage.removeItem("datos");
+      this.botonLogin = true;
+      this.menu = false;
+      this.$router.push("/");
+    },
+  },
   watch: {
     group() {
       this.drawer = false;
