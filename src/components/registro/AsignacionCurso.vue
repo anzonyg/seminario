@@ -1,48 +1,28 @@
 <template>
   <v-container>
     <!-- FORMULARIO BUSQUEDA DE MATERIA -->
-    <v-row v-if="respuestaBusquedaMateria">
-      <v-col md="3" cols="4" align="center">
+    <v-row v-if="respuestaBusquedaGrado">
+      <v-col md="9" cols="12" align="center">
         <br />
         <v-select
-          :items="tablaMateriaOptions"
-          label="Seleccionar la materia"
-          v-model="materia"
-          item-text="nombreCurso"
+          :items="tablaGradoOptions"
+          label="Seleccionar grado y seccion"
+          v-model="grado.ID"
+          item-text="nombreSeccion"
           item-value="ID"
-          required
-        ></v-select>
-      </v-col>
-      <v-col md="3" cols="4" align="center">
-        <br />
-        <v-select
-          :items="itemsCiclo"
-          label="Seleccionar la ciclo"
-          v-model="ciclo"
-          required
-        ></v-select>
-      </v-col>
-      <v-col md="3" cols="4" align="center">
-        <br />
-        <v-select
-          :items="itemsBloque"
-          label="Seleccionar la bloque"
-          v-model="bloque"
-          item-text="text"
-          item-value="value"
           required
         ></v-select>
       </v-col>
       <v-col md="3" cols="12" align="center">
         <br />
-        <v-btn pill @click="validarInputMateria" color="secondary">
+        <v-btn pill @click="validarInputGrado" color="secondary">
           <v-progress-circular
             indeterminate
             :size="25"
             color="light"
-            v-show="progressBuscarMateria"
+            v-show="progressBuscarGrado"
           ></v-progress-circular>
-          <v-icon v-show="icoBuscarMateria">mdi-magnify</v-icon>
+          <v-icon v-show="icoBuscarGrado">mdi-magnify</v-icon>
           Buscar
         </v-btn>
       </v-col>
@@ -60,7 +40,17 @@
                 <v-toolbar flat>
                   <v-spacer></v-spacer>
                   <v-dialog v-model="dialog" max-width="500px">
-                    
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        color="primary"
+                        dark
+                        class="mb-2"
+                        v-bind="attrs"
+                        v-on="on"
+                      >
+                        Añadir Materia
+                      </v-btn>
+                    </template>
                     <v-card>
                       <v-card-title>
                         <span class="text-h5">{{ formTitle }}</span>
@@ -71,18 +61,13 @@
                           <v-row>
                             <v-col cols="12">
                               <v-select
-                                :items="tipoActividad"
-                                label="Tipo de Actividad"
-                                v-model="editedItem.tipo"
+                                :items="tablaMateriaOptions"
+                                label="Seleccionar curso"
+                                v-model="editedItem.ID"
+                                item-text="nombreCurso"
+                                item-value="ID"
                                 required
                               ></v-select>
-                            </v-col>
-                            <v-col cols="12">
-                              <v-textarea
-                                v-model="editedItem.descripcion"
-                                label="Descripcion"
-                                required
-                              ></v-textarea>
                             </v-col>
                           </v-row>
                         </v-container>
@@ -125,11 +110,8 @@
                 <v-icon small class="mr-2" @click="editItem(item)">
                   mdi-pencil
                 </v-icon>
-                
               </template>
-              <template v-slot:no-data>
-                <v-btn color="primary" @click="initialize"> Reset </v-btn>
-              </template>
+              
             </v-data-table>
           </div>
         </v-col>
@@ -144,9 +126,11 @@
 import swal from "sweetalert";
 import axios from "axios";
 const cf = require("../DIR");
+const url = cf.url + "/ListarGrado";
+const listaCurso = cf.url + "/ListarCursos";
 const listaAsignacionCurso = cf.url + "/ListarCursosPorGrado";
-const listaDescripcion = cf.url + "/ListarDescrip";
-const idAsignacion = cf.url + "/ExtraIdasig";
+const AddCurso = cf.url + "/AddAsigGradoCurso";
+const uCurso = cf.url + "/ModAsigGradocurso";
 
 export default {
   data() {
@@ -157,9 +141,9 @@ export default {
       progressBuscarGrado: false, //icono spiner para boton buscar grado
       icoBuscarGrado: true, //icono buscar para boton buscar grado
       consultasGrado: [], // ingresa datos del backend
-      itemsGrado: [], //selectbox de grado
+      tablaGrado: [], //selectbox de grado
       grado: {
-        ID: "4",
+        ID: "",
       }, // valor que se selecciono en selectbox de grado
       respuestaBusquedaGrado: false,
 
@@ -167,26 +151,20 @@ export default {
       icoBuscarMateria: true, //icono buscar para boton buscar materia
       consultasMateria: [], // ingresa datos del backend
       itemsMateria: [], //selectbox de materia
-      materia: "", // valor que se selecciono en selectbox de materia
+      materia: {
+        ID: "",
+      }, // valor que se selecciono en selectbox de materia
       respuestaBusquedaMateria: false,
+
+      cursosArray: [],
 
       itemsCiclo: [], //selectbox de ciclo
       ciclo: "",
 
-      itemsBloque: [
-        { text: "Bloque 1", value: 1 },
-        { text: "Bloque 2", value: 2 },
-        { text: "Bloque 3", value: 3 },
-        { text: "Bloque 4", value: 4 },
-      ], //selectbox de bloque
+      itemsBloque: ["Bloque 1", "Bloque 2", "Bloque 3", "Bloque 4"], //selectbox de bloque
       bloque: "",
 
-      consultasAsignacion: [],
-      tablaAsignacion: [],
-      asignacion: "",
-
       consultas: [], //ingresa datos del backend
-      tablaActividad: [],
       tabla: [],
       tipoActividad: [
         "Nota 1",
@@ -199,8 +177,8 @@ export default {
         "Recuperacion 4",
       ],
       headers: [
-        { text: "Tipo de Actividad", value: "tipo" },
-        { text: "Descripcion", value: "descripcion" },
+        { text: "Materia", value: "NombreCurso" },
+        { text: "Descripcion", value: "DescripcionCurso" },
         { text: "Detalle", value: "actions", sortable: false },
       ],
 
@@ -209,44 +187,36 @@ export default {
       desserts: [],
       editedIndex: -1,
       editedItem: {
-        nombre: "",
-        tipo: "",
-        descripcion: "",
+        ID: "",
+        NombreCurso: "",
+        DescripcionCurso: "",
       },
       defaultItem: {
-        nombre: "",
-        tipo: "",
-        descripcion: "",
+        ID: "",
+        NombreCurso: "",
+        DescripcionCurso: "",
       },
       encabezado: [],
-      formMateria: {
-        nombre: "",
-        idDocente: "",
-      },
-      form: {
-        ID_Asignacion: "",
-        ID_bloque: "",
-        AÑO: "",
-      },
-      formAsignacion: {
-        ID_curso: "",
-        ID_grado: "",
+      formEditar: {
+        id: "",
+        idcurso: "",
+        idgrado: "",
       },
 
       respuesta: {
         data: {
           tabla: [
             {
-              tipo: "Nota 1",
-              descripcion: "22",
+              nombre: "Matematicas",
+              descripcion: "lorem ipsum dolor sit amet",
             },
             {
-              tipo: "Nota 2",
-              descripcion: "16",
+              nombre: "Lenguaje",
+              descripcion: "lorem eget",
             },
             {
-              tipo: "Recuperacion 2",
-              descripcion: "cambia de carrera",
+              nombre: "Fisica",
+              descripcion: "lorem ipsum dolor sit amet",
             },
             // ... (otras entradas de tabla)
           ],
@@ -293,143 +263,166 @@ export default {
     onRowSelected(items) {
       this.selected = items;
     },
-    async buscarcuadro() {
-      this.progressBuscarGrado = true;
-      this.icoBuscarGrado = false;
-
-      // Limpieza de datos
-      this.encabezado = [];
-      this.tabla = [];
-
-      // Asignar nuevos valores
-      this.consultas = this.respuesta.data;
-      this.tabla = this.consultas.tabla;
-      this.encabezado = this.consultas.dato_arma;
-
-      // Validar datos
-      this.validarRest();
-    },
     async buscarGrado() {
-      // Limpieza de datos
-      this.itemsGrado = [];
+      await axios.post(url, this.formEditar).then((data) => {
+        // Limpieza de datos
+        //console.log(data);
+        this.encabezado = [];
+        this.tabla = [];
 
-      // Asignar nuevos valores
-      this.consultasGrado = this.respuestaGrado.data;
-      this.itemsGrado = this.consultasGrado.tabla;
-
+        // Asignar nuevos valores
+        this.consultasGrado = data.data;
+        this.tablaGrado = this.consultasGrado.tabla;
+        console.log(this.tablaGrado);
+      });
+      this.itemsCiclo = this.generarArrayDeAnios();
       // Validar datos
       this.validarRestGrado();
     },
-    async buscarMateria() {
-      await axios.post(listaAsignacionCurso, this.grado).then((data) => {
+    async buscarListaCurso() {
+      await axios.post(listaCurso).then((data) => {
         // Limpieza de datos
+        //console.log(data);
         this.itemsMateria = [];
 
         // Asignar nuevos valores
         this.consultasMateria = data.data;
         this.itemsMateria = this.consultasMateria.tabla;
-        this.itemsCiclo = this.generarArrayDeAnios();
+        console.log(this.itemsMateria);
       });
       // Validar datos
-      this.validarRestMateria();
+      this.validarRestListaCurso();
+      console.log(this.consultasMateria);
+      console.log(this.itemsMateria);
     },
-    async buscarAsignacion() {
-      this.formAsignacion.ID_curso = this.materia;
-      this.formAsignacion.ID_grado = this.grado.ID;
-      console.log(this.formAsignacion);
-      await axios.post(idAsignacion, this.formAsignacion).then((data) => {
-        // Limpieza de datos
-        this.asignacion = "";
-        this.consultasAsignacion = [];
-        this.tablaAsignaicon = [];
-        // Asignar nuevos valores
-        this.consultasAsignacion = data.data;
-        this.tablaAsignacion = this.consultasAsignacion.tabla;
-        //
-        console.log(this.consultasAsignacion);
-      });
-      // Validar datos
-      this.validarRestAsignacion();
-    },
+
     async buscarActividad() {
-      this.progressBuscarMateria = true;
-      this.icoBuscarMateria = false;
-      this.form.ID_Asignacion = this.asignacion;
-      this.form.ID_bloque = this.bloque;
-      this.form.AÑO = this.ciclo;
-      console.log(this.form);
-      await axios.post(listaDescripcion, this.form).then((data) => {
+      this.progressBuscarGrado = true;
+      this.icoBuscarGrado = false;
+      var listado = JSON.stringify(this.grado);
+      console.log(listado);
+      await axios.post(listaAsignacionCurso, this.grado).then((data) => {
         // Limpieza de datos
         this.consultas = [];
         this.tabla = [];
 
         // Asignar nuevos valores
         this.consultas = data.data;
-        this.tablaActividad = this.consultas.tabla[0];
-        console.log(this.consultas);
+        this.tabla = this.consultas.tabla;
+        console.log(this.tabla);
       });
       // Validar datos
       this.validarRestActividad();
     },
-    async cuadropdf() {
-      // ... (código para descargar PDF)
-    },
 
-    validarInputMateria() {
-      if (
-        this.materia.length <= 0 ||
-        this.ciclo.length <= 0 ||
-        this.bloque.length <= 0
-      ) {
-        this.alerta = "Seleccionar Materia, Ciclo, Bloque";
+    validarInputGrado() {
+      if (this.grado.length <= 0) {
+        this.alerta = "Seleccionar Grado, Ciclo, Bloque";
         this.makeToast();
-        console.log("no validar input " + this.materia);
+        console.log("no validar input " + this.grado);
       } else {
-        this.progressBuscarMateria = true;
-        this.icoBuscarMateria = false;
-        this.buscarAsignacion();
+        this.progressBuscarGrado = true;
+        this.icoBuscarGrado = false;
+
+        console.log("validar input " + this.grado);
+        this.buscarActividad();
       }
     },
 
-    validarRestMateria() {
+    async actualizarCurso() {
+      await axios.post(uCurso, this.formEditar).then((data) => {
+        // Limpieza de datos
+        this.consultas = [];
+        this.tabla = [];
+        // Asignar nuevos valores
+        this.consultas = data.data;
+        this.tabla = this.consultas.tabla;
+        console.log(this.consultas);
+      });
+      // Validar datos
+      this.validarRestEditar();
+      this.buscarGrado();
+      this.buscarListaCurso();
+      this.buscarActividad();
+    },
+    async crearCurso() {
+      await axios.post(AddCurso, this.formEditar).then((data) => {
+        // Limpieza de datos
+        this.consultas = [];
+        this.tabla = [];
+        // Asignar nuevos valores
+        this.consultas = data.data;
+        this.tabla = this.consultas.tabla;
+        console.log(this.consultas);
+      });
+      // Validar datos
+      console.log(this.consultas);
+      this.validarRestCrear();
+      this.buscarGrado();
+      this.buscarListaCurso();
+      this.buscarActividad();
+    },
+
+    validarRestGrado() {
+      if (this.consultasMateria.valid == false) {
+        this.alerta = "El usuario ha expirado.";
+        this.makeToast();
+        this.respuestaBusquedaGrado = false;
+      } else if (this.consultasGrado.tabla.length <= 0) {
+        this.alerta = "La grado no existe en la base de datos";
+        this.makeToast();
+        this.respuestaBusquedaGrado = false;
+      } else {
+        this.respuestaBusquedaGrado = true;
+      }
+    },
+
+    validarRestListaCurso() {
       if (this.consultasMateria.valid == false) {
         this.alerta = "El usuario ha expirado.";
         this.makeToast();
         this.respuestaBusquedaMateria = false;
       } else if (this.consultasMateria.tabla.length <= 0) {
-        this.alerta = "La materia no existe en la base de datos";
+        this.alerta = "El curso no existe en la base de datos";
         this.makeToast();
         this.respuestaBusquedaMateria = false;
       } else {
         this.respuestaBusquedaMateria = true;
       }
     },
+
     validarRestActividad() {
-      this.progressBuscarMateria = false;
-      this.icoBuscarMateria = true;
+      this.progressBuscarGrado = false;
+      this.icoBuscarGrado = true;
       if (this.consultas.valid == false) {
         this.alerta = "El usuario ha expirado.";
         this.makeToast();
         this.respuestaBusqueda = false;
       } else if (this.consultas.tabla.length <= 0) {
-        this.alerta = "La actividad no existe en la base de datos";
+        this.alerta = "No hay cursos registrados en el grado seleccionado";
         this.makeToast();
-        this.respuestaBusqueda = false;
+        this.respuestaBusqueda = true;
       } else {
         this.respuestaBusqueda = true;
-        this.estructurar();
       }
     },
-    validarRestAsignacion() {
-      if (this.consultasAsignacion.validar == false) {
-        this.alerta = "El usuario ha expirado.";
-        this.makeToast();
-      } else if (this.consultasAsignacion.tabla.length <= 0) {
-        this.alerta = "La materia no existe en la base de datos";
+
+    validarRestCrear() {
+      if (this.consultas.validar == false) {
+        this.alerta = "El curso no se ha registrado.";
         this.makeToast();
       } else {
-        this.asignacion = this.tablaAsignacion[0].ID;
-        this.buscarActividad();
+        this.alerta = "El curso se ha registrado";
+        this.makeToast();
+      }
+    },
+    validarRestEditar() {
+      if (this.consultas.validar == false) {
+        this.alerta = "El curso no se ha editado.";
+        this.makeToast();
+      } else {
+        this.alerta = "El curso se ha editado";
+        this.makeToast();
       }
     },
 
@@ -442,22 +435,6 @@ export default {
       }
       console.log(arrayDeAnios + " de ");
       return arrayDeAnios;
-    },
-
-    estructurar() {
-      var list = this.tablaActividad;
-      var newList = [
-        { tipo: "NOTA 1", descripcion: list.DESCRIPCIONNOTA1 },
-        { tipo: "NOTA 2", descripcion: list.DESCRIPCIONNOTA2 },
-        { tipo: "NOTA 3", descripcion: list.DESCRIPCIONNOTA3 },
-        { tipo: "NOTA 4", descripcion: list.DESCRIPCIONNOTA4 },
-        { tipo: "RECUPERACION 1", descripcion: list.DESCRIPCIONRENOTA1 },
-        { tipo: "RECUPERACION 2", descripcion: list.DESCRIPCIONRENOTA2 },
-        { tipo: "RECUPERACION 3", descripcion: list.DESCRIPCIONRENOTA3 },
-        { tipo: "RECUPERACION 4", descripcion: list.DESCRIPCIONRENOTA4 },
-      ];
-      this.tabla = newList;
-      console.log(this.tabla);
     },
 
     editItem(item) {
@@ -497,16 +474,32 @@ export default {
     save() {
       if (this.editedIndex > -1) {
         Object.assign(this.tabla[this.editedIndex], this.editedItem);
+        this.formEditar.id = this.editedItem.ID_R + "";
+        this.formEditar.idcurso = this.editedItem.ID + "";
+        this.formEditar.idgrado = this.grado.ID + "";
+
+        this.actualizarCurso();
       } else {
+        
+        this.formEditar.idcurso = this.editedItem.ID + "";
+        this.formEditar.idgrado = this.grado.ID + "";
+        this.crearCurso();
         this.tabla.push(this.editedItem);
       }
       console.log(this.tabla);
+      console.log(this.formEditar);
       this.close();
     },
   },
   computed: {
     formTitle() {
       return this.editedIndex === -1 ? "Nueva Actividad" : "Editar Actividad";
+    },
+    tablaGradoOptions() {
+      return Object.values(this.tablaGrado).map((item) => ({
+        ...item,
+        nombreSeccion: `${item.NombreGrado} ${item.SECCION}`,
+      }));
     },
     tablaMateriaOptions() {
       return Object.values(this.itemsMateria).map((item) => ({
@@ -523,10 +516,15 @@ export default {
     dialogDelete(val) {
       val || this.closeDelete();
     },
+    selectedGrado(newGrado) {
+      console.log(newGrado);
+      this.materia.ID = newDocente.ID;
+    },
   },
 
   created() {
-    this.buscarMateria();
+    this.buscarGrado();
+    this.buscarListaCurso();
   },
 };
 </script>

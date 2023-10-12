@@ -1,154 +1,113 @@
 <template>
-  <v-container>
-    <!-- FORMULARIO BUSQUEDA DE MATERIA -->
-    <v-row v-if="respuestaBusquedaGrado">
-      <v-col md="9" cols="12" align="center">
+  <!-- RESPUESTA DE BUSQUEDA ACTIVIDAD -->
+  <v-container id="cuadro1" v-if="respuestaBusqueda">
+    <v-row>
+      <v-col cols="12">
         <br />
-        <v-select
-          :items="itemsGrado"
-          label="Seleccionar grado y seccion"
-          v-model="grado"
-          required
-        ></v-select>
-      </v-col>
-      <v-col md="3" cols="12" align="center">
-        <br />
-        <v-btn pill @click="validarInputGrado" color="secondary">
-          <v-progress-circular
-            indeterminate
-            :size="25"
-            color="light"
-            v-show="progressBuscarGrado"
-          ></v-progress-circular>
-          <v-icon v-show="icoBuscarGrado">mdi-magnify</v-icon>
-          Buscar
-        </v-btn>
+        <div class="table-responsive">
+          <v-data-table :headers="headers" :items="tabla">
+            <template v-slot:top>
+              <v-toolbar flat>
+                <v-spacer></v-spacer>
+                <v-dialog v-model="dialog" max-width="500px">
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      color="primary"
+                      dark
+                      class="mb-2"
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      Añadir Curso
+                    </v-btn>
+                  </template>
+                  <v-card>
+                    <v-card-title>
+                      <span class="text-h5">{{ formTitle }}</span>
+                    </v-card-title>
+
+                    <v-card-text>
+                      <v-container>
+                        <v-row>
+                          <v-col cols="12" md="6">
+                            <v-text-field
+                              v-model="editedItem.NombreCurso"
+                              label="Nombre del Curso"
+                              required
+                            ></v-text-field>
+                          </v-col>
+                          <v-col cols="12" md="6">
+                            <v-text-field
+                              v-model="editedItem.DescripcionCurso"
+                              label="Descripcion"
+                              required
+                            ></v-text-field>
+                          </v-col>
+                        </v-row>
+                      </v-container>
+                    </v-card-text>
+
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn color="blue darken-1" text @click="close">
+                        Cancelar
+                      </v-btn>
+                      <v-btn color="blue darken-1" text @click="save">
+                        Guardar
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+                <v-dialog v-model="dialogDelete" max-width="500px">
+                  <v-card>
+                    <v-card-title class="text-h5"
+                      >Esta seguro de borrar la actividad?</v-card-title
+                    >
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn color="blue darken-1" text @click="closeDelete"
+                        >Cancelar</v-btn
+                      >
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        @click="deleteItemConfirm"
+                        >OK</v-btn
+                      >
+                      <v-spacer></v-spacer>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </v-toolbar>
+            </template>
+            <template v-slot:item.actions="{ item }">
+              <v-icon small class="mr-2" @click="editItem(item)">
+                mdi-pencil
+              </v-icon>
+            </template>
+           
+          </v-data-table>
+        </div>
       </v-col>
     </v-row>
     <br />
-
-    <!-- RESPUESTA DE BUSQUEDA ACTIVIDAD -->
-    <v-container id="cuadro1" v-if="respuestaBusqueda">
-      <v-row>
-        <v-col cols="12">
-          <br />
-          <div class="table-responsive">
-            <v-data-table :headers="headers" :items="tabla" hide-default-footer>
-              <template v-slot:top>
-                <v-toolbar flat>
-                  <v-spacer></v-spacer>
-                  <v-dialog v-model="dialog" max-width="500px">
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-btn
-                        color="primary"
-                        dark
-                        class="mb-2"
-                        v-bind="attrs"
-                        v-on="on"
-                      >
-                        Añadir Materia
-                      </v-btn>
-                    </template>
-                    <v-card>
-                      <v-card-title>
-                        <span class="text-h5">{{ formTitle }}</span>
-                      </v-card-title>
-
-                      <v-card-text>
-                        <v-container>
-                          <v-row>
-                            <v-col cols="12" md="6">
-                              <v-text-field
-                                v-model="editedItem.nombre"
-                                label="Materia"
-                                required
-                              ></v-text-field>
-                            </v-col>
-                            <v-col cols="12" md="6">
-                              <v-text-field
-                                v-model="editedItem.descripcion"
-                                label="Descripcion"
-                                required
-                              ></v-text-field>
-                            </v-col>
-                          </v-row>
-                        </v-container>
-                      </v-card-text>
-
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" text @click="close">
-                          Cancelar
-                        </v-btn>
-                        <v-btn color="blue darken-1" text @click="save">
-                          Guardar
-                        </v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog>
-                  <v-dialog v-model="dialogDelete" max-width="500px">
-                    <v-card>
-                      <v-card-title class="text-h5"
-                        >Esta seguro de borrar la actividad?</v-card-title
-                      >
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" text @click="closeDelete"
-                          >Cancelar</v-btn
-                        >
-                        <v-btn
-                          color="blue darken-1"
-                          text
-                          @click="deleteItemConfirm"
-                          >OK</v-btn
-                        >
-                        <v-spacer></v-spacer>
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog>
-                </v-toolbar>
-              </template>
-              <template v-slot:item.actions="{ item }">
-                <v-icon small class="mr-2" @click="editItem(item)">
-                  mdi-pencil
-                </v-icon>
-                
-              </template>
-              <template v-slot:no-data>
-                <v-btn color="primary" @click="initialize"> Reset </v-btn>
-              </template>
-            </v-data-table>
-          </div>
-        </v-col>
-      </v-row>
-      <br />
-      <br />
-    </v-container>
+    <br />
   </v-container>
 </template>
 
 <script>
 import swal from "sweetalert";
+import axios from "axios";
+const cf = require("../DIR");
+const url = cf.url + "/ListarCursos";
+const AddGrado = cf.url + "/InsertarCurso";
+const uGrado = cf.url + "/ModtCurso";
 
 export default {
   data() {
     return {
       respuestaBusqueda: false,
       alerta: "",
-
-      progressBuscarGrado: false, //icono spiner para boton buscar grado
-      icoBuscarGrado: true, //icono buscar para boton buscar grado
-      consultasGrado: [], // ingresa datos del backend
-      itemsGrado: [], //selectbox de grado
-      grado: "", // valor que se selecciono en selectbox de grado
-      respuestaBusquedaGrado: false,
-
-      progressBuscarMateria: false, //icono spiner para boton buscar materia
-      icoBuscarMateria: true, //icono buscar para boton buscar materia
-      consultasMateria: [], // ingresa datos del backend
-      itemsMateria: [], //selectbox de materia
-      materia: "", // valor que se selecciono en selectbox de materia
-      respuestaBusquedaMateria: false,
 
       itemsCiclo: [], //selectbox de ciclo
       ciclo: "",
@@ -158,6 +117,8 @@ export default {
 
       consultas: [], //ingresa datos del backend
       tabla: [],
+      consultasDocente: [], //ingresa datos del backend
+      tablaDocente: [],
       tipoActividad: [
         "Nota 1",
         "Nota 2",
@@ -169,43 +130,51 @@ export default {
         "Recuperacion 4",
       ],
       headers: [
-        { text: "Materia", value: "nombre" },
-        { text: "Descripcion", value: "descripcion" },
+        { text: "Curso", value: "NombreCurso" },
+        { text: "Descripcion", value: "DescripcionCurso" },
         { text: "Detalle", value: "actions", sortable: false },
       ],
-
+      selectedDocenteID: null,
       dialog: false,
       dialogDelete: false,
       desserts: [],
       editedIndex: -1,
       editedItem: {
-        nombre: "",
-        descripcion: "",
+        ID: "",
+        NombreCurso: "",
+        DescripcionCurso: "",
       },
+      itemSelect: [],
       defaultItem: {
-        nombre: "",
-        descripcion: "",
+        ID: "",
+        NombreCurso: "",
+        DescripcionCurso: "",
       },
       encabezado: [],
       formMateria: {
         nombre: "",
         idDocente: "",
       },
+      formEditar: {
+        ID: "",
+        NombreC: "",
+        DescripcionC: "",
+      },
 
       respuesta: {
         data: {
           tabla: [
             {
-              nombre: "Matematicas",
-              descripcion: "lorem ipsum dolor sit amet",
+              grado: "Primero",
+              seccion: "A",
             },
             {
-              nombre: "Lenguaje",
-              descripcion: "lorem eget",
+              grado: "Primero",
+              seccion: "B",
             },
             {
-              nombre: "Fisica",
-              descripcion: "lorem ipsum dolor sit amet",
+              grado: "Segundo",
+              seccion: "A",
             },
             // ... (otras entradas de tabla)
           ],
@@ -241,6 +210,7 @@ export default {
       },
     };
   },
+
   methods: {
     makeToast() {
       swal(this.alerta, {
@@ -253,76 +223,78 @@ export default {
       this.selected = items;
     },
     async buscarGrado() {
-      // Limpieza de datos
-      this.itemsGrado = [];
+      await axios.post(url, this.formEditar).then((data) => {
+        // Limpieza de datos
+        //console.log(data);
+        this.encabezado = [];
+        this.tabla = [];
 
-      // Asignar nuevos valores
-      this.consultasGrado = this.respuestaGrado.data;
-      this.itemsGrado = this.consultasGrado.tabla;
-
+        // Asignar nuevos valores
+        this.consultas = data.data;
+        this.tabla = this.consultas.tabla;
+        console.log(this.consultas);
+      });
+      this.itemsCiclo = this.generarArrayDeAnios();
       // Validar datos
       this.validarRestGrado();
     },
-
-    async buscarActividad() {
-      this.progressBuscarGrado = true;
-      this.icoBuscarGrado = false;
-
-      // Limpieza de datos
-      this.consultas = [];
-      this.tabla = [];
-
-      // Asignar nuevos valores
-      this.consultas = this.respuesta.data;
-      this.tabla = this.consultas.tabla;
-
+    async actualizarGrado() {
+      await axios.post(uGrado, this.formEditar).then((data) => {
+        // Limpieza de datos
+        this.encabezado = [];
+        this.tabla = [];
+        // Asignar nuevos valores
+        this.consultas = data.data;
+        console.log(this.consultas);
+      });
       // Validar datos
-      this.validarRestActividad();
+      this.validarRestEditar();
+      this.buscarGrado();
     },
-    async cuadropdf() {
-      // ... (código para descargar PDF)
-    },
-
-    validarInputGrado() {
-      if (this.grado.length <= 0) {
-        this.alerta = "Seleccionar Grado, Ciclo, Bloque";
-        this.makeToast();
-        console.log("no validar input " + this.grado);
-      } else {
-        this.progressBuscarGrado = true;
-        this.icoBuscarGrado = false;
-        this.buscarActividad();
-        console.log("validar input " + this.grado);
-      }
+    async crearGrado() {
+      await axios.post(AddGrado, this.formEditar).then((data) => {
+        // Limpieza de datos
+        this.encabezado = [];
+        this.tabla = [];
+        // Asignar nuevos valores
+        this.consultas = data.data;
+        console.log(this.consultas);
+      });
+      // Validar datos
+      console.log(this.consultas);
+      this.validarRestCrear();
+      this.buscarGrado();
     },
 
     validarRestGrado() {
-      if (this.consultasGrado.valid == false) {
-        this.alerta = "El usuario ha expirado.";
-        this.makeToast();
-        this.respuestaBusquedaGrado = false;
-      } else if (this.consultasGrado.tabla.length <= 0) {
-        this.alerta = "La grado no existe en la base de datos";
-        this.makeToast();
-        this.respuestaBusquedaGrado = false;
-      } else {
-        this.respuestaBusquedaGrado = true;
-      }
-    },
-
-    validarRestActividad() {
-      this.progressBuscarGrado = false;
-      this.icoBuscarGrado = true;
-      if (this.consultas.valid == false) {
-        this.alerta = "El usuario ha expirado.";
+      if (this.consultas.validar == false) {
+        this.alerta = "Error en listar curso.";
         this.makeToast();
         this.respuestaBusqueda = false;
       } else if (this.consultas.tabla.length <= 0) {
-        this.alerta = "La actividad no existe en la base de datos";
+        this.alerta = "Los cursos no existe en la base de datos";
         this.makeToast();
         this.respuestaBusqueda = false;
       } else {
         this.respuestaBusqueda = true;
+      }
+    },
+    validarRestCrear() {
+      if (this.consultas.validar == false) {
+        this.alerta = "El curso no se ha registrado.";
+        this.makeToast();
+      } else {
+        this.alerta = "El curso se ha registrado";
+        this.makeToast();
+      }
+    },
+    validarRestEditar() {
+      if (this.consultas.validar == false) {
+        this.alerta = "El curso no se ha editado.";
+        this.makeToast();
+      } else {
+        this.alerta = "El curso se ha editado";
+        this.makeToast();
       }
     },
 
@@ -341,7 +313,7 @@ export default {
       this.editedIndex = this.tabla.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
-      console.log(this.tabla);
+      //console.log(this.tabla);
     },
 
     deleteItem(item) {
@@ -372,18 +344,37 @@ export default {
     },
 
     save() {
+      console.log(this.editedItem);
       if (this.editedIndex > -1) {
         Object.assign(this.tabla[this.editedIndex], this.editedItem);
+        //Object.assign(this.formEditar, this.editedItem);
+
+        this.formEditar.ID = this.editedItem.ID + "";
+        this.formEditar.NombreC = this.editedItem.NombreCurso + "";
+        this.formEditar.DescripcionC = this.editedItem.DescripcionCurso + "";
+        console.log(this.formEditar);
+        this.actualizarGrado();
       } else {
+        //this.formEditar.ID = this.editedItem.ID + "15";
+        this.formEditar.NombreC = this.editedItem.NombreCurso + "";
+        this.formEditar.DescripcionC = this.editedItem.DescripcionCurso + "";
+        console.log(this.formEditar);
+        this.crearGrado();
+        console.log("agregar");
         this.tabla.push(this.editedItem);
       }
-      console.log(this.tabla);
       this.close();
     },
   },
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "Nueva Actividad" : "Editar Actividad";
+      return this.editedIndex === -1 ? "Nuevo Curso" : "Editar Curso";
+    },
+    tablaDocenteOptions() {
+      return Object.values(this.tablaDocente).map((item) => ({
+        ...item,
+        nombreApellido: `${item.Nombre} ${item.Apellido}`,
+      }));
     },
   },
 
@@ -394,6 +385,10 @@ export default {
     dialogDelete(val) {
       val || this.closeDelete();
     },
+    selectedDocente(newDocente) {
+      console.log(newDocente);
+      this.editedItem.ID_docente = newDocente.ID;
+    },
   },
 
   created() {
@@ -401,3 +396,6 @@ export default {
   },
 };
 </script>
+
+<style>
+</style>

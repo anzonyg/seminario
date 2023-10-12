@@ -79,7 +79,6 @@
           </v-list-item-icon>
           <v-list-item-title>Inicio</v-list-item-title>
         </v-list-item>
-
         <v-list-group>
           <template v-slot:activator>
             <v-list-item-icon>
@@ -87,7 +86,6 @@
             </v-list-item-icon>
             <v-list-item-title class="white--text">Registro</v-list-item-title>
           </template>
-
           <v-list-item link to="/registro/grado" class="white--text">
             <v-list-item-title>Grado</v-list-item-title>
             <v-list-item-icon>
@@ -96,6 +94,12 @@
           </v-list-item>
           <v-list-item link to="/registro/curso" class="white--text">
             <v-list-item-title>Curso</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon class="white--text">mdi-school</v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+          <v-list-item link to="/registro/asignacionCurso" class="white--text">
+            <v-list-item-title>Asignacion de Curso</v-list-item-title>
             <v-list-item-icon>
               <v-icon class="white--text">mdi-school</v-icon>
             </v-list-item-icon>

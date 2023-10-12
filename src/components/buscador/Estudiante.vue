@@ -53,10 +53,31 @@
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
                               <v-text-field
-                                type="number"
-                                v-model="editedItem.dpi"
-                                label="DPI"
+                                v-model="editedItem.nombreMadre"
+                                label="Nombre de la Madre"
                               ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="6">
+                              <v-text-field
+                                v-model="editedItem.nombrePadre"
+                                label="Nombre del Padre"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="6">
+                              <v-select
+                                :items="grado1"
+                                label="Grado"
+                                v-model="editedItem.grado1"
+                                required
+                              ></v-select>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="6">
+                              <v-select
+                                :items="seccion1"
+                                label="Sección"
+                                v-model="editedItem.seccion1"
+                                required
+                              ></v-select>
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
                               <v-select
@@ -65,12 +86,6 @@
                                 v-model="editedItem.sexo"
                                 required
                               ></v-select>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="6">
-                              <v-text-field
-                                v-model="editedItem.direccion"
-                                label="Dirección"
-                              ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
                               <v-text-field
@@ -117,8 +132,8 @@
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
                               <v-text-field
-                                v-model="editedItem.correo"
-                                label="Correo"
+                                v-model="editedItem.direccion"
+                                label="Dirección"
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
@@ -183,7 +198,10 @@
                       <v-container>
                         <v-row>
                           <v-col cols="12" sm="6" md="6">
-                            <h4>DPI: {{ editedItem.dpi }}</h4>
+                            <h4>Nombre de la Madre: {{ editedItem.nombreMadre }}</h4>
+                          </v-col>
+                          <v-col cols="12" sm="6" md="6">
+                            <h4>Nombre del Padre: {{ editedItem.nombrePadre }}</h4>
                           </v-col>
                           <v-col cols="12" sm="6" md="6">
                             <h4>Sexo: {{ editedItem.sexo }}</h4>
@@ -201,16 +219,10 @@
                             </h4>
                           </v-col>
                           <v-col cols="12" sm="6" md="6">
-                            <h4>Correo: {{ editedItem.correo }}</h4>
+                            <h4>Grado: {{ editedItem.grado1 }}</h4>
                           </v-col>
                           <v-col cols="12" sm="6" md="6">
-                            <h4>Ciclo Escolar: {{ editedItem.ciclo }}</h4>
-                          </v-col>
-                          <v-col cols="12" sm="6" md="6">
-                            <h4>Grado: {{ editedItem.grado }}</h4>
-                          </v-col>
-                          <v-col cols="12" sm="6" md="6">
-                            <h4>Seccion: {{ editedItem.seccion }}</h4>
+                            <h4>Seccion: {{ editedItem.seccion1 }}</h4>
                           </v-col>
                         </v-row>
                       </v-container>
@@ -270,12 +282,13 @@ export default {
       editedItem: {
         nombre: "",
         apellido: "",
-        dpi: "",
+        nombreMadre: "",
+        nombrePadre: "",
         sexo: "",
-        grado: "",
-        seccion: "",
         direccion: "",
         telefono: "",
+        grado1: "",
+        seccion1: "",
         fechaNacimiento: "",
         correo: "",
         foto: "",
@@ -284,10 +297,10 @@ export default {
       defaultItem: {
         nombre: "",
         apellido: "",
-        dpi: "",
-        sexo: "",
-        grado: "",
-        seccion: "",
+        nombreMadre: "",
+        nombrePadre: "",
+        grado1: "",
+        seccion1: "",
         direccion: "",
         telefono: "",
         fechaNacimiento: "",
@@ -296,12 +309,13 @@ export default {
         ciclo: "",
       },
 
-      sexo: ["M", "F"],
+      grado1: ["Primero", "Segundo", "Tercero", "Cuarto","Quinto","Sexto"],
 
-      grado: [
-        { nombre: "Primero A", id: 1 },
-        { nombre: "Primero B", id: 2 },
-      ],
+      
+
+      seccion1: ["A", "B", "C", "D"],
+
+      sexo: ["F", "M"],
 
       ciclo: [],
 
@@ -314,8 +328,8 @@ export default {
       headers: [
         { text: "Nombre", value: "nombre" },
         { text: "Apellido", value: "apellido" },
-        { text: "Grado", value: "grado" },
-        { text: "Seccion", value: "seccion" },
+        { text: "Grado", value: "grado1" },
+        { text: "Seccion", value: "seccion1" },
         { text: "Detalle", value: "actions", sortable: false },
       ],
       encabezado: [],
@@ -332,8 +346,8 @@ export default {
               apellido: "Gonzalez Rios",
               dpi: 1234123451234,
               sexo: "M",
-              grado: "Primero",
-              seccion: "A",
+              grado1: "Primero",
+              seccion1: "A",
               ciclo: "2023",
               direccion: "Villa Nueva",
               telefono: "12345678",
@@ -348,8 +362,8 @@ export default {
               apellido: "Gonzalez Rios",
               dpi: 1234123451234,
               sexo: "M",
-              grado: "Primero",
-              seccion: "B",
+              grado1: "Primero",
+              seccion1: "B",
               ciclo: "2023",
               direccion: "Villa Nueva",
               telefono: "12345678",
@@ -362,8 +376,8 @@ export default {
               apellido: "Gonzalez Rios",
               dpi: 1234123451234,
               sexo: "M",
-              grado: "Primero",
-              seccion: "A",
+              grado1: "Primero",
+              seccion1: "A",
               ciclo: "2023",
               direccion: "Villa Nueva",
               telefono: "12345678",
@@ -504,6 +518,6 @@ export default {
   },
   created() {
     this.buscarEstudiante();
-  },
+  },
 };
 </script>

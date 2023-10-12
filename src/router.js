@@ -8,18 +8,6 @@ const routes = [
         name: 'home',
         component: () => import('@/components/Home.vue')
     },
-
-    {
-        path: '/registro/docente',
-        name: 'docenteReg',
-        component: () => import('@/components/registro/Docente.vue')
-    },
-    {
-        path: '/registro/estudiante',
-        name: 'estudianteReg',
-        component: () => import('@/components/registro/Estudiante.vue')
-    },
-
     {
         path: '/registro/grado',
         name: 'gradoReg',
@@ -29,6 +17,11 @@ const routes = [
         path: '/registro/curso',
         name: 'cursoReg',
         component: () => import('@/components/registro/Curso.vue')
+    },
+    {
+        path: '/registro/asignacionCurso',
+        name: 'asignacionCursoReg',
+        component: () => import('@/components/registro/AsignacionCurso.vue')
     },
     {
         path: '/registro/actividad',

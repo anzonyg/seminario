@@ -289,6 +289,8 @@ export default {
       });
       // Validar datos
       this.validarRestEditar();
+      this.buscarGrado();
+      this.buscarDocente();
     },
     async crearGrado() {
       await axios.post(AddGrado, this.formEditar).then((data) => {
@@ -302,6 +304,8 @@ export default {
       // Validar datos
       console.log(this.consultas);
       this.validarRestCrear();
+      this.buscarGrado();
+      this.buscarDocente();
     },
 
     validarRestDocente() {
@@ -310,9 +314,6 @@ export default {
         this.makeToast();
       } else if (this.consultasDocente.tabla.length <= 0) {
         this.alerta = "El nombre no existe en la base de datos";
-        this.makeToast();
-      } else {
-        this.alerta = "Docente exito!";
         this.makeToast();
       }
     },
