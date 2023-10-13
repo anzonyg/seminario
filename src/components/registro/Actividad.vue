@@ -59,30 +59,98 @@
               <template v-slot:top>
                 <v-toolbar flat>
                   <v-spacer></v-spacer>
-                  <v-dialog v-model="dialog" max-width="500px">
-                    
+                  <v-dialog v-model="dialog" max-width="1100px">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        color="primary"
+                        dark
+                        class="mb-2"
+                        v-bind="attrs"
+                        v-on="on"
+                      >
+                        Añadir Descripcion
+                      </v-btn>
+                    </template>
                     <v-card>
                       <v-card-title>
                         <span class="text-h5">{{ formTitle }}</span>
                       </v-card-title>
-
                       <v-card-text>
                         <v-container>
                           <v-row>
-                            <v-col cols="12">
-                              <v-select
-                                :items="tipoActividad"
-                                label="Tipo de Actividad"
-                                v-model="editedItem.tipo"
-                                required
-                              ></v-select>
+                            <v-col cols="12" md="6">
+                              <v-row>
+                                <v-col cols="12" sm="6" md="6">
+                                  <v-textarea
+                                    v-model="listDescripcion.nota1"
+                                    label="Nota 1"
+                                    required
+                                  ></v-textarea>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="6">
+                                  <v-textarea
+                                    v-model="listDescripcion.recuperacion1"
+                                    label="Recuperacion 1"
+                                    required
+                                  ></v-textarea>
+                                </v-col>
+                              </v-row>
                             </v-col>
-                            <v-col cols="12">
-                              <v-textarea
-                                v-model="editedItem.descripcion"
-                                label="Descripcion"
-                                required
-                              ></v-textarea>
+                            <v-col cols="12" md="6">
+                              <v-row>
+                                <v-col cols="12" sm="6" md="6">
+                                  <v-textarea
+                                    v-model="listDescripcion.nota2"
+                                    label="Nota 2"
+                                    required
+                                  ></v-textarea>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="6">
+                                  <v-textarea
+                                    v-model="listDescripcion.recuperacion2"
+                                    label="Recuperacion 2"
+                                    required
+                                  ></v-textarea>
+                                </v-col>
+                              </v-row>
+                            </v-col>
+                          </v-row>
+                          <v-row>
+                            <v-col cols="12" md="6">
+                              <v-row>
+                                <v-col cols="12" sm="6" md="6">
+                                  <v-textarea
+                                    v-model="listDescripcion.nota3"
+                                    label="Nota 3"
+                                    required
+                                  ></v-textarea>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="6">
+                                  <v-textarea
+                                    v-model="listDescripcion.recuperacion3"
+                                    label="Recuperacion 3"
+                                    required
+                                  ></v-textarea>
+                                </v-col>
+                              </v-row>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                              <v-row>
+                                <v-col cols="12" sm="6" md="6">
+                                  <v-textarea
+                                    v-model="listDescripcion.nota4"
+                                    label="Nota 4"
+                                    required
+                                  ></v-textarea>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="6">
+                                  <v-textarea
+                                    v-model="listDescripcion.recuperacion4"
+                                    label="Recuperacion 4"
+                                    required
+                                  ></v-textarea>
+                                </v-col>
+                              </v-row>
                             </v-col>
                           </v-row>
                         </v-container>
@@ -121,15 +189,6 @@
                   </v-dialog>
                 </v-toolbar>
               </template>
-              <template v-slot:item.actions="{ item }">
-                <v-icon small class="mr-2" @click="editItem(item)">
-                  mdi-pencil
-                </v-icon>
-                
-              </template>
-              <template v-slot:no-data>
-                <v-btn color="primary" @click="initialize"> Reset </v-btn>
-              </template>
             </v-data-table>
           </div>
         </v-col>
@@ -147,6 +206,7 @@ const cf = require("../DIR");
 const listaAsignacionCurso = cf.url + "/ListarCursosPorGrado";
 const listaDescripcion = cf.url + "/ListarDescrip";
 const idAsignacion = cf.url + "/ExtraIdasig";
+const guardarDesc = cf.url + "/aggDescripcionesGradocurso";
 
 export default {
   data() {
@@ -184,6 +244,7 @@ export default {
       consultasAsignacion: [],
       tablaAsignacion: [],
       asignacion: "",
+      idDescripcionAsignacion: "",
 
       consultas: [], //ingresa datos del backend
       tablaActividad: [],
@@ -201,7 +262,6 @@ export default {
       headers: [
         { text: "Tipo de Actividad", value: "tipo" },
         { text: "Descripcion", value: "descripcion" },
-        { text: "Detalle", value: "actions", sortable: false },
       ],
 
       dialog: false,
@@ -232,7 +292,29 @@ export default {
         ID_curso: "",
         ID_grado: "",
       },
-
+      listDescripcion: {
+        nota1: "",
+        nota2: "",
+        nota3: "",
+        nota4: "",
+        recuperacion1: "",
+        recuperacion2: "",
+        recuperacion3: "",
+        recuperacion4: "",
+      },
+      formDescripcion: {
+        id: "",
+        des1: "",
+        des2: "",
+        des3: "",
+        des4: "",
+        desr1: "",
+        desr2: "",
+        desr3: "",
+        desr4: "",
+      },
+      consultasDescripcion: [],
+      tablaDescripcion: [],
       respuesta: {
         data: {
           tabla: [
@@ -366,10 +448,24 @@ export default {
         // Asignar nuevos valores
         this.consultas = data.data;
         this.tablaActividad = this.consultas.tabla[0];
-        console.log(this.consultas);
+        this.idDescripcionAsignacion = this.tablaActividad.ID;
+        console.log(this.tablaActividad);
       });
       // Validar datos
       this.validarRestActividad();
+    },
+    async guardarDescripcion() {
+      console.log(this.formDescripcion);
+      await axios.post(guardarDesc, this.formDescripcion).then((data) => {
+        // Limpieza de datos
+        this.consultasDescripcion = [];
+        this.tablaDescripcion = [];
+
+        // Asignar nuevos valores
+        this.consultasDescripcion = data.data;
+      });
+      // Validar datos
+      this.validarRestDescripcion();
     },
     async cuadropdf() {
       // ... (código para descargar PDF)
@@ -418,6 +514,17 @@ export default {
       } else {
         this.respuestaBusqueda = true;
         this.estructurar();
+        this.listarEstructura();
+      }
+    },
+    validarRestDescripcion() {
+      if (this.consultasDescripcion.validar == false) {
+        this.alerta = "El usuario ha expirado.";
+        this.makeToast();
+      } else {
+        this.alerta = "Las descripciones se han guardado";
+        this.makeToast();
+        this.buscarActividad();
       }
     },
     validarRestAsignacion() {
@@ -440,7 +547,6 @@ export default {
       for (let anio = 2023; anio <= anioActual; anio++) {
         arrayDeAnios.push(anio);
       }
-      console.log(arrayDeAnios + " de ");
       return arrayDeAnios;
     },
 
@@ -457,14 +563,55 @@ export default {
         { tipo: "RECUPERACION 4", descripcion: list.DESCRIPCIONRENOTA4 },
       ];
       this.tabla = newList;
-      console.log(this.tabla);
+    },
+    descripcionEstructura() {
+      if (
+        this.listDescripcion.nota1 == "" ||
+        this.listDescripcion.nota2 == "" ||
+        this.listDescripcion.nota3 == "" ||
+        this.listDescripcion.nota4 == "" ||
+        this.listDescripcion.recuperacion1 == "" ||
+        this.listDescripcion.recuperacion2 == "" ||
+        this.listDescripcion.recuperacion3 == "" ||
+        this.listDescripcion.recuperacion4 == "" ||
+        this.listDescripcion.nota1 == null ||
+        this.listDescripcion.nota2 == null ||
+        this.listDescripcion.nota3 == null ||
+        this.listDescripcion.nota4 == null ||
+        this.listDescripcion.recuperacion1 == null ||
+        this.listDescripcion.recuperacion2 == null ||
+        this.listDescripcion.recuperacion3 == null ||
+        this.listDescripcion.recuperacion4 == null
+      ) {
+        return false;
+      } else {
+        this.formDescripcion.id = this.idDescripcionAsignacion;
+        this.formDescripcion.des1 = this.listDescripcion.nota1;
+        this.formDescripcion.des2 = this.listDescripcion.nota2;
+        this.formDescripcion.des3 = this.listDescripcion.nota3;
+        this.formDescripcion.des4 = this.listDescripcion.nota4;
+        this.formDescripcion.desr1 = this.listDescripcion.recuperacion1;
+        this.formDescripcion.desr2 = this.listDescripcion.recuperacion2;
+        this.formDescripcion.desr3 = this.listDescripcion.recuperacion3;
+        this.formDescripcion.desr4 = this.listDescripcion.recuperacion4;
+        return true;
+      }
+    },
+    listarEstructura() {
+      this.listDescripcion.nota1 = this.tabla[0].descripcion;
+      this.listDescripcion.nota2 = this.tabla[1].descripcion;
+      this.listDescripcion.nota3 = this.tabla[2].descripcion;
+      this.listDescripcion.nota4 = this.tabla[3].descripcion;
+      this.listDescripcion.recuperacion1 = this.tabla[4].descripcion;
+      this.listDescripcion.recuperacion2 = this.tabla[5].descripcion;
+      this.listDescripcion.recuperacion3 = this.tabla[6].descripcion;
+      this.listDescripcion.recuperacion4 = this.tabla[7].descripcion;
     },
 
     editItem(item) {
       this.editedIndex = this.tabla.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
-      console.log(this.tabla);
     },
 
     deleteItem(item) {
@@ -498,7 +645,14 @@ export default {
       if (this.editedIndex > -1) {
         Object.assign(this.tabla[this.editedIndex], this.editedItem);
       } else {
-        this.tabla.push(this.editedItem);
+        console.log(this.listDescripcion);
+        if (this.descripcionEstructura()) {
+          console.log(this.formDescripcion);
+          this.guardarDescripcion();
+        } else {
+          this.alerta = "Los campos estan vacios.";
+          this.makeToast();
+        }
       }
       console.log(this.tabla);
       this.close();
@@ -506,7 +660,9 @@ export default {
   },
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "Nueva Actividad" : "Editar Actividad";
+      return this.editedIndex === -1
+        ? "Editar Descripcion"
+        : "Nueva Descripcion";
     },
     tablaMateriaOptions() {
       return Object.values(this.itemsMateria).map((item) => ({
