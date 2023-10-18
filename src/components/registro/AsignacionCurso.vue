@@ -364,7 +364,7 @@ export default {
     },
 
     validarRestGrado() {
-      if (this.consultasMateria.valid == false) {
+      if (this.consultasGrado.valid == false) {
         this.alerta = "El usuario ha expirado.";
         this.makeToast();
         this.respuestaBusquedaGrado = false;

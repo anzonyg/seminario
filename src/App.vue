@@ -192,20 +192,17 @@
     <v-footer app class="primary">
       <v-container>
         <v-row>
-          <v-col cols="12" md="6">
+          <v-col cols="12" md="4">
             <h2 class="white--text">Contáctanos</h2>
             <p class="white--text">Dirección: Calle Principal #123, Ciudad</p>
-            <p class="white--text">Email: docentes@escuelaxyz.com</p>
-            <p class="white--text">Teléfono: (123) 456-7890</p>
           </v-col>
-          <v-col cols="12" md="6">
-            <h2 class="white--text">Enlaces Rápidos</h2>
-            <ul>
-              <li><a href="#" class="white--text">Inicio</a></li>
-              <li><a href="#" class="white--text">Recursos</a></li>
-              <li><a href="#" class="white--text">Comunidad</a></li>
-              <li><a href="#" class="white--text">Contacto</a></li>
-            </ul>
+          <v-col cols="12" md="4">
+            <br/>
+            <p class="white--text">Email: docentes@escuelaxyz.com</p>
+          </v-col>
+          <v-col cols="12" md="4">
+            <br/>
+            <p class="white--text">Teléfono: (123) 456-7890</p>
           </v-col>
         </v-row>
       </v-container>

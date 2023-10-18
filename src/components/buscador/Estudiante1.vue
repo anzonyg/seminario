@@ -43,35 +43,30 @@
                               <v-text-field
                                 v-model="editedItem.Codigo_personal"
                                 label="Codigo Personal"
-                                :disabled="switchState"
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
                               <v-text-field
                                 v-model="editedItem.Nombre"
                                 label="Nombre"
-                                :disabled="switchState"
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
                               <v-text-field
                                 v-model="editedItem.Apellido"
                                 label="Apellido"
-                                :disabled="switchState"
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
                               <v-text-field
                                 v-model="editedItem.Nombre_mama"
                                 label="Nombre de la Madre"
-                                :disabled="switchState"
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
                               <v-text-field
                                 v-model="editedItem.Nombre_papa"
                                 label="Nombre del Padre"
-                                :disabled="switchState"
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
@@ -81,7 +76,6 @@
                                 v-model="editedItem.Grado"
                                 item-text="nombreSeccion"
                                 item-value="ID"
-                                :disabled="switchState"
                                 required
                               ></v-select>
                             </v-col>
@@ -92,7 +86,6 @@
                                 v-model="editedItem.Sexo"
                                 item-text="text"
                                 item-value="value"
-                                :disabled="switchState"
                                 required
                               ></v-select>
                             </v-col>
@@ -101,7 +94,6 @@
                                 type="number"
                                 v-model="editedItem.Telefono"
                                 label="Telefono"
-                                :disabled="switchState"
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
@@ -121,7 +113,6 @@
                                     readonly
                                     v-bind="attrs"
                                     v-on="on"
-                                    :disabled="switchState"
                                   ></v-text-field>
                                 </template>
                                 <v-date-picker
@@ -145,7 +136,6 @@
                               <v-text-field
                                 v-model="editedItem.Direccion"
                                 label="Dirección"
-                                :disabled="switchState"
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="6">
@@ -161,12 +151,11 @@
                                 :disabled="!switchState"
                               ></v-select>
                               <v-select
-                                :items="tablaGradoOptions"
-                                label="Seleccionar grado y seccion"
+                                :items="grado"
+                                label="Grado"
                                 v-model="editedItem.Grado"
-                                item-text="nombreSeccion"
-                                item-value="ID"
                                 required
+                                item-text="nombre"
                                 :disabled="!switchState"
                               ></v-select>
                             </v-col>
@@ -177,7 +166,6 @@
                                 filled
                                 prepend-icon="mdi-camera"
                                 @change="getFilePath"
-                                :disabled="switchState"
                               ></v-file-input>
                             </v-col>
                           </v-row>
@@ -269,7 +257,6 @@ const urlGrado = cf.url + "/ListarGrado";
 const url = cf.url + "/ListarEstudiante";
 const AddEstudiante = cf.url + "/AgregarEstudiante";
 const uEstudiante = cf.url + "/ModificarAlumnosDatos";
-const uGrado = cf.url + "/ModificarGradoAlumno";
 
 export default {
   data() {
@@ -346,12 +333,6 @@ export default {
       ],
 
       ciclo: [],
-
-      formEditarGrado: {
-        Id_alumno: "",
-        anio: "",
-        grado: "",
-      },
 
       activePicker: null,
       date: null,
@@ -446,7 +427,7 @@ export default {
         //this.consultas = this.respuesta.data;
         this.tabla = this.consultas.tabla;
         console.log(this.tabla);
-        this.ciclo = this.generarArrayDeAnios();
+        //this.ciclo = this.generarArrayDeAnios();
       });
       // Validar datos
       this.validarRest();
@@ -468,21 +449,15 @@ export default {
     async crearEstudiante() {
       console.log(this.formEditar);
       await axios.post(AddEstudiante, this.formEditar).then((data) => {
-        this.consultas = data.data;
-        console.log(this.consultas);
-      });
-      // Validar datos
-      this.validarRestCrear();
-    },
-
-    async actualizarGrado() {
-      await axios.post(uGrado, this.formEditarGrado).then((data) => {
+        // Limpieza de datos
+        this.encabezado = [];
+        this.tabla = [];
         // Asignar nuevos valores
         this.consultas = data.data;
         console.log(this.consultas);
       });
       // Validar datos
-      this.validarRestEditarGrado();
+      this.validarRestCrear();
     },
 
     validarRest() {
@@ -526,34 +501,10 @@ export default {
       }
     },
 
-    validarRestEditarGrado() {
-      if (this.consultas.validar == false) {
-        this.alerta = "El grado no se ha editado.";
-        this.makeToast();
-      } else {
-        this.alerta = "El grado se ha editado";
-        this.makeToast();
-        this.buscarEstudiante();
-      }
-    },
-
-    validarInputEditarGrado() {
-      if (
-        this.formEditarGrado.Id_alumno <= 0 ||
-          this.formEditarGrado.anio <= 0 ||
-          this.formEditarGrado.anio == "undefined" ||
-          this.formEditarGrado.grado <= 0
-      ) {
-        return false;
-      } else {
-        return true;
-      }
-    },
-
     async buscarGrado() {
       await axios.post(urlGrado, this.formEditar).then((data) => {
         // Limpieza de datos
-
+        
         // Asignar nuevos valores
         this.consultasGrado = data.data;
         this.tablaGrado = this.consultasGrado.tabla;
@@ -630,42 +581,28 @@ export default {
 
     saveEstudiante() {
       if (this.editedIndex > -1) {
-        if (this.switchState) {
-          this.formEditarGrado.Id_alumno = this.editedItem.ID + "";
-          this.formEditarGrado.anio = this.editedItem.ciclo + "";
-          this.formEditarGrado.grado = this.editedItem.Grado + "";
-          if (this.validarInputEditarGrado()) {
-            console.log(this.formEditarGrado);
-            this.actualizarGrado();
-          } else {
-            this.alerta = "El seleccionar ciclo escolar o grado";
-            this.makeToast();
-          }
-        } else {
-          Object.assign(this.tabla[this.editedIndex], this.editedItem);
+        Object.assign(this.tabla[this.editedIndex], this.editedItem);
 
-          this.formEditar.ID = this.editedItem.ID + "";
-          this.formEditar.Codigo_personal =
-            this.editedItem.Codigo_personal + "";
-          this.formEditar.Nombre = this.editedItem.Nombre + "";
-          this.formEditar.foto = this.editedItem.foto + " ";
-          this.formEditar.Apellido = this.editedItem.Apellido + "";
-          this.formEditar.Grado = this.editedItem.Grado + "";
-          this.formEditar.Direccion = this.editedItem.Direccion + "";
-          this.formEditar.Telefono = this.editedItem.Telefono + "";
-          this.formEditar.Nombre_papa = this.editedItem.Nombre_papa + "";
-          this.formEditar.Nombre_mama = this.editedItem.Nombre_mama + "";
-          this.formEditar.FechaNacimiento =
-            this.editedItem.FechaNacimiento + "";
-          this.formEditar.Sexo = this.editedItem.Sexo + "";
-          console.log(this.formEditar);
-          this.actualizarEstudiante();
-        }
+        this.formEditar.ID = this.editedItem.ID + "";
+        this.formEditar.Codigo_personal = this.editedItem.Codigo_personal + "";
+        this.formEditar.Nombre = this.editedItem.Nombre + "";
+        this.formEditar.foto = this.editedItem.foto + " ";
+        this.formEditar.Apellido = this.editedItem.Apellido + "";
+        this.formEditar.Grado = this.editedItem.Grado + "";
+        this.formEditar.Direccion = this.editedItem.Direccion + "";
+        this.formEditar.Telefono = this.editedItem.Telefono + "";
+        this.formEditar.Nombre_papa = this.editedItem.Nombre_papa + "";
+        this.formEditar.Nombre_mama = this.editedItem.Nombre_mama + "";
+        this.formEditar.FechaNacimiento = this.editedItem.FechaNacimiento + "";
+        this.formEditar.Sexo = this.editedItem.Sexo + "";
+        console.log(this.formEditar);
+        this.actualizarEstudiante();
       } else {
         this.formEditar.Codigo_personal = this.editedItem.Codigo_personal + "";
         this.formEditar.Nombre = this.editedItem.Nombre + "";
         this.formEditar.foto = this.editedItem.foto + " ";
         this.formEditar.Apellido = this.editedItem.Apellido + "";
+        this.formEditar.Grado = this.editedItem.Grado + "";
         this.formEditar.Direccion = this.editedItem.Direccion + "";
         this.formEditar.Telefono = this.editedItem.Telefono + "";
         this.formEditar.Nombre_papa = this.editedItem.Nombre_papa + "";

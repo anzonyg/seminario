@@ -1,13 +1,41 @@
 <template>
   <v-container>
     <!-- FORMULARIO BUSQUEDA DE MATERIA -->
+    <v-row v-if="respuestaBusquedaGrado">
+      <v-col md="9" cols="12" align="center">
+        <br />
+        <v-select
+          :items="tablaGradoOptions"
+          label="Seleccionar grado y seccion"
+          v-model="grado.ID"
+          item-text="nombreSeccion"
+          item-value="ID"
+          required
+        ></v-select>
+      </v-col>
+      <v-col md="3" cols="12" align="center">
+        <br />
+        <v-btn pill @click="validarInputGrado" color="secondary">
+          <v-progress-circular
+            indeterminate
+            :size="25"
+            color="light"
+            v-show="progressBuscarGrado"
+          ></v-progress-circular>
+          <v-icon v-show="icoBuscarGrado">mdi-magnify</v-icon>
+          Buscar
+        </v-btn>
+      </v-col>
+    </v-row>
     <v-row v-if="respuestaBusquedaMateria">
       <v-col md="3" cols="4" align="center">
         <br />
         <v-select
-          :items="itemsMateria"
+          :items="tablaMateriaOptions"
           label="Seleccionar la materia"
           v-model="materia"
+          item-text="nombreCurso"
+          item-value="ID"
           required
         ></v-select>
       </v-col>
@@ -26,6 +54,8 @@
           :items="itemsBloque"
           label="Seleccionar la bloque"
           v-model="bloque"
+          item-text="text"
+          item-value="value"
           required
         ></v-select>
       </v-col>
@@ -82,6 +112,11 @@
         <v-col cols="12">
           <div class="table-responsive">
             <v-data-table :headers="headers" :items="tabla" hide-default-footer>
+              <template v-slot:item.promedio="{ item }">
+                <v-chip :color="getColor(item.promedio)" dark>
+                  {{ item.promedio }}
+                </v-chip>
+              </template>
               <template v-slot:top>
                 <v-toolbar flat>
                   <v-spacer></v-spacer>
@@ -89,7 +124,7 @@
                     <v-card>
                       <v-card-title>
                         <span class="text-h5"
-                          >{{ formTitle }} de {{ editedItem.nombre }}</span
+                          >{{ formTitle }} de {{ editedItem.Alumno }}</span
                         >
                       </v-card-title>
                       <v-card-text>
@@ -101,7 +136,7 @@
                                 <v-col cols="12" sm="6" md="6">
                                   <v-text-field
                                     type="number"
-                                    v-model="editedItem.nota1"
+                                    v-model="editedItem.NOTA1"
                                     label="Actividad 1"
                                     max="25"
                                     required
@@ -110,7 +145,7 @@
                                 <v-col cols="12" sm="6" md="6">
                                   <v-text-field
                                     type="number"
-                                    v-model="editedItem.recuperacion1"
+                                    v-model="editedItem.RENOTA1"
                                     label="Recuperacion 1"
                                     max="25"
                                     required
@@ -124,7 +159,7 @@
                                 <v-col cols="12" sm="6" md="6">
                                   <v-text-field
                                     type="number"
-                                    v-model="editedItem.nota2"
+                                    v-model="editedItem.NOTA2"
                                     label="Actividad 2"
                                     max="25"
                                     required
@@ -133,7 +168,7 @@
                                 <v-col cols="12" sm="6" md="6">
                                   <v-text-field
                                     type="number"
-                                    v-model="editedItem.recuperacion2"
+                                    v-model="editedItem.RENOTA2"
                                     label="Recuperacion 2"
                                     max="25"
                                     required
@@ -149,7 +184,7 @@
                                 <v-col cols="12" sm="6" md="6">
                                   <v-text-field
                                     type="number"
-                                    v-model="editedItem.nota3"
+                                    v-model="editedItem.NOTA3"
                                     label="Actividad 3"
                                     max="25"
                                     required
@@ -158,7 +193,7 @@
                                 <v-col cols="12" sm="6" md="6">
                                   <v-text-field
                                     type="number"
-                                    v-model="editedItem.recuperacion3"
+                                    v-model="editedItem.RENOTA3"
                                     label="Recuperacion 3"
                                     max="25"
                                     required
@@ -172,7 +207,7 @@
                                 <v-col cols="12" sm="6" md="6">
                                   <v-text-field
                                     type="number"
-                                    v-model="editedItem.nota4"
+                                    v-model="editedItem.NOTA4"
                                     label="Actividad 4"
                                     max="25"
                                     required
@@ -181,7 +216,7 @@
                                 <v-col cols="12" sm="6" md="6">
                                   <v-text-field
                                     type="number"
-                                    v-model="editedItem.recuperacion4"
+                                    v-model="editedItem.RENOTA4"
                                     label="Recuperacion 4"
                                     max="25"
                                     required
@@ -230,11 +265,8 @@
                 <v-icon small class="mr-2" @click="editItem(item)">
                   mdi-pencil
                 </v-icon>
-                
               </template>
-              <template v-slot:no-data>
-                <v-btn color="primary" @click="initialize"> Reset </v-btn>
-              </template>
+              
             </v-data-table>
           </div>
         </v-col>
@@ -247,6 +279,12 @@
 
 <script>
 import swal from "sweetalert";
+import axios from "axios";
+const cf = require("./DIR");
+const url = cf.url + "/ListarGrado";
+const listaAsignacionCurso = cf.url + "/ListarCursosPorGrado";
+const listarEstudiante = cf.url + "/LitarnotasporCurso";
+const notas = cf.url + "/ModificarNotas";
 
 export default {
   data() {
@@ -257,9 +295,11 @@ export default {
       progressBuscarGrado: false, //icono spiner para boton buscar grado
       icoBuscarGrado: true, //icono buscar para boton buscar grado
       consultasGrado: [], // ingresa datos del backend
-      itemsGrado: [], //selectbox de grado
-      grado: "", // valor que se selecciono en selectbox de grado
-      respuestaBusquedaGrado: false,
+      tablaGrado: [], //selectbox de grado
+      grado: {
+        ID: "",
+      }, // valor que se selecciono en selectbox de grado
+      respuestaBusquedaGrado: true,
 
       progressBuscarMateria: false, //icono spiner para boton buscar materia
       icoBuscarMateria: true, //icono buscar para boton buscar materia
@@ -278,22 +318,34 @@ export default {
       itemsCiclo: [], //selectbox de ciclo
       ciclo: "",
 
-      itemsBloque: ["Bloque 1", "Bloque 2", "Bloque 3", "Bloque 4"], //selectbox de bloque
+      itemsBloque: [
+        { text: "Bloque 1", value: 1 },
+        { text: "Bloque 2", value: 2 },
+        { text: "Bloque 3", value: 3 },
+        { text: "Bloque 4", value: 4 },
+      ], //selectbox de bloque
       bloque: "",
+
+      fomr1: {
+        idcurso: "",
+        idgrado: "",
+        anio: "",
+        id_bloque: "",
+      },
 
       consultas: [], //ingresa datos del backend
       tabla: [],
       headers: [
-        { text: "Nombre del Estudiante", value: "nombre" },
-        { text: "Actividad 1", value: "nota1" },
-        { text: "Recuperacion 1", value: "recuperacion1" },
-        { text: "Actividad 2", value: "nota2" },
-        { text: "Recuperacion 2", value: "recuperacion2" },
-        { text: "Actividad 3", value: "nota3" },
-        { text: "Recuperacion 3", value: "recuperacion3" },
-        { text: "Actividad 4", value: "nota4" },
-        { text: "Recuperacion 4", value: "recuperacion4" },
-        { text: "Promedio", value: "promedio" },
+        { text: "Nombre del Estudiante", value: "Alumno" },
+        { text: "Actividad 1", value: "NOTA1" },
+        { text: "Recuperacion 1", value: "RENOTA1" },
+        { text: "Actividad 2", value: "NOTA2" },
+        { text: "Recuperacion 2", value: "RENOTA2" },
+        { text: "Actividad 3", value: "NOTA3" },
+        { text: "Recuperacion 3", value: "RENOTA3" },
+        { text: "Actividad 4", value: "NOTA4" },
+        { text: "Recuperacion 4", value: "RENOTA4" },
+        { text: "Total", value: "promedio" },
         { text: "Detalle", value: "actions", sortable: false },
       ],
 
@@ -302,24 +354,36 @@ export default {
       desserts: [],
       editedIndex: -1,
       editedItem: {
-        nota1: "",
-        recuperacion1: "",
-        nota2: "",
-        recuperacion2: "",
-        nota3: "",
-        recuperacion3: "",
-        nota4: "",
-        recuperacion4: "",
+        Alumno: "",
+        Año: "",
+        ID: "",
+        ID_alumno: "",
+        ID_asignacion: "",
+        ID_bloque: "",
+        NOTA1: "",
+        NOTA2: "",
+        NOTA3: "",
+        NOTA4: "",
+        RENOTA1: "",
+        RENOTA2: "",
+        RENOTA3: "",
+        RENOTA4: "",
       },
       defaultItem: {
-        nota1: "",
-        recuperacion1: "",
-        nota2: "",
-        recuperacion2: "",
-        nota3: "",
-        recuperacion3: "",
-        nota4: "",
-        recuperacion4: "",
+        Alumno: "",
+        Año: "",
+        ID: "",
+        ID_alumno: "",
+        ID_asignacion: "",
+        ID_bloque: "",
+        NOTA1: "",
+        NOTA2: "",
+        NOTA3: "",
+        NOTA4: "",
+        RENOTA1: "",
+        RENOTA2: "",
+        RENOTA3: "",
+        RENOTA4: "",
       },
       encabezado: [],
       formGrado: {
@@ -453,24 +517,31 @@ export default {
       this.validarRest();
     },
     async buscarGrado() {
-      // Limpieza de datos
-      this.itemsGrado = [];
+      await axios.post(url, this.formEditar).then((data) => {
+        // Limpieza de datos
+        //console.log(data);
+        this.encabezado = [];
+        this.tabla = [];
 
-      // Asignar nuevos valores
-      this.consultasGrado = this.respuestaGrado.data;
-      this.itemsGrado = this.consultasGrado.tabla;
+        // Asignar nuevos valores
+        this.consultasGrado = data.data;
+        this.tablaGrado = this.consultasGrado.tabla;
+        console.log(this.tablaGrado);
+      });
 
       // Validar datos
       this.validarRestGrado();
     },
     async buscarMateria() {
-      // Limpieza de datos
-      this.itemsMateria = [];
+      await axios.post(listaAsignacionCurso, this.grado).then((data) => {
+        // Limpieza de datos
+        this.itemsMateria = [];
 
-      // Asignar nuevos valores
-      this.consultasMateria = this.respuestaMateria.data;
-      this.itemsMateria = this.consultasMateria.tabla;
-      this.itemsCiclo = this.generarArrayDeAnios();
+        // Asignar nuevos valores
+        this.consultasMateria = data.data;
+        this.itemsMateria = this.consultasMateria.tabla;
+        this.itemsCiclo = this.generarArrayDeAnios();
+      });
       // Validar datos
       this.validarRestMateria();
     },
@@ -491,24 +562,36 @@ export default {
     async buscarEstudiante() {
       this.progressBuscarMateria = true;
       this.icoBuscarMateria = false;
+      await axios.post(listarEstudiante, this.fomr1).then((data) => {
+        // Limpieza de datos
+        this.consultas = [];
+        this.tabla = [];
 
-      // Limpieza de datos
-      this.consultas = [];
-      this.tabla = [];
-
-      // Asignar nuevos valores
-      this.consultas = this.respuesta.data;
-      this.tabla = this.consultas.tabla;
-
+        // Asignar nuevos valores
+        this.consultas = data.data;
+        this.tabla = this.consultas.tabla;
+        console.log(this.consultas);
+      });
       // Validar datos
       this.validarRestEstudiante();
     },
-    async cuadropdf() {
-      // ... (código para descargar PDF)
+    async calificaciones() {
+      console.log(this.editedItem);
+      await axios.post(notas, this.editedItem).then((data) => {
+        console.log(data.data)
+        if (data.data.validar == false) {
+        this.alerta = "No se logro actualizar.";
+        this.makeToast();
+      } else {
+        this.alerta = "Se guardo las calificaciones con exito!";
+        this.makeToast();
+        this.buscarEstudiante();
+      } 
+      });
     },
 
     validarInputGrado() {
-      if (this.grado.length <= 0) {
+      if (this.grado.ID.length <= 0) {
         this.alerta = "Seleccionar Grado y Seccion";
         this.makeToast();
         console.log("no validar input " + this.grado);
@@ -525,12 +608,12 @@ export default {
         this.ciclo.length <= 0 ||
         this.bloque.length <= 0
       ) {
-        this.alerta = "Seleccionar Materia";
+        this.alerta = "Seleccionar Materia, Ciclo o Bloque";
         this.makeToast();
-        console.log("no validar input " + this.materia);
       } else {
         this.progressBuscarMateria = true;
         this.icoBuscarMateria = false;
+        this.crearForm();
         this.buscarEstudiante();
         console.log("validar input " + this.materia);
       }
@@ -552,19 +635,17 @@ export default {
       if (this.consultasGrado.valid == false) {
         this.alerta = "El usuario ha expirado.";
         this.makeToast();
-        this.respuestaBusquedaGrado = false;
       } else if (this.consultasGrado.tabla.length <= 0) {
         this.alerta = "El grado no existe en la base de datos";
         this.makeToast();
-        this.respuestaBusquedaGrado = false;
       } else {
-        this.respuestaBusquedaGrado = true;
         //console.log('funciona respuesta en Grado')
       }
     },
     validarRestMateria() {
-      this.progressBuscarMateria = false;
-      this.icoBuscarMateria = true;
+      this.progressBuscarGrado = false;
+      this.icoBuscarGrado = true;
+      this.respuestaBusquedaMateria = true;
       if (this.consultasMateria.valid == false) {
         this.alerta = "El usuario ha expirado.";
         this.makeToast();
@@ -595,7 +676,7 @@ export default {
     validarRestEstudiante() {
       this.progressBuscarMateria = false;
       this.icoBuscarMateria = true;
-      if (this.consultas.valid == false) {
+      if (this.consultas.validar == false) {
         this.alerta = "El usuario ha expirado.";
         this.makeToast();
         this.respuestaBusquedaMateria = false;
@@ -608,6 +689,17 @@ export default {
       }
     },
 
+    crearForm() {
+      this.fomr1.idgrado = this.grado.ID;
+      this.fomr1.idcurso = this.materia;
+      this.fomr1.anio = this.ciclo;
+      this.fomr1.id_bloque = this.bloque;
+    },
+    getColor(nota) {
+      if (nota > 80) return "green";
+      else if (nota > 61) return "orange";
+      else return "red";
+    },
     generarArrayDeAnios() {
       const anioActual = new Date().getFullYear();
       const arrayDeAnios = [];
@@ -656,10 +748,13 @@ export default {
     save() {
       if (this.editedIndex > -1) {
         Object.assign(this.tabla[this.editedIndex], this.editedItem);
+        this.calificaciones()
       } else {
         this.tabla.push(this.editedItem);
+        this.calificaciones();
+        
       }
-      console.log(this.tabla);
+      
       this.close();
     },
   },
@@ -674,6 +769,18 @@ export default {
 
       return actividadSeleccionada ? actividadSeleccionada.descripcion : "";
     },
+    tablaGradoOptions() {
+      return Object.values(this.tablaGrado).map((item) => ({
+        ...item,
+        nombreSeccion: `${item.NombreGrado} ${item.SECCION}`,
+      }));
+    },
+    tablaMateriaOptions() {
+      return Object.values(this.itemsMateria).map((item) => ({
+        ...item,
+        nombreCurso: `${item.NombreCurso}`,
+      }));
+    },
   },
 
   watch: {
@@ -686,7 +793,7 @@ export default {
   },
 
   created() {
-    this.buscarMateria();
+    this.buscarGrado();
   },
 };
 </script>
