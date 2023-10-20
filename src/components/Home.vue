@@ -11,7 +11,7 @@
                     <v-card-text>
                       <h1 class="display-3 text-center">Bienvenido, Docente</h1>
                       <p class="subtitle-1 text-center">
-                        Explora nuestras oportunidades educativas
+                        Escuela Oficial Urbana Mixta No. 460 Santa Luisa
                       </p>
                     </v-card-text>
                   </v-card>
@@ -21,12 +21,12 @@
           </v-card>
           <!-- Sección de Breves Reseñas -->
           <v-container class="mt-10">
-            <h2 class="text-center">Breves Reseñas</h2>
+            <h2 class="text-center">Nuestra Misión y Visión</h2>
             <br/>
             <v-row justify="center">
               <v-col
                 cols="12"
-                md="4"
+                md="3"
                 v-for="(review, index) in reviews"
                 :key="index"
               >
@@ -52,19 +52,24 @@ export default {
     return {
       reviews: [
         {
-          title: "Excelentes Recursos",
+          title: "Misión",
           content:
-            "Encontré una amplia gama de recursos educativos que enriquecieron mi enseñanza.",
+            "Somos una institución que realiza con excelencia y de forma integral el proceso educativo, fundamentado en valores, principios y el temor de Dios; incorporando a la sociedad hombres y mujeres de éxito, proporcionándoles las herramientas necesarias para que sean competitivos en todas las áreas productivas de nuestro país.",
         },
         {
-          title: "Comunidad Activa",
+          title: "Visión",
           content:
-            "La comunidad docente aquí es increíblemente activa y útil para compartir experiencias.",
+            "Brindar un servicio educativo de calidad, cumpliendo responsablemente con las normas del Ministerio de Educación, para cubrir las expectativas y necesidades de la comunidad educativa y formar ciudadanos con conciencia crítica de su entorno.",
         },
         {
-          title: "Soporte de Calidad",
+          title: "MISIÓN MINEDUC",
           content:
-            "Recibí un soporte de alta calidad que me ayudó a resolver desafíos educativos.",
+            "Somos una institución evolutiva, organizada, eficiente y eficaz, generadora de oportunidades de enseñanza-aprendizaje, orientada a resultados, que aprovecha diligentemente las oportunidades que el siglo XXI le brinda y comprometida con una Guatemala mejor.",
+        },
+        {
+          title: "VISIÓN MINEDUC",
+          content:
+            "Formar ciudadanos con carácter, capaces de aprender por sí mismos, orgullosos de ser guatemaltecos, empeñados en conseguir su desarrollo integral, con principios, valores y convicciones que fundamentan su conducta.",
         },
       ],
     };

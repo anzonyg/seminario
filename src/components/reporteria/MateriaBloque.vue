@@ -542,6 +542,7 @@ export default {
         this.respuestaBusquedaMateria = true;
         this.grado.ID = datos.Id_grado + "";
         this.buscarMateria();
+        this.buscarGrado();
       }
     },
     async buscarcuadro() {
@@ -561,7 +562,7 @@ export default {
       this.validarRest();
     },
     async buscarGrado() {
-      await axios.post(url, this.formEditar).then((data) => {
+      await axios.post(url).then((data) => {
         // Limpieza de datos
         //console.log(data);
         this.encabezado = [];
@@ -760,13 +761,13 @@ export default {
       var datos = JSON.parse(localStorage.getItem("datos"));
       var materia1 = this.nombreMateria(this.materia);
       var grado = this.nombreGrado(this.grado.ID);
-      var descripcion= this.piePagina;
+      var descripcion = this.piePagina;
       var lista = {
         catedratico: datos.Nombre + " " + datos.Apellido,
         nombreGrado: grado.nombre,
         seccionGrado: grado.seccion,
         materia: materia1.nombreCurso,
-        bloque : this.bloque,
+        bloque: this.bloque,
         AÑO: descripcion.AÑO,
         alumno: this.nombreAlumno(),
         creador: "MateriaBloque",
@@ -784,7 +785,7 @@ export default {
     nombreGrado(idBuscado) {
       var datos = this.tablaGrado;
       for (let i = 0; i < datos.length; i++) {
-        if (datos[i].ID === idBuscado) {
+        if (datos[i].ID == idBuscado) {
           return {
             nombre: datos[i].NombreGrado,
             seccion: datos[i].SECCION,
@@ -804,7 +805,7 @@ export default {
       }
       return null; // Retorna null si no se encuentra el id
     },
-    
+
     nombreBloque(idBuscado) {
       var datos = this.itemsBloque;
       for (let i = 0; i < datos.length; i++) {
@@ -878,6 +879,16 @@ export default {
       this.close();
     },
 
+    quitarVacio(obj) {
+      for (const key in obj) {
+        if (obj[key] === null) {
+          obj[key] = " ";
+        } else if (typeof obj[key] === "object") {
+          quitarVacio(obj[key]); // Llama recursivamente para objetos anidados
+        }
+      }
+    },
+
     generarPDF2() {
       var content2 = {
         lista: this.generarJson(),
@@ -888,7 +899,6 @@ export default {
     async generarPDF() {
       console.log("imprimir");
       var datos = this.generarJson();
-      console.log(datos);
       var content2 = {
         lista: datos,
       };

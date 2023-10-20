@@ -82,7 +82,7 @@ const routes = [
 
 const router = new VueRouter({
 
-    base: '/consultasIbis/',
+    base: '/sistemaNotas/',
     routes
 })
 export default router

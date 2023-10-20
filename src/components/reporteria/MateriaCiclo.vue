@@ -409,7 +409,8 @@ export default {
         this.respuestaBusquedaGrado = false;
         this.respuestaBusquedaMateria = true;
         this.grado.ID = datos.Id_grado + "";
-        this.buscarEstudiante();
+        this.buscarMateria();
+        this.buscarGrado();
       }
     },
     async buscarcuadro() {
@@ -676,7 +677,7 @@ export default {
     nombreGrado(idBuscado) {
       var datos = this.tablaGrado;
       for (let i = 0; i < datos.length; i++) {
-        if (datos[i].ID === idBuscado) {
+        if (datos[i].ID == idBuscado) {
           return {
             nombre: datos[i].NombreGrado,
             seccion: datos[i].SECCION,
