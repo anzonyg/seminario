@@ -1,5 +1,11 @@
 <template>
   <v-container>
+    <v-row>
+      <v-col cols="12">
+        <br />
+        <h1>Reporteria de Materia</h1>
+      </v-col>
+    </v-row>
     <!-- FORMULARIO BUSQUEDA DE MATERIA -->
     <v-row v-if="respuestaBusquedaGrado">
       <v-col md="9" cols="12" align="center">
@@ -59,9 +65,9 @@
           required
         ></v-select>
       </v-col>
-      <v-col md="3" cols="12" align="center">
+      <v-col md="1" cols="6" align="center">
         <br />
-        <v-btn pill @click="validarInputMateria" color="secondary">
+        <v-btn fab pill @click="validarInputMateria" color="secondary">
           <v-progress-circular
             indeterminate
             :size="25"
@@ -69,49 +75,30 @@
             v-show="progressBuscarMateria"
           ></v-progress-circular>
           <v-icon v-show="icoBuscarMateria">mdi-magnify</v-icon>
-          Buscar
+        </v-btn>
+      </v-col>
+      <v-col md="1" cols="6" align="center">
+        <br />
+        <v-btn
+          fab
+          @click="generarPDF()"
+          pill
+          color="primary"
+          name="descarga"
+          v-show="btDescarga"
+        >
+          <v-icon>mdi-download</v-icon>
         </v-btn>
       </v-col>
     </v-row>
     <br />
-
-    <!-- FORMULARIO BUSQUEDA DE ACTIVIDAD -->
-    <v-row v-if="respuestaBusquedaActividad">
-      <v-col md="10" cols="12" align="center">
-        <br />
-        <v-select
-          :items="itemsActividad"
-          label="Seleccionar la actividad"
-          v-model="actividad"
-          required
-          item-text="nombre"
-        ></v-select>
-      </v-col>
-      <v-col md="2" cols="12" align="center">
-        <br />
-        <v-btn pill @click="validarInputActividad" color="secondary">
-          <v-progress-circular
-            indeterminate
-            :size="25"
-            color="light"
-            v-show="progressBuscarActividad"
-          ></v-progress-circular>
-          <v-icon v-show="icoBuscarActividad">mdi-magnify</v-icon>
-          Buscar
-        </v-btn>
-      </v-col>
-      <v-col cols="12">
-        <br />
-        <h3>Descripcion: {{ descripcionSeleccionada }}</h3>
-      </v-col>
-    </v-row>
 
     <!-- RESPUESTA DE BUSQUEDA ESTUDIANTE -->
     <v-container id="cuadro1" v-if="respuestaBusqueda">
       <v-row>
         <v-col cols="12">
           <div class="table-responsive">
-            <v-data-table :headers="headers" :items="tabla" hide-default-footer>
+            <v-data-table :headers="headers" :items="tabla">
               <template v-slot:item.promedio="{ item }">
                 <v-chip :color="getColor(item.promedio)" dark>
                   {{ item.promedio }}
@@ -261,30 +248,61 @@
                   </v-dialog>
                 </v-toolbar>
               </template>
-              <template v-slot:item.actions="{ item }">
-                <v-icon small class="mr-2" @click="editItem(item)">
-                  mdi-pencil
-                </v-icon>
-              </template>
-              
             </v-data-table>
           </div>
         </v-col>
       </v-row>
       <br />
       <br />
+      <v-row>
+        <v-col cols="6">
+          <div>
+            <h3>
+              {{ `Actividad 1: ${piePagina.DESCRIPCIONNOTA1}` }}
+            </h3>
+            <h3>
+              {{ `Actividad 2: ${piePagina.DESCRIPCIONNOTA2}` }}
+            </h3>
+            <h3>
+              {{ `Actividad 3: ${piePagina.DESCRIPCIONNOTA3} ` }}
+            </h3>
+            <h3>
+              {{ `Actividad 4: ${piePagina.DESCRIPCIONNOTA4} ` }}
+            </h3>
+          </div>
+        </v-col>
+        <v-col cols="6">
+          <div>
+            <h3>
+              {{ `Recuperacion 1: ${piePagina.DESCRIPCIONRENOTA1}` }}
+            </h3>
+            <h3>
+              {{ `Recuperacion 2: ${piePagina.DESCRIPCIONRENOTA2}` }}
+            </h3>
+            <h3>
+              {{ `Recuperacion 3: ${piePagina.DESCRIPCIONRENOTA3} ` }}
+            </h3>
+            <h3>
+              {{ `Recuperacion 4: ${piePagina.DESCRIPCIONRENOTA4} ` }}
+            </h3>
+          </div>
+        </v-col>
+      </v-row>
+      <br />
     </v-container>
   </v-container>
 </template>
-
-<script>
+  
+  <script>
 import swal from "sweetalert";
 import axios from "axios";
-const cf = require("./DIR");
+const cf = require("../DIR");
 const url = cf.url + "/ListarGrado";
+const url2 = cf.url + "/Documentos";
 const listaAsignacionCurso = cf.url + "/ListarCursosPorGrado";
 const listarEstudiante = cf.url + "/LitarnotasporCurso";
 const notas = cf.url + "/ModificarNotas";
+const listarDescripcion = cf.url + "/LitarnotasporCursoConDescrip";
 
 export default {
   data() {
@@ -292,6 +310,7 @@ export default {
       admin: false,
       respuestaBusqueda: false,
       alerta: "",
+      btDescarga: false,
 
       progressBuscarGrado: false, //icono spiner para boton buscar grado
       icoBuscarGrado: true, //icono buscar para boton buscar grado
@@ -347,8 +366,18 @@ export default {
         { text: "Actividad 4", value: "NOTA4" },
         { text: "Recuperacion 4", value: "RENOTA4" },
         { text: "Total", value: "promedio" },
-        { text: "Detalle", value: "actions", sortable: false },
       ],
+
+      piePagina: {
+        nota1: "",
+        nota2: "",
+        nota3: "",
+        nota4: "",
+        renota1: "",
+        renota2: "",
+        renota3: "",
+        renota4: "",
+      },
 
       dialog: false,
       dialogDelete: false,
@@ -387,6 +416,7 @@ export default {
         RENOTA4: "",
       },
       encabezado: [],
+
       formGrado: {
         nombre: "",
         bitacora: [],
@@ -503,12 +533,14 @@ export default {
     },
     validraAdmin() {
       var datos = JSON.parse(localStorage.getItem("datos"));
-      if (datos.idTipo == 1){
+      if (datos.idTipo == 1) {
+        this.buscarGrado();
         this.respuestaBusquedaGrado = true;
-      }else{
+        this.respuestaBusquedaMateria = false;
+      } else {
         this.respuestaBusquedaGrado = false;
         this.respuestaBusquedaMateria = true;
-        this.grado.ID = datos.Id_grado + '';
+        this.grado.ID = datos.Id_grado + "";
         this.buscarMateria();
       }
     },
@@ -582,21 +614,28 @@ export default {
         this.consultas = data.data;
         this.tabla = this.consultas.tabla;
       });
+      await axios.post(listarDescripcion, this.fomr1).then((data) => {
+        // Limpieza de datos
+        this.piePagina = [];
+
+        // Asignar nuevos valores
+        data.data;
+        this.piePagina = data.data.piePagina[0];
+      });
       // Validar datos
       this.validarRestEstudiante();
     },
     async calificaciones() {
-      console.log(this.editedItem);
       await axios.post(notas, this.editedItem).then((data) => {
-        console.log(data.data)
+        console.log(data.data);
         if (data.data.validar == false) {
-        this.alerta = "No se logro actualizar.";
-        this.makeToast();
-      } else {
-        this.alerta = "Se guardo las calificaciones con exito!";
-        this.makeToast();
-        this.buscarEstudiante();
-      } 
+          this.alerta = "No se logro actualizar.";
+          this.makeToast();
+        } else {
+          this.alerta = "Se guardo las calificaciones con exito!";
+          this.makeToast();
+          this.buscarEstudiante();
+        }
       });
     },
 
@@ -685,12 +724,15 @@ export default {
         this.alerta = "El usuario ha expirado.";
         this.makeToast();
         this.respuestaBusquedaMateria = false;
+        this.btDescarga = false;
       } else if (this.consultas.tabla.length <= 0) {
         this.alerta = "Los estudiantes no existe en la base de datos";
         this.makeToast();
         this.respuestaBusqueda = false;
+        this.btDescarga = false;
       } else {
         this.respuestaBusqueda = true;
+        this.btDescarga = true;
       }
     },
 
@@ -714,24 +756,103 @@ export default {
       }
       return arrayDeAnios;
     },
+    generarJson() {
+      var datos = JSON.parse(localStorage.getItem("datos"));
+      var materia1 = this.nombreMateria(this.materia);
+      var grado = this.nombreGrado(this.grado.ID);
+      var descripcion= this.piePagina;
+      var lista = {
+        catedratico: datos.Nombre + " " + datos.Apellido,
+        nombreGrado: grado.nombre,
+        seccionGrado: grado.seccion,
+        materia: materia1.nombreCurso,
+        bloque : this.bloque,
+        AÑO: descripcion.AÑO,
+        alumno: this.nombreAlumno(),
+        creador: "MateriaBloque",
+        DESCRIPCIONNOTA1: descripcion.DESCRIPCIONNOTA1,
+        DESCRIPCIONRENOTA1: descripcion.DESCRIPCIONRENOTA1,
+        DESCRIPCIONNOTA2: descripcion.DESCRIPCIONNOTA2,
+        DESCRIPCIONRENOTA2: descripcion.DESCRIPCIONRENOTA2,
+        DESCRIPCIONNOTA3: descripcion.DESCRIPCIONNOTA3,
+        DESCRIPCIONRENOTA3: descripcion.DESCRIPCIONRENOTA3,
+        DESCRIPCIONNOTA4: descripcion.DESCRIPCIONNOTA4,
+        DESCRIPCIONRENOTA4: descripcion.DESCRIPCIONRENOTA4,
+      };
+      return lista;
+    },
+    nombreGrado(idBuscado) {
+      var datos = this.tablaGrado;
+      for (let i = 0; i < datos.length; i++) {
+        if (datos[i].ID === idBuscado) {
+          return {
+            nombre: datos[i].NombreGrado,
+            seccion: datos[i].SECCION,
+          };
+        }
+      }
+      return null; // Retorna null si no se encuentra el id
+    },
+    nombreMateria(idBuscado) {
+      var datos = this.itemsMateria;
+      for (let i = 0; i < datos.length; i++) {
+        if (datos[i].ID === idBuscado) {
+          return {
+            nombreCurso: datos[i].NombreCurso,
+          };
+        }
+      }
+      return null; // Retorna null si no se encuentra el id
+    },
+    
+    nombreBloque(idBuscado) {
+      var datos = this.itemsBloque;
+      for (let i = 0; i < datos.length; i++) {
+        if (datos[i].ID === idBuscado) {
+          return {
+            nombreCurso: datos[i].NombreCurso,
+          };
+        }
+      }
+      return null; // Retorna null si no se encuentra el id
+    },
+    nombreAlumno() {
+      var datos = this.tabla;
+      var listNuevo = [];
+      for (let i = 0; i < datos.length; i++) {
+        var cuadronuevo = {
+          nombreAlumno: datos[i].Alumno,
+          nota1: datos[i].NOTA1,
+          nota2: datos[i].NOTA2,
+          nota3: datos[i].NOTA3,
+          nota4: datos[i].NOTA4,
+          renota1: datos[i].RENOTA1,
+          renota2: datos[i].RENOTA2,
+          renota3: datos[i].RENOTA3,
+          renota4: datos[i].RENOTA4,
+          promedio: datos[i].promedio,
+          contador: i + 1,
+          codigo: datos[i].Codigo_personal,
+        };
+        listNuevo.push(cuadronuevo);
+      }
+      return listNuevo; // Retorna null si no se encuentra el id
+    },
 
     editItem(item) {
       this.editedIndex = this.tabla.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
-
     deleteItem(item) {
       this.editedIndex = this.tabla.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
     },
-
     deleteItemConfirm() {
       this.tabla.splice(this.editedIndex, 1);
       this.closeDelete();
     },
-
     close() {
       this.dialog = false;
       this.$nextTick(() => {
@@ -739,7 +860,6 @@ export default {
         this.editedIndex = -1;
       });
     },
-
     closeDelete() {
       this.dialogDelete = false;
       this.$nextTick(() => {
@@ -747,16 +867,57 @@ export default {
         this.editedIndex = -1;
       });
     },
-
     save() {
       if (this.editedIndex > -1) {
         Object.assign(this.tabla[this.editedIndex], this.editedItem);
-        this.calificaciones()
+        this.calificaciones();
       } else {
         this.tabla.push(this.editedItem);
-        this.calificaciones();       
+        this.calificaciones();
       }
       this.close();
+    },
+
+    generarPDF2() {
+      var content2 = {
+        lista: this.generarJson(),
+      };
+      console.log(content2);
+    },
+
+    async generarPDF() {
+      console.log("imprimir");
+      var datos = this.generarJson();
+      console.log(datos);
+      var content2 = {
+        lista: datos,
+      };
+      await axios({
+        url: url2,
+        method: "POST",
+        data: content2,
+        responseType: "blob",
+      }).then((response) => {
+        this.mostrar = false;
+        this.mostrar2 = true;
+        this.download(response.data, datos);
+      });
+    },
+    download(data, lista) {
+      if (!data) {
+        return;
+      }
+      let url = window.URL.createObjectURL(new Blob([data]));
+      let link = document.createElement("a");
+      link.style.display = "none";
+      link.href = url;
+      link.setAttribute(
+        "download",
+        lista.nombreGrado + "_" + lista.materia + ".docx"
+      );
+
+      document.body.appendChild(link);
+      link.click();
     },
   },
   computed: {
@@ -794,7 +955,6 @@ export default {
   },
 
   created() {
-    this.buscarGrado();
     this.validraAdmin();
   },
 };

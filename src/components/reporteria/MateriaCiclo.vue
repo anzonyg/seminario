@@ -1,5 +1,11 @@
 <template>
   <v-container>
+    <v-row>
+      <v-col cols="12">
+        <br />
+        <h1>Reporteria de Materia</h1>
+      </v-col>
+    </v-row>
     <!-- FORMULARIO BUSQUEDA DE MATERIA -->
     <v-row v-if="respuestaBusquedaGrado">
       <v-col md="9" cols="12" align="center">
@@ -28,7 +34,7 @@
       </v-col>
     </v-row>
     <v-row v-if="respuestaBusquedaMateria">
-      <v-col md="3" cols="4" align="center">
+      <v-col md="5" cols="6" align="center">
         <br />
         <v-select
           :items="tablaMateriaOptions"
@@ -39,7 +45,7 @@
           required
         ></v-select>
       </v-col>
-      <v-col md="3" cols="4" align="center">
+      <v-col md="5" cols="6" align="center">
         <br />
         <v-select
           :items="itemsCiclo"
@@ -48,20 +54,9 @@
           required
         ></v-select>
       </v-col>
-      <v-col md="3" cols="4" align="center">
+      <v-col md="1" cols="6" align="center">
         <br />
-        <v-select
-          :items="itemsBloque"
-          label="Seleccionar la bloque"
-          v-model="bloque"
-          item-text="text"
-          item-value="value"
-          required
-        ></v-select>
-      </v-col>
-      <v-col md="3" cols="12" align="center">
-        <br />
-        <v-btn pill @click="validarInputMateria" color="secondary">
+        <v-btn fab pill @click="validarInputMateria" color="secondary">
           <v-progress-circular
             indeterminate
             :size="25"
@@ -69,49 +64,30 @@
             v-show="progressBuscarMateria"
           ></v-progress-circular>
           <v-icon v-show="icoBuscarMateria">mdi-magnify</v-icon>
-          Buscar
+        </v-btn>
+      </v-col>
+      <v-col md="1" cols="6" align="center">
+        <br />
+        <v-btn
+          fab
+          @click="generarPDF()"
+          pill
+          color="primary"
+          name="descarga"
+          v-show="btDescarga"
+        >
+          <v-icon>mdi-download</v-icon>
         </v-btn>
       </v-col>
     </v-row>
     <br />
-
-    <!-- FORMULARIO BUSQUEDA DE ACTIVIDAD -->
-    <v-row v-if="respuestaBusquedaActividad">
-      <v-col md="10" cols="12" align="center">
-        <br />
-        <v-select
-          :items="itemsActividad"
-          label="Seleccionar la actividad"
-          v-model="actividad"
-          required
-          item-text="nombre"
-        ></v-select>
-      </v-col>
-      <v-col md="2" cols="12" align="center">
-        <br />
-        <v-btn pill @click="validarInputActividad" color="secondary">
-          <v-progress-circular
-            indeterminate
-            :size="25"
-            color="light"
-            v-show="progressBuscarActividad"
-          ></v-progress-circular>
-          <v-icon v-show="icoBuscarActividad">mdi-magnify</v-icon>
-          Buscar
-        </v-btn>
-      </v-col>
-      <v-col cols="12">
-        <br />
-        <h3>Descripcion: {{ descripcionSeleccionada }}</h3>
-      </v-col>
-    </v-row>
 
     <!-- RESPUESTA DE BUSQUEDA ESTUDIANTE -->
     <v-container id="cuadro1" v-if="respuestaBusqueda">
       <v-row>
         <v-col cols="12">
           <div class="table-responsive">
-            <v-data-table :headers="headers" :items="tabla" hide-default-footer>
+            <v-data-table :headers="headers" :items="tablaBloque">
               <template v-slot:item.promedio="{ item }">
                 <v-chip :color="getColor(item.promedio)" dark>
                   {{ item.promedio }}
@@ -261,29 +237,26 @@
                   </v-dialog>
                 </v-toolbar>
               </template>
-              <template v-slot:item.actions="{ item }">
-                <v-icon small class="mr-2" @click="editItem(item)">
-                  mdi-pencil
-                </v-icon>
-              </template>
-              
             </v-data-table>
           </div>
         </v-col>
       </v-row>
       <br />
       <br />
+
+      <br />
     </v-container>
   </v-container>
 </template>
-
-<script>
+    
+    <script>
 import swal from "sweetalert";
 import axios from "axios";
-const cf = require("./DIR");
+const cf = require("../DIR");
 const url = cf.url + "/ListarGrado";
+const url2 = cf.url + "/Documentos";
 const listaAsignacionCurso = cf.url + "/ListarCursosPorGrado";
-const listarEstudiante = cf.url + "/LitarnotasporCurso";
+const listarEstudiante = cf.url + "/listarNotasBloquesCurso";
 const notas = cf.url + "/ModificarNotas";
 
 export default {
@@ -292,6 +265,7 @@ export default {
       admin: false,
       respuestaBusqueda: false,
       alerta: "",
+      btDescarga: false,
 
       progressBuscarGrado: false, //icono spiner para boton buscar grado
       icoBuscarGrado: true, //icono buscar para boton buscar grado
@@ -318,36 +292,34 @@ export default {
 
       itemsCiclo: [], //selectbox de ciclo
       ciclo: "",
-
+      formGrado1: {
+        Grado: "",
+      },
       itemsBloque: [
         { text: "Bloque 1", value: 1 },
         { text: "Bloque 2", value: 2 },
         { text: "Bloque 3", value: 3 },
         { text: "Bloque 4", value: 4 },
       ], //selectbox de bloque
-      bloque: "",
+      bloque: "1",
 
       fomr1: {
         idcurso: "",
-        idgrado: "",
+        grado: "",
         anio: "",
         id_bloque: "",
       },
 
       consultas: [], //ingresa datos del backend
       tabla: [],
+      tablaBloque: [],
       headers: [
-        { text: "Nombre del Estudiante", value: "Alumno" },
-        { text: "Actividad 1", value: "NOTA1" },
-        { text: "Recuperacion 1", value: "RENOTA1" },
-        { text: "Actividad 2", value: "NOTA2" },
-        { text: "Recuperacion 2", value: "RENOTA2" },
-        { text: "Actividad 3", value: "NOTA3" },
-        { text: "Recuperacion 3", value: "RENOTA3" },
-        { text: "Actividad 4", value: "NOTA4" },
-        { text: "Recuperacion 4", value: "RENOTA4" },
-        { text: "Total", value: "promedio" },
-        { text: "Detalle", value: "actions", sortable: false },
+        { text: "Nombre del Estudiante", value: "nombre" },
+        { text: "Bloque 1", value: "Bloque1" },
+        { text: "Bloque 2", value: "Bloque2" },
+        { text: "Bloque 3", value: "Bloque3" },
+        { text: "Bloque 4", value: "Bloque4" },
+        { text: "Promedio", value: "promedio" },
       ],
 
       dialog: false,
@@ -387,6 +359,16 @@ export default {
         RENOTA4: "",
       },
       encabezado: [],
+      piePagina: {
+        nota1: "",
+        nota2: "",
+        nota3: "",
+        nota4: "",
+        renota1: "",
+        renota2: "",
+        renota3: "",
+        renota4: "",
+      },
       formGrado: {
         nombre: "",
         bitacora: [],
@@ -404,90 +386,7 @@ export default {
         "Recuperacion 4",
       ],
 
-      respuesta: {
-        data: {
-          tabla: [
-            {
-              nombre: "Anzony Gonzalez",
-              nota1: "10",
-              recuperacion1: "10",
-              nota2: "10",
-              recuperacion2: "10",
-              nota3: "10",
-              recuperacion3: "10",
-              nota4: "10",
-              recuperacion4: "10",
-              promedio: "10",
-            },
-            {
-              nombre: "Rafael Gonzalez",
-              nota1: "10",
-              recuperacion1: "10",
-              nota2: "10",
-              recuperacion2: "10",
-              nota3: "10",
-              recuperacion3: "10",
-              nota4: "10",
-              recuperacion4: "10",
-              promedio: "10",
-            },
-            {
-              nombre: "Actividad no. 3",
-              nota1: "10",
-              recuperacion1: "10",
-              nota2: "10",
-              recuperacion2: "10",
-              nota3: "10",
-              recuperacion3: "10",
-              nota4: "10",
-              recuperacion4: "10",
-              promedio: "10",
-            },
-            // ... (otras entradas de tabla)
-          ],
-          valid: true,
-        },
-        // ...
-      },
-      respuestaGrado: {
-        data: {
-          tabla: [
-            "Primero A",
-            "Primero B",
-            "Segundo A",
-            "Segundo B",
-            // ... (otras entradas de tabla)
-          ],
-          valid: true,
-        },
-        // ...
-      },
-      respuestaMateria: {
-        data: {
-          tabla: [
-            "Matematicas",
-            "Lenguaje",
-            "Ciencias Sociales",
-            "Ciencias Naturales",
-            // ... (otras entradas de tabla)
-          ],
-          valid: true,
-        },
-        // ...
-      },
-      respuestaActividad: {
-        data: {
-          tabla: [
-            { nombre: "Nota 1", descripcion: "descripcion de la actividad 1" },
-            { nombre: "Nota 2", descripcion: "descripcion de la actividad 2" },
-            { nombre: "Nota 3", descripcion: "descripcion de la actividad 3" },
-            { nombre: "Nota 4", descripcion: "descripcion de la actividad 4" },
-            // ... (otras entradas de tabla)
-          ],
-          valid: true,
-        },
-        // ...
-      },
+      notasPorCurso: {},
     };
   },
   methods: {
@@ -503,13 +402,14 @@ export default {
     },
     validraAdmin() {
       var datos = JSON.parse(localStorage.getItem("datos"));
-      if (datos.idTipo == 1){
+      if (datos.idTipo == 1) {
         this.respuestaBusquedaGrado = true;
-      }else{
+        this.buscarGrado();
+      } else {
         this.respuestaBusquedaGrado = false;
         this.respuestaBusquedaMateria = true;
-        this.grado.ID = datos.Id_grado + '';
-        this.buscarMateria();
+        this.grado.ID = datos.Id_grado + "";
+        this.buscarEstudiante();
       }
     },
     async buscarcuadro() {
@@ -582,21 +482,22 @@ export default {
         this.consultas = data.data;
         this.tabla = this.consultas.tabla;
       });
+
       // Validar datos
       this.validarRestEstudiante();
+      this.formatBloques();
     },
     async calificaciones() {
-      console.log(this.editedItem);
       await axios.post(notas, this.editedItem).then((data) => {
-        console.log(data.data)
+        console.log(data.data);
         if (data.data.validar == false) {
-        this.alerta = "No se logro actualizar.";
-        this.makeToast();
-      } else {
-        this.alerta = "Se guardo las calificaciones con exito!";
-        this.makeToast();
-        this.buscarEstudiante();
-      } 
+          this.alerta = "No se logro actualizar.";
+          this.makeToast();
+        } else {
+          this.alerta = "Se guardo las calificaciones con exito!";
+          this.makeToast();
+          this.buscarEstudiante();
+        }
       });
     },
 
@@ -611,11 +512,7 @@ export default {
       }
     },
     validarInputMateria() {
-      if (
-        this.materia.length <= 0 ||
-        this.ciclo.length <= 0 ||
-        this.bloque.length <= 0
-      ) {
+      if (this.materia.length <= 0 || this.ciclo.length <= 0) {
         this.alerta = "Seleccionar Materia, Ciclo o Bloque";
         this.makeToast();
       } else {
@@ -685,20 +582,66 @@ export default {
         this.alerta = "El usuario ha expirado.";
         this.makeToast();
         this.respuestaBusquedaMateria = false;
+        this.btDescarga = false;
       } else if (this.consultas.tabla.length <= 0) {
         this.alerta = "Los estudiantes no existe en la base de datos";
         this.makeToast();
         this.respuestaBusqueda = false;
+        this.btDescarga = false;
       } else {
         this.respuestaBusqueda = true;
+        this.btDescarga = true;
       }
     },
 
+    generarPDF() {},
+
     crearForm() {
-      this.fomr1.idgrado = this.grado.ID;
+      this.fomr1.grado = this.grado.ID;
       this.fomr1.idcurso = this.materia;
       this.fomr1.anio = this.ciclo;
       this.fomr1.id_bloque = this.bloque;
+    },
+    formatBloques() {
+      this.tabla.forEach((item) => {
+        const curso = item.Nombre;
+        const bloque = item.NombreBloque;
+        const codigo1 = item.Codigo_personal;
+        if (!this.notasPorCurso[curso]) {
+          this.notasPorCurso[curso] = {};
+        }
+        this.notasPorCurso[curso][bloque] = item.Total;
+      });
+      const newArray = [];
+      var originalArray = this.notasPorCurso;
+
+      for (const curso in originalArray) {
+        const bloques = originalArray[curso];
+        const total = Object.values(bloques).reduce(
+          (acc, value) => acc + value,
+          0
+        );
+        const promedio = total / Object.values(bloques).length;
+        const codigo1 = this.tabla.find(
+          (item) => item.Nombre === curso
+        ).Codigo_personal; // Accedemos al código personal desde this.tabla
+
+        const bloquesSinEspacios = {};
+        for (const bloque in bloques) {
+          const bloqueSinEspacios = bloque.replace(/\s/g, ""); // Quitamos los espacios en blanco
+          bloquesSinEspacios[bloqueSinEspacios] = bloques[bloque];
+        }
+
+        const nombreCurso = {
+          nombre: curso,
+          ...bloquesSinEspacios,
+          promedio,
+          codigo: codigo1,
+        };
+        newArray.push(nombreCurso);
+      }
+      this.tablaBloque = newArray;
+      console.log(this.tablaBloque);
     },
     getColor(nota) {
       if (nota > 80) return "green";
@@ -713,6 +656,74 @@ export default {
         arrayDeAnios.push(anio);
       }
       return arrayDeAnios;
+    },
+    generarJson() {
+      var datos = JSON.parse(localStorage.getItem("datos"));
+      var materia1 = this.nombreMateria(this.materia);
+      var grado = this.nombreGrado(this.grado.ID);
+      var lista = {
+        catedratico: datos.Nombre + " " + datos.Apellido,
+        nombreGrado: grado.nombre,
+        seccionGrado: grado.seccion,
+        AÑO: this.ciclo,
+        materia: materia1.nombreCurso,
+        bloque: this.bloque,
+        alumno: this.nombreAlumno(),
+        creador: "MateriaCiclo",
+      };
+      return lista;
+    },
+    nombreGrado(idBuscado) {
+      var datos = this.tablaGrado;
+      for (let i = 0; i < datos.length; i++) {
+        if (datos[i].ID === idBuscado) {
+          return {
+            nombre: datos[i].NombreGrado,
+            seccion: datos[i].SECCION,
+          };
+        }
+      }
+      return null; // Retorna null si no se encuentra el id
+    },
+    nombreMateria(idBuscado) {
+      var datos = this.itemsMateria;
+      for (let i = 0; i < datos.length; i++) {
+        if (datos[i].ID === idBuscado) {
+          return {
+            nombreCurso: datos[i].NombreCurso,
+          };
+        }
+      }
+      return null; // Retorna null si no se encuentra el id
+    },
+    nombreBloque(idBuscado) {
+      var datos = this.itemsBloque;
+      for (let i = 0; i < datos.length; i++) {
+        if (datos[i].ID === idBuscado) {
+          return {
+            nombreCurso: datos[i].NombreCurso,
+          };
+        }
+      }
+      return null; // Retorna null si no se encuentra el id
+    },
+    nombreAlumno() {
+      var datos = this.tablaBloque;
+      var listNuevo = [];
+      for (let i = 0; i < datos.length; i++) {
+        var cuadronuevo = {
+          nombreAlumno: datos[i].nombre,
+          nota1: datos[i].Bloque1,
+          nota2: datos[i].Bloque2,
+          nota3: datos[i].Bloque3,
+          nota4: datos[i].Bloque4,
+          promedio: datos[i].promedio,
+          contador: i + 1,
+          codigo: datos[i].codigo,
+        };
+        listNuevo.push(cuadronuevo);
+      }
+      return listNuevo; // Retorna null si no se encuentra el id
     },
 
     editItem(item) {
@@ -751,12 +762,52 @@ export default {
     save() {
       if (this.editedIndex > -1) {
         Object.assign(this.tabla[this.editedIndex], this.editedItem);
-        this.calificaciones()
+        this.calificaciones();
       } else {
         this.tabla.push(this.editedItem);
-        this.calificaciones();       
+        this.calificaciones();
       }
       this.close();
+    },
+
+    generarPDF2() {
+      var content2 = {
+        lista: this.generarJson(),
+      };
+      console.log(content2);
+    },
+    async generarPDF() {
+      console.log("imprimir");
+      var datos = this.generarJson();
+      var content2 = {
+        lista: datos,
+      };
+      await axios({
+        url: url2,
+        method: "POST",
+        data: content2,
+        responseType: "blob",
+      }).then((response) => {
+        this.mostrar = false;
+        this.mostrar2 = true;
+        this.download(response.data, datos);
+      });
+    },
+    download(data, lista) {
+      if (!data) {
+        return;
+      }
+      let url = window.URL.createObjectURL(new Blob([data]));
+      let link = document.createElement("a");
+      link.style.display = "none";
+      link.href = url;
+      link.setAttribute(
+        "download",
+        lista.nombreGrado + "_" + lista.materia + ".docx"
+      );
+
+      document.body.appendChild(link);
+      link.click();
     },
   },
   computed: {
@@ -794,7 +845,6 @@ export default {
   },
 
   created() {
-    this.buscarGrado();
     this.validraAdmin();
   },
 };

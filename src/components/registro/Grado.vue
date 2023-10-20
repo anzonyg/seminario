@@ -45,7 +45,7 @@
                           </v-col>
                           <v-col cols="12" md="6">
                             <v-select
-                            :items="tablaDocenteOptions"
+                              :items="tablaDocenteOptions"
                               label="Docente"
                               v-model="editedItem.ID_docente"
                               item-text="nombreApellido"
@@ -97,9 +97,6 @@
               <v-icon small class="mr-2" @click="editItem(item)">
                 mdi-pencil
               </v-icon>
-            </template>
-            <template v-slot:no-data>
-              <v-btn color="primary" @click="initialize"> Reset </v-btn>
             </template>
           </v-data-table>
         </div>
@@ -251,14 +248,11 @@ export default {
     async buscarDocente() {
       await axios.post(listDocente, this.formEditar).then((data) => {
         // Limpieza de datos
-
         this.tablaDocente = [];
-
         // Asignar nuevos valores
         this.consultasDocente = data.data;
-        //this.consultas = this.respuesta.data;
+
         this.tablaDocente = this.consultasDocente.tabla;
-        //console.log(this.tablaDocente);
       });
       // Validar datos
       this.validarRestDocente();
@@ -266,10 +260,8 @@ export default {
     async buscarGrado() {
       await axios.post(url, this.formEditar).then((data) => {
         // Limpieza de datos
-        //console.log(data);
         this.encabezado = [];
         this.tabla = [];
-
         // Asignar nuevos valores
         this.consultas = data.data;
         this.tabla = this.consultas.tabla;
@@ -285,7 +277,6 @@ export default {
         this.tabla = [];
         // Asignar nuevos valores
         this.consultas = data.data;
-        console.log(this.consultas);
       });
       // Validar datos
       this.validarRestEditar();
@@ -299,10 +290,8 @@ export default {
         this.tabla = [];
         // Asignar nuevos valores
         this.consultas = data.data;
-        console.log(this.consultas);
       });
       // Validar datos
-      console.log(this.consultas);
       this.validarRestCrear();
       this.buscarGrado();
       this.buscarDocente();
@@ -356,7 +345,6 @@ export default {
       for (let anio = 2023; anio <= anioActual; anio++) {
         arrayDeAnios.push(anio);
       }
-      console.log(arrayDeAnios + " de ");
       return arrayDeAnios;
     },
 
@@ -364,7 +352,6 @@ export default {
       this.editedIndex = this.tabla.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
-      //console.log(this.tabla);
     },
 
     deleteItem(item) {
@@ -395,24 +382,18 @@ export default {
     },
 
     save() {
-      console.log(this.editedItem);
       if (this.editedIndex > -1) {
         Object.assign(this.tabla[this.editedIndex], this.editedItem);
-        //Object.assign(this.formEditar, this.editedItem);
-
         this.formEditar.ID = this.editedItem.ID + "";
         this.formEditar.IdDocente = this.editedItem.ID_docente + "";
         this.formEditar.NombreG = this.editedItem.NombreGrado + "";
         this.formEditar.Seccion = this.editedItem.SECCION + "";
-        console.log(this.formEditar);
         this.actualizarGrado();
       } else {
         this.formEditar.IdDocente = this.editedItem.ID_docente + "";
         this.formEditar.NombreG = this.editedItem.NombreGrado + "";
         this.formEditar.Seccion = this.editedItem.SECCION + "";
-        console.log(this.formEditar);
         this.crearGrado();
-        console.log("agregar");
         this.tabla.push(this.editedItem);
       }
       this.close();
@@ -438,7 +419,6 @@ export default {
       val || this.closeDelete();
     },
     selectedDocente(newDocente) {
-      console.log(newDocente);
       this.editedItem.ID_docente = newDocente.ID;
     },
   },
@@ -449,6 +429,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

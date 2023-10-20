@@ -85,7 +85,6 @@
                 mdi-pencil
               </v-icon>
             </template>
-           
           </v-data-table>
         </div>
       </v-col>
@@ -225,14 +224,12 @@ export default {
     async buscarGrado() {
       await axios.post(url, this.formEditar).then((data) => {
         // Limpieza de datos
-        //console.log(data);
         this.encabezado = [];
         this.tabla = [];
 
         // Asignar nuevos valores
         this.consultas = data.data;
         this.tabla = this.consultas.tabla;
-        console.log(this.consultas);
       });
       this.itemsCiclo = this.generarArrayDeAnios();
       // Validar datos
@@ -245,7 +242,6 @@ export default {
         this.tabla = [];
         // Asignar nuevos valores
         this.consultas = data.data;
-        console.log(this.consultas);
       });
       // Validar datos
       this.validarRestEditar();
@@ -258,10 +254,8 @@ export default {
         this.tabla = [];
         // Asignar nuevos valores
         this.consultas = data.data;
-        console.log(this.consultas);
       });
       // Validar datos
-      console.log(this.consultas);
       this.validarRestCrear();
       this.buscarGrado();
     },
@@ -305,7 +299,6 @@ export default {
       for (let anio = 2023; anio <= anioActual; anio++) {
         arrayDeAnios.push(anio);
       }
-      console.log(arrayDeAnios + " de ");
       return arrayDeAnios;
     },
 
@@ -313,7 +306,6 @@ export default {
       this.editedIndex = this.tabla.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
-      //console.log(this.tabla);
     },
 
     deleteItem(item) {
@@ -344,23 +336,17 @@ export default {
     },
 
     save() {
-      console.log(this.editedItem);
       if (this.editedIndex > -1) {
         Object.assign(this.tabla[this.editedIndex], this.editedItem);
-        //Object.assign(this.formEditar, this.editedItem);
-
         this.formEditar.ID = this.editedItem.ID + "";
         this.formEditar.NombreC = this.editedItem.NombreCurso + "";
         this.formEditar.DescripcionC = this.editedItem.DescripcionCurso + "";
-        console.log(this.formEditar);
         this.actualizarGrado();
       } else {
         //this.formEditar.ID = this.editedItem.ID + "15";
         this.formEditar.NombreC = this.editedItem.NombreCurso + "";
         this.formEditar.DescripcionC = this.editedItem.DescripcionCurso + "";
-        console.log(this.formEditar);
         this.crearGrado();
-        console.log("agregar");
         this.tabla.push(this.editedItem);
       }
       this.close();
@@ -386,7 +372,6 @@ export default {
       val || this.closeDelete();
     },
     selectedDocente(newDocente) {
-      console.log(newDocente);
       this.editedItem.ID_docente = newDocente.ID;
     },
   },
@@ -396,6 +381,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

@@ -1,6 +1,32 @@
 <template>
   <v-container>
     <!-- FORMULARIO BUSQUEDA DE MATERIA -->
+    <v-row v-if="respuestaBusquedaGrado">
+      <v-col md="9" cols="12" align="center">
+        <br />
+        <v-select
+          :items="tablaGradoOptions"
+          label="Seleccionar grado y seccion"
+          v-model="grado.ID"
+          item-text="nombreSeccion"
+          item-value="ID"
+          required
+        ></v-select>
+      </v-col>
+      <v-col md="3" cols="12" align="center">
+        <br />
+        <v-btn pill @click="validarInputGrado" color="secondary">
+          <v-progress-circular
+            indeterminate
+            :size="25"
+            color="light"
+            v-show="progressBuscarGrado"
+          ></v-progress-circular>
+          <v-icon v-show="icoBuscarGrado">mdi-magnify</v-icon>
+          Buscar
+        </v-btn>
+      </v-col>
+    </v-row>
     <v-row v-if="respuestaBusquedaMateria">
       <v-col md="3" cols="4" align="center">
         <br />
@@ -203,6 +229,7 @@
 import swal from "sweetalert";
 import axios from "axios";
 const cf = require("../DIR");
+const url = cf.url + "/ListarGrado";
 const listaAsignacionCurso = cf.url + "/ListarCursosPorGrado";
 const listaDescripcion = cf.url + "/ListarDescrip";
 const idAsignacion = cf.url + "/ExtraIdasig";
@@ -219,9 +246,10 @@ export default {
       consultasGrado: [], // ingresa datos del backend
       itemsGrado: [], //selectbox de grado
       grado: {
-        ID: "4",
+        ID: "",
       }, // valor que se selecciono en selectbox de grado
       respuestaBusquedaGrado: false,
+      tablaGrado: [],
 
       progressBuscarMateria: false, //icono spiner para boton buscar materia
       icoBuscarMateria: true, //icono buscar para boton buscar materia
@@ -315,53 +343,6 @@ export default {
       },
       consultasDescripcion: [],
       tablaDescripcion: [],
-      respuesta: {
-        data: {
-          tabla: [
-            {
-              tipo: "Nota 1",
-              descripcion: "22",
-            },
-            {
-              tipo: "Nota 2",
-              descripcion: "16",
-            },
-            {
-              tipo: "Recuperacion 2",
-              descripcion: "cambia de carrera",
-            },
-            // ... (otras entradas de tabla)
-          ],
-          valid: true,
-        },
-        // ...
-      },
-      respuestaGrado: {
-        data: {
-          tabla: [
-            "Primero A",
-            "Primero B",
-            "Segundo A",
-            "Segundo B",
-            // ... (otras entradas de tabla)
-          ],
-          valid: true,
-        },
-        // ...
-      },
-      respuestaMateria: {
-        data: {
-          tabla: [
-            "Matematicas",
-            "Lenguaje",
-            "Ciencias Sociales",
-            "Ciencias Naturales",
-            // ... (otras entradas de tabla)
-          ],
-          valid: true,
-        },
-        // ...
-      },
     };
   },
   methods: {
@@ -374,6 +355,19 @@ export default {
     },
     onRowSelected(items) {
       this.selected = items;
+    },
+    validarAdmin() {
+      var datos = JSON.parse(localStorage.getItem("datos"));
+      if (datos.idTipo == 1) {
+        this.respuestaBusquedaGrado = true;
+        this.respuestaBusquedaMateria = false;
+        this.buscarGrado();
+      } else {
+        this.respuestaBusquedaGrado = false;
+        this.respuestaBusquedaMateria = true;
+        this.grado.ID = datos.Id_grado + '';
+        this.buscarMateria();
+      }
     },
     async buscarcuadro() {
       this.progressBuscarGrado = true;
@@ -392,12 +386,15 @@ export default {
       this.validarRest();
     },
     async buscarGrado() {
-      // Limpieza de datos
-      this.itemsGrado = [];
+      await axios.post(url).then((data) => {
+        // Limpieza de datos
+        this.consultasGrado = [];
+        this.tablaGrado = [];
 
-      // Asignar nuevos valores
-      this.consultasGrado = this.respuestaGrado.data;
-      this.itemsGrado = this.consultasGrado.tabla;
+        // Asignar nuevos valores
+        this.consultasGrado = data.data;
+        this.tablaGrado = this.consultasGrado.tabla;
+      });
 
       // Validar datos
       this.validarRestGrado();
@@ -416,9 +413,10 @@ export default {
       this.validarRestMateria();
     },
     async buscarAsignacion() {
+      //var datos = JSON.parse(localStorage.getItem("datos"));
+      //this.formAsignacion.ID_grado = datos.idGrado;
       this.formAsignacion.ID_curso = this.materia;
       this.formAsignacion.ID_grado = this.grado.ID;
-      console.log(this.formAsignacion);
       await axios.post(idAsignacion, this.formAsignacion).then((data) => {
         // Limpieza de datos
         this.asignacion = "";
@@ -428,7 +426,6 @@ export default {
         this.consultasAsignacion = data.data;
         this.tablaAsignacion = this.consultasAsignacion.tabla;
         //
-        console.log(this.consultasAsignacion);
       });
       // Validar datos
       this.validarRestAsignacion();
@@ -439,7 +436,6 @@ export default {
       this.form.ID_Asignacion = this.asignacion;
       this.form.ID_bloque = this.bloque;
       this.form.AÑO = this.ciclo;
-      console.log(this.form);
       await axios.post(listaDescripcion, this.form).then((data) => {
         // Limpieza de datos
         this.consultas = [];
@@ -449,13 +445,11 @@ export default {
         this.consultas = data.data;
         this.tablaActividad = this.consultas.tabla[0];
         this.idDescripcionAsignacion = this.tablaActividad.ID;
-        console.log(this.tablaActividad);
       });
       // Validar datos
       this.validarRestActividad();
     },
     async guardarDescripcion() {
-      console.log(this.formDescripcion);
       await axios.post(guardarDesc, this.formDescripcion).then((data) => {
         // Limpieza de datos
         this.consultasDescripcion = [];
@@ -467,10 +461,17 @@ export default {
       // Validar datos
       this.validarRestDescripcion();
     },
-    async cuadropdf() {
-      // ... (código para descargar PDF)
-    },
 
+    validarInputGrado() {
+      if (this.grado.ID.length <= 0) {
+        this.alerta = "Seleccionar Grado y Seccion";
+        this.makeToast();
+      } else {
+        this.progressBuscarGrado = true;
+        this.icoBuscarGrado = false;
+        this.buscarMateria();
+      }
+    },
     validarInputMateria() {
       if (
         this.materia.length <= 0 ||
@@ -487,7 +488,20 @@ export default {
       }
     },
 
+    validarRestGrado() {
+      if (this.consultasGrado.valid == false) {
+        this.alerta = "El usuario ha expirado.";
+        this.makeToast();
+      } else if (this.consultasGrado.tabla.length <= 0) {
+        this.alerta = "El grado no existe en la base de datos";
+        this.makeToast();
+      } else {
+        //console.log('funciona respuesta en Grado')
+      }
+    },
     validarRestMateria() {
+      this.progressBuscarGrado = false;
+      this.icoBuscarGrado = true;
       if (this.consultasMateria.valid == false) {
         this.alerta = "El usuario ha expirado.";
         this.makeToast();
@@ -664,6 +678,12 @@ export default {
         ? "Editar Descripcion"
         : "Nueva Descripcion";
     },
+    tablaGradoOptions() {
+      return Object.values(this.tablaGrado).map((item) => ({
+        ...item,
+        nombreSeccion: `${item.NombreGrado} ${item.SECCION}`,
+      }));
+    },
     tablaMateriaOptions() {
       return Object.values(this.itemsMateria).map((item) => ({
         ...item,
@@ -682,7 +702,7 @@ export default {
   },
 
   created() {
-    this.buscarMateria();
+    this.validarAdmin();
   },
 };
 </script>

@@ -111,7 +111,6 @@
                   mdi-pencil
                 </v-icon>
               </template>
-              
             </v-data-table>
           </div>
         </v-col>
@@ -266,14 +265,12 @@ export default {
     async buscarGrado() {
       await axios.post(url, this.formEditar).then((data) => {
         // Limpieza de datos
-        //console.log(data);
         this.encabezado = [];
         this.tabla = [];
 
         // Asignar nuevos valores
         this.consultasGrado = data.data;
         this.tablaGrado = this.consultasGrado.tabla;
-        console.log(this.tablaGrado);
       });
       this.itemsCiclo = this.generarArrayDeAnios();
       // Validar datos
@@ -282,25 +279,19 @@ export default {
     async buscarListaCurso() {
       await axios.post(listaCurso).then((data) => {
         // Limpieza de datos
-        //console.log(data);
+
         this.itemsMateria = [];
 
         // Asignar nuevos valores
         this.consultasMateria = data.data;
         this.itemsMateria = this.consultasMateria.tabla;
-        console.log(this.itemsMateria);
       });
       // Validar datos
       this.validarRestListaCurso();
-      console.log(this.consultasMateria);
-      console.log(this.itemsMateria);
     },
-
     async buscarActividad() {
       this.progressBuscarGrado = true;
       this.icoBuscarGrado = false;
-      var listado = JSON.stringify(this.grado);
-      console.log(listado);
       await axios.post(listaAsignacionCurso, this.grado).then((data) => {
         // Limpieza de datos
         this.consultas = [];
@@ -309,7 +300,6 @@ export default {
         // Asignar nuevos valores
         this.consultas = data.data;
         this.tabla = this.consultas.tabla;
-        console.log(this.tabla);
       });
       // Validar datos
       this.validarRestActividad();
@@ -319,12 +309,9 @@ export default {
       if (this.grado.length <= 0) {
         this.alerta = "Seleccionar Grado, Ciclo, Bloque";
         this.makeToast();
-        console.log("no validar input " + this.grado);
       } else {
         this.progressBuscarGrado = true;
         this.icoBuscarGrado = false;
-
-        console.log("validar input " + this.grado);
         this.buscarActividad();
       }
     },
@@ -337,7 +324,6 @@ export default {
         // Asignar nuevos valores
         this.consultas = data.data;
         this.tabla = this.consultas.tabla;
-        console.log(this.consultas);
       });
       // Validar datos
       this.validarRestEditar();
@@ -353,10 +339,8 @@ export default {
         // Asignar nuevos valores
         this.consultas = data.data;
         this.tabla = this.consultas.tabla;
-        console.log(this.consultas);
       });
       // Validar datos
-      console.log(this.consultas);
       this.validarRestCrear();
       this.buscarGrado();
       this.buscarListaCurso();
@@ -433,7 +417,6 @@ export default {
       for (let anio = 2023; anio <= anioActual; anio++) {
         arrayDeAnios.push(anio);
       }
-      console.log(arrayDeAnios + " de ");
       return arrayDeAnios;
     },
 
@@ -441,7 +424,6 @@ export default {
       this.editedIndex = this.tabla.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
-      console.log(this.tabla);
     },
 
     deleteItem(item) {
@@ -477,17 +459,13 @@ export default {
         this.formEditar.id = this.editedItem.ID_R + "";
         this.formEditar.idcurso = this.editedItem.ID + "";
         this.formEditar.idgrado = this.grado.ID + "";
-
         this.actualizarCurso();
       } else {
-        
         this.formEditar.idcurso = this.editedItem.ID + "";
         this.formEditar.idgrado = this.grado.ID + "";
         this.crearCurso();
         this.tabla.push(this.editedItem);
       }
-      console.log(this.tabla);
-      console.log(this.formEditar);
       this.close();
     },
   },
@@ -517,8 +495,7 @@ export default {
       val || this.closeDelete();
     },
     selectedGrado(newGrado) {
-      console.log(newGrado);
-      this.materia.ID = newDocente.ID;
+       this.materia.ID = newGrado.ID;
     },
   },
 

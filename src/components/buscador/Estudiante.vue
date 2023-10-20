@@ -27,6 +27,7 @@
                         class="mb-2"
                         v-bind="attrs"
                         v-on="on"
+                        v-if="admin"
                       >
                         Añadir Estudiante
                       </v-btn>
@@ -170,16 +171,6 @@
                                 :disabled="!switchState"
                               ></v-select>
                             </v-col>
-                            <v-col cols="12" sm="6" md="6">
-                              <v-file-input
-                                label="File input"
-                                accept="image/png, image/jpeg, image/bmp"
-                                filled
-                                prepend-icon="mdi-camera"
-                                @change="getFilePath"
-                                :disabled="switchState"
-                              ></v-file-input>
-                            </v-col>
                           </v-row>
                         </v-container>
                       </v-card-text>
@@ -206,9 +197,7 @@
                   <v-card>
                     <v-card-title>
                       <span class="text-h5"
-                        ><v-avatar color="primary">
-                          <img :src="editedItem.foto" alt="John" />
-                        </v-avatar>
+                        >
                         {{ editedItem.Nombre }} {{ editedItem.Apellido }}</span
                       >
                     </v-card-title>
@@ -225,10 +214,16 @@
                             <h4>Telefono: {{ editedItem.Telefono }}</h4>
                           </v-col>
                           <v-col cols="12" sm="6" md="6">
-                            <h4>Sexo: {{ editedItem.Sexo }}</h4>
+                            <h4>Sexo: {{ editedItem.FechaNacimiento }}</h4>
                           </v-col>
                           <v-col cols="12" sm="6" md="6">
                             <h4>Dirección: {{ editedItem.Direccion }}</h4>
+                          </v-col>
+                          <v-col cols="12" sm="6" md="6">
+                            <h4>Nombre de la Madre: {{ editedItem.Nombre_mama }}</h4>
+                          </v-col>
+                          <v-col cols="12" sm="6" md="6">
+                            <h4>Nombre del Padre: {{ editedItem.Nombre_papa }}</h4>
                           </v-col>
                         </v-row>
                       </v-container>
@@ -247,7 +242,7 @@
                 <v-icon small class="mr-2" @click="verItem(item)">
                   mdi-eye
                 </v-icon>
-                <v-icon small class="mr-2" @click="editItem(item)">
+                <v-icon v-if="admin" small class="mr-2" @click="editItem(item)">
                   mdi-pencil
                 </v-icon>
               </template>
@@ -274,6 +269,7 @@ const uGrado = cf.url + "/ModificarGradoAlumno";
 export default {
   data() {
     return {
+      admin: false,
       tablaGrado: [], //selectbox de grado
       grado: {
         ID: "",
@@ -435,6 +431,14 @@ export default {
     onRowSelected(items) {
       this.selected = items;
     },
+    validraAdmin() {
+      var datos = JSON.parse(localStorage.getItem("datos"));
+      if (datos.idTipo == 1) {
+        this.admin = true;
+      } else {
+        this.admin = false;
+      }
+    },
     async buscarEstudiante() {
       await axios.post(url, this.formEditar).then((data) => {
         // Limpieza de datos
@@ -442,16 +446,12 @@ export default {
 
         // Asignar nuevos valores
         this.consultas = data.data;
-        console.log(this.consultas);
-        //this.consultas = this.respuesta.data;
         this.tabla = this.consultas.tabla;
-        console.log(this.tabla);
         this.ciclo = this.generarArrayDeAnios();
       });
       // Validar datos
       this.validarRest();
     },
-
     async actualizarEstudiante() {
       await axios.post(uEstudiante, this.formEditar).then((data) => {
         // Limpieza de datos
@@ -459,27 +459,21 @@ export default {
         this.tabla = [];
         // Asignar nuevos valores
         this.consultas = data.data;
-        console.log(this.consultas);
       });
       // Validar datos
       this.validarRestEditar();
     },
-
     async crearEstudiante() {
-      console.log(this.formEditar);
       await axios.post(AddEstudiante, this.formEditar).then((data) => {
         this.consultas = data.data;
-        console.log(this.consultas);
       });
       // Validar datos
       this.validarRestCrear();
     },
-
     async actualizarGrado() {
       await axios.post(uGrado, this.formEditarGrado).then((data) => {
         // Asignar nuevos valores
         this.consultas = data.data;
-        console.log(this.consultas);
       });
       // Validar datos
       this.validarRestEditarGrado();
@@ -498,12 +492,10 @@ export default {
         this.respuestaBusqueda = true;
       } else {
         this.icoBuscar = true;
-        this.alerta = "Si hay alumnos.";
-        this.makeToast();
         this.respuestaBusqueda = true;
+        this.validraAdmin();
       }
     },
-
     validarRestCrear() {
       if (this.consultas.validar == false) {
         this.alerta = "El estudiante no se ha registrado.";
@@ -514,7 +506,6 @@ export default {
         this.buscarEstudiante();
       }
     },
-
     validarRestEditar() {
       if (this.consultas.validar == false) {
         this.alerta = "El estudiante no se ha editado.";
@@ -525,7 +516,6 @@ export default {
         this.buscarEstudiante();
       }
     },
-
     validarRestEditarGrado() {
       if (this.consultas.validar == false) {
         this.alerta = "El grado no se ha editado.";
@@ -540,9 +530,9 @@ export default {
     validarInputEditarGrado() {
       if (
         this.formEditarGrado.Id_alumno <= 0 ||
-          this.formEditarGrado.anio <= 0 ||
-          this.formEditarGrado.anio == "undefined" ||
-          this.formEditarGrado.grado <= 0
+        this.formEditarGrado.anio <= 0 ||
+        this.formEditarGrado.anio == "undefined" ||
+        this.formEditarGrado.grado <= 0
       ) {
         return false;
       } else {
@@ -557,7 +547,6 @@ export default {
         // Asignar nuevos valores
         this.consultasGrado = data.data;
         this.tablaGrado = this.consultasGrado.tabla;
-        console.log(this.tablaGrado);
       });
       this.itemsCiclo = this.generarArrayDeAnios();
       // Validar datos
@@ -600,13 +589,11 @@ export default {
       this.editedIndex = this.tabla.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
-      console.log(this.tabla);
     },
     verItem(item) {
       this.editedIndex = this.tabla.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog2 = true;
-      console.log(this.tabla);
     },
 
     close() {
@@ -635,10 +622,9 @@ export default {
           this.formEditarGrado.anio = this.editedItem.ciclo + "";
           this.formEditarGrado.grado = this.editedItem.Grado + "";
           if (this.validarInputEditarGrado()) {
-            console.log(this.formEditarGrado);
             this.actualizarGrado();
           } else {
-            this.alerta = "El seleccionar ciclo escolar o grado";
+            this.alerta = "Seleccionar ciclo escolar o grado";
             this.makeToast();
           }
         } else {
@@ -658,7 +644,6 @@ export default {
           this.formEditar.FechaNacimiento =
             this.editedItem.FechaNacimiento + "";
           this.formEditar.Sexo = this.editedItem.Sexo + "";
-          console.log(this.formEditar);
           this.actualizarEstudiante();
         }
       } else {
@@ -667,17 +652,14 @@ export default {
         this.formEditar.foto = this.editedItem.foto + " ";
         this.formEditar.Apellido = this.editedItem.Apellido + "";
         this.formEditar.Direccion = this.editedItem.Direccion + "";
+        this.formEditar.Grado = this.editedItem.Grado + "";
         this.formEditar.Telefono = this.editedItem.Telefono + "";
         this.formEditar.Nombre_papa = this.editedItem.Nombre_papa + "";
         this.formEditar.Nombre_mama = this.editedItem.Nombre_mama + "";
         this.formEditar.FechaNacimiento = this.editedItem.FechaNacimiento + "";
         this.formEditar.Sexo = this.editedItem.Sexo + "";
-        console.log(this.formEditar);
         this.crearEstudiante();
-        console.log("agregar");
-        this.tabla.push(this.editedItem);
       }
-      console.log(this.tabla);
       this.close();
     },
   },

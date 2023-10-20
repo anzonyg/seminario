@@ -29,6 +29,7 @@
                         class="mb-2"
                         v-bind="attrs"
                         v-on="on"
+                        v-if="admin"
                       >
                         Añadir Docente
                       </v-btn>
@@ -101,15 +102,7 @@
                                 :disabled="!switchState"
                               ></v-select>
                             </v-col>
-                            <v-col cols="12" sm="6" md="6">
-                              <v-file-input
-                                label="File input"
-                                accept="image/png, image/jpeg, image/bmp"
-                                filled
-                                prepend-icon="mdi-camera"
-                                @change="getFilePath"
-                              ></v-file-input>
-                            </v-col>
+                           
                           </v-row>
                         </v-container>
                       </v-card-text>
@@ -128,13 +121,11 @@
                 </v-toolbar>
 
                 <!-- VER DATOS -->
-                <v-dialog v-model="dialog2" max-width="1100px">
+                <v-dialog v-model="dialog2" max-width="700px">
                   <v-card>
                     <v-card-title>
                       <span class="text-h5"
-                        ><v-avatar color="primary">
-                          <img :src="editedItem.foto" alt="John" />
-                        </v-avatar>
+                        >
                         {{ editedItem.Nombre }} {{ editedItem.Apellido }}</span
                       >
                     </v-card-title>
@@ -152,10 +143,7 @@
                             <h4>Correo: {{ editedItem.CorreoElectronico }}</h4>
                           </v-col>
                           <v-col cols="12" sm="6" md="6">
-                            <h4>Ciclo Escolar: {{ editedItem.ciclo }}</h4>
-                          </v-col>
-                          <v-col cols="12" sm="6" md="6">
-                            <h4>Grado: {{ editedItem.GradoSeccion }}</h4>
+                            <h4>Grado Academico: {{ editedItem.GradoAcademico }}</h4>
                           </v-col>
                         </v-row>
                       </v-container>
@@ -174,7 +162,7 @@
                 <v-icon small class="mr-2" @click="verItem(item)">
                   mdi-eye
                 </v-icon>
-                <v-icon small class="mr-2" @click="editItem(item)">
+                <v-icon v-if="admin" small class="mr-2" @click="editItem(item)">
                   mdi-pencil
                 </v-icon>
               </template>
@@ -203,6 +191,7 @@ const uDocente = cf.url + "/ModtDocente";
 export default {
   data() {
     return {
+      admin: false,
       respuestaBusqueda: false,
       alerta: "",
       progressBuscar: false,
@@ -351,6 +340,14 @@ export default {
     onRowSelected(items) {
       this.selected = items;
     },
+    validraAdmin() {
+      var datos = JSON.parse(localStorage.getItem("datos"));
+      if (datos.idTipo == 1){
+        this.admin = true;
+      }else{
+        this.admin = false;
+      }
+    },
     async buscarDocente() {
       await axios.post(url, this.formEditar).then((data) => {
         // Limpieza de datos
@@ -374,7 +371,6 @@ export default {
         this.tabla = [];
         // Asignar nuevos valores
         this.consultas = data.data;
-        console.log(this.consultas);
       });
       // Validar datos
       this.validarRestEditar();
@@ -387,7 +383,6 @@ export default {
         this.tabla = [];
         // Asignar nuevos valores
         this.consultas = data.data;
-        console.log(this.consultas);
       });
       // Validar datos
       this.validarRestCrear();
@@ -400,13 +395,14 @@ export default {
         this.icoBuscar = true;
         this.respuestaBusqueda = false;
       } else if (this.consultas.tabla.length <= 0) {
-        this.alerta = "El nombre no existe en la base de datos";
+        this.alerta = "No hay catedraticos en base de datos";
         this.makeToast();
         this.icoBuscar = true;
         this.respuestaBusqueda = false;
       } else {
         this.icoBuscar = true;
         this.respuestaBusqueda = true;
+        this.validraAdmin();
       }
     },
     validarRestCrear() {
@@ -461,7 +457,7 @@ export default {
       this.editedIndex = this.tabla.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog2 = true;
-      console.log(this.tabla);
+    
     },
 
     close() {
@@ -485,8 +481,6 @@ export default {
     saveDocente() {
       if (this.editedIndex > -1) {
         Object.assign(this.tabla[this.editedIndex], this.editedItem);
-        //Object.assign(this.formEditar, this.editedItem);
-        
         this.formEditar.ID = this.editedItem.ID +"";
         this.formEditar.DPI = this.editedItem.DPI+"";
         this.formEditar.Nombre = this.editedItem.Nombre+"";
@@ -497,7 +491,6 @@ export default {
         this.formEditar.tel = this.editedItem.Telefono+"";
         this.formEditar.GradoAca = this.editedItem.GradoAcademico+"";
         this.formEditar.clave = this.editedItem.clave+"";
-        console.log(this.formEditar);
         this.actualizarDocente();
       } else {
          
@@ -511,13 +504,9 @@ export default {
         this.formEditar.tel = this.editedItem.Telefono+"";
         this.formEditar.GradoAca = this.editedItem.GradoAcademico+" ";
         this.formEditar.clave = this.editedItem.clave+"";
-        console.log(this.formEditar);
         this.crearDocente();
-        console.log('agregar')
         this.tabla.push(this.editedItem);
       }
-      console.log(this.tabla);
-      
       this.close();
     },
   },

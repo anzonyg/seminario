@@ -56,9 +56,6 @@
     >
       <v-list>
         <v-list-item class="px-2">
-          <v-list-item-avatar>
-            <v-img :src="foto"></v-img>
-          </v-list-item-avatar>
           <v-list-item-content class="white--text">
             <v-list-item-title class="text-h6">
               {{ nombre }} {{ apellidos }}
@@ -86,24 +83,30 @@
             </v-list-item-icon>
             <v-list-item-title class="white--text">Registro</v-list-item-title>
           </template>
-          <v-list-item link to="/registro/grado" class="white--text">
-            <v-list-item-title>Grado</v-list-item-title>
-            <v-list-item-icon>
-              <v-icon class="white--text">mdi-school</v-icon>
-            </v-list-item-icon>
-          </v-list-item>
-          <v-list-item link to="/registro/curso" class="white--text">
-            <v-list-item-title>Curso</v-list-item-title>
-            <v-list-item-icon>
-              <v-icon class="white--text">mdi-school</v-icon>
-            </v-list-item-icon>
-          </v-list-item>
-          <v-list-item link to="/registro/asignacionCurso" class="white--text">
-            <v-list-item-title>Asignacion de Curso</v-list-item-title>
-            <v-list-item-icon>
-              <v-icon class="white--text">mdi-school</v-icon>
-            </v-list-item-icon>
-          </v-list-item>
+          <div v-if="admin">
+            <v-list-item link to="/registro/grado" class="white--text">
+              <v-list-item-title>Grado</v-list-item-title>
+              <v-list-item-icon>
+                <v-icon class="white--text">mdi-school</v-icon>
+              </v-list-item-icon>
+            </v-list-item>
+            <v-list-item link to="/registro/curso" class="white--text">
+              <v-list-item-title>Curso</v-list-item-title>
+              <v-list-item-icon>
+                <v-icon class="white--text">mdi-school</v-icon>
+              </v-list-item-icon>
+            </v-list-item>
+            <v-list-item
+              link
+              to="/registro/asignacionCurso"
+              class="white--text"
+            >
+              <v-list-item-title>Asignacion de Curso</v-list-item-title>
+              <v-list-item-icon>
+                <v-icon class="white--text">mdi-school</v-icon>
+              </v-list-item-icon>
+            </v-list-item>
+          </div>
           <v-list-item link to="/registro/actividad" class="white--text">
             <v-list-item-title class="white--text">Actividad</v-list-item-title>
             <v-list-item-icon>
@@ -142,8 +145,14 @@
               >Reporteria</v-list-item-title
             >
           </template>
-          <v-list-item link to="/reporteria/curso" class="white--text">
-            <v-list-item-title>Curso</v-list-item-title>
+          <v-list-item link to="/reporteria/cursoBloque" class="white--text">
+            <v-list-item-title>Curso Bloque</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon class="white--text">mdi-file-chart</v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+          <v-list-item link to="/reporteria/cursoCiclo" class="white--text">
+            <v-list-item-title>Curso Ciclo</v-list-item-title>
             <v-list-item-icon>
               <v-icon class="white--text">mdi-file-chart</v-icon>
             </v-list-item-icon>
@@ -197,11 +206,11 @@
             <p class="white--text">Dirección: Calle Principal #123, Ciudad</p>
           </v-col>
           <v-col cols="12" md="4">
-            <br/>
+            <br />
             <p class="white--text">Email: docentes@escuelaxyz.com</p>
           </v-col>
           <v-col cols="12" md="4">
-            <br/>
+            <br />
             <p class="white--text">Teléfono: (123) 456-7890</p>
           </v-col>
         </v-row>
@@ -220,9 +229,10 @@ export default {
   name: "App",
   components: {},
   data: () => ({
+    admin: false,
     drawer: false,
     alerta: "",
-    menu: true,
+    menu: false,
     botonLogin: true,
     group: null,
     loginDialog: false, // Inicialmente, el diálogo de inicio de sesión está oculto
@@ -249,8 +259,6 @@ export default {
     async validarLogin() {
       await axios.post(url, this.form).then((data) => {
         // Limpieza de datos
-        console.log(data.data);
-        console.log(data.data.validar);
         if (data.data.validar) {
           const auxDataUser = data.data.tabla[0];
           localStorage.setItem("datos", JSON.stringify(auxDataUser));
@@ -263,17 +271,14 @@ export default {
         }
       });
       // Asignar nuevos valores
-
-      // Validar datos
-      this.validarRest();
     },
     validarRest() {
-      console.log(this.consultas);
       if (this.consultas.validar == false) {
         this.alerta = "Error de login verificar datos.";
         this.makeToast();
         this.botonLogin = true;
         this.menu = false;
+        this.cerrarSesion();
       } else {
         this.botonLogin = false;
         this.loginDialog = false;
@@ -283,6 +288,45 @@ export default {
         this.nombre = this.consultas.tabla[0].Nombre;
         this.apellidos = this.consultas.tabla[0].Apellidos;
         this.correo = this.consultas.tabla[0].CorreoElectronico;
+        this.validraAdmin();
+      }
+    },
+   
+    verificarLogin() {
+      var datos = JSON.parse(localStorage.getItem("datos"));
+      if (datos == null) {
+        this.cerrarSesion();
+      } else {
+        this.consultas = datos;
+        this.validarRest2();
+      }
+    },
+    validarRest2() {
+      console.log(this.consultas);
+      if (this.consultas.validar == false) {
+        this.alerta = "Error de login verificar datos.";
+        this.makeToast();
+        this.botonLogin = true;
+        this.menu = false;
+        this.cerrarSesion();
+      } else {
+        this.botonLogin = false;
+        this.loginDialog = false;
+        this.menu = true;
+        this.alerta = "Login exitoso.";
+        this.makeToast();
+        this.nombre = this.consultas.Nombre;
+        this.apellidos = this.consultas.Apellido;
+        this.correo = this.consultas.CorreoElectronico;
+        this.validraAdmin();
+      }
+    },
+    validraAdmin() {
+      var datos = JSON.parse(localStorage.getItem("datos"));
+      if (datos.idTipo == 1){
+        this.admin = true;
+      }else{
+        this.admin = false;
       }
     },
     cerrarSesion() {
@@ -296,6 +340,9 @@ export default {
     group() {
       this.drawer = false;
     },
+  },
+  created() {
+    this.verificarLogin();
   },
 };
 </script>

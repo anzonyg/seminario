@@ -46,6 +46,16 @@ const routes = [
         component: () => import('@/components/reporteria/Curso.vue')
     },
     {
+        path: '/reporteria/cursoBloque',
+        name: 'cursoReportBloque',
+        component: () => import('@/components/reporteria/MateriaBloque.vue')
+    },
+    {
+        path: '/reporteria/cursoCiclo',
+        name: 'cursoReportCiclo',
+        component: () => import('@/components/reporteria/MateriaCiclo.vue')
+    },
+    {
         path: '/reporteria/estudiante',
         name: 'estudianteReportBloque',
         component: () => import('@/components/reporteria/Estudiante.vue')
