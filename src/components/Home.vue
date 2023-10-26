@@ -62,12 +62,12 @@ export default {
             "Brindar un servicio educativo de calidad, cumpliendo responsablemente con las normas del Ministerio de Educación, para cubrir las expectativas y necesidades de la comunidad educativa y formar ciudadanos con conciencia crítica de su entorno.",
         },
         {
-          title: "MISIÓN MINEDUC",
+          title: "Misión MINEDUC",
           content:
             "Somos una institución evolutiva, organizada, eficiente y eficaz, generadora de oportunidades de enseñanza-aprendizaje, orientada a resultados, que aprovecha diligentemente las oportunidades que el siglo XXI le brinda y comprometida con una Guatemala mejor.",
         },
         {
-          title: "VISIÓN MINEDUC",
+          title: "Visión MINEDUC",
           content:
             "Formar ciudadanos con carácter, capaces de aprender por sí mismos, orgullosos de ser guatemaltecos, empeñados en conseguir su desarrollo integral, con principios, valores y convicciones que fundamentan su conducta.",
         },
