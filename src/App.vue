@@ -35,7 +35,7 @@
                 <!-- Añade la clase justify-end aquí -->
                 <v-btn text @click="loginDialog = false">Cancelar</v-btn>
                 <v-btn color="primary" type="submit" @click="validarLogin"
-                  >IniciarSesion</v-btn
+                  >Iniciar Sesión</v-btn
                 >
               </v-card-actions>
             </v-form>
